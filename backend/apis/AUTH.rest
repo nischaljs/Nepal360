@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:3000/api
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMTA5Yzc0ZC1jNTNmLTRhMGQtOTA5OC1iYmRhM2YzZWM3MzQiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NjY4MTE2MjcsImV4cCI6MTc2NzQxNjQyN30.m6yFtAp3dBsT8FWu5xECSIdQQEMCqmHHJLwHXrNT2vw
+
+### 1. Signup
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "SecurePassword123"
+}
+
+### 2. Verify Email
+POST {{baseUrl}}/auth/verify-email
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "otp": "914980"
+}
+
+### 3. Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "SecurePassword123"
+}
+
+### 4. Get Current User
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
