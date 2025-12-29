@@ -1,0 +1,419 @@
+@baseUrl = http://localhost:3000/api
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbi11dWlkIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImVtYWlsVmVyaWZpZWQiOnRydWUsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAwMDAwfQ.signature
+
+###############################################################################
+#                    ADMIN CAMPAIGN API DOCUMENTATION                       #
+###############################################################################
+#
+# This API is for administrators to manage campaign verification, moderation,
+# and monitoring. Requires admin role.
+#
+# Base URL: /api/admin/campaigns
+# Authentication: Bearer token with admin role
+#
+###############################################################################
+
+###############################################################################
+#                        CAMPAIGN STATUS FLOW                                #
+###############################################################################
+#
+# DRAFT
+#   ↓ (user creates)
+# PENDING_VERIFICATION ← admin reviews here
+#   ↓ (admin approve)
+# LIVE
+#   ↓ (system/admin)
+# COMPLETED
+#
+# SUSPENDED (can be set anytime, overrides current status)
+#   ↓ (admin resume)
+# LIVE
+#
+# REJECTED campaigns stay in PENDING_VERIFICATION with rejectionReason
+#
+###############################################################################
+
+###############################################################################
+#                        ROUTE: LIST & REVIEW                                #
+###############################################################################
+
+### 1. List All Campaigns (with filters)
+### Retrieve all campaigns with optional filtering
+###
+### Query Parameters:
+###   - status: DRAFT | PENDING_VERIFICATION | LIVE | SUSPENDED | COMPLETED
+###   - beneficiaryId: uuid (filter by beneficiary)
+###   - isActive: true | false (include soft-deleted)
+###   - sortBy: createdAt | verifiedAt | donationCount
+###   - order: asc | desc
+###
+GET {{baseUrl}}/admin/campaigns?status=PENDING_VERIFICATION&sortBy=createdAt&order=asc
+Authorization: Bearer {{adminToken}}
+
+### 2. List Campaigns by Status
+GET {{baseUrl}}/admin/campaigns?status=LIVE
+Authorization: Bearer {{adminToken}}
+
+### 3. List Active Campaigns Only
+GET {{baseUrl}}/admin/campaigns?isActive=true
+Authorization: Bearer {{adminToken}}
+
+### 4. Get Verification Queue (pending campaigns)
+### Convenient shortcut to get all PENDING_VERIFICATION campaigns
+###
+GET {{baseUrl}}/admin/campaigns/verification-queue
+Authorization: Bearer {{adminToken}}
+
+### 5. Get Campaign Detail (Admin View)
+### Full campaign details including admin metadata
+###
+### Parameters:
+###   - campaignId: uuid
+###
+GET {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer {{adminToken}}
+
+### 6. Get Campaign Statistics
+### Detailed engagement and funding metrics
+###
+GET {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/stats
+Authorization: Bearer {{adminToken}}
+
+###############################################################################
+#                    ROUTE: VERIFICATION ACTIONS                             #
+###############################################################################
+
+### 7. Approve Campaign (PENDING → LIVE)
+### Move campaign to LIVE status after review
+###
+### Body:
+###   - note: optional admin note
+###
+POST {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "note": "All documents verified, campaign approved for launch"
+}
+
+### 8. Reject Campaign
+### Keep campaign in PENDING_VERIFICATION with rejection reason
+### Can be resubmitted by beneficiary with improvements
+###
+### Body (required):
+###   - reason: rejection reason (10-500 chars)
+###   - note: optional admin note
+###
+POST {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/reject
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "reason": "Proof documents are insufficient. Please provide official hospital documents or medical reports.",
+  "note": "User can resubmit with updated proof documents"
+}
+
+###############################################################################
+#                    ROUTE: MODERATION ACTIONS                               #
+###############################################################################
+
+### 9. Suspend Campaign
+### Temporarily stop a campaign (can be any status)
+### Used for policy violations, fraud detection, etc.
+###
+### Body (required):
+###   - reason: suspension reason (10-500 chars)
+###   - note: optional admin note
+###
+POST {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/suspend
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "reason": "Campaign violates platform guidelines. Suspicious activity detected.",
+  "note": "Flagged for manual review. User contacted for explanation."
+}
+
+### 10. Resume Campaign (SUSPENDED → LIVE)
+### Reactivate a previously suspended campaign
+###
+POST {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/resume
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{}
+
+###############################################################################
+#                    ROUTE: SOFT DELETE                                      #
+###############################################################################
+
+### 11. Delete Campaign (Soft Delete)
+### Mark campaign as inactive (does NOT remove from database)
+###
+### Constraints:
+###   - Cannot delete LIVE campaigns (suspend first)
+###   - Cannot delete campaigns with donations (donationCount > 0)
+###   - Sets isActive = false, deletedAt = now
+###
+### Body (required):
+###   - reason: deletion reason (10-500 chars)
+###   - note: optional admin note
+###
+DELETE {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "reason": "Campaign was duplicate submission from same beneficiary.",
+  "note": "Beneficiary notified about consolidation with existing campaign"
+}
+
+###############################################################################
+#                        RESPONSE EXAMPLES                                   #
+###############################################################################
+
+# ===== Success: Campaign List =====
+# Status: 200
+# {
+#   "success": true,
+#   "campaigns": [
+#     {
+#       "id": "550e8400-e29b-41d4-a716-446655440000",
+#       "title": "Emergency Medical Fund",
+#       "beneficiary": {
+#         "id": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#         "name": "John Doe",
+#         "email": "john@example.com"
+#       },
+#       "targetAmount": "50000.00",
+#       "donationCount": 0,
+#       "status": "PENDING_VERIFICATION",
+#       "isActive": true,
+#       "createdAt": "2025-12-29T10:30:00Z",
+#       "verifiedAt": null,
+#       "rejectionReason": null
+#     }
+#   ]
+# }
+
+# ===== Success: Campaign Detail (Admin) =====
+# Status: 200
+# {
+#   "success": true,
+#   "campaign": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "beneficiaryId": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#     "beneficiary": {
+#       "id": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#       "name": "John Doe",
+#       "email": "john@example.com"
+#     },
+#     "title": "Emergency Medical Fund",
+#     "description": "Help us raise funds for emergency medical treatment...",
+#     "coverImage": "http://localhost:3000/uploads/campaigns/550e8400.../cover.jpg",
+#     "proofLinks": [
+#       "http://localhost:3000/uploads/campaigns/550e8400.../proof1.pdf",
+#       "http://localhost:3000/uploads/campaigns/550e8400.../proof2.jpg"
+#     ],
+#     "targetAmount": "50000.00",
+#     "status": "PENDING_VERIFICATION",
+#     "donationCount": 0,
+#     "shareCount": 0,
+#     "viewCount": 0,
+#     "isActive": true,
+#     "rejectionReason": null,
+#     "suspensionReason": null,
+#     "verifiedBy": null,
+#     "rejectedBy": null,
+#     "suspendedBy": null,
+#     "createdAt": "2025-12-29T10:30:00Z",
+#     "verifiedAt": null,
+#     "rejectedAt": null,
+#     "suspendedAt": null,
+#     "deletedAt": null,
+#     "milestones": [
+#       {
+#         "id": "660e8400-e29b-41d4-a716-446655440001",
+#         "campaignId": "550e8400-e29b-41d4-a716-446655440000",
+#         "title": "Initial Target: 25000",
+#         "amount": "25000.00",
+#         "completed": false
+#       }
+#     ]
+#   }
+# }
+
+# ===== Success: Campaign Stats =====
+# Status: 200
+# {
+#   "success": true,
+#   "stats": {
+#     "campaignId": "550e8400-e29b-41d4-a716-446655440000",
+#     "totalRaised": "23450.50",
+#     "donationCount": 145,
+#     "averageDonation": "161.72",
+#     "itemDonationCount": 32,
+#     "shareCount": 89,
+#     "viewCount": 2340,
+#     "completionPercentage": 47,
+#     "milestonesCompleted": 1,
+#     "totalMilestones": 2
+#   }
+# }
+
+# ===== Success: Approval =====
+# Status: 200
+# {
+#   "success": true,
+#   "message": "Campaign approved and set to LIVE",
+#   "campaign": { ...campaign object... }
+# }
+
+# ===== Success: Rejection =====
+# Status: 200
+# {
+#   "success": true,
+#   "message": "Campaign rejected",
+#   "campaign": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "status": "PENDING_VERIFICATION",
+#     "rejectionReason": "Proof documents are insufficient...",
+#     "rejectedAt": "2025-12-29T11:45:00Z",
+#     "rejectedBy": "admin-uuid"
+#     ...
+#   }
+# }
+
+# ===== Success: Suspension =====
+# Status: 200
+# {
+#   "success": true,
+#   "message": "Campaign suspended",
+#   "campaign": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "status": "SUSPENDED",
+#     "suspensionReason": "Campaign violates platform guidelines...",
+#     "suspendedAt": "2025-12-29T12:00:00Z",
+#     "suspendedBy": "admin-uuid"
+#     ...
+#   }
+# }
+
+# ===== Success: Soft Delete =====
+# Status: 200
+# {
+#   "success": true,
+#   "message": "Campaign deleted (soft delete)"
+# }
+
+# ===== Error: Unauthorized (not admin) =====
+# Status: 403
+# {
+#   "success": false,
+#   "message": "Admin access required."
+# }
+
+# ===== Error: Campaign Not Found =====
+# Status: 404
+# {
+#   "success": false,
+#   "message": "Campaign not found"
+# }
+
+# ===== Error: Cannot Approve Live Campaign =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Campaign is already live"
+# }
+
+# ===== Error: Cannot Reject Live Campaign =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Cannot reject a live campaign. Use suspend instead."
+# }
+
+# ===== Error: Cannot Delete Live Campaign =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Cannot delete a live campaign. Suspend it first."
+# }
+
+# ===== Error: Cannot Delete Campaign with Donations =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Cannot delete a campaign that has received donations. Archive instead."
+# }
+
+# ===== Error: Validation Failed =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Validation failed",
+#   "errors": {
+#     "reason": ["Rejection reason must be at least 10 characters"]
+#   }
+# }
+
+###############################################################################
+#                        AUDIT LOGGING                                       #
+###############################################################################
+#
+# Every admin action creates an AuditLog entry:
+# - Actor: admin user ID
+# - Action Type: CAMPAIGN_VERIFICATION
+# - Timestamp: when action occurred
+# - Details: JSON with action, reason, note
+#
+# This provides a complete audit trail for compliance and debugging.
+#
+###############################################################################
+
+###############################################################################
+#                        SOFT DELETE PHILOSOPHY                              #
+###############################################################################
+#
+# No campaigns are hard deleted from database.
+# Soft delete workflow:
+#
+# 1. isActive = false (marks as inactive in queries)
+# 2. deletedAt = now (timestamp for recovery/audit)
+# 3. Audit log entry created with reason
+#
+# Benefits:
+# - Full audit trail preserved
+# - Can restore if needed
+# - Maintains referential integrity
+# - Supports reporting and analytics
+#
+###############################################################################
+
+###############################################################################
+#                        VERIFICATION QUEUE                                  #
+###############################################################################
+#
+# GET /api/admin/campaigns/verification-queue
+#
+# Returns all campaigns in PENDING_VERIFICATION status ordered by oldest first.
+# Includes daysWaiting field to identify delayed reviews.
+#
+# Response:
+# {
+#   "success": true,
+#   "queue": [
+#     {
+#       "id": "550e8400-e29b-41d4-a716-446655440000",
+#       "title": "Emergency Medical Fund",
+#       "beneficiary": { "id": "...", "name": "...", "email": "..." },
+#       "targetAmount": "50000.00",
+#       "createdAt": "2025-12-27T10:30:00Z",
+#       "daysWaiting": 2
+#     }
+#   ]
+# }
+#
+###############################################################################

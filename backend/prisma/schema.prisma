@@ -151,13 +151,26 @@ model Campaign {
   targetAmount Decimal        @db.Decimal(12, 2)
   status       CampaignStatus @default(PENDING_VERIFICATION)
 
+  // Admin fields
+  rejectionReason String?
+  suspensionReason String?
+  verifiedBy      String?  // Admin user ID who verified
+  rejectedBy      String?  // Admin user ID who rejected
+  suspendedBy     String?  // Admin user ID who suspended
+
   // Engagement metrics
   donationCount Int     @default(0)
   shareCount    Int     @default(0)
   viewCount     Int     @default(0)
 
+  // Soft delete
+  isActive Boolean @default(true)
+
   createdAt  DateTime  @default(now())
   verifiedAt DateTime?
+  rejectedAt DateTime?
+  suspendedAt DateTime?
+  deletedAt  DateTime? // soft delete timestamp
 
   milestones     Milestone[]
   moneyDonations MoneyDonation[]
@@ -165,6 +178,8 @@ model Campaign {
 
   @@index([status])
   @@index([beneficiaryId])
+  @@index([isActive])
+  @@index([verifiedAt])
 }
 
 model Milestone {
