@@ -1,0 +1,384 @@
+@baseUrl = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMTA5Yzc0ZC1jNTNmLTRhMGQtOTA5OC1iYmRhM2YzZWM3MzQiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NjY4MTE2MjcsImV4cCI6MTc2NzQxNjQyN30.m6yFtAp3dBsT8FWu5xECSIdQQEMCqmHHJLwHXrNT2vw
+
+###############################################################################
+#                         CAMPAIGN API DOCUMENTATION                         #
+###############################################################################
+#
+# This file documents the Campaign API endpoints for creating, managing,
+# and updating fundraising campaigns with milestone tracking and file uploads.
+#
+# Authentication: All endpoints require Bearer token authentication
+# Authorization: Requires verified email and approved KYC
+#
+# File Uploads:
+# - Cover images must be single image file (JPEG, PNG, WebP, GIF) - Max 5MB
+# - Proof files can be images, videos, or documents - Max 20MB each, up to 10 files
+#
+###############################################################################
+
+###############################################################################
+#                              SCHEMA TYPES                                  #
+###############################################################################
+
+# ===== Campaign Status Enum =====
+# DRAFT - Campaign is in draft state
+# PENDING_VERIFICATION - Awaiting admin verification
+# LIVE - Campaign is active
+# SUSPENDED - Campaign has been suspended
+# COMPLETED - Campaign is completed
+
+# ===== Campaign Schema (Response) =====
+# {
+#   "id": "uuid",
+#   "beneficiaryId": "uuid",
+#   "beneficiary": {
+#     "id": "uuid",
+#     "name": "string",
+#     "email": "string"
+#   },
+#   "title": "string",
+#   "description": "string",
+#   "coverImage": "string - complete URL to uploaded image",
+#   "proofLinks": ["string - array of complete URLs to proof files"],
+#   "targetAmount": "number - decimal with 2 places",
+#   "status": "enum - DRAFT | PENDING_VERIFICATION | LIVE | SUSPENDED | COMPLETED",
+#   "donationCount": "number - total donations received",
+#   "shareCount": "number - times shared on social media",
+#   "viewCount": "number - total campaign views",
+#   "createdAt": "ISO 8601 timestamp",
+#   "verifiedAt": "ISO 8601 timestamp (nullable)",
+#   "milestones": [Milestone[]]
+# }
+
+# ===== Milestone Schema =====
+# {
+#   "id": "uuid",
+#   "campaignId": "uuid",
+#   "title": "string",
+#   "amount": "number - decimal with 2 places",
+#   "completed": "boolean",
+#   "createdAt": "ISO 8601 timestamp"
+# }
+
+# ===== Organizer Info (Beneficiary) =====
+# {
+#   "id": "uuid",
+#   "name": "string - organizer's full name",
+#   "email": "string - organizer's email"
+# }
+
+###############################################################################
+#                           CAMPAIGN ENDPOINTS                               #
+###############################################################################
+
+### 1. Create Campaign (with file uploads)
+### Creates a new fundraising campaign with cover image and proof files
+###
+### Content-Type: multipart/form-data
+### Required Fields:
+###   - title: string (5-100 characters)
+###   - description: string (20-5000 characters)
+###   - targetAmount: number (positive, max 999999999.99)
+###   - coverImage: file (JPEG, PNG, WebP, GIF - max 5MB)
+### Optional Fields:
+###   - proofs: files (up to 10 files, images/videos/docs - max 20MB each)
+###
+### Returns: 201 Created with campaign object
+### File Structure: uploads/campaigns/{campaignId}/
+###
+POST {{baseUrl}}/campaigns
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Emergency Medical Fund
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Help us raise funds for emergency medical treatment of underprivileged children in rural Nepal. This campaign aims to provide critical medical care to children who cannot afford proper treatment.
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="targetAmount"
+
+50000
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="coverImage"; filename="medical-fund.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/your/image.jpg
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="proofs"; filename="proof1.pdf"
+Content-Type: application/pdf
+
+< ./path/to/your/proof1.pdf
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="proofs"; filename="proof2.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/your/proof2.jpg
+------FormBoundary7MA4YWxkTrZu0gW--
+
+### 2. Get My Campaigns
+### Retrieves all campaigns created by the authenticated user
+### Includes beneficiary info and complete file URLs
+### Sorted by createdAt in descending order
+### Returns: 200 OK with array of campaign objects
+###
+GET {{baseUrl}}/campaigns/me
+Authorization: Bearer {{token}}
+
+### 3. Get Campaign by ID
+### Retrieves detailed information for a specific campaign including milestones
+### Shows beneficiary information and engagement metrics
+###
+### Parameters: id (URL parameter - campaign UUID)
+### Returns: 200 OK with campaign object, 404 if not found or not owned by user
+###
+GET {{baseUrl}}/campaigns/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer {{token}}
+
+### 4. Update Campaign
+### Updates campaign details (text fields only)
+### Note: Cannot update campaigns with status = LIVE
+### Note: File uploads are handled separately
+###
+### Allowed Fields: title, description, targetAmount, status
+### All fields are optional but at least one must be provided
+### Returns: 200 OK with updated campaign object
+###
+PUT {{baseUrl}}/campaigns/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Emergency Medical Fund - Updated",
+  "description": "Updated description for the campaign with more details about how funds will be used",
+  "targetAmount": 75000,
+  "status": "DRAFT"
+}
+
+### 5. Add Milestone to Campaign
+### Creates a milestone (funding goal) for a specific campaign
+### Used to track intermediate funding goals
+###
+### Required Fields: title, amount
+### Returns: 201 Created with milestone object
+###
+POST {{baseUrl}}/campaigns/550e8400-e29b-41d4-a716-446655440000/milestones
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Initial Target: 25000",
+  "amount": "25000"
+}
+
+### 6. Delete Milestone
+### Deletes a specific milestone from a campaign
+###
+### Parameters:
+###   - id (URL parameter - campaign UUID)
+###   - milestoneId (URL parameter - milestone UUID)
+### Returns: 200 OK with success message
+###
+DELETE {{baseUrl}}/campaigns/550e8400-e29b-41d4-a716-446655440000/milestones/660e8400-e29b-41d4-a716-446655440001
+Authorization: Bearer {{token}}
+
+###############################################################################
+#                           RESPONSE EXAMPLES                                #
+###############################################################################
+
+# ===== Success Response (Campaign Created) =====
+# Status: 201
+# {
+#   "success": true,
+#   "campaign": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "beneficiaryId": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#     "beneficiary": {
+#       "id": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#       "name": "John Doe",
+#       "email": "john@example.com"
+#     },
+#     "title": "Emergency Medical Fund",
+#     "description": "Help us raise funds for emergency medical treatment...",
+#     "coverImage": "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/medical-fund-1735411200000.jpg",
+#     "proofLinks": [
+#       "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/proof1-1735411200000.pdf",
+#       "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/proof2-1735411200000.jpg"
+#     ],
+#     "targetAmount": "50000.00",
+#     "status": "PENDING_VERIFICATION",
+#     "donationCount": 0,
+#     "shareCount": 0,
+#     "viewCount": 0,
+#     "createdAt": "2025-12-29T10:30:00Z",
+#     "verifiedAt": null,
+#     "milestones": []
+#   }
+# }
+
+# ===== Success Response (Campaign with Metrics) =====
+# Status: 200
+# {
+#   "success": true,
+#   "campaign": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "beneficiaryId": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#     "beneficiary": {
+#       "id": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#       "name": "John Doe",
+#       "email": "john@example.com"
+#     },
+#     "title": "Emergency Medical Fund",
+#     "description": "Help us raise funds for emergency medical treatment...",
+#     "coverImage": "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/medical-fund-1735411200000.jpg",
+#     "proofLinks": [
+#       "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/proof1-1735411200000.pdf"
+#     ],
+#     "targetAmount": "50000.00",
+#     "status": "LIVE",
+#     "donationCount": 245,
+#     "shareCount": 156,
+#     "viewCount": 8934,
+#     "createdAt": "2025-12-29T10:30:00Z",
+#     "verifiedAt": "2025-12-29T12:00:00Z",
+#     "milestones": [
+#       {
+#         "id": "660e8400-e29b-41d4-a716-446655440001",
+#         "campaignId": "550e8400-e29b-41d4-a716-446655440000",
+#         "title": "Initial Target: 25000",
+#         "amount": "25000.00",
+#         "completed": true,
+#         "createdAt": "2025-12-29T10:45:00Z"
+#       }
+#     ]
+#   }
+# }
+
+# ===== Success Response (Campaign List) =====
+# Status: 200
+# {
+#   "success": true,
+#   "campaigns": [
+#     {
+#       "id": "550e8400-e29b-41d4-a716-446655440000",
+#       "title": "Emergency Medical Fund",
+#       "description": "Help us raise funds...",
+#       "coverImage": "http://localhost:3000/uploads/campaigns/550e8400-e29b-41d4-a716-446655440000/medical-fund-1735411200000.jpg",
+#       "targetAmount": "50000.00",
+#       "status": "LIVE",
+#       "donationCount": 245,
+#       "shareCount": 156,
+#       "beneficiary": {
+#         "id": "e109c74d-c53f-4a0d-9098-bbda3f3ec734",
+#         "name": "John Doe",
+#         "email": "john@example.com"
+#       },
+#       "createdAt": "2025-12-29T10:30:00Z"
+#     }
+#   ]
+# }
+
+# ===== Error Response (Validation Failed) =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Validation failed",
+#   "errors": {
+#     "title": ["Title must be at least 5 characters"],
+#     "targetAmount": ["Target amount must be greater than 0"]
+#   }
+# }
+
+# ===== Error Response (Missing Cover Image) =====
+# Status: 400
+# {
+#   "success": false,
+#   "message": "Cover image is required"
+# }
+
+# ===== Error Response (Campaign Not Found) =====
+# Status: 404
+# {
+#   "success": false,
+#   "message": "Campaign not found"
+# }
+
+# ===== Error Response (Live Campaign Edit Attempt) =====
+# Status: 403
+# {
+#   "success": false,
+#   "message": "Live campaigns cannot be edited"
+# }
+
+# ===== Error Response (Server Error) =====
+# Status: 500
+# {
+#   "success": false,
+#   "message": "Failed to create campaign"
+# }
+
+###############################################################################
+#                           AUTHORIZATION NOTES                              #
+###############################################################################
+#
+# All campaign endpoints require:
+# 1. Valid Bearer token (user must be authenticated)
+# 2. Verified email address (emailStatus = VERIFIED)
+# 3. Approved KYC profile (kycStatus = APPROVED)
+#
+# Middleware Chain:
+# - requireAuth: Validates JWT token
+# - requireVerifiedEmail: Checks if user's email is verified
+# - requireApprovedKYC: Checks if user's KYC is approved
+#
+###############################################################################
+
+###############################################################################
+#                        FILE UPLOAD DETAILS                                 #
+###############################################################################
+#
+# Upload Directory Structure:
+# uploads/
+# └── campaigns/
+#     └── {campaignId}/
+#         ├── cover-image.ext
+#         ├── proof-file-1.ext
+#         └── proof-file-N.ext
+#
+# Supported File Types:
+# Images: JPEG, PNG, WebP, GIF (cover image max 5MB)
+# Videos: MP4, WebM, QuickTime (proof files max 20MB)
+# Documents: PDF, DOC, DOCX (proof files max 20MB)
+#
+# Database Storage:
+# - Relative paths are stored in database (e.g., 'campaigns/uuid/file.jpg')
+# - Complete URLs are generated in API responses
+# - URLs can be accessed via: http://localhost:3000/uploads/campaigns/{id}/file.ext
+#
+###############################################################################
+
+###############################################################################
+#                           ENGAGEMENT METRICS                               #
+###############################################################################
+#
+# Campaign Engagement Tracking:
+#
+# donationCount:
+#   - Incremented each time someone makes a donation to the campaign
+#   - Displayed as total number of donations
+#
+# shareCount:
+#   - Incremented each time campaign is shared on social media
+#   - Helps identify viral campaigns
+#   - Can be used for gamification/rewards
+#
+# viewCount:
+#   - Incremented each time campaign details are viewed
+#   - Tracks campaign popularity and visibility
+#   - Useful for analytics and recommendations
+#
+###############################################################################

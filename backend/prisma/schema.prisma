@@ -146,10 +146,15 @@ model Campaign {
 
   title        String
   description  String
-  coverImage   String
-  proofLinks   String?
+  coverImage   String  // relative path to cover image
+  proofLinks   String? // JSON array of relative paths to proof files
   targetAmount Decimal        @db.Decimal(12, 2)
   status       CampaignStatus @default(PENDING_VERIFICATION)
+
+  // Engagement metrics
+  donationCount Int     @default(0)
+  shareCount    Int     @default(0)
+  viewCount     Int     @default(0)
 
   createdAt  DateTime  @default(now())
   verifiedAt DateTime?
@@ -159,6 +164,7 @@ model Campaign {
   itemDonations  ItemDonation[]
 
   @@index([status])
+  @@index([beneficiaryId])
 }
 
 model Milestone {

@@ -1,5 +1,3 @@
-
-
 import { hashPassword, verifyPassword } from '../utils/password';
 import { saveOTP, verifyOTP } from '../utils/otp';
 import { generateToken } from '../utils/jwt';
