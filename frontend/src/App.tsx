@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import { useAuthStore } from "./store/auth.store";
 import { useEffect } from "react";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 
 function App() {
   const { fetchUser, isLoading } = useAuthStore();
@@ -19,10 +21,14 @@ function App() {
   }
 
   return (
-    <>
-      <Outlet />
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <Footer />
       <Toaster />
-    </>
+    </div>
   );
 }
 
