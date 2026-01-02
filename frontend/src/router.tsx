@@ -11,6 +11,7 @@ import CampaignDetail from "./pages/campaign/CampaignDetail";
 import AdminCampaignList from "./pages/admin/AdminCampaignList";
 import AdminCampaignDetail from "./pages/admin/AdminCampaignDetail";
 import AdminRoute from "./components/AdminRoute";
+import KYCForm from "./pages/kyc/KYCForm"; // Import KYCForm
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/verify-email",
         element: <VerifyEmail />,
+      },
+      {
+        path: "/kyc/submit", // New KYC submission route
+        element: <KYCForm />,
       },
       {
         path: "/campaigns/create",

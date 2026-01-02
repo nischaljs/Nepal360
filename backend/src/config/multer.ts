@@ -1,6 +1,6 @@
 import multer from 'multer';
 import path from 'path';
-import { getCampaignUploadDir, ensureDir } from '../utils/file';
+import { getCampaignUploadDir, ensureDir, getKycUserUploadDir } from '../utils/file';
 
 /**
  * Allowed file types for campaign uploads
@@ -19,11 +19,17 @@ const ALLOWED_MIMETYPES = [
 ];
 
 /**
+ * Allowed file types for KYC uploads (images only)
+ */
+const KYC_ALLOWED_MIMETYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+/**
  * Maximum file sizes (in bytes)
  */
 const MAX_FILE_SIZES = {
     coverImage: 5 * 1024 * 1024, // 5MB
     proof: 20 * 1024 * 1024, // 20MB
+    kycImage: 5 * 1024 * 1024, // 5MB for document and profile photos
 };
 
 /**
@@ -32,6 +38,28 @@ const MAX_FILE_SIZES = {
  */
 export const createCampaignStorage = (campaignId: string) => {
     const uploadDir = getCampaignUploadDir(campaignId);
+    ensureDir(uploadDir);
+
+    return multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, uploadDir);
+        },
+        filename: (req, file, cb) => {
+            const timestamp = Date.now();
+            const ext = path.extname(file.originalname);
+            const name = path.basename(file.originalname, ext);
+            const filename = `${name}-${timestamp}${ext}`;
+            cb(null, filename);
+        },
+    });
+};
+
+/**
+ * Create multer storage configuration for KYC files
+ * Files are organized by user ID
+ */
+export const createKycStorage = (userId: string) => {
+    const uploadDir = getKycUserUploadDir(userId);
     ensureDir(uploadDir);
 
     return multer.diskStorage({
@@ -60,6 +88,21 @@ const campaignFileFilter = (
         cb(null, true);
     } else {
         cb(new Error(`File type not allowed: ${file.mimetype}`));
+    }
+};
+
+/**
+ * File filter function for KYC uploads (images only)
+ */
+const kycFileFilter = (
+    req: Express.Request,
+    file: Express.Multer.File,
+    cb: multer.FileFilterCallback
+) => {
+    if (KYC_ALLOWED_MIMETYPES.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(new Error(`KYC File type not allowed: ${file.mimetype}`));
     }
 };
 
@@ -107,6 +150,24 @@ export const createCampaignUpload = (campaignId: string) => {
         { name: 'proofs', maxCount: 10 },
     ]);
 };
+
+/**
+ * Create multer upload middleware for KYC document and profile photos
+ */
+export const createKycUpload = (userId: string) => {
+    const storage = createKycStorage(userId);
+    return multer({
+        storage,
+        fileFilter: kycFileFilter,
+        limits: {
+            fileSize: MAX_FILE_SIZES.kycImage,
+        },
+    }).fields([
+        { name: 'documentImage', maxCount: 1 },
+        { name: 'profilePhoto', maxCount: 1 },
+    ]);
+};
+
 
 /**
  * Default campaign multer instance

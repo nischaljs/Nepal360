@@ -15,7 +15,7 @@ const Header = () => {
           <Link to="/" className="hover:underline">
             Home
           </Link>
-          {isAuthenticated && (
+          {isAuthenticated && user && (
             <>
               <Link to="/campaigns/create" className="hover:underline">
                 Create Campaign
@@ -23,7 +23,7 @@ const Header = () => {
               <Link to="/campaigns/me" className="hover:underline">
                 My Campaigns
               </Link>
-              {user?.isAdmin && (
+              {user.roles && user.roles.isAdmin && (
                 <Link to="/admin/campaigns" className="hover:underline">
                   Admin
                 </Link>

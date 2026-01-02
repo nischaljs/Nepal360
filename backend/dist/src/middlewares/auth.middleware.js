@@ -29,6 +29,7 @@ function authMiddleware(req) {
 function requireAuth(req, res, next) {
     const user = authMiddleware(req);
     if (!user) {
+        console.warn('requireAuth: User not authenticated. Token might be missing or invalid.');
         return res.status(401).json({ success: false, message: 'Unauthorized. Please login.' });
     }
     req.user = user;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Campaign } from "../types/campaign.types";
+import type { Campaign } from "../types/campaign.types";
 import { getAllCampaigns } from "../services/campaign.service";
 import CampaignCard from "../components/campaign/CampaignCard";
 import { toast } from "sonner";

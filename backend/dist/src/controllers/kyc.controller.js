@@ -13,10 +13,23 @@ exports.resubmitKyc = exports.getMyKycStatus = exports.submitKyc = void 0;
 const zod_1 = require("zod");
 const prisma_1 = require("../lib/prisma");
 const kyc_schema_1 = require("../schemas/kyc.schema");
+const file_1 = require("../utils/file");
+const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3000'; // Define base URL
 const submitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const kycData = kyc_schema_1.submitKycSchema.parse(req.body);
-        const { userId: userId } = req.user;
+        const { userId } = req.user;
+        const files = req.files;
+        // Validate file uploads
+        if (!files || !files.documentImage || files.documentImage.length === 0) {
+            return res.status(400).json({ message: 'Document image is required.' });
+        }
+        if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
+            return res.status(400).json({ message: 'Profile photo is required.' });
+        }
+        const documentImageRelativePath = (0, file_1.getRelativePath)(files.documentImage[0].path);
+        const profilePhotoRelativePath = (0, file_1.getRelativePath)(files.profilePhoto[0].path);
+        const kycDataWithFiles = Object.assign(Object.assign({}, req.body), { documentImage: documentImageRelativePath, profilePhoto: profilePhotoRelativePath });
+        const parsedKycData = kyc_schema_1.submitKycSchema.parse(kycDataWithFiles);
         const existingKyc = yield prisma_1.prisma.kYCProfile.findUnique({
             where: { userId },
         });
@@ -26,11 +39,13 @@ const submitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function
                 .json({ message: 'KYC profile already exists.' });
         }
         const newKyc = yield prisma_1.prisma.kYCProfile.create({
-            data: Object.assign(Object.assign({}, kycData), { userId, status: 'PENDING' }),
+            data: Object.assign(Object.assign({}, parsedKycData), { userId, status: 'PENDING' }),
         });
+        // Convert relative paths to full URLs for the response
+        const responseKyc = Object.assign(Object.assign({}, newKyc), { documentImage: (0, file_1.generateAssetUrl)(newKyc.documentImage, BASE_URL), profilePhoto: (0, file_1.generateAssetUrl)(newKyc.profilePhoto, BASE_URL) });
         res
             .status(201)
-            .json({ message: 'KYC profile submitted successfully.', kyc: newKyc });
+            .json({ message: 'KYC profile submitted successfully.', kyc: responseKyc });
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {
@@ -47,7 +62,7 @@ const submitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function
 });
 exports.submitKyc = submitKyc;
 const getMyKycStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId: userId } = req.user;
+    const { userId } = req.user;
     try {
         const kyc = yield prisma_1.prisma.kYCProfile.findUnique({
             where: { userId },
@@ -56,12 +71,16 @@ const getMyKycStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                 rejectionReason: true,
                 submittedAt: true,
                 reviewedAt: true,
+                documentImage: true, // Include documentImage
+                profilePhoto: true, // Include profilePhoto
             },
         });
         if (!kyc) {
             return res.status(200).json({ status: 'NOT_SUBMITTED' });
         }
-        res.status(200).json(kyc);
+        // Convert relative paths to full URLs for the response
+        const responseKyc = Object.assign(Object.assign({}, kyc), { documentImage: kyc.documentImage ? (0, file_1.generateAssetUrl)(kyc.documentImage, BASE_URL) : undefined, profilePhoto: kyc.profilePhoto ? (0, file_1.generateAssetUrl)(kyc.profilePhoto, BASE_URL) : undefined });
+        res.status(200).json(responseKyc);
     }
     catch (error) {
         next(error);
@@ -70,8 +89,19 @@ const getMyKycStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.getMyKycStatus = getMyKycStatus;
 const resubmitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const kycData = kyc_schema_1.submitKycSchema.parse(req.body);
-        const { userId: userId } = req.user;
+        const { userId } = req.user;
+        const files = req.files;
+        // Validate file uploads
+        if (!files || !files.documentImage || files.documentImage.length === 0) {
+            return res.status(400).json({ message: 'Document image is required.' });
+        }
+        if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
+            return res.status(400).json({ message: 'Profile photo is required.' });
+        }
+        const documentImageRelativePath = (0, file_1.getRelativePath)(files.documentImage[0].path);
+        const profilePhotoRelativePath = (0, file_1.getRelativePath)(files.profilePhoto[0].path);
+        const kycDataWithFiles = Object.assign(Object.assign({}, req.body), { documentImage: documentImageRelativePath, profilePhoto: profilePhotoRelativePath });
+        const parsedKycData = kyc_schema_1.submitKycSchema.parse(kycDataWithFiles);
         const existingKyc = yield prisma_1.prisma.kYCProfile.findUnique({
             where: { userId },
         });
@@ -85,11 +115,13 @@ const resubmitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         }
         const updatedKyc = yield prisma_1.prisma.kYCProfile.update({
             where: { userId },
-            data: Object.assign(Object.assign({}, kycData), { status: 'PENDING', rejectionReason: null }),
+            data: Object.assign(Object.assign({}, parsedKycData), { status: 'PENDING', rejectionReason: null }),
         });
+        // Convert relative paths to full URLs for the response
+        const responseKyc = Object.assign(Object.assign({}, updatedKyc), { documentImage: (0, file_1.generateAssetUrl)(updatedKyc.documentImage, BASE_URL), profilePhoto: (0, file_1.generateAssetUrl)(updatedKyc.profilePhoto, BASE_URL) });
         res.status(200).json({
             message: 'KYC profile resubmitted successfully.',
-            kyc: updatedKyc,
+            kyc: responseKyc,
         });
     }
     catch (error) {

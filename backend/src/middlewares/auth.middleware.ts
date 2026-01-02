@@ -18,6 +18,7 @@ export function authMiddleware(req: any): AuthenticatedRequest['user'] | null {
 export function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
     const user = authMiddleware(req);
     if (!user) {
+        console.warn('requireAuth: User not authenticated. Token might be missing or invalid.');
         return res.status(401).json({ success: false, message: 'Unauthorized. Please login.' });
     }
     req.user = user;

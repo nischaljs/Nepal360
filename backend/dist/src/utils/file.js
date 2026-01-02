@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCampaignDirectory = exports.deleteFile = exports.convertProofLinksToUrls = exports.parseProofLinks = exports.getRelativePath = exports.generateAssetUrl = exports.ensureDir = exports.getCampaignUploadDir = exports.getCampaignsUploadDir = exports.getUploadDir = void 0;
+exports.getKycUserUploadDir = exports.getKycUploadDir = exports.deleteCampaignDirectory = exports.deleteFile = exports.convertProofLinksToUrls = exports.parseProofLinks = exports.getRelativePath = exports.generateAssetUrl = exports.ensureDir = exports.getCampaignUploadDir = exports.getCampaignsUploadDir = exports.getUploadDir = void 0;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 /**
@@ -119,3 +119,17 @@ const deleteCampaignDirectory = (campaignId) => {
     }
 };
 exports.deleteCampaignDirectory = deleteCampaignDirectory;
+/**
+ * Get the KYC upload directory
+ */
+const getKycUploadDir = () => {
+    return path_1.default.join((0, exports.getUploadDir)(), 'kyc');
+};
+exports.getKycUploadDir = getKycUploadDir;
+/**
+ * Get a specific user's KYC upload directory
+ */
+const getKycUserUploadDir = (userId) => {
+    return path_1.default.join((0, exports.getKycUploadDir)(), userId);
+};
+exports.getKycUserUploadDir = getKycUserUploadDir;

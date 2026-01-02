@@ -109,3 +109,17 @@ export const deleteCampaignDirectory = (campaignId: string): void => {
         console.error('Error deleting campaign directory:', error);
     }
 };
+
+/**
+ * Get the KYC upload directory
+ */
+export const getKycUploadDir = (): string => {
+    return path.join(getUploadDir(), 'kyc');
+};
+
+/**
+ * Get a specific user's KYC upload directory
+ */
+export const getKycUserUploadDir = (userId: string): string => {
+    return path.join(getKycUploadDir(), userId);
+};
