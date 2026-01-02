@@ -40,7 +40,9 @@ export type MoneyDonationMinAggregateOutputType = {
   campaignId: string | null
   amount: runtime.Decimal | null
   visibility: $Enums.DonationVisibility | null
+  status: $Enums.MoneyDonationStatus | null
   paymentRef: string | null
+  pidx: string | null
   createdAt: Date | null
 }
 
@@ -50,7 +52,9 @@ export type MoneyDonationMaxAggregateOutputType = {
   campaignId: string | null
   amount: runtime.Decimal | null
   visibility: $Enums.DonationVisibility | null
+  status: $Enums.MoneyDonationStatus | null
   paymentRef: string | null
+  pidx: string | null
   createdAt: Date | null
 }
 
@@ -60,7 +64,9 @@ export type MoneyDonationCountAggregateOutputType = {
   campaignId: number
   amount: number
   visibility: number
+  status: number
   paymentRef: number
+  pidx: number
   createdAt: number
   _all: number
 }
@@ -80,7 +86,9 @@ export type MoneyDonationMinAggregateInputType = {
   campaignId?: true
   amount?: true
   visibility?: true
+  status?: true
   paymentRef?: true
+  pidx?: true
   createdAt?: true
 }
 
@@ -90,7 +98,9 @@ export type MoneyDonationMaxAggregateInputType = {
   campaignId?: true
   amount?: true
   visibility?: true
+  status?: true
   paymentRef?: true
+  pidx?: true
   createdAt?: true
 }
 
@@ -100,7 +110,9 @@ export type MoneyDonationCountAggregateInputType = {
   campaignId?: true
   amount?: true
   visibility?: true
+  status?: true
   paymentRef?: true
+  pidx?: true
   createdAt?: true
   _all?: true
 }
@@ -197,7 +209,9 @@ export type MoneyDonationGroupByOutputType = {
   campaignId: string
   amount: runtime.Decimal
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status: $Enums.MoneyDonationStatus
+  paymentRef: string | null
+  pidx: string | null
   createdAt: Date
   _count: MoneyDonationCountAggregateOutputType | null
   _avg: MoneyDonationAvgAggregateOutputType | null
@@ -230,7 +244,9 @@ export type MoneyDonationWhereInput = {
   campaignId?: Prisma.StringFilter<"MoneyDonation"> | string
   amount?: Prisma.DecimalFilter<"MoneyDonation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFilter<"MoneyDonation"> | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFilter<"MoneyDonation"> | string
+  status?: Prisma.EnumMoneyDonationStatusFilter<"MoneyDonation"> | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.StringNullableFilter<"MoneyDonation"> | string | null
+  pidx?: Prisma.StringNullableFilter<"MoneyDonation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MoneyDonation"> | Date | string
   donor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
@@ -242,7 +258,9 @@ export type MoneyDonationOrderByWithRelationInput = {
   campaignId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
-  paymentRef?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrderInput | Prisma.SortOrder
+  pidx?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   donor?: Prisma.UserOrderByWithRelationInput
   campaign?: Prisma.CampaignOrderByWithRelationInput
@@ -251,6 +269,8 @@ export type MoneyDonationOrderByWithRelationInput = {
 
 export type MoneyDonationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  paymentRef?: string
+  pidx?: string
   AND?: Prisma.MoneyDonationWhereInput | Prisma.MoneyDonationWhereInput[]
   OR?: Prisma.MoneyDonationWhereInput[]
   NOT?: Prisma.MoneyDonationWhereInput | Prisma.MoneyDonationWhereInput[]
@@ -258,11 +278,11 @@ export type MoneyDonationWhereUniqueInput = Prisma.AtLeast<{
   campaignId?: Prisma.StringFilter<"MoneyDonation"> | string
   amount?: Prisma.DecimalFilter<"MoneyDonation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFilter<"MoneyDonation"> | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFilter<"MoneyDonation"> | string
+  status?: Prisma.EnumMoneyDonationStatusFilter<"MoneyDonation"> | $Enums.MoneyDonationStatus
   createdAt?: Prisma.DateTimeFilter<"MoneyDonation"> | Date | string
   donor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
-}, "id">
+}, "id" | "paymentRef" | "pidx">
 
 export type MoneyDonationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -270,7 +290,9 @@ export type MoneyDonationOrderByWithAggregationInput = {
   campaignId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
-  paymentRef?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrderInput | Prisma.SortOrder
+  pidx?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MoneyDonationCountOrderByAggregateInput
   _avg?: Prisma.MoneyDonationAvgOrderByAggregateInput
@@ -288,7 +310,9 @@ export type MoneyDonationScalarWhereWithAggregatesInput = {
   campaignId?: Prisma.StringWithAggregatesFilter<"MoneyDonation"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"MoneyDonation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityWithAggregatesFilter<"MoneyDonation"> | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringWithAggregatesFilter<"MoneyDonation"> | string
+  status?: Prisma.EnumMoneyDonationStatusWithAggregatesFilter<"MoneyDonation"> | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.StringNullableWithAggregatesFilter<"MoneyDonation"> | string | null
+  pidx?: Prisma.StringNullableWithAggregatesFilter<"MoneyDonation"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MoneyDonation"> | Date | string
 }
 
@@ -296,7 +320,9 @@ export type MoneyDonationCreateInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
   donor: Prisma.UserCreateNestedOneWithoutMoneyDonationsInput
   campaign: Prisma.CampaignCreateNestedOneWithoutMoneyDonationsInput
@@ -308,7 +334,9 @@ export type MoneyDonationUncheckedCreateInput = {
   campaignId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -316,7 +344,9 @@ export type MoneyDonationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donor?: Prisma.UserUpdateOneRequiredWithoutMoneyDonationsNestedInput
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMoneyDonationsNestedInput
@@ -328,7 +358,9 @@ export type MoneyDonationUncheckedUpdateInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -338,7 +370,9 @@ export type MoneyDonationCreateManyInput = {
   campaignId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -346,7 +380,9 @@ export type MoneyDonationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -356,7 +392,9 @@ export type MoneyDonationUncheckedUpdateManyInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -382,7 +420,9 @@ export type MoneyDonationCountOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   paymentRef?: Prisma.SortOrder
+  pidx?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -396,7 +436,9 @@ export type MoneyDonationMaxOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   paymentRef?: Prisma.SortOrder
+  pidx?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -406,7 +448,9 @@ export type MoneyDonationMinOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   paymentRef?: Prisma.SortOrder
+  pidx?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -502,11 +546,17 @@ export type EnumDonationVisibilityFieldUpdateOperationsInput = {
   set?: $Enums.DonationVisibility
 }
 
+export type EnumMoneyDonationStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MoneyDonationStatus
+}
+
 export type MoneyDonationCreateWithoutDonorInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
   campaign: Prisma.CampaignCreateNestedOneWithoutMoneyDonationsInput
 }
@@ -516,7 +566,9 @@ export type MoneyDonationUncheckedCreateWithoutDonorInput = {
   campaignId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -555,7 +607,9 @@ export type MoneyDonationScalarWhereInput = {
   campaignId?: Prisma.StringFilter<"MoneyDonation"> | string
   amount?: Prisma.DecimalFilter<"MoneyDonation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFilter<"MoneyDonation"> | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFilter<"MoneyDonation"> | string
+  status?: Prisma.EnumMoneyDonationStatusFilter<"MoneyDonation"> | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.StringNullableFilter<"MoneyDonation"> | string | null
+  pidx?: Prisma.StringNullableFilter<"MoneyDonation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MoneyDonation"> | Date | string
 }
 
@@ -563,7 +617,9 @@ export type MoneyDonationCreateWithoutCampaignInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
   donor: Prisma.UserCreateNestedOneWithoutMoneyDonationsInput
 }
@@ -573,7 +629,9 @@ export type MoneyDonationUncheckedCreateWithoutCampaignInput = {
   donorId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -608,7 +666,9 @@ export type MoneyDonationCreateManyDonorInput = {
   campaignId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -616,7 +676,9 @@ export type MoneyDonationUpdateWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMoneyDonationsNestedInput
 }
@@ -626,7 +688,9 @@ export type MoneyDonationUncheckedUpdateWithoutDonorInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -635,7 +699,9 @@ export type MoneyDonationUncheckedUpdateManyWithoutDonorInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -644,7 +710,9 @@ export type MoneyDonationCreateManyCampaignInput = {
   donorId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility: $Enums.DonationVisibility
-  paymentRef: string
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
   createdAt?: Date | string
 }
 
@@ -652,7 +720,9 @@ export type MoneyDonationUpdateWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donor?: Prisma.UserUpdateOneRequiredWithoutMoneyDonationsNestedInput
 }
@@ -662,7 +732,9 @@ export type MoneyDonationUncheckedUpdateWithoutCampaignInput = {
   donorId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -671,7 +743,9 @@ export type MoneyDonationUncheckedUpdateManyWithoutCampaignInput = {
   donorId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
-  paymentRef?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -683,7 +757,9 @@ export type MoneyDonationSelect<ExtArgs extends runtime.Types.Extensions.Interna
   campaignId?: boolean
   amount?: boolean
   visibility?: boolean
+  status?: boolean
   paymentRef?: boolean
+  pidx?: boolean
   createdAt?: boolean
   donor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
@@ -697,11 +773,13 @@ export type MoneyDonationSelectScalar = {
   campaignId?: boolean
   amount?: boolean
   visibility?: boolean
+  status?: boolean
   paymentRef?: boolean
+  pidx?: boolean
   createdAt?: boolean
 }
 
-export type MoneyDonationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "donorId" | "campaignId" | "amount" | "visibility" | "paymentRef" | "createdAt", ExtArgs["result"]["moneyDonation"]>
+export type MoneyDonationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "donorId" | "campaignId" | "amount" | "visibility" | "status" | "paymentRef" | "pidx" | "createdAt", ExtArgs["result"]["moneyDonation"]>
 export type MoneyDonationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   donor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
@@ -719,7 +797,9 @@ export type $MoneyDonationPayload<ExtArgs extends runtime.Types.Extensions.Inter
     campaignId: string
     amount: runtime.Decimal
     visibility: $Enums.DonationVisibility
-    paymentRef: string
+    status: $Enums.MoneyDonationStatus
+    paymentRef: string | null
+    pidx: string | null
     createdAt: Date
   }, ExtArgs["result"]["moneyDonation"]>
   composites: {}
@@ -1097,7 +1177,9 @@ export interface MoneyDonationFieldRefs {
   readonly campaignId: Prisma.FieldRef<"MoneyDonation", 'String'>
   readonly amount: Prisma.FieldRef<"MoneyDonation", 'Decimal'>
   readonly visibility: Prisma.FieldRef<"MoneyDonation", 'DonationVisibility'>
+  readonly status: Prisma.FieldRef<"MoneyDonation", 'MoneyDonationStatus'>
   readonly paymentRef: Prisma.FieldRef<"MoneyDonation", 'String'>
+  readonly pidx: Prisma.FieldRef<"MoneyDonation", 'String'>
   readonly createdAt: Prisma.FieldRef<"MoneyDonation", 'DateTime'>
 }
     

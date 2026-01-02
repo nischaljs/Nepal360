@@ -269,3 +269,52 @@ export async function deleteMilestone(req: AuthenticatedRequest, res: Response) 
         return res.status(500).json({ success: false, message: 'Failed to delete milestone' });
     }
 }
+
+export const getCampaignStats = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const moneyDonations = await prisma.moneyDonation.findMany({
+            where: {
+                campaignId: id,
+                status: 'COMPLETED'
+            }
+        });
+
+        const itemDonations = await prisma.itemDonation.findMany({
+            where: {
+                campaignId: id,
+                status: 'CONFIRMED'
+            }
+        });
+
+        const totalMoneyRaised = moneyDonations.reduce((sum, d) => sum + d.amount.toNumber(), 0);
+        const moneyDonationCount = moneyDonations.length;
+        const itemDonationCount = itemDonations.length;
+
+        const allDonors = new Set([
+            ...moneyDonations.map(d => d.donorId),
+            ...itemDonations.map(d => d.donorId)
+        ]);
+        
+        const uniqueDonorCount = allDonors.size;
+
+        const averageMoneyDonation = moneyDonationCount > 0 ? totalMoneyRaised / moneyDonationCount : 0;
+
+        return res.status(200).json({
+            success: true,
+            stats: {
+                totalMoneyRaised,
+                moneyDonationCount,
+                itemDonationCount,
+                totalDonationCount: moneyDonationCount + itemDonationCount,
+                uniqueDonorCount,
+                averageMoneyDonation
+            }
+        });
+
+    } catch (error) {
+        console.error('Get campaign stats error:', error);
+        return res.status(500).json({ success: false, message: 'Failed to get campaign stats' });
+    }
+}

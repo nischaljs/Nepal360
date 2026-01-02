@@ -53,10 +53,25 @@ CREATE TABLE `Campaign` (
     `proofLinks` VARCHAR(191) NULL,
     `targetAmount` DECIMAL(12, 2) NOT NULL,
     `status` ENUM('DRAFT', 'PENDING_VERIFICATION', 'LIVE', 'SUSPENDED', 'COMPLETED') NOT NULL DEFAULT 'PENDING_VERIFICATION',
+    `rejectionReason` VARCHAR(191) NULL,
+    `suspensionReason` VARCHAR(191) NULL,
+    `verifiedBy` VARCHAR(191) NULL,
+    `rejectedBy` VARCHAR(191) NULL,
+    `suspendedBy` VARCHAR(191) NULL,
+    `donationCount` INTEGER NOT NULL DEFAULT 0,
+    `shareCount` INTEGER NOT NULL DEFAULT 0,
+    `viewCount` INTEGER NOT NULL DEFAULT 0,
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `verifiedAt` DATETIME(3) NULL,
+    `rejectedAt` DATETIME(3) NULL,
+    `suspendedAt` DATETIME(3) NULL,
+    `deletedAt` DATETIME(3) NULL,
 
     INDEX `Campaign_status_idx`(`status`),
+    INDEX `Campaign_beneficiaryId_idx`(`beneficiaryId`),
+    INDEX `Campaign_isActive_idx`(`isActive`),
+    INDEX `Campaign_verifiedAt_idx`(`verifiedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -79,9 +94,13 @@ CREATE TABLE `MoneyDonation` (
     `campaignId` VARCHAR(191) NOT NULL,
     `amount` DECIMAL(12, 2) NOT NULL,
     `visibility` ENUM('PUBLIC', 'ANONYMOUS') NOT NULL,
-    `paymentRef` VARCHAR(191) NOT NULL,
+    `status` ENUM('PENDING', 'COMPLETED', 'FAILED') NOT NULL DEFAULT 'PENDING',
+    `paymentRef` VARCHAR(191) NULL,
+    `pidx` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    UNIQUE INDEX `MoneyDonation_paymentRef_key`(`paymentRef`),
+    UNIQUE INDEX `MoneyDonation_pidx_key`(`pidx`),
     INDEX `MoneyDonation_campaignId_idx`(`campaignId`),
     INDEX `MoneyDonation_donorId_idx`(`donorId`),
     PRIMARY KEY (`id`)

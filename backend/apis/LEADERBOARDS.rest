@@ -1,0 +1,82 @@
+@baseUrl = http://localhost:3000/api
+
+###############################################################################
+#                        LEADERBOARDS API DOCUMENTATION                       #
+###############################################################################
+#
+# This API is for fetching public leaderboards.
+#
+# Base URL: /api/leaderboards
+#
+###############################################################################
+
+### 1. List Available Leaderboards
+### Retrieves a list of all available leaderboards.
+###
+GET {{baseUrl}}/leaderboards
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "leaderboard-uuid-1",
+#     "period": "MONTHLY",
+#     "periodKey": "2024-01",
+#     "createdAt": "2024-01-01T00:00:00Z"
+#   },
+#   {
+#     "id": "leaderboard-uuid-2",
+#     "period": "CAMPAIGN",
+#     "periodKey": "campaign-uuid",
+#     "createdAt": "2024-01-02T10:00:00Z"
+#   }
+# ]
+
+### 2. Get a Specific Leaderboard
+### Retrieves the details and entries for a specific leaderboard.
+###
+### Path Parameters:
+###   - period: MONTHLY | CAMPAIGN | YEARLY
+###   - key: The key for the period (e.g., '2024-01' for MONTHLY, a campaignId for CAMPAIGN)
+###
+GET {{baseUrl}}/leaderboards/MONTHLY/2024-01
+
+### Response (200 OK):
+# {
+#   "id": "leaderboard-uuid-1",
+#   "period": "MONTHLY",
+#   "periodKey": "2024-01",
+#   "createdAt": "2024-01-01T00:00:00Z",
+#   "entries": [
+#     {
+#       "id": "entry-uuid-1",
+#       "leaderboardId": "leaderboard-uuid-1",
+#       "userId": "user-uuid-1",
+#       "rank": 1,
+#       "totalAmount": "5000.00",
+#       "totalItems": 10,
+#       "isAnonymous": false,
+#       "user": {
+#         "id": "user-uuid-1",
+#         "name": "Donor One"
+#       }
+#     },
+#     {
+#       "id": "entry-uuid-2",
+#       "leaderboardId": "leaderboard-uuid-1",
+#       "userId": "user-uuid-2",
+#       "rank": 2,
+#       "totalAmount": "4500.00",
+#       "totalItems": 8,
+#       "isAnonymous": false,
+#       "user": {
+#         "id": "user-uuid-2",
+#         "name": "Donor Two"
+#       }
+#     }
+#   ]
+# }
+
+### Response (404 Not Found):
+# {
+#   "message": "Leaderboard not found."
+# }

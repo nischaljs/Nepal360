@@ -144,11 +144,20 @@ Content-Type: application/json
 
 {}
 
+### 11. Complete Campaign (LIVE → COMPLETED)
+### Mark a live campaign as completed.
+###
+POST {{baseUrl}}/admin/campaigns/550e8400-e29b-41d4-a716-446655440000/complete
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{}
+
 ###############################################################################
 #                    ROUTE: SOFT DELETE                                      #
 ###############################################################################
 
-### 11. Delete Campaign (Soft Delete)
+### 12. Delete Campaign (Soft Delete)
 ### Mark campaign as inactive (does NOT remove from database)
 ###
 ### Constraints:

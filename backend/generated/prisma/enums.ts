@@ -46,6 +46,15 @@ export const DonationVisibility = {
 export type DonationVisibility = (typeof DonationVisibility)[keyof typeof DonationVisibility]
 
 
+export const MoneyDonationStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type MoneyDonationStatus = (typeof MoneyDonationStatus)[keyof typeof MoneyDonationStatus]
+
+
 export const ItemDonationStatus = {
   PLEDGED: 'PLEDGED',
   DELIVERED: 'DELIVERED',

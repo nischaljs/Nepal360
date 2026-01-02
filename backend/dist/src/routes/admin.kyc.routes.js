@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const admin_kyc_controller_1 = require("../controllers/admin.kyc.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.requireAuth, auth_middleware_1.requireAdmin);
+router.get('/', (0, errohandler_middleware_1.catchAsync)(admin_kyc_controller_1.listKycProfiles));
+router.get('/:userId', (0, errohandler_middleware_1.catchAsync)(admin_kyc_controller_1.getKycDetail));
+router.post('/:userId/approve', (0, errohandler_middleware_1.catchAsync)(admin_kyc_controller_1.approveKyc));
+router.post('/:userId/reject', (0, errohandler_middleware_1.catchAsync)(admin_kyc_controller_1.rejectKyc));
+exports.default = router;

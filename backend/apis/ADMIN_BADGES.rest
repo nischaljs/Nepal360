@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:3000/api
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbi11dWlkIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImVtYWlsVmVyaWZpZWQiOnRydWUsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAwMDAwfQ.signature
+@userId = some-user-uuid
+
+###############################################################################
+#                      ADMIN BADGES API DOCUMENTATION                         #
+###############################################################################
+#
+# This API is for administrators to manage user badges.
+#
+# Base URL: /api/admin/badges
+# Authentication: Bearer token with admin role
+#
+###############################################################################
+
+### 1. Grant a Badge to a User
+### Manually grants a badge to a specific user.
+###
+POST {{baseUrl}}/admin/badges/grant
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "badgeCode": "LIFETIME_AMOUNT"
+}
+
+### Response (201 Created):
+# {
+#   "id": "new-user-badge-uuid",
+#   "userId": "user-uuid",
+#   "badgeId": "badge-uuid",
+#   "awardedAt": "2024-01-02T17:00:00Z"
+# }
+
+### Response (404 Not Found - Badge not found):
+# {
+#   "message": "Badge not found."
+# }
+
+### Response (409 Conflict - User already has badge):
+# {
+#   "message": "User already has this badge."
+# }

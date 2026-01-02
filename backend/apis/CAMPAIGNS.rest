@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3000/api
+@campaignId = some-campaign-uuid
+
+###############################################################################
+#                         CAMPAIGNS API DOCUMENTATION                         #
+###############################################################################
+
+### 1. Get Campaign Statistics
+### Retrieves public statistics for a specific campaign.
+###
+GET {{baseUrl}}/campaigns/{{campaignId}}/stats
+
+### Response (200 OK):
+# {
+#   "success": true,
+#   "stats": {
+#     "totalMoneyRaised": 1500,
+#     "moneyDonationCount": 2,
+#     "itemDonationCount": 1,
+#     "totalDonationCount": 3,
+#     "uniqueDonorCount": 2,
+#     "averageMoneyDonation": 750
+#   }
+# }

@@ -1,0 +1,154 @@
+import { NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
+import { KYCStatus } from '../../generated/prisma/enums';
+import { prisma } from '../lib/prisma';
+import { rejectKycSchema } from '../schemas/admin.kyc.schema';
+import { AuthenticatedRequest } from '../types/auth.types';
+
+export const listKycProfiles = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { status } = req.query;
+
+  if (status && !['PENDING', 'APPROVED', 'REJECTED'].includes(status as string)) {
+    return res.status(400).json({ message: 'Invalid status filter.' });
+  }
+
+  try {
+    const kycProfiles = await prisma.kYCProfile.findMany({
+      where: {
+        status: status ? (status as KYCStatus) : undefined,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json(kycProfiles);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getKycDetail = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+
+  try {
+    const kycProfile = await prisma.kYCProfile.findUnique({
+      where: { userId },
+      include: {
+        user: true,
+      },
+    });
+
+    if (!kycProfile) {
+      return res.status(404).json({ message: 'KYC profile not found.' });
+    }
+
+    const auditLogs = await prisma.auditLog.findMany({
+      where: {
+        targetType: 'KYC_PROFILE',
+        targetId: kycProfile.id,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    res.status(200).json({ ...kycProfile, auditLogs });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const approveKyc = async (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+  const { userId: adminId } = req.user!;
+
+  try {
+    const kycProfile = await prisma.kYCProfile.update({
+      where: { userId },
+      data: {
+        status: 'APPROVED',
+        reviewedAt: new Date(),
+      },
+    });
+
+    await prisma.auditLog.create({
+      data: {
+        actorType: 'ADMIN',
+        actorId: adminId,
+        actionType: 'KYC_REVIEW',
+        targetType: 'KYC_PROFILE',
+        targetId: kycProfile.id,
+        note: 'KYC Approved',
+      },
+    });
+
+    res.status(200).json({ message: 'KYC profile approved.', kycProfile });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const rejectKyc = async (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+  const { userId: adminId } = req.user!;
+
+  try {
+    const { reason } = rejectKycSchema.parse(req.body);
+
+    const kycProfile = await prisma.kYCProfile.update({
+      where: { userId },
+      data: {
+        status: 'REJECTED',
+        rejectionReason: reason,
+        reviewedAt: new Date(),
+      },
+    });
+
+    await prisma.auditLog.create({
+      data: {
+        actorType: 'ADMIN',
+        actorId: adminId,
+        actionType: 'KYC_REVIEW',
+        targetType: 'KYC_PROFILE',
+        targetId: kycProfile.id,
+        note: `KYC Rejected: ${reason}`,
+      },
+    });
+
+    res.status(200).json({ message: 'KYC profile rejected.', kycProfile });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        message: 'Validation error',
+        errors: error.issues.map((e) => ({
+          path: e.path,
+          message: e.message,
+        })),
+      });
+    }
+    next(error);
+  }
+};

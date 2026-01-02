@@ -6,6 +6,7 @@ import {
     updateCampaign,
     addMilestone,
     deleteMilestone,
+    getCampaignStats,
 } from '../controllers/campaign.controller';
 
 import {
@@ -17,6 +18,9 @@ import { createCampaignUpload } from '../config/multer';
 import { AuthenticatedRequest } from '../types/auth.types';
 
 const router = Router();
+
+// Public routes
+router.get('/:id/stats', getCampaignStats);
 
 // Apply authentication middlewares to all routes
 router.use(requireAuth, requireVerifiedEmail, requireApprovedKYC);

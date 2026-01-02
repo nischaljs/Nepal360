@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:3000/api
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbi11dWlkIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImVtYWlsVmVyaWZpZWQiOnRydWUsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAwMDAwfQ.signature
+
+###############################################################################
+#                     ADMIN AUDIT LOGS API DOCUMENTATION                      #
+###############################################################################
+#
+# This API is for administrators to view audit logs.
+#
+# Base URL: /api/admin/audit-logs
+# Authentication: Bearer token with admin role
+#
+###############################################################################
+
+### 1. List Audit Logs
+### Retrieves a list of all audit logs, with optional filtering.
+###
+### Query Parameters:
+###   - actorId: uuid
+###   - actionType: KYC_REVIEW | CAMPAIGN_VERIFICATION | etc.
+###   - targetType: USER | CAMPAIGN | etc.
+###
+GET {{baseUrl}}/admin/audit-logs?actionType=KYC_REVIEW
+Authorization: Bearer {{adminToken}}
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "audit-log-uuid",
+#     "actorType": "ADMIN",
+#     "actorId": "admin-uuid",
+#     "actionType": "KYC_REVIEW",
+#     "targetType": "KYC_PROFILE",
+#     "targetId": "kyc-profile-uuid",
+#     "note": "KYC Approved",
+#     "createdAt": "2024-01-02T18:00:00Z",
+#     "actor": {
+#       "id": "admin-uuid",
+#       "name": "Admin User",
+#       "email": "admin@example.com"
+#     }
+#   }
+# ]
+
+### 2. Get Audit Logs for a Specific Target
+### Retrieves all audit logs related to a specific target entity.
+###
+### Path Parameters:
+###   - targetType: The type of the target (e.g., 'KYC_PROFILE', 'CAMPAIGN')
+###   - targetId: The UUID of the target entity
+###
+GET {{baseUrl}}/admin/audit-logs/KYC_PROFILE/some-kyc-profile-uuid
+Authorization: Bearer {{adminToken}}

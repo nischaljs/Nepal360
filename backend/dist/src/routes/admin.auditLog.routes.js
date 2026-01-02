@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const admin_auditLog_controller_1 = require("../controllers/admin.auditLog.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.requireAuth, auth_middleware_1.requireAdmin);
+router.get('/', (0, errohandler_middleware_1.catchAsync)(admin_auditLog_controller_1.listAuditLogs));
+router.get('/:targetType/:targetId', (0, errohandler_middleware_1.catchAsync)(admin_auditLog_controller_1.getAuditLogsForTarget));
+exports.default = router;

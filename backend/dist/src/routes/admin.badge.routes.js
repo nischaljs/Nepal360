@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const admin_badge_controller_1 = require("../controllers/admin.badge.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.requireAuth, auth_middleware_1.requireAdmin);
+router.post('/grant', (0, errohandler_middleware_1.catchAsync)(admin_badge_controller_1.grantBadge));
+exports.default = router;

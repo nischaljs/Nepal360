@@ -1,0 +1,199 @@
+@baseUrl = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMTA5Yzc0ZC1jNTNmLTRhMGQtOTA5OC1iYmRhM2YzZWM3MzQiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NjY4MTE2MjcsImV4cCI6MTc2NzQxNjQyN30.m6yFtAp3dBsT8FWu5xECSIdQQEMCqmHHJLwHXrNT2vw
+@campaignId = some-campaign-uuid
+@pidx = some-khalti-pidx
+
+###############################################################################
+#                         DONATIONS API DOCUMENTATION                         #
+###############################################################################
+#
+# This API handles money donations via Khalti payment gateway.
+#
+# REQUIRED ENVIRONMENT VARIABLES:
+# KHALTI_SECRET_KEY = Your Khalti merchant secret key
+# WEBSITE_URL = The base URL of your frontend application (e.g., https://yourdomain.com)
+#
+###############################################################################
+
+### 1. Initiate Khalti Payment
+### Starts the donation process by creating a pending donation record
+### and getting a payment URL from Khalti.
+###
+### Requires: `requireAuth`
+###
+POST {{baseUrl}}/donations/money/khalti/initiate
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "campaignId": "{{campaignId}}",
+  "amount": 500,
+  "currency": "NPR",
+  "returnUrl": "https://yourdomain.com/donation/success",
+  "visibility": "PUBLIC"
+}
+
+### Response (200 OK):
+# {
+#   "paymentUrl": "https://pay.khalti.com/?pidx=..."
+# }
+
+
+### 2. Verify Khalti Payment & Record Donation
+### After the user pays and is redirected to your `returnUrl`, the frontend
+### should call this endpoint with the `pidx` from the URL query parameters.
+### This verifies the payment with Khalti and marks the donation as 'COMPLETED'.
+###
+### Requires: `requireAuth`
+###
+POST {{baseUrl}}/donations/money/khalti/verify
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "pidx": "{{pidx}}"
+}
+
+### Response (200 OK):
+# {
+#   "success": true,
+#   "donation": {
+#     "id": "donation-uuid",
+#     "donorId": "user-uuid",
+#     "campaignId": "campaign-uuid",
+#     "amount": 500,
+#     "visibility": "PUBLIC",
+#     "status": "COMPLETED",
+#     "paymentRef": "khalti-transaction-id",
+#     "pidx": "khalti-pidx",
+#     "createdAt": "2024-01-02T15:00:00Z"
+#   }
+# }
+
+### Response (200 OK - already verified):
+# {
+#   "success": true,
+#   "message": "Donation already verified.",
+#   "donation": { ... }
+# }
+
+### Response (404 Not Found):
+# {
+#   "message": "Donation not found or you are not authorized to verify it."
+# }
+
+
+### 3. Khalti Callback Handler (Server-to-Server)
+### This is an optional webhook endpoint for Khalti to send payment status updates.
+### It serves as a fallback to verify payments.
+### This endpoint is NOT authenticated as it's called by Khalti's servers.
+###
+POST {{baseUrl}}/donations/money/khalti/callback
+Content-Type: application/json
+
+{
+    "pidx": "{{pidx}}",
+    "transaction_id": "...",
+    "status": "Completed",
+    "total_amount": 50000,
+    "mobile": "...",
+    "purchase_order_id": "donation-uuid",
+    "purchase_order_name": "Donation for ...",
+    "widget_id": "..."
+}
+
+### Response (200 OK):
+# {
+#   "success": true
+# }
+
+
+### 4. Get My Successful Money Donations
+### Retrieves a list of all 'COMPLETED' money donations for the authenticated user.
+###
+### Requires: `requireAuth`
+###
+GET {{baseUrl}}/donations/money/me
+Authorization: Bearer {{token}}
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "donation-uuid",
+#     "donorId": "user-uuid",
+#     "campaignId": "campaign-uuid",
+#     "amount": 500,
+#     "visibility": "PUBLIC",
+#     "status": "COMPLETED",
+#     "paymentRef": "khalti-transaction-id",
+#     "pidx": "khalti-pidx",
+#     "createdAt": "2024-01-02T15:00:00Z",
+#     "campaign": {
+#       "id": "campaign-uuid",
+#       "title": "Save the Kittens"
+#     }
+#   }
+# ]
+
+###############################################################################
+#                         ITEM DONATIONS                                      #
+###############################################################################
+
+### 5. Pledge an Item Donation
+### Creates a new item donation pledge for a campaign.
+###
+### Requires: `requireAuth`
+###
+POST {{baseUrl}}/donations/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "campaignId": "{{campaignId}}",
+  "itemName": "Blankets",
+  "quantity": "10 pieces",
+  "deliveryNote": "Will deliver by this weekend.",
+  "deliveryPhoto": "http://example.com/photo.jpg"
+}
+
+### Response (201 Created):
+# {
+#   "id": "item-donation-uuid",
+#   "donorId": "user-uuid",
+#   "campaignId": "campaign-uuid",
+#   "itemName": "Blankets",
+#   "quantity": "10 pieces",
+#   "deliveryNote": "Will deliver by this weekend.",
+#   "deliveryPhoto": "http://example.com/photo.jpg",
+#   "status": "PLEDGED",
+#   "confirmedAt": null,
+#   "createdAt": "2024-01-02T16:00:00Z"
+# }
+
+### 6. Get My Item Donations
+### Retrieves a list of all item donations made by the authenticated user.
+###
+### Requires: `requireAuth`
+###
+GET {{baseUrl}}/donations/items/me
+Authorization: Bearer {{token}}
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "item-donation-uuid",
+#     "donorId": "user-uuid",
+#     "campaignId": "campaign-uuid",
+#     "itemName": "Blankets",
+#     "quantity": "10 pieces",
+#     "deliveryNote": "Will deliver by this weekend.",
+#     "deliveryPhoto": "http://example.com/photo.jpg",
+#     "status": "PLEDGED",
+#     "confirmedAt": null,
+#     "createdAt": "2024-01-02T16:00:00Z",
+#     "campaign": {
+#       "id": "campaign-uuid",
+#       "title": "Winter Shelter Drive"
+#     }
+#   }
+# ]

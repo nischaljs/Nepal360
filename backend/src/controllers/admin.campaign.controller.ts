@@ -200,8 +200,9 @@ export async function approveCampaign(req: AuthenticatedRequest, res: Response) 
                 actorId: req.user!.userId,
                 actorType: 'ADMIN',
                 actionType: 'CAMPAIGN_VERIFICATION',
-                details: JSON.stringify({
-                    campaignId: updated.id,
+                targetType: 'CAMPAIGN', // Added targetType
+                targetId: updated.id,    // Added targetId
+                note: JSON.stringify({
                     action: 'APPROVE',
                     note: validation.data.note || '',
                 }),
@@ -284,8 +285,9 @@ export async function rejectCampaign(req: AuthenticatedRequest, res: Response) {
                 actorId: req.user!.userId,
                 actorType: 'ADMIN',
                 actionType: 'CAMPAIGN_VERIFICATION',
-                details: JSON.stringify({
-                    campaignId: updated.id,
+                targetType: 'CAMPAIGN',
+                targetId: updated.id,
+                note: JSON.stringify({
                     action: 'REJECT',
                     reason,
                     note: note || '',
@@ -374,8 +376,9 @@ export async function suspendCampaign(req: AuthenticatedRequest, res: Response) 
                 actorId: req.user!.userId,
                 actorType: 'ADMIN',
                 actionType: 'CAMPAIGN_VERIFICATION',
-                details: JSON.stringify({
-                    campaignId: updated.id,
+                targetType: 'CAMPAIGN',
+                targetId: updated.id,
+                note: JSON.stringify({
                     action: 'SUSPEND',
                     reason,
                     note: note || '',
@@ -449,8 +452,9 @@ export async function resumeCampaign(req: AuthenticatedRequest, res: Response) {
                 actorId: req.user!.userId,
                 actorType: 'ADMIN',
                 actionType: 'CAMPAIGN_VERIFICATION',
-                details: JSON.stringify({
-                    campaignId: updated.id,
+                targetType: 'CAMPAIGN',
+                targetId: updated.id,
+                note: JSON.stringify({
                     action: 'RESUME',
                 }),
             },
@@ -533,8 +537,9 @@ export async function deleteCampaign(req: AuthenticatedRequest, res: Response) {
                 actorId: req.user!.userId,
                 actorType: 'ADMIN',
                 actionType: 'CAMPAIGN_VERIFICATION',
-                details: JSON.stringify({
-                    campaignId: updated.id,
+                targetType: 'CAMPAIGN',
+                targetId: updated.id,
+                note: JSON.stringify({
                     action: 'DELETE',
                     reason,
                     note: note || '',
@@ -597,5 +602,51 @@ export async function getCampaignStats(req: AuthenticatedRequest, res: Response)
     } catch (error) {
         console.error('Get campaign stats error:', error);
         return res.status(500).json({ success: false, message: 'Failed to fetch campaign stats' });
+    }
+}
+
+export async function completeCampaign(req: AuthenticatedRequest, res: Response) {
+    try {
+        const { campaignId } = req.params;
+        
+        const campaign = await prisma.campaign.findUnique({
+            where: { id: campaignId },
+        });
+
+        if (!campaign) {
+            return res.status(404).json({ success: false, message: 'Campaign not found' });
+        }
+
+        if (campaign.status !== CampaignStatus.LIVE) {
+            return res.status(400).json({ success: false, message: 'Only LIVE campaigns can be completed.' });
+        }
+
+        const updated = await prisma.campaign.update({
+            where: { id: campaignId },
+            data: {
+                status: CampaignStatus.COMPLETED,
+            },
+        });
+
+        await prisma.auditLog.create({
+            data: {
+                actorId: req.user!.userId,
+                actorType: 'ADMIN',
+                actionType: 'CAMPAIGN_VERIFICATION',
+                targetType: 'CAMPAIGN',
+                targetId: updated.id,
+                note: `Campaign marked as COMPLETED`,
+            },
+        });
+
+        return res.json({
+            success: true,
+            message: 'Campaign marked as completed',
+            campaign: updated,
+        });
+
+    } catch (error) {
+        console.error('Complete campaign error:', error);
+        return res.status(500).json({ success: false, message: 'Failed to complete campaign' });
     }
 }

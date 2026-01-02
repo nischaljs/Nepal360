@@ -9,6 +9,7 @@ import {
     resumeCampaign,
     deleteCampaign,
     getCampaignStats,
+    completeCampaign,
 } from '../controllers/admin.campaign.controller';
 import { requireAuth, requireAdmin } from '../middlewares/auth.middleware';
 
@@ -77,6 +78,12 @@ router.post('/:campaignId/suspend', suspendCampaign);
  * Resume campaign (SUSPENDED → LIVE)
  */
 router.post('/:campaignId/resume', resumeCampaign);
+
+/**
+ * POST /api/admin/campaigns/:campaignId/complete
+ * Mark campaign as COMPLETED
+ */
+router.post('/:campaignId/complete', completeCampaign);
 
 /**
  * ==================== DELETION (SOFT DELETE) ====================

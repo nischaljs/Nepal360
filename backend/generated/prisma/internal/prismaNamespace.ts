@@ -1363,8 +1363,20 @@ export const CampaignScalarFieldEnum = {
   proofLinks: 'proofLinks',
   targetAmount: 'targetAmount',
   status: 'status',
+  rejectionReason: 'rejectionReason',
+  suspensionReason: 'suspensionReason',
+  verifiedBy: 'verifiedBy',
+  rejectedBy: 'rejectedBy',
+  suspendedBy: 'suspendedBy',
+  donationCount: 'donationCount',
+  shareCount: 'shareCount',
+  viewCount: 'viewCount',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  verifiedAt: 'verifiedAt'
+  verifiedAt: 'verifiedAt',
+  rejectedAt: 'rejectedAt',
+  suspendedAt: 'suspendedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
@@ -1388,7 +1400,9 @@ export const MoneyDonationScalarFieldEnum = {
   campaignId: 'campaignId',
   amount: 'amount',
   visibility: 'visibility',
+  status: 'status',
   paymentRef: 'paymentRef',
+  pidx: 'pidx',
   createdAt: 'createdAt'
 } as const
 
@@ -1539,7 +1553,12 @@ export const CampaignOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
   coverImage: 'coverImage',
-  proofLinks: 'proofLinks'
+  proofLinks: 'proofLinks',
+  rejectionReason: 'rejectionReason',
+  suspensionReason: 'suspensionReason',
+  verifiedBy: 'verifiedBy',
+  rejectedBy: 'rejectedBy',
+  suspendedBy: 'suspendedBy'
 } as const
 
 export type CampaignOrderByRelevanceFieldEnum = (typeof CampaignOrderByRelevanceFieldEnum)[keyof typeof CampaignOrderByRelevanceFieldEnum]
@@ -1558,7 +1577,8 @@ export const MoneyDonationOrderByRelevanceFieldEnum = {
   id: 'id',
   donorId: 'donorId',
   campaignId: 'campaignId',
-  paymentRef: 'paymentRef'
+  paymentRef: 'paymentRef',
+  pidx: 'pidx'
 } as const
 
 export type MoneyDonationOrderByRelevanceFieldEnum = (typeof MoneyDonationOrderByRelevanceFieldEnum)[keyof typeof MoneyDonationOrderByRelevanceFieldEnum]
@@ -1681,6 +1701,13 @@ export type EnumCampaignStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1695,6 +1722,13 @@ export type EnumDonationVisibilityFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'MoneyDonationStatus'
+ */
+export type EnumMoneyDonationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MoneyDonationStatus'>
+    
+
+
+/**
  * Reference to a field of type 'ItemDonationStatus'
  */
 export type EnumItemDonationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ItemDonationStatus'>
@@ -1705,13 +1739,6 @@ export type EnumItemDonationStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'BadgeType'
  */
 export type EnumBadgeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BadgeType'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 

@@ -432,10 +432,6 @@ export type MilestoneUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.MilestoneScalarWhereInput | Prisma.MilestoneScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type MilestoneCreateWithoutCampaignInput = {
   id?: string
   title: string

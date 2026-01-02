@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const auth_routes_1 = __importDefault(require("./auth.routes"));
+const campaign_routes_1 = __importDefault(require("./campaign.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const kyc_routes_1 = __importDefault(require("./kyc.routes"));
+const donation_routes_1 = __importDefault(require("./donation.routes"));
+const user_routes_1 = __importDefault(require("./user.routes"));
+const leaderboard_routes_1 = __importDefault(require("./leaderboard.routes"));
+const router = express_1.default.Router();
+router.use('/auth', auth_routes_1.default);
+router.use('/campaigns', campaign_routes_1.default);
+router.use('/admin', admin_routes_1.default);
+router.use('/kyc', kyc_routes_1.default);
+router.use('/donations', donation_routes_1.default);
+router.use('/users', user_routes_1.default);
+router.use('/leaderboards', leaderboard_routes_1.default);
+exports.default = router;

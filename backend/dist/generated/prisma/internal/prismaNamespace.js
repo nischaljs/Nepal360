@@ -164,8 +164,20 @@ exports.CampaignScalarFieldEnum = {
     proofLinks: 'proofLinks',
     targetAmount: 'targetAmount',
     status: 'status',
+    rejectionReason: 'rejectionReason',
+    suspensionReason: 'suspensionReason',
+    verifiedBy: 'verifiedBy',
+    rejectedBy: 'rejectedBy',
+    suspendedBy: 'suspendedBy',
+    donationCount: 'donationCount',
+    shareCount: 'shareCount',
+    viewCount: 'viewCount',
+    isActive: 'isActive',
     createdAt: 'createdAt',
-    verifiedAt: 'verifiedAt'
+    verifiedAt: 'verifiedAt',
+    rejectedAt: 'rejectedAt',
+    suspendedAt: 'suspendedAt',
+    deletedAt: 'deletedAt'
 };
 exports.MilestoneScalarFieldEnum = {
     id: 'id',
@@ -181,7 +193,9 @@ exports.MoneyDonationScalarFieldEnum = {
     campaignId: 'campaignId',
     amount: 'amount',
     visibility: 'visibility',
+    status: 'status',
     paymentRef: 'paymentRef',
+    pidx: 'pidx',
     createdAt: 'createdAt'
 };
 exports.ItemDonationScalarFieldEnum = {
@@ -280,7 +294,12 @@ exports.CampaignOrderByRelevanceFieldEnum = {
     title: 'title',
     description: 'description',
     coverImage: 'coverImage',
-    proofLinks: 'proofLinks'
+    proofLinks: 'proofLinks',
+    rejectionReason: 'rejectionReason',
+    suspensionReason: 'suspensionReason',
+    verifiedBy: 'verifiedBy',
+    rejectedBy: 'rejectedBy',
+    suspendedBy: 'suspendedBy'
 };
 exports.MilestoneOrderByRelevanceFieldEnum = {
     id: 'id',
@@ -291,7 +310,8 @@ exports.MoneyDonationOrderByRelevanceFieldEnum = {
     id: 'id',
     donorId: 'donorId',
     campaignId: 'campaignId',
-    paymentRef: 'paymentRef'
+    paymentRef: 'paymentRef',
+    pidx: 'pidx'
 };
 exports.ItemDonationOrderByRelevanceFieldEnum = {
     id: 'id',

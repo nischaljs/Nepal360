@@ -1,0 +1,147 @@
+@baseUrl = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMTA5Yzc0ZC1jNTNmLTRhMGQtOTA5OC1iYmRhM2YzZWM3MzQiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NjY4MTE2MjcsImV4cCI6MTc2NzQxNjQyN30.m6yFtAp3dBsT8FWu5xECSIdQQEMCqmHHJLwHXrNT2vw
+
+###############################################################################
+#                         USER KYC API DOCUMENTATION                        #
+###############################################################################
+#
+# This API allows authenticated users to submit, view, and resubmit their KYC
+# (Know Your Customer) information.
+#
+# Base URL: /api/kyc
+# Authentication: Bearer token (required for all routes)
+#
+###############################################################################
+
+### 1. Submit KYC (first time)
+### Creates a new KYCProfile for the authenticated user.
+### Only allowed if no KYC exists yet for the user.
+###
+POST {{baseUrl}}/kyc/submit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "documentType": "Passport",
+  "documentNumber": "P12345678",
+  "documentImage": "http://localhost:3000/uploads/kyc/user_id/passport.jpg",
+  "profilePhoto": "http://localhost:3000/uploads/kyc/user_id/profile.jpg",
+  "bankAccountName": "John Doe",
+  "bankAccountNo": "1234567890",
+  "walletProvider": "Esewa"
+}
+
+### Response (201 Created):
+# {
+#   "message": "KYC profile submitted successfully.",
+#   "kyc": {
+#     "id": "some-uuid",
+#     "userId": "user-uuid",
+#     "documentType": "Passport",
+#     "documentNumber": "P12345678",
+#     "documentImage": "http://localhost:3000/uploads/kyc/user_id/passport.jpg",
+#     "profilePhoto": "http://localhost:3000/uploads/kyc/user_id/profile.jpg",
+#     "bankAccountName": "John Doe",
+#     "bankAccountNo": "1234567890",
+#     "walletProvider": "Esewa",
+#     "status": "PENDING",
+#     "rejectionReason": null,
+#     "submittedAt": "2024-01-02T12:00:00Z",
+#     "reviewedAt": null
+#   }
+# }
+
+### Response (409 Conflict - if KYC already exists):
+# {
+#   "message": "KYC profile already exists."
+# }
+
+### Response (400 Bad Request - Validation error):
+# {
+#   "message": "Validation error",
+#   "errors": [
+#     {
+#       "path": ["documentType"],
+#       "message": "Document type is required"
+#     }
+#   ]
+# }
+
+### 2. Get My KYC Status
+### Retrieves the current authenticated user's KYC profile status and details.
+###
+GET {{baseUrl}}/kyc/me
+Authorization: Bearer {{token}}
+
+### Response (200 OK - if KYC exists):
+# {
+#   "status": "PENDING",
+#   "rejectionReason": null,
+#   "submittedAt": "2024-01-02T12:00:00Z",
+#   "reviewedAt": null
+# }
+
+### Response (200 OK - if no KYC exists):
+# {
+#   "status": "NOT_SUBMITTED"
+# }
+
+### 3. Resubmit KYC (after rejection)
+### Updates an existing KYC profile with new details.
+### Only allowed if the current KYC status is 'REJECTED'.
+### Clears any previous rejection reason and sets status back to 'PENDING'.
+###
+PUT {{baseUrl}}/kyc/resubmit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "documentType": "National ID",
+  "documentNumber": "N98765432",
+  "documentImage": "http://localhost:3000/uploads/kyc/user_id/national_id.jpg",
+  "profilePhoto": "http://localhost:3000/uploads/kyc/user_id/new_profile.jpg",
+  "bankAccountName": "John Doe",
+  "bankAccountNo": "0987654321",
+  "walletProvider": null
+}
+
+### Response (200 OK):
+# {
+#   "message": "KYC profile resubmitted successfully.",
+#   "kyc": {
+#     "id": "some-uuid",
+#     "userId": "user-uuid",
+#     "documentType": "National ID",
+#     "documentNumber": "N98765432",
+#     "documentImage": "http://localhost:3000/uploads/kyc/user_id/national_id.jpg",
+#     "profilePhoto": "http://localhost:3000/uploads/kyc/user_id/new_profile.jpg",
+#     "bankAccountName": "John Doe",
+#     "bankAccountNo": "0987654321",
+#     "walletProvider": null,
+#     "status": "PENDING",
+#     "rejectionReason": null,
+#     "submittedAt": "2024-01-02T12:00:00Z",
+#     "reviewedAt": null
+#   }
+# }
+
+### Response (404 Not Found - if KYC profile doesn't exist):
+# {
+#   "message": "KYC profile not found."
+# }
+
+### Response (403 Forbidden - if status is not REJECTED):
+# {
+#   "message": "You can only resubmit a rejected KYC profile."
+# }
+
+### Response (400 Bad Request - Validation error):
+# {
+#   "message": "Validation error",
+#   "errors": [
+#     {
+#       "path": ["documentType"],
+#       "message": "Document type is required"
+#     }
+#   ]
+# }

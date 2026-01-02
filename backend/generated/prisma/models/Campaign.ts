@@ -28,10 +28,16 @@ export type AggregateCampaign = {
 
 export type CampaignAvgAggregateOutputType = {
   targetAmount: runtime.Decimal | null
+  donationCount: number | null
+  shareCount: number | null
+  viewCount: number | null
 }
 
 export type CampaignSumAggregateOutputType = {
   targetAmount: runtime.Decimal | null
+  donationCount: number | null
+  shareCount: number | null
+  viewCount: number | null
 }
 
 export type CampaignMinAggregateOutputType = {
@@ -43,8 +49,20 @@ export type CampaignMinAggregateOutputType = {
   proofLinks: string | null
   targetAmount: runtime.Decimal | null
   status: $Enums.CampaignStatus | null
+  rejectionReason: string | null
+  suspensionReason: string | null
+  verifiedBy: string | null
+  rejectedBy: string | null
+  suspendedBy: string | null
+  donationCount: number | null
+  shareCount: number | null
+  viewCount: number | null
+  isActive: boolean | null
   createdAt: Date | null
   verifiedAt: Date | null
+  rejectedAt: Date | null
+  suspendedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CampaignMaxAggregateOutputType = {
@@ -56,8 +74,20 @@ export type CampaignMaxAggregateOutputType = {
   proofLinks: string | null
   targetAmount: runtime.Decimal | null
   status: $Enums.CampaignStatus | null
+  rejectionReason: string | null
+  suspensionReason: string | null
+  verifiedBy: string | null
+  rejectedBy: string | null
+  suspendedBy: string | null
+  donationCount: number | null
+  shareCount: number | null
+  viewCount: number | null
+  isActive: boolean | null
   createdAt: Date | null
   verifiedAt: Date | null
+  rejectedAt: Date | null
+  suspendedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CampaignCountAggregateOutputType = {
@@ -69,18 +99,36 @@ export type CampaignCountAggregateOutputType = {
   proofLinks: number
   targetAmount: number
   status: number
+  rejectionReason: number
+  suspensionReason: number
+  verifiedBy: number
+  rejectedBy: number
+  suspendedBy: number
+  donationCount: number
+  shareCount: number
+  viewCount: number
+  isActive: number
   createdAt: number
   verifiedAt: number
+  rejectedAt: number
+  suspendedAt: number
+  deletedAt: number
   _all: number
 }
 
 
 export type CampaignAvgAggregateInputType = {
   targetAmount?: true
+  donationCount?: true
+  shareCount?: true
+  viewCount?: true
 }
 
 export type CampaignSumAggregateInputType = {
   targetAmount?: true
+  donationCount?: true
+  shareCount?: true
+  viewCount?: true
 }
 
 export type CampaignMinAggregateInputType = {
@@ -92,8 +140,20 @@ export type CampaignMinAggregateInputType = {
   proofLinks?: true
   targetAmount?: true
   status?: true
+  rejectionReason?: true
+  suspensionReason?: true
+  verifiedBy?: true
+  rejectedBy?: true
+  suspendedBy?: true
+  donationCount?: true
+  shareCount?: true
+  viewCount?: true
+  isActive?: true
   createdAt?: true
   verifiedAt?: true
+  rejectedAt?: true
+  suspendedAt?: true
+  deletedAt?: true
 }
 
 export type CampaignMaxAggregateInputType = {
@@ -105,8 +165,20 @@ export type CampaignMaxAggregateInputType = {
   proofLinks?: true
   targetAmount?: true
   status?: true
+  rejectionReason?: true
+  suspensionReason?: true
+  verifiedBy?: true
+  rejectedBy?: true
+  suspendedBy?: true
+  donationCount?: true
+  shareCount?: true
+  viewCount?: true
+  isActive?: true
   createdAt?: true
   verifiedAt?: true
+  rejectedAt?: true
+  suspendedAt?: true
+  deletedAt?: true
 }
 
 export type CampaignCountAggregateInputType = {
@@ -118,8 +190,20 @@ export type CampaignCountAggregateInputType = {
   proofLinks?: true
   targetAmount?: true
   status?: true
+  rejectionReason?: true
+  suspensionReason?: true
+  verifiedBy?: true
+  rejectedBy?: true
+  suspendedBy?: true
+  donationCount?: true
+  shareCount?: true
+  viewCount?: true
+  isActive?: true
   createdAt?: true
   verifiedAt?: true
+  rejectedAt?: true
+  suspendedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -218,8 +302,20 @@ export type CampaignGroupByOutputType = {
   proofLinks: string | null
   targetAmount: runtime.Decimal
   status: $Enums.CampaignStatus
+  rejectionReason: string | null
+  suspensionReason: string | null
+  verifiedBy: string | null
+  rejectedBy: string | null
+  suspendedBy: string | null
+  donationCount: number
+  shareCount: number
+  viewCount: number
+  isActive: boolean
   createdAt: Date
   verifiedAt: Date | null
+  rejectedAt: Date | null
+  suspendedAt: Date | null
+  deletedAt: Date | null
   _count: CampaignCountAggregateOutputType | null
   _avg: CampaignAvgAggregateOutputType | null
   _sum: CampaignSumAggregateOutputType | null
@@ -254,8 +350,20 @@ export type CampaignWhereInput = {
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
+  rejectionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspensionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  donationCount?: Prisma.IntFilter<"Campaign"> | number
+  shareCount?: Prisma.IntFilter<"Campaign"> | number
+  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  suspendedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   beneficiary?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   milestones?: Prisma.MilestoneListRelationFilter
   moneyDonations?: Prisma.MoneyDonationListRelationFilter
@@ -271,8 +379,20 @@ export type CampaignOrderByWithRelationInput = {
   proofLinks?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspensionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspendedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspendedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiary?: Prisma.UserOrderByWithRelationInput
   milestones?: Prisma.MilestoneOrderByRelationAggregateInput
   moneyDonations?: Prisma.MoneyDonationOrderByRelationAggregateInput
@@ -292,8 +412,20 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
+  rejectionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspensionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  donationCount?: Prisma.IntFilter<"Campaign"> | number
+  shareCount?: Prisma.IntFilter<"Campaign"> | number
+  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  suspendedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   beneficiary?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   milestones?: Prisma.MilestoneListRelationFilter
   moneyDonations?: Prisma.MoneyDonationListRelationFilter
@@ -309,8 +441,20 @@ export type CampaignOrderByWithAggregationInput = {
   proofLinks?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspensionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspendedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  suspendedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CampaignCountOrderByAggregateInput
   _avg?: Prisma.CampaignAvgOrderByAggregateInput
   _max?: Prisma.CampaignMaxOrderByAggregateInput
@@ -330,8 +474,20 @@ export type CampaignScalarWhereWithAggregatesInput = {
   proofLinks?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalWithAggregatesFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusWithAggregatesFilter<"Campaign"> | $Enums.CampaignStatus
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  suspensionReason?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  verifiedBy?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  rejectedBy?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  suspendedBy?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  donationCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
+  shareCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
+  viewCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
+  isActive?: Prisma.BoolWithAggregatesFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
+  rejectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
+  suspendedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
 }
 
 export type CampaignCreateInput = {
@@ -342,8 +498,20 @@ export type CampaignCreateInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
@@ -359,8 +527,20 @@ export type CampaignUncheckedCreateInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
@@ -374,8 +554,20 @@ export type CampaignUpdateInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
@@ -391,8 +583,20 @@ export type CampaignUncheckedUpdateInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
@@ -407,8 +611,20 @@ export type CampaignCreateManyInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type CampaignUpdateManyMutationInput = {
@@ -419,8 +635,20 @@ export type CampaignUpdateManyMutationInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CampaignUncheckedUpdateManyInput = {
@@ -432,8 +660,20 @@ export type CampaignUncheckedUpdateManyInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CampaignListRelationFilter = {
@@ -461,12 +701,27 @@ export type CampaignCountOrderByAggregateInput = {
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  suspensionReason?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  suspendedBy?: Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  suspendedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CampaignAvgOrderByAggregateInput = {
   targetAmount?: Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
 }
 
 export type CampaignMaxOrderByAggregateInput = {
@@ -478,8 +733,20 @@ export type CampaignMaxOrderByAggregateInput = {
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  suspensionReason?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  suspendedBy?: Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  suspendedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CampaignMinOrderByAggregateInput = {
@@ -491,12 +758,27 @@ export type CampaignMinOrderByAggregateInput = {
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  suspensionReason?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  suspendedBy?: Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  suspendedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CampaignSumOrderByAggregateInput = {
   targetAmount?: Prisma.SortOrder
+  donationCount?: Prisma.SortOrder
+  shareCount?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
 }
 
 export type CampaignScalarRelationFilter = {
@@ -558,6 +840,18 @@ export type EnumCampaignStatusFieldUpdateOperationsInput = {
   set?: $Enums.CampaignStatus
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type CampaignCreateNestedOneWithoutMilestonesInput = {
   create?: Prisma.XOR<Prisma.CampaignCreateWithoutMilestonesInput, Prisma.CampaignUncheckedCreateWithoutMilestonesInput>
   connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutMilestonesInput
@@ -608,8 +902,20 @@ export type CampaignCreateWithoutBeneficiaryInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
@@ -623,8 +929,20 @@ export type CampaignUncheckedCreateWithoutBeneficiaryInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
@@ -668,8 +986,20 @@ export type CampaignScalarWhereInput = {
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
+  rejectionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspensionReason?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  donationCount?: Prisma.IntFilter<"Campaign"> | number
+  shareCount?: Prisma.IntFilter<"Campaign"> | number
+  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  suspendedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
 }
 
 export type CampaignCreateWithoutMilestonesInput = {
@@ -680,8 +1010,20 @@ export type CampaignCreateWithoutMilestonesInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
@@ -696,8 +1038,20 @@ export type CampaignUncheckedCreateWithoutMilestonesInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
 }
@@ -726,8 +1080,20 @@ export type CampaignUpdateWithoutMilestonesInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
@@ -742,8 +1108,20 @@ export type CampaignUncheckedUpdateWithoutMilestonesInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
 }
@@ -756,8 +1134,20 @@ export type CampaignCreateWithoutMoneyDonationsInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
@@ -772,8 +1162,20 @@ export type CampaignUncheckedCreateWithoutMoneyDonationsInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
 }
@@ -802,8 +1204,20 @@ export type CampaignUpdateWithoutMoneyDonationsInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
@@ -818,8 +1232,20 @@ export type CampaignUncheckedUpdateWithoutMoneyDonationsInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
 }
@@ -832,8 +1258,20 @@ export type CampaignCreateWithoutItemDonationsInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
@@ -848,8 +1286,20 @@ export type CampaignUncheckedCreateWithoutItemDonationsInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
 }
@@ -878,8 +1328,20 @@ export type CampaignUpdateWithoutItemDonationsInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
@@ -894,8 +1356,20 @@ export type CampaignUncheckedUpdateWithoutItemDonationsInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
 }
@@ -908,8 +1382,20 @@ export type CampaignCreateManyBeneficiaryInput = {
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  viewCount?: number
+  isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type CampaignUpdateWithoutBeneficiaryInput = {
@@ -920,8 +1406,20 @@ export type CampaignUpdateWithoutBeneficiaryInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
@@ -935,8 +1433,20 @@ export type CampaignUncheckedUpdateWithoutBeneficiaryInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
@@ -950,8 +1460,20 @@ export type CampaignUncheckedUpdateManyWithoutBeneficiaryInput = {
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1012,8 +1534,20 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   proofLinks?: boolean
   targetAmount?: boolean
   status?: boolean
+  rejectionReason?: boolean
+  suspensionReason?: boolean
+  verifiedBy?: boolean
+  rejectedBy?: boolean
+  suspendedBy?: boolean
+  donationCount?: boolean
+  shareCount?: boolean
+  viewCount?: boolean
+  isActive?: boolean
   createdAt?: boolean
   verifiedAt?: boolean
+  rejectedAt?: boolean
+  suspendedAt?: boolean
+  deletedAt?: boolean
   beneficiary?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   milestones?: boolean | Prisma.Campaign$milestonesArgs<ExtArgs>
   moneyDonations?: boolean | Prisma.Campaign$moneyDonationsArgs<ExtArgs>
@@ -1032,11 +1566,23 @@ export type CampaignSelectScalar = {
   proofLinks?: boolean
   targetAmount?: boolean
   status?: boolean
+  rejectionReason?: boolean
+  suspensionReason?: boolean
+  verifiedBy?: boolean
+  rejectedBy?: boolean
+  suspendedBy?: boolean
+  donationCount?: boolean
+  shareCount?: boolean
+  viewCount?: boolean
+  isActive?: boolean
   createdAt?: boolean
   verifiedAt?: boolean
+  rejectedAt?: boolean
+  suspendedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "createdAt" | "verifiedAt", ExtArgs["result"]["campaign"]>
+export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "rejectionReason" | "suspensionReason" | "verifiedBy" | "rejectedBy" | "suspendedBy" | "donationCount" | "shareCount" | "viewCount" | "isActive" | "createdAt" | "verifiedAt" | "rejectedAt" | "suspendedAt" | "deletedAt", ExtArgs["result"]["campaign"]>
 export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   milestones?: boolean | Prisma.Campaign$milestonesArgs<ExtArgs>
@@ -1062,8 +1608,20 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     proofLinks: string | null
     targetAmount: runtime.Decimal
     status: $Enums.CampaignStatus
+    rejectionReason: string | null
+    suspensionReason: string | null
+    verifiedBy: string | null
+    rejectedBy: string | null
+    suspendedBy: string | null
+    donationCount: number
+    shareCount: number
+    viewCount: number
+    isActive: boolean
     createdAt: Date
     verifiedAt: Date | null
+    rejectedAt: Date | null
+    suspendedAt: Date | null
+    deletedAt: Date | null
   }, ExtArgs["result"]["campaign"]>
   composites: {}
 }
@@ -1445,8 +2003,20 @@ export interface CampaignFieldRefs {
   readonly proofLinks: Prisma.FieldRef<"Campaign", 'String'>
   readonly targetAmount: Prisma.FieldRef<"Campaign", 'Decimal'>
   readonly status: Prisma.FieldRef<"Campaign", 'CampaignStatus'>
+  readonly rejectionReason: Prisma.FieldRef<"Campaign", 'String'>
+  readonly suspensionReason: Prisma.FieldRef<"Campaign", 'String'>
+  readonly verifiedBy: Prisma.FieldRef<"Campaign", 'String'>
+  readonly rejectedBy: Prisma.FieldRef<"Campaign", 'String'>
+  readonly suspendedBy: Prisma.FieldRef<"Campaign", 'String'>
+  readonly donationCount: Prisma.FieldRef<"Campaign", 'Int'>
+  readonly shareCount: Prisma.FieldRef<"Campaign", 'Int'>
+  readonly viewCount: Prisma.FieldRef<"Campaign", 'Int'>
+  readonly isActive: Prisma.FieldRef<"Campaign", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly verifiedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
+  readonly rejectedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
+  readonly suspendedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
 }
     
 

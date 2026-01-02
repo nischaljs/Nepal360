@@ -1,0 +1,95 @@
+@baseUrl = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMTA5Yzc0ZC1jNTNmLTRhMGQtOTA5OC1iYmRhM2YzZWM3MzQiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NjY4MTE2MjcsImV4cCI6MTc2NzQxNjQyN30.m6yFtAp3dBsT8FWu5xECSIdQQEMCqmHHJLwHXrNT2vw
+@userId = some-user-uuid
+
+###############################################################################
+#                           USERS API DOCUMENTATION                           #
+###############################################################################
+#
+# This API handles fetching user-related public information, stats, and badges.
+#
+###############################################################################
+
+### 1. Get My Donor Stats
+### Retrieves the donation statistics for the currently authenticated user.
+###
+### Requires: `requireAuth`
+###
+GET {{baseUrl}}/users/me/stats
+Authorization: Bearer {{token}}
+
+### Response (200 OK):
+# {
+#   "userId": "user-uuid",
+#   "totalMoneyDonated": "1500.00",
+#   "totalItemCount": 5,
+#   "donationCount": 10,
+#   "lastDonationAt": "2024-01-02T15:00:00Z",
+#   "updatedAt": "2024-01-02T15:00:00Z"
+# }
+
+### 2. Get User's Public Donor Stats
+### Retrieves the public donation statistics for a specific user.
+###
+GET {{baseUrl}}/users/{{userId}}/stats
+
+### 3. Get My Badges
+### Retrieves all badges awarded to the currently authenticated user.
+###
+### Requires: `requireAuth`
+###
+GET {{baseUrl}}/users/me/badges
+Authorization: Bearer {{token}}
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "user-badge-uuid",
+#     "userId": "user-uuid",
+#     "badgeId": "badge-uuid",
+#     "awardedAt": "2024-01-02T15:00:00Z",
+#     "badge": {
+#       "id": "badge-uuid",
+#       "code": "FIRST_DONATION",
+#       "name": "First Donation",
+#       "description": "Awarded for making your first donation.",
+#       "iconUrl": "http://example.com/badge.png",
+#       "badgeType": "FIRST_DONATION",
+#       "createdAt": "2023-12-01T10:00:00Z"
+#     }
+#   }
+# ]
+
+### 4. Get My Unified Donation History
+### Retrieves a combined list of money and item donations for the authenticated user.
+###
+### Requires: `requireAuth`
+###
+GET {{baseUrl}}/users/me/donations
+Authorization: Bearer {{token}}
+
+### Response (200 OK):
+# [
+#   {
+#     "type": "Money",
+#     "id": "money-donation-uuid",
+#     "donorId": "user-uuid",
+#     "campaignId": "campaign-uuid-1",
+#     "amount": 500,
+#     "visibility": "PUBLIC",
+#     "status": "COMPLETED",
+#     "createdAt": "2024-01-02T15:00:00Z",
+#     "campaign": { "id": "campaign-uuid-1", "title": "Campaign A" }
+#   },
+#   {
+#     "type": "Item",
+#     "id": "item-donation-uuid",
+#     "donorId": "user-uuid",
+#     "campaignId": "campaign-uuid-2",
+#     "itemName": "Blankets",
+#     "quantity": "10",
+#     "status": "CONFIRMED",
+#     "createdAt": "2023-12-28T11:00:00Z",
+#     "campaign": { "id": "campaign-uuid-2", "title": "Campaign B" }
+#   }
+# ]

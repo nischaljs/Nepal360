@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:3000/api
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbi11dWlkIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImVtYWlsVmVyaWZpZWQiOnRydWUsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAwMDAwfQ.signature
+@itemDonationId = some-item-donation-uuid
+
+###############################################################################
+#                    ADMIN ITEM DONATIONS API DOCUMENTATION                   #
+###############################################################################
+#
+# This API is for administrators to manage item donations.
+#
+# Base URL: /api/admin/item-donations
+# Authentication: Bearer token with admin role
+#
+###############################################################################
+
+### 1. List Item Donations
+### Retrieve all item donations with optional filtering by status.
+###
+### Query Parameters:
+###   - status: PLEDGED | DELIVERED | CONFIRMED | REJECTED
+###
+GET {{baseUrl}}/admin/item-donations?status=PLEDGED
+Authorization: Bearer {{adminToken}}
+
+### 2. Confirm Item Donation
+### Mark an item donation as 'CONFIRMED'.
+###
+POST {{baseUrl}}/admin/item-donations/{{itemDonationId}}/confirm
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{}
+
+### 3. Reject Item Donation
+### Mark an item donation as 'REJECTED'.
+###
+POST {{baseUrl}}/admin/item-donations/{{itemDonationId}}/reject
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+    "reason": "Item was not as described."
+}

@@ -1,0 +1,191 @@
+@baseUrl = http://localhost:3000/api
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbi11dWlkIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImVtYWlsVmVyaWZpZWQiOnRydWUsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAwMDAwfQ.signature
+
+###############################################################################
+#                        ADMIN KYC API DOCUMENTATION                        #
+###############################################################################
+#
+# This API is for administrators to manage KYC profiles.
+# Admins can list, view details, approve, and reject KYC submissions.
+#
+# Base URL: /api/admin/kyc
+# Authentication: Bearer token with admin role (required for all routes)
+#
+###############################################################################
+
+### 1. List KYC Profiles (Review Queue)
+### Retrieve all KYC profiles with optional filtering by status.
+###
+### Query Parameters:
+###   - status: PENDING | APPROVED | REJECTED
+###
+GET {{baseUrl}}/admin/kyc?status=PENDING
+Authorization: Bearer {{adminToken}}
+
+### Response (200 OK):
+# [
+#   {
+#     "id": "kyc-uuid-1",
+#     "userId": "user-uuid-1",
+#     "documentType": "Passport",
+#     "documentNumber": "P12345678",
+#     "documentImage": "http://localhost:3000/uploads/kyc/user_id_1/passport.jpg",
+#     "profilePhoto": "http://localhost:3000/uploads/kyc/user_id_1/profile.jpg",
+#     "bankAccountName": "User One",
+#     "bankAccountNo": "111122223333",
+#     "walletProvider": "Esewa",
+#     "status": "PENDING",
+#     "rejectionReason": null,
+#     "submittedAt": "2024-01-01T10:00:00Z",
+#     "reviewedAt": null,
+#     "user": {
+#       "id": "user-uuid-1",
+#       "name": "User One",
+#       "email": "user1@example.com"
+#     }
+#   }
+# ]
+
+### Response (400 Bad Request - Invalid status filter):
+# {
+#   "message": "Invalid status filter."
+# }
+
+### 2. Get KYC Detail (Review Screen)
+### Retrieve full details for a specific user's KYC profile, including user metadata and past audit logs.
+###
+### Parameters:
+###   - userId: uuid of the user whose KYC profile is to be retrieved.
+###
+GET {{baseUrl}}/admin/kyc/user-uuid-1
+Authorization: Bearer {{adminToken}}
+
+### Response (200 OK):
+# {
+#   "id": "kyc-uuid-1",
+#   "userId": "user-uuid-1",
+#   "documentType": "Passport",
+#   "documentNumber": "P12345678",
+#   "documentImage": "http://localhost:3000/uploads/kyc/user_id_1/passport.jpg",
+#   "profilePhoto": "http://localhost:3000/uploads/kyc/user_id_1/profile.jpg",
+#   "bankAccountName": "User One",
+#   "bankAccountNo": "111122223333",
+#   "walletProvider": "Esewa",
+#   "status": "PENDING",
+#   "rejectionReason": null,
+#   "submittedAt": "2024-01-01T10:00:00Z",
+#   "reviewedAt": null,
+#   "user": {
+#     "id": "user-uuid-1",
+#     "name": "User One",
+#     "email": "user1@example.com",
+#     "passwordHash": "...",
+#     "emailStatus": "VERIFIED",
+#     "createdAt": "2024-01-01T09:00:00Z",
+#     "updatedAt": "2024-01-01T09:00:00Z"
+#   },
+#   "auditLogs": [
+#     {
+#       "id": "audit-uuid-1",
+#       "actorType": "ADMIN",
+#       "actorId": "admin-uuid",
+#       "actionType": "KYC_REVIEW",
+#       "targetType": "KYC_PROFILE",
+#       "targetId": "kyc-uuid-1",
+#       "note": "KYC Rejected: Document image unclear",
+#       "createdAt": "2024-01-01T11:30:00Z"
+#     }
+#   ]
+# }
+
+### Response (404 Not Found):
+# {
+#   "message": "KYC profile not found."
+# }
+
+### 3. Approve KYC
+### Approves a user's KYC profile, setting its status to 'APPROVED' and recording the review time.
+### An audit log entry is created for this action.
+###
+### Parameters:
+###   - userId: uuid of the user whose KYC profile is to be approved.
+###
+POST {{baseUrl}}/admin/kyc/user-uuid-1/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{}
+
+### Response (200 OK):
+# {
+#   "message": "KYC profile approved.",
+#   "kycProfile": {
+#     "id": "kyc-uuid-1",
+#     "userId": "user-uuid-1",
+#     "documentType": "Passport",
+#     "documentNumber": "P12345678",
+#     "documentImage": "http://localhost:3000/uploads/kyc/user_id_1/passport.jpg",
+#     "profilePhoto": "http://localhost:3000/uploads/kyc/user_id_1/profile.jpg",
+#     "bankAccountName": "User One",
+#     "bankAccountNo": "111122223333",
+#     "walletProvider": "Esewa",
+#     "status": "APPROVED",
+#     "rejectionReason": null,
+#     "submittedAt": "2024-01-01T10:00:00Z",
+#     "reviewedAt": "2024-01-02T14:00:00Z"
+#   }
+# }
+
+### 4. Reject KYC (with reason)
+### Rejects a user's KYC profile, setting its status to 'REJECTED' and storing the reason.
+### An audit log entry is created for this action.
+###
+### Parameters:
+###   - userId: uuid of the user whose KYC profile is to be rejected.
+###
+### Body:
+###   - reason: String (e.g., "Document image unclear", "Information mismatch")
+###
+POST {{baseUrl}}/admin/kyc/user-uuid-1/reject
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "reason": "Document image unclear, please provide a clearer scan."
+}
+
+### Response (200 OK):
+# {
+#   "message": "KYC profile rejected.",
+#   "kycProfile": {
+#     "id": "kyc-uuid-1",
+#     "userId": "user-uuid-1",
+#     "documentType": "Passport",
+#     "documentNumber": "P12345678",
+#     "documentImage": "http://localhost:3000/uploads/kyc/user_id_1/passport.jpg",
+#     "profilePhoto": "http://localhost:3000/uploads/kyc/user_id_1/profile.jpg",
+#     "bankAccountName": "User One",
+#     "bankAccountNo": "111122223333",
+#     "walletProvider": "Esewa",
+#     "status": "REJECTED",
+#     "rejectionReason": "Document image unclear, please provide a clearer scan.",
+#     "submittedAt": "2024-01-01T10:00:00Z",
+#     "reviewedAt": "2024-01-02T14:30:00Z"
+#   }
+# }
+
+### Response (400 Bad Request - Validation error):
+# {
+#   "message": "Validation error",
+#   "errors": [
+#     {
+#       "path": ["reason"],
+#       "message": "Rejection reason is required"
+#     }
+#   ]
+# }
+
+### Response (403 Forbidden - if not admin or unauthorized):
+# {
+#   "message": "Admin access required."
+# }
