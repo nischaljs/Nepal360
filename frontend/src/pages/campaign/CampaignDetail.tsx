@@ -8,27 +8,51 @@ import MilestoneForm from "../../components/campaign/MilestoneForm";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Separator } from "../../components/ui/separator";
-import { addMilestone, deleteMilestone, getCampaignById, updateCampaign } from "../../services/campaign.service";
+import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats } from "../../services/campaign.service";
 import { useAuthStore } from "../../store/auth.store";
 import type { AddMilestoneData, Campaign, UpdateCampaignData } from "../../types/campaign.types";
+import { CircleDollarSign, Users, Gift, Handshake } from "lucide-react";
 
 const CampaignDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { user } = useAuthStore();
-
+  const { user, isAuthenticated } = useAuthStore(); // Use isAuthenticated
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isAddingMilestone, setIsAddingMilestone] = useState(false);
   const [isEditingCampaign, setIsEditingCampaign] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [stats, setStats] = useState<any>(null);
+
 
   const fetchCampaign = async () => {
     if (!id) return;
     setIsLoading(true);
     try {
-      const data = await getCampaignById(id);
+      let data: Campaign;
+      let fetchedStats: any;
+
+      if (isAuthenticated && user?.id) {
+        // Attempt to fetch as beneficiary first if authenticated
+        try {
+          data = await getBeneficiaryCampaignById(id);
+        } catch (authError: any) {
+          // If authenticated but not beneficiary or other auth error, try public
+          if (authError.response?.status === 403 || authError.response?.status === 404) {
+            data = await getCampaignById(id);
+          } else {
+            throw authError;
+          }
+        }
+      } else {
+        // Not authenticated, fetch public campaign
+        data = await getCampaignById(id);
+      }
+
+      fetchedStats = await getCampaignStats(id);
+
       setCampaign(data);
+      setStats(fetchedStats);
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to load campaign details.");
       toast.error("Error", { description: err.response?.data?.message || "Failed to load campaign." });
@@ -120,16 +144,56 @@ const CampaignDetail = () => {
               <CardTitle>Details</CardTitle>
             </CardHeader>
             <CardContent>
-              <p><strong>Beneficiary:</strong> {campaign.beneficiary.name} ({campaign.beneficiary.email})</p>
+              <p><strong>Beneficiary:</strong> {campaign.beneficiary.name}</p>
+              {isBeneficiary && <p><strong>Beneficiary Email:</strong> {campaign.beneficiary.email}</p>}
               <p><strong>Target Amount:</strong> ${parseFloat(campaign.targetAmount).toFixed(2)}</p>
               <p><strong>Current Status:</strong> {campaign.status}</p>
-              <p><strong>Donations Received:</strong> {campaign.donationCount}</p>
               <p><strong>Created On:</strong> {format(new Date(campaign.createdAt), "PPP")}</p>
               {campaign.verifiedAt && <p><strong>Verified On:</strong> {format(new Date(campaign.verifiedAt), "PPP")}</p>}
               {campaign.rejectionReason && <p className="text-red-500"><strong>Rejection Reason:</strong> {campaign.rejectionReason}</p>}
               {campaign.suspensionReason && <p className="text-orange-500"><strong>Suspension Reason:</strong> {campaign.suspensionReason}</p>}
             </CardContent>
           </Card>
+
+          {stats && (
+            <Card className="mt-4">
+              <CardHeader>
+                <CardTitle>Campaign Statistics</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <CircleDollarSign className="text-green-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Total Money Raised</p>
+                      <p className="font-bold">${stats.totalMoneyRaised ? parseFloat(stats.totalMoneyRaised).toFixed(2) : '0.00'}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Handshake className="text-blue-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Total Donations</p>
+                      <p className="font-bold">{stats.totalDonationCount}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Users className="text-purple-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Unique Donors</p>
+                      <p className="font-bold">{stats.uniqueDonorCount}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Gift className="text-yellow-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Item Donations</p>
+                      <p className="font-bold">{stats.itemDonationCount}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {campaign.proofLinks && campaign.proofLinks.length > 0 && (
             <Card className="mt-4">

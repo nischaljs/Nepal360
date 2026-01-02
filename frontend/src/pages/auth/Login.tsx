@@ -21,8 +21,14 @@ const Login = () => {
     try {
       const response = await login({ email, password });
       localStorage.setItem('token', response.token);
-      await fetchUser();
-      navigate("/");
+      const user = await fetchUser();
+      
+      if (user?.roles.isAdmin) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/");
+      }
+
       toast.success("Login Successful", { description: `Welcome back, ${response.user.name}` });
     } catch (error: any) {
       toast.error("Login Failed", {

@@ -7,6 +7,8 @@ import {
     addMilestone,
     deleteMilestone,
     getCampaignStats,
+    getAllCampaigns,
+    getCampaignPublic,
 } from '../controllers/campaign.controller';
 
 import {
@@ -20,6 +22,8 @@ import { AuthenticatedRequest } from '../types/auth.types';
 const router = Router();
 
 // Public routes
+router.get('/', getAllCampaigns);
+router.get('/public/:id', getCampaignPublic);
 router.get('/:id/stats', getCampaignStats);
 
 // Apply authentication middlewares to all routes
@@ -38,7 +42,7 @@ const createUploadMiddleware = (req: AuthenticatedRequest, res: Response, next: 
 // Campaign endpoints
 router.post('/', createUploadMiddleware, createCampaign);
 router.get('/me', getMyCampaigns);
-router.get('/:id', getCampaignById);
+router.get('/me/:id', getCampaignById);
 router.put('/:id', updateCampaign);
 
 // Milestone endpoints

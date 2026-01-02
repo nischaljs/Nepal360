@@ -107,6 +107,80 @@ export async function getMyCampaigns(req: AuthenticatedRequest, res: Response) {
     }
 }
 
+
+export async function getAllCampaigns(req: Request, res: Response) {
+    try {
+        const campaigns = await prisma.campaign.findMany({
+            where: {
+                status: {
+                    in: [CampaignStatus.LIVE, CampaignStatus.COMPLETED],
+                },
+            },
+            include: {
+                beneficiary: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+
+        const baseUrl = getBaseUrl(req);
+        const formattedCampaigns = campaigns.map(c => ({
+            ...c,
+            coverImage: `${baseUrl}/uploads/${c.coverImage}`,
+            proofLinks: convertProofLinksToUrls(parseProofLinks(c.proofLinks), baseUrl),
+        }));
+
+        return res.status(200).json({ success: true, campaigns: formattedCampaigns });
+    } catch (error) {
+        console.error("Get all campaigns error:", error);
+        return res.status(500).json({ success: false, message: 'Failed to get campaigns' });
+    }
+}
+
+
+export async function getCampaignPublic(req: Request, res: Response) {
+    try {
+        const { id } = req.params;
+
+        const campaign = await prisma.campaign.findFirst({
+            where: {
+                id,
+                status: {
+                    in: [CampaignStatus.LIVE, CampaignStatus.COMPLETED],
+                }
+            },
+            include: {
+                beneficiary: { select: { id: true, name: true } },
+                milestones: { orderBy: { amount: 'asc' } },
+            },
+        });
+
+        if (!campaign) {
+            return res.status(404).json({ success: false, message: 'Campaign not found or not live' });
+        }
+
+        const baseUrl = getBaseUrl(req);
+
+        return res.status(200).json({
+            success: true,
+            campaign: {
+                ...campaign,
+                coverImage: `${baseUrl}/uploads/${campaign.coverImage}`,
+                proofLinks: convertProofLinksToUrls(parseProofLinks(campaign.proofLinks), baseUrl),
+            }
+        });
+    } catch (error) {
+        console.error("Get campaign public error:", error);
+        return res.status(500).json({ success: false, message: 'Failed to get campaign' });
+    }
+}
+
 /**
  * Get Campaign Detail
  */

@@ -9,13 +9,16 @@ function App() {
   const { fetchUser, isLoading } = useAuthStore();
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    console.log("App.tsx useEffect triggered. typeof fetchUser:", typeof fetchUser);
+    if (typeof fetchUser === 'function') {
+      fetchUser();
+    }
+  }, []);
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p>Loading user data...</p> {/* You can replace this with a spinner */}
+        <p>Loading authentication...</p>
       </div>
     );
   }

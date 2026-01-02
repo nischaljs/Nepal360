@@ -40,9 +40,19 @@ export const getMyCampaigns = async (): Promise<Campaign[]> => {
   return response.data.campaigns;
 };
 
-export const getCampaignById = async (campaignId: string): Promise<Campaign> => {
-  const response = await api.get<CampaignResponse>(`${BASE_URL}/${campaignId}`);
+export const getBeneficiaryCampaignById = async (campaignId: string): Promise<Campaign> => {
+  const response = await api.get<CampaignResponse>(`${BASE_URL}/me/${campaignId}`);
   return response.data.campaign;
+};
+
+export const getCampaignById = async (campaignId: string): Promise<Campaign> => {
+  const response = await api.get<CampaignResponse>(`${BASE_URL}/public/${campaignId}`);
+  return response.data.campaign;
+};
+
+export const getCampaignStats = async (campaignId: string): Promise<any> => {
+  const response = await api.get<any>(`${BASE_URL}/${campaignId}/stats`);
+  return response.data.stats;
 };
 
 export const updateCampaign = async (

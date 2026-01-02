@@ -257,7 +257,7 @@ const AdminCampaignDetail = () => {
               {isPendingVerification && (
                 <>
                   <Button
-                    onClick={() => handleAction("approve")}
+                    onClick={() => handleAction("approve", {})}
                     className="mr-2"
                   >
                     Approve Campaign

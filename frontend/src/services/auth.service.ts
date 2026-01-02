@@ -26,8 +26,8 @@ export const login = async (data: LoginData): Promise<LoginResponse> => {
 };
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {
-  const response = await api.get<CurrentUser>('/auth/me');
-  return response.data;
+  const response = await api.get<{ user: CurrentUser }>('/auth/me');
+  return response.data.user;
 };
 
 export const logout = () => {

@@ -8,10 +8,16 @@ import VerifyEmail from "./pages/auth/VerifyEmail";
 import CreateCampaign from "./pages/campaign/CreateCampaign";
 import MyCampaigns from "./pages/campaign/MyCampaigns";
 import CampaignDetail from "./pages/campaign/CampaignDetail";
-import AdminCampaignList from "./pages/admin/AdminCampaignList";
 import AdminCampaignDetail from "./pages/admin/AdminCampaignDetail";
 import AdminRoute from "./components/AdminRoute";
-import KYCForm from "./pages/kyc/KYCForm"; // Import KYCForm
+import KYCForm from "./pages/kyc/KYCForm";
+import AdminLayout from "./pages/admin/layout/AdminLayout";
+import AdminDashboard from "./pages/admin/Dashboard";
+import KYCManagement from "./pages/admin/KYCManagement";
+import CampaignManagement from "./pages/admin/CampaignManagement";
+import ItemDonationManagement from "./pages/admin/ItemDonationManagement";
+import BadgeManagement from "./pages/admin/BadgeManagement";
+import AuditLogView from "./pages/admin/AuditLogView";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +41,7 @@ export const router = createBrowserRouter([
         element: <VerifyEmail />,
       },
       {
-        path: "/kyc/submit", // New KYC submission route
+        path: "/kyc/submit",
         element: <KYCForm />,
       },
       {
@@ -50,21 +56,43 @@ export const router = createBrowserRouter([
         path: "/campaigns/:id",
         element: <CampaignDetail />,
       },
+    ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
+    children: [
       {
-        path: "/admin/campaigns",
-        element: (
-          <AdminRoute>
-            <AdminCampaignList />
-          </AdminRoute>
-        ),
+        path: "dashboard",
+        element: <AdminDashboard />,
       },
       {
-        path: "/admin/campaigns/:id",
-        element: (
-          <AdminRoute>
-            <AdminCampaignDetail />
-          </AdminRoute>
-        ),
+        path: "kyc",
+        element: <KYCManagement />,
+      },
+      {
+        path: "campaigns",
+        element: <CampaignManagement />,
+      },
+      {
+        path: "campaigns/:id",
+        element: <AdminCampaignDetail />,
+      },
+      {
+        path: "item-donations",
+        element: <ItemDonationManagement />,
+      },
+      {
+        path: "badges",
+        element: <BadgeManagement />,
+      },
+      {
+        path: "audit-logs",
+        element: <AuditLogView />,
       },
     ],
   },

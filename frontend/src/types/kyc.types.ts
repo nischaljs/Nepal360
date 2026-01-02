@@ -1,5 +1,7 @@
 // frontend/src/types/kyc.types.ts
 
+import type { CurrentUser } from "./auth.types";
+
 export type KYCStatus = "PENDING" | "APPROVED" | "REJECTED" | "NOT_SUBMITTED";
 
 export interface KYCProfile {
@@ -16,6 +18,7 @@ export interface KYCProfile {
   rejectionReason?: string | null;
   submittedAt?: string;
   reviewedAt?: string;
+  user?: Partial<CurrentUser>;
 }
 
 export interface SubmitKYCData {
