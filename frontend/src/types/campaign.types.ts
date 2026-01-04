@@ -39,6 +39,7 @@ export interface Campaign {
   deletedAt?: string | null;
   isActive?: boolean;
   milestones: Milestone[];
+  totalMoneyRaised?: number;
 }
 
 export interface CreateCampaignData {
