@@ -245,6 +245,7 @@ export const getCampaignDonors = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('Received request for campaign donors:', req.params.id, req.query);
   try {
     const { id: campaignId } = req.params;
     const page = parseInt(req.query.page as string) || 1;

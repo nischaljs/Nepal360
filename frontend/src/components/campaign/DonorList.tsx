@@ -1,7 +1,7 @@
-// frontend/src/components/campaign/DonorList.tsx
+
 import { useEffect, useState } from "react";
 import { getCampaignDonors } from "../../services/donation.service";
-import { Donor } from "../../types/donation.types";
+import type { Donor } from "../../types/donation.types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Table,

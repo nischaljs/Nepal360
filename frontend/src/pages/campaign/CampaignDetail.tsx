@@ -17,6 +17,7 @@ import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, FacebookI
 import QRCode from "react-qr-code";
 import DonationForm from "../../components/campaign/DonationForm";
 import { verifyKhaltiPayment } from "../../services/donation.service";
+import DonorList from "@/components/campaign/DonorList";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -369,6 +370,7 @@ const CampaignDetail = () => {
           {isBeneficiary && canEditCampaign && (
             <MilestoneForm onSubmit={handleAddMilestone} isLoading={isAddingMilestone} />
           )}
+          <DonorList campaignId={id!} />
         </div>
       </div>
     </div>
