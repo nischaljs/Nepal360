@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { CampaignStatus } from '../../generated/prisma/enums';
-import { prisma } from '../lib/prisma';
-import { createCampaignSchema, createMilestoneSchema, updateCampaignSchema } from '../schemas/campaign.schema';
-import { AuthenticatedRequest } from '../types/auth.types';
+import { CampaignStatus } from '../../../generated/prisma/enums';
+import { prisma } from '../../lib/prisma';
+import { createCampaignSchema, createMilestoneSchema, updateCampaignSchema } from '../../schemas/campaign.schema';
+import type { AuthenticatedRequest } from '../../types/auth.types';
 import {
     convertProofLinksToUrls,
     getRelativePath,
     parseProofLinks
-} from '../utils/file';
+} from '../../utils/file';
 
 
 const getBaseUrl = (req: Request): string => {
@@ -173,6 +173,8 @@ export async function getCampaignPublic(req: Request, res: Response) {
                 ...campaign,
                 coverImage: `${baseUrl}/uploads/${campaign.coverImage}`,
                 proofLinks: convertProofLinksToUrls(parseProofLinks(campaign.proofLinks), baseUrl),
+                visits: campaign.visits,
+                shareCount: campaign.shareCount,
             }
         });
     } catch (error) {
@@ -213,6 +215,8 @@ export async function getCampaignById(req: AuthenticatedRequest, res: Response) 
                 ...campaign,
                 coverImage: `${baseUrl}/uploads/${campaign.coverImage}`,
                 proofLinks: convertProofLinksToUrls(parseProofLinks(campaign.proofLinks), baseUrl),
+                visits: campaign.visits,
+                shareCount: campaign.shareCount,
             }
         });
     } catch (error) {

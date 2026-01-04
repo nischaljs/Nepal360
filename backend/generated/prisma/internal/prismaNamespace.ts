@@ -1370,7 +1370,7 @@ export const CampaignScalarFieldEnum = {
   suspendedBy: 'suspendedBy',
   donationCount: 'donationCount',
   shareCount: 'shareCount',
-  viewCount: 'viewCount',
+  visits: 'visits',
   isActive: 'isActive',
   createdAt: 'createdAt',
   verifiedAt: 'verifiedAt',

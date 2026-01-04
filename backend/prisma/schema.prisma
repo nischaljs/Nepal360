@@ -167,7 +167,7 @@ model Campaign {
   // Engagement metrics
   donationCount Int     @default(0)
   shareCount    Int     @default(0)
-  viewCount     Int     @default(0)
+  visits        Int     @default(0)
 
   // Soft delete
   isActive Boolean @default(true)

@@ -1,21 +1,30 @@
 // frontend/src/pages/campaign/CampaignDetail.tsx
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import CampaignForm from "../../components/campaign/CampaignForm";
 import MilestoneForm from "../../components/campaign/MilestoneForm";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Separator } from "../../components/ui/separator";
-import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats } from "../../services/campaign.service";
+import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats, incrementShareCount } from "../../services/campaign.service";
 import { useAuthStore } from "../../store/auth.store";
 import type { AddMilestoneData, Campaign, UpdateCampaignData } from "../../types/campaign.types";
-import { CircleDollarSign, Users, Gift, Handshake } from "lucide-react";
+import { CircleDollarSign, Users, Gift, Handshake, Eye, Share2 } from "lucide-react";
+import { incrementVisitCount } from "../../services/campaign.visit.service";
+import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, FacebookIcon, TwitterIcon, LinkedinIcon } from "react-share";
+import QRCode from "react-qr-code";
+import DonationForm from "../../components/campaign/DonationForm";
+import { verifyKhaltiPayment } from "../../services/donation.service";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+}
 
 const CampaignDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { user, isAuthenticated } = useAuthStore(); // Use isAuthenticated
+  const { user, isAuthenticated } = useAuthStore();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -23,9 +32,14 @@ const CampaignDetail = () => {
   const [isEditingCampaign, setIsEditingCampaign] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<any>(null);
+  const [visits, setVisits] = useState(0);
+  const [shares, setShares] = useState(0);
 
+  const query = useQuery();
+  const pidxVerifiedRef = useRef(false);
 
-  const fetchCampaign = async () => {
+  // Define fetchCampaign using useCallback to memoize it
+  const fetchCampaign = useCallback(async () => {
     if (!id) return;
     setIsLoading(true);
     try {
@@ -33,11 +47,9 @@ const CampaignDetail = () => {
       let fetchedStats: any;
 
       if (isAuthenticated && user?.id) {
-        // Attempt to fetch as beneficiary first if authenticated
         try {
           data = await getBeneficiaryCampaignById(id);
         } catch (authError: any) {
-          // If authenticated but not beneficiary or other auth error, try public
           if (authError.response?.status === 403 || authError.response?.status === 404) {
             data = await getCampaignById(id);
           } else {
@@ -45,7 +57,6 @@ const CampaignDetail = () => {
           }
         }
       } else {
-        // Not authenticated, fetch public campaign
         data = await getCampaignById(id);
       }
 
@@ -53,17 +64,68 @@ const CampaignDetail = () => {
 
       setCampaign(data);
       setStats(fetchedStats);
+      setVisits(data.viewCount);
+      setShares(data.shareCount);
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to load campaign details.");
       toast.error("Error", { description: err.response?.data?.message || "Failed to load campaign." });
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id, isAuthenticated, user?.id]); // Dependencies for useCallback
 
+  // Effect for handling Khalti payment verification
+  useEffect(() => {
+    const pidx = query.get("pidx");
+    const paymentSuccess = query.get("payment_success");
+
+    if (pidx && paymentSuccess === "true" && !pidxVerifiedRef.current) {
+      pidxVerifiedRef.current = true; // Mark as processed
+      verifyKhaltiPayment({ pidx }).then(() => {
+        toast.success("Payment verified successfully!");
+        fetchCampaign(); // Re-fetch campaign data after successful payment
+      }).catch((err) => {
+        toast.error("Payment verification failed.", { description: err.message || "Please try again." });
+      }).finally(() => {
+        // Clear pidx and payment_success from URL
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete("pidx");
+        newUrl.searchParams.delete("payment_success");
+        window.history.replaceState({}, document.title, newUrl.toString());
+        // Do NOT reset pidxVerifiedRef.current here, it should remain true for the current render cycle
+      });
+    }
+  }, [id, query, fetchCampaign]); // Added fetchCampaign to dependencies
+
+  // Effect for incrementing visit count
+  useEffect(() => {
+    if (!id) return;
+    const pidx = query.get("pidx");
+    // Only increment visit count if not returning from payment gateway
+    // And only once per session per campaign
+    if (!pidx) {
+        const visitedKey = `campaign-${id}-visited`;
+        if (!sessionStorage.getItem(visitedKey)) {
+            incrementVisitCount(id)
+                .then(data => {
+                    setVisits(data.visits);
+                    sessionStorage.setItem(visitedKey, 'true');
+                })
+                .catch(err => console.error("Failed to increment visit count:", err));
+        }
+    }
+  }, [id, query]); // Depend on id and query to ensure it runs correctly on initial load and navigation
+
+  // Effect for fetching campaign data
   useEffect(() => {
     fetchCampaign();
-  }, [id]);
+  }, [fetchCampaign, pidxVerifiedRef.current]); // fetchCampaign is already memoized
+
+  const handleShare = () => {
+    if (id) {
+      incrementShareCount(id).then(data => setShares(data.shares));
+    }
+  }
 
   const handleUpdateCampaign = async (data: UpdateCampaignData) => {
     if (!id) return;
@@ -72,7 +134,7 @@ const CampaignDetail = () => {
       const updatedCampaign = await updateCampaign(id, data);
       setCampaign(updatedCampaign);
       toast.success("Campaign Updated", { description: "Campaign details updated successfully." });
-      setIsEditingCampaign(false); // Exit edit mode
+      setIsEditingCampaign(false);
     } catch (err: any) {
       toast.error("Update Failed", { description: err.response?.data?.message || "Failed to update campaign." });
     } finally {
@@ -86,7 +148,7 @@ const CampaignDetail = () => {
     try {
       await addMilestone(id, data);
       toast.success("Milestone Added", { description: "New milestone added successfully." });
-      fetchCampaign(); // Re-fetch campaign to update milestones list
+      fetchCampaign();
     } catch (err: any) {
       toast.error("Milestone Failed", { description: err.response?.data?.message || "Failed to add milestone." });
     } finally {
@@ -102,7 +164,7 @@ const CampaignDetail = () => {
     try {
       await deleteMilestone(id, milestoneId);
       toast.success("Milestone Deleted", { description: "Milestone removed successfully." });
-      fetchCampaign(); // Re-fetch campaign to update milestones list
+      fetchCampaign();
     } catch (err: any) {
       toast.error("Deletion Failed", { description: err.response?.data?.message || "Failed to delete milestone." });
     }
@@ -122,6 +184,7 @@ const CampaignDetail = () => {
 
   const isBeneficiary = user?.id === campaign.beneficiaryId;
   const canEditCampaign = isBeneficiary && (campaign.status === "DRAFT" || campaign.status === "PENDING_VERIFICATION");
+  const campaignUrl = window.location.href;
 
   return (
     <div className="container mx-auto p-4">
@@ -148,7 +211,7 @@ const CampaignDetail = () => {
               {isBeneficiary && <p><strong>Beneficiary Email:</strong> {campaign.beneficiary.email}</p>}
               <p><strong>Target Amount:</strong> ${parseFloat(campaign.targetAmount).toFixed(2)}</p>
               <p><strong>Current Status:</strong> {campaign.status}</p>
-              <p><strong>Created On:</strong> {format(new Date(campaign.createdAt), "PPP")}</p>
+              <p><strong>Created On:</strong> {format(new Date(campaign.createdAt), "PPP")}</p>)
               {campaign.verifiedAt && <p><strong>Verified On:</strong> {format(new Date(campaign.verifiedAt), "PPP")}</p>}
               {campaign.rejectionReason && <p className="text-red-500"><strong>Rejection Reason:</strong> {campaign.rejectionReason}</p>}
               {campaign.suspensionReason && <p className="text-orange-500"><strong>Suspension Reason:</strong> {campaign.suspensionReason}</p>}
@@ -190,10 +253,51 @@ const CampaignDetail = () => {
                       <p className="font-bold">{stats.itemDonationCount}</p>
                     </div>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <Eye className="text-gray-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Views</p>
+                      <p className="font-bold">{visits}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Share2 className="text-gray-500" />
+                    <div>
+                      <p className="text-sm text-gray-500">Shares</p>
+                      <p className="font-bold">{shares}</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           )}
+
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>Share Campaign</CardTitle>
+            </CardHeader>
+            <CardContent className="flex items-center gap-4">
+              <div className="flex gap-2">
+                <FacebookShareButton url={campaignUrl} onShareWindowClose={handleShare}>
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+                <TwitterShareButton url={campaignUrl} onShareWindowClose={handleShare}>
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+                <LinkedinShareButton url={campaignUrl} onShareWindowClose={handleShare}>
+                  <LinkedinIcon size={32} round />
+                </LinkedinShareButton>
+              </div>
+              <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
+                <QRCode
+                  size={256}
+                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                  value={campaignUrl}
+                  viewBox={`0 0 256 256`}
+                />
+              </div>
+            </CardContent>
+          </Card>
 
           {campaign.proofLinks && campaign.proofLinks.length > 0 && (
             <Card className="mt-4">
@@ -236,7 +340,9 @@ const CampaignDetail = () => {
             </div>
           )}
 
-          <Card className="mb-4">
+          <DonationForm campaignId={id!} />
+
+          <Card className="mb-4 mt-8">
             <CardHeader>
               <CardTitle>Milestones</CardTitle>
             </CardHeader>

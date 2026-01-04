@@ -9,7 +9,10 @@ import {
     getCampaignStats,
     getAllCampaigns,
     getCampaignPublic,
-} from '../controllers/campaign.controller';
+} from '../controllers/campaign/campaign.controller';
+import { incrementVisitCount } from '../controllers/campaign/visit.controller';
+import { incrementShareCount } from '../controllers/campaign/share.controller';
+import { getCampaignDonors } from '../controllers/donation.controller';
 
 import {
     requireAuth,
@@ -24,10 +27,15 @@ const router = Router();
 // Public routes
 router.get('/', getAllCampaigns);
 router.get('/public/:id', getCampaignPublic);
+router.post('/public/:id/visit', incrementVisitCount);
+router.post('/public/:id/share', incrementShareCount);
 router.get('/:id/stats', getCampaignStats);
+router.get('/:id/donors', getCampaignDonors); // New route for campaign donors
 
 // Apply authentication middlewares to all routes
 router.use(requireAuth, requireVerifiedEmail, requireApprovedKYC);
+
+
 
 /**
  * Middleware to dynamically create upload handler based on campaign ID

@@ -1,14 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import {prisma} from '../lib/prisma';
+import { ZodError } from 'zod';
+import { prisma } from '../lib/prisma';
 import {
   initiateKhaltiPaymentSchema,
   verifyKhaltiPaymentSchema,
 } from '../schemas/donation.schema';
-import { ZodError } from 'zod';
-import { randomUUID } from 'crypto';
 import { AuthenticatedRequest } from '../types/auth.types';
 
-const KHALTI_API_URL = 'https://khalti.com/api/v2';
+const KHALTI_API_URL = process.env.KHALTI_API_URL || 'https://dev.khalti.com/api/v2'; // Updated to sandbox URL by default
 const KHALTI_SECRET_KEY = process.env.KHALTI_SECRET_KEY;
 
 // ============== Helper function to verify payment ==============
@@ -27,7 +26,9 @@ const verifyPayment = async (pidx: string) => {
   });
 
   if (!response.ok) {
-    throw new Error(`Khalti lookup failed with status ${response.status}`);
+    const errorText = await response.text();
+    console.error('Khalti lookup failed. Status:', response.status, 'Response:', errorText);
+    throw new Error(`Khalti lookup failed with status ${response.status}. See server logs for details.`);
   }
 
   const data = await response.json();
@@ -71,7 +72,8 @@ export const initiateKhaltiPayment = async (
       throw new Error('Khalti secret key is not configured.');
     }
 
-    const { userId: donorId, name, email } = req.user!;
+    const { userId: donorId, name: userName, email } = req.user!;
+    const customerName = userName || 'Guest Donor';
     const { campaignId, amount, returnUrl, visibility } =
       initiateKhaltiPaymentSchema.parse(req.body);
 
@@ -94,33 +96,51 @@ export const initiateKhaltiPayment = async (
 
     const purchase_order_id = donation.id;
     const amountInPaisa = amount * 100;
-
-    const khaltiResponse = await fetch(`${KHALTI_API_URL}/epayment/initiate/`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Key ${KHALTI_SECRET_KEY}`,
-        'Content-Type': 'application/json',
+    console.log('Preparing to send to Khalti:', {
+      return_url: returnUrl,
+      website_url: process.env.WEBSITE_URL || 'http://localhost:3000',
+      amount: amountInPaisa,
+      purchase_order_id: purchase_order_id,
+      purchase_order_name: `Donation for ${campaign.title}`,
+      customer_info: {
+        name: customerName,
+        email: email,
+        phone: "9800000001" 
       },
-      body: JSON.stringify({
+    });
+
+    const khaltiRequestBody = JSON.stringify({
         return_url: returnUrl,
         website_url: process.env.WEBSITE_URL || 'http://localhost:3000',
         amount: amountInPaisa,
         purchase_order_id: purchase_order_id,
         purchase_order_name: `Donation for ${campaign.title}`,
         customer_info: {
-          name: name,
+          name: customerName,
           email: email,
+          phone: "9800000001" // Added phone for sandbox testing
         },
-      }),
+      });
+
+    console.log('Sending to Khalti:', khaltiRequestBody);
+
+    const khaltiResponse = await fetch(`${KHALTI_API_URL}/epayment/initiate/`, { // Changed /payment/initiate/ to /epayment/initiate/
+      method: 'POST',
+      headers: {
+        Authorization: `Key ${KHALTI_SECRET_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: khaltiRequestBody,
     });
 
     if (!khaltiResponse.ok) {
-      const errorBody = await khaltiResponse.json();
-      console.error('Khalti initiation failed:', errorBody);
-      return res.status(500).json({ message: 'Failed to initiate Khalti payment.' });
+      const errorText = await khaltiResponse.text(); // Get raw text to see HTML
+      console.error('Khalti initiation failed. Status:', khaltiResponse.status, 'Response:', errorText);
+      return res.status(500).json({ message: 'Failed to initiate Khalti payment. Check server logs for details.' });
     }
 
     const khaltiData = await khaltiResponse.json();
+    console.log('Received from Khalti:', khaltiData);
 
     await prisma.moneyDonation.update({
       where: { id: donation.id },
@@ -219,3 +239,62 @@ export const getMyMoneyDonations = async (
         next(error);
     }
 }
+
+export const getCampaignDonors = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id: campaignId } = req.params;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const donations = await prisma.moneyDonation.findMany({
+      where: {
+        campaignId,
+        status: 'COMPLETED',
+      },
+      orderBy: {
+        amount: 'desc', // Sort by highest amount
+      },
+      take: limit,
+      skip: skip,
+      include: {
+        donor: {
+          select: {
+            id: true,
+            name: true,
+            // Only include name if visibility is public, otherwise anonymize
+          },
+        },
+      },
+    });
+
+    const totalDonations = await prisma.moneyDonation.count({
+      where: {
+        campaignId,
+        status: 'COMPLETED',
+      },
+    });
+
+    const formattedDonations = donations.map(d => ({
+        id: d.id,
+        amount: d.amount,
+        createdAt: d.createdAt,
+        donorName: d.visibility === 'PUBLIC' ? d.donor.name : 'Anonymous Donor',
+    }));
+
+    res.status(200).json({
+      donors: formattedDonations,
+      currentPage: page,
+      totalPages: Math.ceil(totalDonations / limit),
+      totalDonors: totalDonations,
+    });
+  } catch (error) {
+    console.error('Error fetching campaign donors:', error);
+    next(error);
+  }
+};
+

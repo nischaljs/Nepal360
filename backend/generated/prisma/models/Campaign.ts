@@ -30,14 +30,14 @@ export type CampaignAvgAggregateOutputType = {
   targetAmount: runtime.Decimal | null
   donationCount: number | null
   shareCount: number | null
-  viewCount: number | null
+  visits: number | null
 }
 
 export type CampaignSumAggregateOutputType = {
   targetAmount: runtime.Decimal | null
   donationCount: number | null
   shareCount: number | null
-  viewCount: number | null
+  visits: number | null
 }
 
 export type CampaignMinAggregateOutputType = {
@@ -56,7 +56,7 @@ export type CampaignMinAggregateOutputType = {
   suspendedBy: string | null
   donationCount: number | null
   shareCount: number | null
-  viewCount: number | null
+  visits: number | null
   isActive: boolean | null
   createdAt: Date | null
   verifiedAt: Date | null
@@ -81,7 +81,7 @@ export type CampaignMaxAggregateOutputType = {
   suspendedBy: string | null
   donationCount: number | null
   shareCount: number | null
-  viewCount: number | null
+  visits: number | null
   isActive: boolean | null
   createdAt: Date | null
   verifiedAt: Date | null
@@ -106,7 +106,7 @@ export type CampaignCountAggregateOutputType = {
   suspendedBy: number
   donationCount: number
   shareCount: number
-  viewCount: number
+  visits: number
   isActive: number
   createdAt: number
   verifiedAt: number
@@ -121,14 +121,14 @@ export type CampaignAvgAggregateInputType = {
   targetAmount?: true
   donationCount?: true
   shareCount?: true
-  viewCount?: true
+  visits?: true
 }
 
 export type CampaignSumAggregateInputType = {
   targetAmount?: true
   donationCount?: true
   shareCount?: true
-  viewCount?: true
+  visits?: true
 }
 
 export type CampaignMinAggregateInputType = {
@@ -147,7 +147,7 @@ export type CampaignMinAggregateInputType = {
   suspendedBy?: true
   donationCount?: true
   shareCount?: true
-  viewCount?: true
+  visits?: true
   isActive?: true
   createdAt?: true
   verifiedAt?: true
@@ -172,7 +172,7 @@ export type CampaignMaxAggregateInputType = {
   suspendedBy?: true
   donationCount?: true
   shareCount?: true
-  viewCount?: true
+  visits?: true
   isActive?: true
   createdAt?: true
   verifiedAt?: true
@@ -197,7 +197,7 @@ export type CampaignCountAggregateInputType = {
   suspendedBy?: true
   donationCount?: true
   shareCount?: true
-  viewCount?: true
+  visits?: true
   isActive?: true
   createdAt?: true
   verifiedAt?: true
@@ -309,7 +309,7 @@ export type CampaignGroupByOutputType = {
   suspendedBy: string | null
   donationCount: number
   shareCount: number
-  viewCount: number
+  visits: number
   isActive: boolean
   createdAt: Date
   verifiedAt: Date | null
@@ -357,7 +357,7 @@ export type CampaignWhereInput = {
   suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
   donationCount?: Prisma.IntFilter<"Campaign"> | number
   shareCount?: Prisma.IntFilter<"Campaign"> | number
-  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  visits?: Prisma.IntFilter<"Campaign"> | number
   isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
@@ -386,7 +386,7 @@ export type CampaignOrderByWithRelationInput = {
   suspendedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -419,7 +419,7 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
   donationCount?: Prisma.IntFilter<"Campaign"> | number
   shareCount?: Prisma.IntFilter<"Campaign"> | number
-  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  visits?: Prisma.IntFilter<"Campaign"> | number
   isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
@@ -448,7 +448,7 @@ export type CampaignOrderByWithAggregationInput = {
   suspendedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -481,7 +481,7 @@ export type CampaignScalarWhereWithAggregatesInput = {
   suspendedBy?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
   donationCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
   shareCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
-  viewCount?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
+  visits?: Prisma.IntWithAggregatesFilter<"Campaign"> | number
   isActive?: Prisma.BoolWithAggregatesFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
@@ -505,7 +505,7 @@ export type CampaignCreateInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -534,7 +534,7 @@ export type CampaignUncheckedCreateInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -561,7 +561,7 @@ export type CampaignUpdateInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -590,7 +590,7 @@ export type CampaignUncheckedUpdateInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -618,7 +618,7 @@ export type CampaignCreateManyInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -642,7 +642,7 @@ export type CampaignUpdateManyMutationInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -667,7 +667,7 @@ export type CampaignUncheckedUpdateManyInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -708,7 +708,7 @@ export type CampaignCountOrderByAggregateInput = {
   suspendedBy?: Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
@@ -721,7 +721,7 @@ export type CampaignAvgOrderByAggregateInput = {
   targetAmount?: Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
 }
 
 export type CampaignMaxOrderByAggregateInput = {
@@ -740,7 +740,7 @@ export type CampaignMaxOrderByAggregateInput = {
   suspendedBy?: Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
@@ -765,7 +765,7 @@ export type CampaignMinOrderByAggregateInput = {
   suspendedBy?: Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
@@ -778,7 +778,7 @@ export type CampaignSumOrderByAggregateInput = {
   targetAmount?: Prisma.SortOrder
   donationCount?: Prisma.SortOrder
   shareCount?: Prisma.SortOrder
-  viewCount?: Prisma.SortOrder
+  visits?: Prisma.SortOrder
 }
 
 export type CampaignScalarRelationFilter = {
@@ -909,7 +909,7 @@ export type CampaignCreateWithoutBeneficiaryInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -936,7 +936,7 @@ export type CampaignUncheckedCreateWithoutBeneficiaryInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -993,7 +993,7 @@ export type CampaignScalarWhereInput = {
   suspendedBy?: Prisma.StringNullableFilter<"Campaign"> | string | null
   donationCount?: Prisma.IntFilter<"Campaign"> | number
   shareCount?: Prisma.IntFilter<"Campaign"> | number
-  viewCount?: Prisma.IntFilter<"Campaign"> | number
+  visits?: Prisma.IntFilter<"Campaign"> | number
   isActive?: Prisma.BoolFilter<"Campaign"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   verifiedAt?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
@@ -1017,7 +1017,7 @@ export type CampaignCreateWithoutMilestonesInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1045,7 +1045,7 @@ export type CampaignUncheckedCreateWithoutMilestonesInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1087,7 +1087,7 @@ export type CampaignUpdateWithoutMilestonesInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1115,7 +1115,7 @@ export type CampaignUncheckedUpdateWithoutMilestonesInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1141,7 +1141,7 @@ export type CampaignCreateWithoutMoneyDonationsInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1169,7 +1169,7 @@ export type CampaignUncheckedCreateWithoutMoneyDonationsInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1211,7 +1211,7 @@ export type CampaignUpdateWithoutMoneyDonationsInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1239,7 +1239,7 @@ export type CampaignUncheckedUpdateWithoutMoneyDonationsInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1265,7 +1265,7 @@ export type CampaignCreateWithoutItemDonationsInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1293,7 +1293,7 @@ export type CampaignUncheckedCreateWithoutItemDonationsInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1335,7 +1335,7 @@ export type CampaignUpdateWithoutItemDonationsInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1363,7 +1363,7 @@ export type CampaignUncheckedUpdateWithoutItemDonationsInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1389,7 +1389,7 @@ export type CampaignCreateManyBeneficiaryInput = {
   suspendedBy?: string | null
   donationCount?: number
   shareCount?: number
-  viewCount?: number
+  visits?: number
   isActive?: boolean
   createdAt?: Date | string
   verifiedAt?: Date | string | null
@@ -1413,7 +1413,7 @@ export type CampaignUpdateWithoutBeneficiaryInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1440,7 +1440,7 @@ export type CampaignUncheckedUpdateWithoutBeneficiaryInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1467,7 +1467,7 @@ export type CampaignUncheckedUpdateManyWithoutBeneficiaryInput = {
   suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   donationCount?: Prisma.IntFieldUpdateOperationsInput | number
   shareCount?: Prisma.IntFieldUpdateOperationsInput | number
-  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1541,7 +1541,7 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   suspendedBy?: boolean
   donationCount?: boolean
   shareCount?: boolean
-  viewCount?: boolean
+  visits?: boolean
   isActive?: boolean
   createdAt?: boolean
   verifiedAt?: boolean
@@ -1573,7 +1573,7 @@ export type CampaignSelectScalar = {
   suspendedBy?: boolean
   donationCount?: boolean
   shareCount?: boolean
-  viewCount?: boolean
+  visits?: boolean
   isActive?: boolean
   createdAt?: boolean
   verifiedAt?: boolean
@@ -1582,7 +1582,7 @@ export type CampaignSelectScalar = {
   deletedAt?: boolean
 }
 
-export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "rejectionReason" | "suspensionReason" | "verifiedBy" | "rejectedBy" | "suspendedBy" | "donationCount" | "shareCount" | "viewCount" | "isActive" | "createdAt" | "verifiedAt" | "rejectedAt" | "suspendedAt" | "deletedAt", ExtArgs["result"]["campaign"]>
+export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "rejectionReason" | "suspensionReason" | "verifiedBy" | "rejectedBy" | "suspendedBy" | "donationCount" | "shareCount" | "visits" | "isActive" | "createdAt" | "verifiedAt" | "rejectedAt" | "suspendedAt" | "deletedAt", ExtArgs["result"]["campaign"]>
 export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   milestones?: boolean | Prisma.Campaign$milestonesArgs<ExtArgs>
@@ -1615,7 +1615,7 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     suspendedBy: string | null
     donationCount: number
     shareCount: number
-    viewCount: number
+    visits: number
     isActive: boolean
     createdAt: Date
     verifiedAt: Date | null
@@ -2010,7 +2010,7 @@ export interface CampaignFieldRefs {
   readonly suspendedBy: Prisma.FieldRef<"Campaign", 'String'>
   readonly donationCount: Prisma.FieldRef<"Campaign", 'Int'>
   readonly shareCount: Prisma.FieldRef<"Campaign", 'Int'>
-  readonly viewCount: Prisma.FieldRef<"Campaign", 'Int'>
+  readonly visits: Prisma.FieldRef<"Campaign", 'Int'>
   readonly isActive: Prisma.FieldRef<"Campaign", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly verifiedAt: Prisma.FieldRef<"Campaign", 'DateTime'>

@@ -85,3 +85,13 @@ export const getAllCampaigns = async (): Promise<Campaign[]> => {
   const response = await api.get<CampaignsResponse>(BASE_URL);
   return response.data.campaigns;
 };
+
+export const incrementShareCount = async (campaignId: string) => {
+  try {
+    const response = await api.post(`/campaigns/public/${campaignId}/share`);
+    return response.data;
+  } catch (error) {
+    console.error('Error incrementing share count:', error);
+    throw error;
+  }
+};
