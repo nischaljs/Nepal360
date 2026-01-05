@@ -8,6 +8,7 @@ import VerifyEmail from "./pages/auth/VerifyEmail";
 import CreateCampaign from "./pages/campaign/CreateCampaign";
 import MyCampaigns from "./pages/campaign/MyCampaigns";
 import CampaignDetail from "./pages/campaign/CampaignDetail";
+import CampaignsPage from "./pages/campaign/List";
 import AdminCampaignDetail from "./pages/admin/AdminCampaignDetail";
 import AdminRoute from "./components/AdminRoute";
 import KYCForm from "./pages/kyc/KYCForm";
@@ -18,6 +19,7 @@ import CampaignManagement from "./pages/admin/CampaignManagement";
 import ItemDonationManagement from "./pages/admin/ItemDonationManagement";
 import BadgeManagement from "./pages/admin/BadgeManagement";
 import AuditLogView from "./pages/admin/AuditLogView";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,15 +44,31 @@ export const router = createBrowserRouter([
       },
       {
         path: "/kyc/submit",
-        element: <KYCForm />,
+        element: (
+          <ProtectedRoute>
+            <KYCForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/campaigns",
+        element: <CampaignsPage />,
       },
       {
         path: "/campaigns/create",
-        element: <CreateCampaign />,
+        element: (
+          <ProtectedRoute>
+            <CreateCampaign />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/campaigns/me",
-        element: <MyCampaigns />,
+        element: (
+          <ProtectedRoute>
+            <MyCampaigns />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/campaigns/:id",

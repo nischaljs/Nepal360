@@ -19,12 +19,6 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="flex items-center gap-8">
-            <Link 
-              to="/" 
-              className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"
-            >
-              Home
-            </Link>
 
             {isAuthenticated && user && (
               <>
