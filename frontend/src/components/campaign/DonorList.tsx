@@ -114,7 +114,7 @@ className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 </div>
 </TableCell>
 <TableCell className="text-right font-semibold text-emerald-600">
-${parseFloat(donor.amount.toString()).toFixed(2)}
+Rs. {parseFloat(donor.amount.toString()).toFixed(2)}
 </TableCell>
 </TableRow>
 ))}

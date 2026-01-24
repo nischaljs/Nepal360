@@ -112,7 +112,7 @@ const CampaignDetail = () => {
 
   useEffect(() => {
     fetchCampaign();
-  }, [fetchCampaign, pidxVerifiedRef.current]);
+  }, [fetchCampaign]);
 
   const handleShare = () => {
     if (id) {
@@ -245,10 +245,10 @@ const CampaignDetail = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-3xl font-bold text-emerald-600">
-                  ${stats?.totalMoneyRaised ? parseFloat(stats.totalMoneyRaised).toFixed(2) : '0.00'}
+                  Rs. {stats?.totalMoneyRaised ? parseFloat(stats.totalMoneyRaised).toLocaleString(undefined, {minimumFractionDigits: 2}) : '0.00'}
                 </span>
                 <span className="text-gray-600">
-                  raised of <span className="font-semibold">${parseFloat(campaign.targetAmount).toFixed(2)}</span> goal
+                  raised of <span className="font-semibold">Rs. {parseFloat(campaign.targetAmount).toLocaleString(undefined, {minimumFractionDigits: 2})}</span> goal
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -315,7 +315,7 @@ const CampaignDetail = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600 mb-1">Target Amount</p>
-                    <p className="font-semibold text-gray-900">${parseFloat(campaign.targetAmount).toFixed(2)}</p>
+                    <p className="font-semibold text-gray-900">Rs. {parseFloat(campaign.targetAmount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-600 mb-1">Created On</p>
@@ -362,7 +362,7 @@ const CampaignDetail = () => {
                     <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
                       <CircleDollarSign className="w-8 h-8 text-emerald-600 mx-auto mb-2" />
                       <p className="text-2xl font-bold text-emerald-700">
-                        ${stats.totalMoneyRaised ? parseFloat(stats.totalMoneyRaised).toFixed(2) : '0.00'}
+                        Rs. {stats.totalMoneyRaised ? parseFloat(stats.totalMoneyRaised).toLocaleString() : '0.00'}
                       </p>
                       <p className="text-sm text-emerald-600 mt-1">Total Raised</p>
                     </div>
@@ -534,7 +534,7 @@ const CampaignDetail = () => {
                             <p className={`text-sm ${
                               milestone.completed ? 'text-emerald-600' : 'text-gray-600'
                             }`}>
-                              ${parseFloat(milestone.amount).toFixed(2)}
+                              Rs. {parseFloat(milestone.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}
                             </p>
                           </div>
                           {isBeneficiary && canEditCampaign && (

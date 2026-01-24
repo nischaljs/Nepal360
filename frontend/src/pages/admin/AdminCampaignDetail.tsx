@@ -179,7 +179,7 @@ const AdminCampaignDetail = () => {
                 {campaign.beneficiary.email})
               </p>
               <p>
-                <strong>Target Amount:</strong> $
+                <strong>Target Amount:</strong> Rs.
                 {parseFloat(campaign.targetAmount).toFixed(2)}
               </p>
               <p>
@@ -237,7 +237,7 @@ const AdminCampaignDetail = () => {
                       className="flex justify-between items-center bg-gray-100 p-3 rounded-md"
                     >
                       <span>
-                        {milestone.title} - $
+                        {milestone.title} - Rs.
                         {parseFloat(milestone.amount).toFixed(2)}{" "}
                         {milestone.completed && "(Completed)"}
                       </span>
@@ -375,14 +375,14 @@ const AdminCampaignDetail = () => {
               {stats ? (
                 <div className="space-y-2">
                   <p>
-                    <strong>Total Raised:</strong> $
+                    <strong>Total Raised:</strong> Rs.
                     {parseFloat(stats.totalRaised).toFixed(2)}
                   </p>
                   <p>
                     <strong>Donation Count:</strong> {stats.donationCount}
                   </p>
                   <p>
-                    <strong>Average Donation:</strong> $
+                    <strong>Average Donation:</strong> Rs.
                     {parseFloat(stats.averageDonation).toFixed(2)}
                   </p>
                   <p>

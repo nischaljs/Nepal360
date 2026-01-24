@@ -136,7 +136,7 @@ const AdminCampaignList = () => {
                     <TableRow key={campaign.id}>
                       <TableCell className="font-medium">{campaign.title}</TableCell>
                       <TableCell>{campaign.beneficiary.name} ({campaign.beneficiary.email})</TableCell>
-                      <TableCell>${"targetAmount" in campaign ? parseFloat(campaign.targetAmount).toFixed(2) : 'N/A'}</TableCell>
+                      <TableCell>Rs.${"targetAmount" in campaign ? parseFloat(campaign.targetAmount).toFixed(2) : 'N/A'}</TableCell>
                       <TableCell>{"status" in campaign ? campaign.status : 'N/A'}</TableCell>
                       <TableCell>{"createdAt" in campaign ? new Date(campaign.createdAt).toLocaleDateString() : 'N/A'}</TableCell>
                       {filterStatus === "VERIFICATION_QUEUE" && (

@@ -1,4 +1,4 @@
-import { AlertCircle, ArrowRight, CheckCircle, Clock, Target, Users, XCircle } from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle, Clock, Users, XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Campaign } from "../../types/campaign.types";
 import { Button } from "../ui/button";
@@ -9,26 +9,25 @@ interface CampaignCardProps {
 }
 
 const CampaignCard = ({ campaign }: CampaignCardProps) => {
-  // Calculate progress percentage
   const totalRaised = campaign.totalMoneyRaised || 0;
   const targetAmount = parseFloat(campaign.targetAmount);
   const progressPercentage = Math.min((totalRaised / targetAmount) * 100, 100);
 
   const getStatusBadge = (status: string) => {
     const badges: Record<string, { color: string; bg: string; icon: any; text: string }> = {
-      DRAFT: { color: "text-gray-700", bg: "bg-gray-100", icon: Clock, text: "Draft" },
-      PENDING_VERIFICATION: { color: "text-yellow-700", bg: "bg-yellow-100", icon: AlertCircle, text: "Pending" },
-      ACTIVE: { color: "text-emerald-700", bg: "bg-emerald-100", icon: CheckCircle, text: "Active" },
-      COMPLETED: { color: "text-blue-700", bg: "bg-blue-100", icon: CheckCircle, text: "Completed" },
-      SUSPENDED: { color: "text-orange-700", bg: "bg-orange-100", icon: XCircle, text: "Suspended" },
-      REJECTED: { color: "text-red-700", bg: "bg-red-100", icon: XCircle, text: "Rejected" },
+      DRAFT: { color: "text-gray-600", bg: "bg-gray-100", icon: Clock, text: "Draft" },
+      PENDING_VERIFICATION: { color: "text-amber-700", bg: "bg-amber-50", icon: AlertCircle, text: "Pending" },
+      ACTIVE: { color: "text-emerald-700", bg: "bg-emerald-50", icon: CheckCircle, text: "Active" },
+      COMPLETED: { color: "text-blue-700", bg: "bg-blue-50", icon: CheckCircle, text: "Completed" },
+      SUSPENDED: { color: "text-orange-700", bg: "bg-orange-50", icon: XCircle, text: "Suspended" },
+      REJECTED: { color: "text-red-700", bg: "bg-red-50", icon: XCircle, text: "Rejected" },
     };
 
     const badge = badges[status] || badges.DRAFT;
     const Icon = badge.icon;
 
     return (
-      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${badge.bg} ${badge.color}`}>
+      <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-tight ${badge.bg} ${badge.color} border border-current opacity-90`}>
         <Icon className="w-3 h-3" />
         {badge.text}
       </span>
@@ -36,89 +35,69 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
   };
 
   return (
-    <Card className="group flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-gray-200 hover:border-emerald-300">
-      {/* Image Section */}
-      <div className="relative h-48 overflow-hidden">
+    <Card className="group flex flex-col overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl bg-white">
+      {/* Image Section - Reduced Height */}
+      <div className="relative h-40 overflow-hidden">
         <img 
           src={campaign.coverImage} 
           alt={campaign.title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
         />
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-2 right-2">
           {getStatusBadge(campaign.status)}
         </div>
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
-      <CardHeader className="pb-3">
-        <CardTitle className="text-xl line-clamp-2 group-hover:text-emerald-600 transition-colors">
-          {campaign.title}
-        </CardTitle>
-        <CardDescription className="line-clamp-2 text-gray-600">
-          {campaign.description}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent className="flex-grow space-y-4">
-        {/* Progress Bar */}
-        <div>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-2xl font-bold text-emerald-600">
-              ${totalRaised.toFixed(2)}
-            </span>
-            <span className="text-sm text-gray-600">
-              of ${targetAmount.toFixed(2)}
+      <div className="flex flex-col flex-grow p-4">
+        <CardHeader className="p-0 space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-600 font-bold text-[10px] uppercase tracking-wider">Verified</span>
+            <span className="text-gray-400 text-[11px] flex items-center gap-1">
+              <Users size={10} /> {campaign.beneficiary?.name || 'Anonymous'}
             </span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-            <div 
-              className="bg-emerald-600 h-full rounded-full transition-all duration-500"
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
-          </div>
-          <p className="text-xs text-gray-600 mt-1.5">{progressPercentage.toFixed(0)}% funded</p>
-        </div>
+          <CardTitle className="text-lg font-bold line-clamp-1 text-gray-900 group-hover:text-emerald-600 transition-colors">
+            {campaign.title}
+          </CardTitle>
+          <CardDescription className="line-clamp-2 text-gray-500 text-xs leading-snug">
+            {campaign.description}
+          </CardDescription>
+        </CardHeader>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-8 h-8 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0">
-              <Users className="w-4 h-4 text-emerald-600" />
+        <CardContent className="p-0 mt-3">
+          <div className="space-y-2">
+            <div className="flex justify-between items-end">
+              <div className="flex flex-col">
+                <span className="text-lg font-black text-gray-900 leading-none">
+                  Rs. {totalRaised.toLocaleString()}
+                </span>
+                <span className="text-[10px] font-medium text-gray-400 mt-0.5">
+                  of Rs. {targetAmount.toLocaleString()}
+                </span>
+              </div>
+              <span className="text-emerald-700 font-bold text-xs">{progressPercentage.toFixed(0)}%</span>
             </div>
-            <div>
-              <p className="font-semibold text-gray-900">{campaign.donationCount || 0}</p>
-              <p className="text-xs text-gray-600">Donors</p>
+            
+            <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+              <div 
+                className="bg-emerald-500 h-full rounded-full transition-all duration-700"
+                style={{ width: `${progressPercentage}%` }}
+              />
             </div>
           </div>
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-              <Target className="w-4 h-4 text-blue-600" />
-            </div>
-            <div>
-              <p className="font-semibold text-gray-900">{campaign.milestones?.length || 0}</p>
-              <p className="text-xs text-gray-600">Milestones</p>
-            </div>
-          </div>
-        </div>
+        </CardContent>
 
-        {/* Beneficiary Info */}
-        <div className="pt-3 border-t border-gray-100">
-          <p className="text-xs text-gray-600">Campaign by</p>
-          <p className="text-sm font-semibold text-gray-900">{campaign.beneficiary?.name || 'Anonymous'}</p>
-        </div>
-      </CardContent>
-
-      <CardFooter className="pt-4 border-t border-gray-100">
-        <Link to={`/campaigns/${campaign.id}`} className="w-full">
-          <Button 
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white group-hover:shadow-md transition-all"
-          >
-            View Campaign
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
-      </CardFooter>
+        <CardFooter className="p-0 mt-4">
+          <Link to={`/campaigns/${campaign.id}`} className="w-full">
+            <Button 
+              className="w-full h-9 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition-all gap-2"
+            >
+              View Campaign
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </Button>
+          </Link>
+        </CardFooter>
+      </div>
     </Card>
   );
 };

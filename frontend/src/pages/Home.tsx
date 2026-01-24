@@ -4,7 +4,7 @@ import type { Campaign } from "../types/campaign.types";
 import { getAllCampaigns } from "../services/campaign.service";
 import CampaignCard from "../components/campaign/CampaignCard";
 import { toast } from "sonner";
-import { Heart, Shield, TrendingUp, Users, ArrowRight, Search } from "lucide-react";
+import { Heart, Shield, TrendingUp, Users, ArrowRight, Search, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 
 const Home = () => {
@@ -19,43 +19,23 @@ const Home = () => {
         setCampaigns(data);
       } catch (err: any) {
         setError(err.response?.data?.message || "Failed to fetch campaigns.");
-        toast.error("Failed to fetch campaigns", {
-          description: err.response?.data?.message || "An unexpected error occurred.",
-        });
+        toast.error("Error", { description: "Could not load campaigns." });
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchCampaigns();
   }, []);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        {/* Hero Skeleton */}
-        <div className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-6 py-20">
-            <div className="max-w-3xl mx-auto">
-              <div className="h-12 bg-gray-200 rounded-lg mb-6 skeleton"></div>
-              <div className="h-6 bg-gray-200 rounded-lg mb-4 skeleton"></div>
-              <div className="h-6 bg-gray-200 rounded-lg w-3/4 skeleton"></div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Campaign Cards Skeleton */}
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                <div className="h-48 bg-gray-200 skeleton"></div>
-                <div className="p-6 space-y-3">
-                  <div className="h-6 bg-gray-200 rounded skeleton"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 skeleton"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 skeleton"></div>
-                </div>
-              </div>
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-6 py-20 animate-pulse">
+          <div className="h-12 bg-gray-100 rounded-xl w-2/3 mx-auto mb-6" />
+          <div className="h-6 bg-gray-100 rounded-lg w-1/2 mx-auto mb-12" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="aspect-[4/5] bg-gray-50 rounded-2xl" />
             ))}
           </div>
         </div>
@@ -65,186 +45,146 @@ const Home = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
-        <div className="bg-white rounded-xl shadow-sm border border-red-200 p-8 max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-8 h-8 text-red-600" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Error Loading Campaigns</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
-          <Button 
-            onClick={() => window.location.reload()}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white"
-          >
-            Try Again
-          </Button>
+      <div className="min-h-screen flex items-center justify-center p-6">
+        <div className="text-center">
+          <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-bold mb-2">Something went wrong</h2>
+          <Button onClick={() => window.location.reload()} variant="outline">Try Again</Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-6 py-20 lg:py-28">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Make a Difference with
-              <span className="text-emerald-600"> Nepal360</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Join our trusted crowdfunding platform where transparency meets impact. 
-              Support verified campaigns and help communities thrive across Nepal.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/campaigns">
-                <Button 
-                  size="lg"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg"
-                >
-                  Explore Campaigns
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/campaigns/create">
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-6 text-lg"
-                >
-                  Start a Campaign
-                </Button>
-              </Link>
-            </div>
+      <section className="relative overflow-hidden pt-16 pb-12 lg:pt-24 lg:pb-20">
+        {/* Background Decorative Element */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,#ecfdf5_0%,#ffffff_100%)]" />
+        <div className="container mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mb-6">
+            <Sparkles size={14} />
+            NEPAL'S MOST TRUSTED PLATFORM
+          </div>
+          <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 tracking-tight">
+            Empower Change <br />
+            <span className="text-emerald-600">Across Nepal</span>
+          </h1>
+          <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Nepal360 connects compassionate hearts with verified causes. 
+            Start a movement or support a community today.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/campaigns">
+              <Button size="lg" className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg shadow-emerald-200 transition-all active:scale-95">
+                Explore Campaigns <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Link to="/campaigns/create">
+              <Button size="lg" variant="outline" className="h-14 px-8 border-gray-200 text-gray-700 rounded-2xl font-bold text-base hover:bg-gray-50 active:scale-95">
+                Start Fundraising
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Trust Indicators */}
-      <section className="bg-emerald-50 border-b border-emerald-100 py-12">
+      {/* Trust Stats - Compact */}
+      <section className="py-8 border-y border-gray-100 bg-gray-50/50">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+            <div className="flex items-center justify-center gap-4 py-4 md:py-0">
+              <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Shield size={24} /></div>
+              <div className="text-left">
+                <p className="font-bold text-gray-900">100% Verified</p>
+                <p className="text-xs text-gray-500">Secure & Trustworthy</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Verified Campaigns</h3>
-              <p className="text-gray-600">
-                Every campaign is thoroughly verified to ensure authenticity and trust
-              </p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="flex items-center justify-center gap-4 py-4 md:py-0">
+              <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><TrendingUp size={24} /></div>
+              <div className="text-left">
+                <p className="font-bold text-gray-900">Full Transparency</p>
+                <p className="text-xs text-gray-500">Track every Rupee</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Transparent Tracking</h3>
-              <p className="text-gray-600">
-                Track every donation and milestone with complete transparency
-              </p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
+            <div className="flex items-center justify-center gap-4 py-4 md:py-0">
+              <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Users size={24} /></div>
+              <div className="text-left">
+                <p className="font-bold text-gray-900">Community First</p>
+                <p className="text-xs text-gray-500">Local Impact Focus</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Community Driven</h3>
-              <p className="text-gray-600">
-                Join thousands of donors making real impact in communities
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Campaigns */}
-      <section className="py-16 lg:py-24">
+      <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+          <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-3">Featured Campaigns</h2>
-              <p className="text-lg text-gray-600">
-                Support these verified campaigns and make an impact today
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Featured Campaigns</h2>
+              <p className="text-gray-500 mt-1">Handpicked causes that need your urgent support</p>
             </div>
-            <Link to="/campaigns" className="mt-4 md:mt-0">
-              <Button 
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-50"
-              >
-                View All Campaigns
-                <Search className="ml-2 w-4 h-4" />
+            <Link to="/campaigns" className="hidden md:block">
+              <Button variant="ghost" className="text-emerald-600 font-bold hover:bg-emerald-50">
+                View All <ArrowRight size={16} className="ml-1" />
               </Button>
             </Link>
           </div>
 
           {campaigns.length === 0 ? (
-            <div className="bg-white rounded-xl border border-gray-200 p-16 text-center">
-              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Heart className="w-10 h-10 text-gray-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">No Campaigns Yet</h3>
-              <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                Be the first to create a campaign and start making a difference in your community!
-              </p>
+            <div className="py-20 text-center bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+              <Heart className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-bold">No active campaigns</h3>
+              <p className="text-gray-500 mb-6">Be the spark that starts a change.</p>
               <Link to="/campaigns/create">
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  Create First Campaign
-                </Button>
+                <Button className="bg-emerald-600">Create First Campaign</Button>
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {campaigns.slice(0, 6).map((campaign) => (
                 <CampaignCard key={campaign.id} campaign={campaign} />
               ))}
             </div>
           )}
 
-          {campaigns.length > 6 && (
-            <div className="text-center mt-12">
-              <Link to="/campaigns">
-                <Button 
-                  size="lg"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                >
-                  See All {campaigns.length} Campaigns
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-            </div>
-          )}
+          <div className="mt-12 text-center md:hidden">
+            <Link to="/campaigns">
+              <Button variant="outline" className="w-full h-12 rounded-xl">View All Campaigns</Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="bg-emerald-600 py-16 lg:py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to Make an Impact?
-          </h2>
-          <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
-            Whether you're looking to support a cause or start your own campaign, 
-            Nepal360 makes it easy and transparent.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/signup">
-              <Button 
-                size="lg"
-                className="bg-white text-emerald-600 hover:bg-gray-50 px-8 py-6 text-lg"
-              >
-                Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/about">
-              <Button 
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-emerald-700 px-8 py-6 text-lg"
-              >
-                Learn More
-              </Button>
-            </Link>
+      {/* CTA Section - Minimalist */}
+      <section className="container mx-auto px-6 mb-20">
+        <div className="bg-emerald-600 rounded-[2.5rem] p-10 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-emerald-200">
+          {/* Decorative Circles */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-500 rounded-full opacity-50" />
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 bg-emerald-700 rounded-full opacity-50" />
+          
+          <div className="relative z-10">
+            <h2 className="text-3xl lg:text-5xl font-black text-white mb-6">
+              Ready to create an impact?
+            </h2>
+            <p className="text-emerald-50 text-lg mb-10 max-w-xl mx-auto opacity-90">
+              Join thousands of donors and organizers. 
+              Registration is free and takes less than 2 minutes.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/signup">
+                <Button size="lg" className="h-14 px-10 bg-white text-emerald-600 hover:bg-emerald-50 rounded-2xl font-bold transition-all active:scale-95">
+                  Start Now
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button size="lg" variant="outline" className="h-14 px-10 border-emerald-400 text-white hover:bg-emerald-700 rounded-2xl font-bold">
+                  Learn More
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
