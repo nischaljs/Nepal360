@@ -1,15 +1,37 @@
 import { ArrowLeft, CheckCircle, Lightbulb, Shield } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CampaignForm from "../../components/campaign/CampaignForm";
 import { Card, CardContent } from "../../components/ui/card";
+import GlobalLoader from "../../components/ui/GlobalLoader";
+import { useKycCheck } from "../../hooks/useKycCheck";
 import { createCampaign } from "../../services/campaign.service";
 import type { CreateCampaignData, UpdateCampaignData } from "../../types/campaign.types";
 
 const CreateCampaign = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { isLoading: isKycLoading, hasApprovedKyc, user } = useKycCheck();
+
+  useEffect(() => {
+    if (!isKycLoading && user && !hasApprovedKyc) {
+      toast.error("KYC Verification Required", {
+        description: "You must complete KYC verification before creating a campaign.",
+      });
+      navigate('/kyc/submit');
+    }
+  }, [user, hasApprovedKyc, isKycLoading, navigate]);
+
+  // Show global loader while checking KYC
+  if (isKycLoading) {
+    return <GlobalLoader fullScreen message="Verifying KYC status..." />;
+  }
+
+  // Redirect if no approved KYC
+  if (!user || !hasApprovedKyc) {
+    return null;
+  }
 
   const handleSubmit = async (data: CreateCampaignData | UpdateCampaignData) => {
     setIsLoading(true);

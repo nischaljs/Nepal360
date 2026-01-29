@@ -48,6 +48,11 @@ export interface CurrentUser {
     email: string;
     emailStatus: "PENDING" | "VERIFIED";
     createdAt: string;
+    kycProfile: {
+        id: string;
+        status: "PENDING" | "APPROVED" | "REJECTED" | "NOT_SUBMITTED";
+        rejectionReason?: string;
+    } | null;
     roles: {
         isAdmin: boolean;
         isVerifiedBeneficiary: boolean;

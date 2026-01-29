@@ -123,6 +123,10 @@ export async function getAllCampaigns(req: Request, res: Response) {
                         name: true,
                     },
                 },
+                moneyDonations: {
+                    where: { status: 'COMPLETED' },
+                    select: { amount: true },
+                },
             },
             orderBy: {
                 createdAt: 'desc',
@@ -132,6 +136,7 @@ export async function getAllCampaigns(req: Request, res: Response) {
         const baseUrl = getBaseUrl(req);
         const formattedCampaigns = campaigns.map(c => ({
             ...c,
+            totalMoneyRaised: c.moneyDonations.reduce((sum, d) => sum + d.amount.toNumber(), 0),
             coverImage: `${baseUrl}/uploads/${c.coverImage}`,
             proofLinks: convertProofLinksToUrls(parseProofLinks(c.proofLinks), baseUrl),
         }));

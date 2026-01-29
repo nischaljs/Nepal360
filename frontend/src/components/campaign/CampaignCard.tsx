@@ -17,7 +17,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
     const badges: Record<string, { color: string; bg: string; icon: any; text: string }> = {
       DRAFT: { color: "text-gray-600", bg: "bg-gray-100", icon: Clock, text: "Draft" },
       PENDING_VERIFICATION: { color: "text-amber-700", bg: "bg-amber-50", icon: AlertCircle, text: "Pending" },
-      ACTIVE: { color: "text-emerald-700", bg: "bg-emerald-50", icon: CheckCircle, text: "Active" },
+      LIVE: { color: "text-emerald-700", bg: "bg-emerald-50", icon: CheckCircle, text: "Active" },
       COMPLETED: { color: "text-blue-700", bg: "bg-blue-50", icon: CheckCircle, text: "Completed" },
       SUSPENDED: { color: "text-orange-700", bg: "bg-orange-50", icon: XCircle, text: "Suspended" },
       REJECTED: { color: "text-red-700", bg: "bg-red-50", icon: XCircle, text: "Rejected" },
@@ -35,7 +35,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
   };
 
   return (
-    <Card className="group flex flex-col overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl bg-white">
+    <Card className="group flex flex-col overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl bg-white max-w-sm">
       {/* Image Section - Reduced Height */}
       <div className="relative h-40 overflow-hidden">
         <img 
@@ -69,10 +69,10 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
             <div className="flex justify-between items-end">
               <div className="flex flex-col">
                 <span className="text-lg font-black text-gray-900 leading-none">
-                  Rs. {totalRaised.toLocaleString()}
+                   रू {totalRaised.toLocaleString()}
                 </span>
                 <span className="text-[10px] font-medium text-gray-400 mt-0.5">
-                  of Rs. {targetAmount.toLocaleString()}
+                  of रू {targetAmount.toLocaleString()}
                 </span>
               </div>
               <span className="text-emerald-700 font-bold text-xs">{progressPercentage.toFixed(0)}%</span>

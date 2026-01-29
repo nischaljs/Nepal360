@@ -27,6 +27,7 @@ export interface Campaign {
   donationCount: number;
   shareCount: number;
   viewCount: number;
+  visits?: number;
   createdAt: string; 
   verifiedAt: string | null; 
   rejectionReason?: string | null;

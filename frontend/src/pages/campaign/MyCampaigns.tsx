@@ -1,16 +1,19 @@
 // frontend/src/pages/campaign/MyCampaigns.tsx
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { getMyCampaigns } from "../../services/campaign.service";
 import type{ Campaign } from "../../types/campaign.types";
 import CampaignCard from "../../components/campaign/CampaignCard";
-import { toast } from "sonner";
 import { Button } from "../../components/ui/button";
+import GlobalLoader from "../../components/ui/GlobalLoader";
+import { useKycCheck } from "../../hooks/useKycCheck";
 
 const MyCampaigns = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { isLoading: isKycLoading, hasApprovedKyc, user } = useKycCheck();
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -18,21 +21,31 @@ const MyCampaigns = () => {
         const data = await getMyCampaigns();
         setCampaigns(data);
       } catch (err: any) {
-        setError(err.response?.data?.message || "Failed to load campaigns.");
+        // If 403 and no KYC, redirect to KYC page
+        if (err.response?.status === 403 && err.response?.data?.message?.includes('KYC')) {
+          navigate('/kyc/submit');
+          return;
+        }
         toast.error("Error", { description: err.response?.data?.message || "Failed to load campaigns." });
       } finally {
         setIsLoading(false);
       }
     };
     fetchCampaigns();
-  }, []);
+  }, [navigate]);
 
-  if (isLoading) {
-    return <div className="container mx-auto p-4 text-center">Loading your campaigns...</div>;
+  useEffect(() => {
+    if (!isKycLoading && user && !hasApprovedKyc) {
+      navigate('/kyc/submit');
+    }
+  }, [user, hasApprovedKyc, isKycLoading, navigate]);
+
+  if (isKycLoading || isLoading) {
+    return <GlobalLoader fullScreen message="Loading..." />;
   }
 
-  if (error) {
-    return <div className="container mx-auto p-4 text-center text-red-500">{error}</div>;
+  if (!user || !hasApprovedKyc) {
+    return null;
   }
 
   return (

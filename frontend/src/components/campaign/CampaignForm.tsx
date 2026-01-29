@@ -1,12 +1,12 @@
+import { AlertCircle, FileText, Image as ImageIcon, Upload, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { CreateCampaignData, UpdateCampaignData, Campaign, CampaignStatus } from "../../types/campaign.types";
+import { toast } from "sonner";
+import type { Campaign, CampaignStatus, CreateCampaignData, UpdateCampaignData } from "../../types/campaign.types";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea"; 
-import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Upload, FileText, Image as ImageIcon, DollarSign, AlertCircle } from "lucide-react";
+import { Textarea } from "../ui/textarea";
 
 interface CampaignFormProps {
   initialData?: Campaign;
@@ -35,6 +35,22 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
       setCoverImagePreview(initialData.coverImage);
     }
   }, [initialData]);
+
+  const handleProofsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setProofs((prev) => [...prev, ...files]);
+  };
+
+  const removeProof = (index: number) => {
+    setProofs((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const getFileIcon = (file: File) => {
+    if (file.type.startsWith('image/')) {
+      return URL.createObjectURL(file);
+    }
+    return null;
+  };
 
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -139,7 +155,7 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
           Funding Goal <span className="text-red-500">*</span>
         </Label>
         <div className="relative">
-          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold text-sm">रू</span>
           <Input
             id="targetAmount"
             type="number"
@@ -222,20 +238,67 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
           
           <label 
             htmlFor="proofs"
-            className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+            className={`flex items-center justify-center w-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors ${proofs.length > 0 ? 'h-auto min-h-[120px] py-3 px-2' : 'h-32'}`}
           >
-            <div className="flex flex-col items-center">
-              <FileText className="w-10 h-10 text-gray-400 mb-2" />
-              <p className="text-sm font-medium text-gray-700 mb-1">
-                Upload supporting documents
-              </p>
-              <p className="text-xs text-gray-500">
-                Medical bills, receipts, certificates, etc.
-              </p>
-              {proofs.length > 0 && (
-                <p className="text-xs text-emerald-600 mt-2 font-medium">
-                  {proofs.length} file{proofs.length > 1 ? 's' : ''} selected
-                </p>
+            <div className={`flex flex-col items-center ${proofs.length > 0 ? 'w-full' : ''}`}>
+              {proofs.length === 0 ? (
+                <>
+                  <FileText className="w-10 h-10 text-gray-400 mb-2" />
+                  <p className="text-sm font-medium text-gray-700 mb-1">
+                    Upload supporting documents
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Medical bills, receipts, certificates, etc.
+                  </p>
+                </>
+              ) : (
+                <div className="w-full px-2">
+                  <p className="text-xs text-gray-500 mb-2">
+                    Medical bills, receipts, certificates, etc.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {proofs.map((file, index) => {
+                      const filePreview = getFileIcon(file);
+                     
+                      return (
+                        <div 
+                          key={`${file.name}-${index}`}
+                          className="relative group w-20 h-20 border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm"
+                        >
+                          {filePreview ? (
+                            <img 
+                              src={filePreview} 
+                              alt={file.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                              <FileText className="w-8 h-8 text-gray-400" />
+                            </div>
+                          )}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              removeProof(index);
+                            }}
+                            className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 px-1 py-0.5">
+                            <p className="text-[8px] text-white truncate">
+                              {file.name}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-xs text-emerald-600 mt-2 font-medium text-center">
+                    + Add more documents
+                  </p>
+                </div>
               )}
             </div>
           </label>
@@ -245,7 +308,7 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
             type="file"
             accept="image/*,video/*,application/pdf"
             multiple
-            onChange={(e) => setProofs(Array.from(e.target.files || []))}
+            onChange={handleProofsChange}
             disabled={isLoading}
             className="hidden"
           />
