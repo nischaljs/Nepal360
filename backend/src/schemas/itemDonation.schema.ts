@@ -7,3 +7,9 @@ export const pledgeItemDonationSchema = z.object({
   deliveryNote: z.string().optional(),
   deliveryPhoto: z.string().optional(),
 });
+
+export const updateItemDonationSchema = z.object({
+  status: z.enum(['DELIVERED']).optional(),
+  deliveryNote: z.string().optional(),
+  deliveryPhoto: z.string().optional(),
+});

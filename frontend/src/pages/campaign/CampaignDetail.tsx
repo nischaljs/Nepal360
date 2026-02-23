@@ -5,13 +5,17 @@ import { useLocation, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import CampaignForm from "../../components/campaign/CampaignForm";
 import MilestoneForm from "../../components/campaign/MilestoneForm";
+import ItemPledgeForm from "../../components/campaign/ItemPledgeForm";
 import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Separator } from "../../components/ui/separator";
 import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats, incrementShareCount } from "../../services/campaign.service";
+import { getCampaignItemDonations } from "../../services/itemDonation.service";
 import { useAuthStore } from "../../store/auth.store";
 import type { AddMilestoneData, Campaign, UpdateCampaignData } from "../../types/campaign.types";
-import { CircleDollarSign, Users, Gift, Handshake, Eye, Share2, Edit, X, Calendar, CheckCircle, AlertCircle, XCircle } from "lucide-react";
+import type { ItemDonation } from "../../types/itemDonation.types";
+import { CircleDollarSign, Users, Gift, Handshake, Eye, Share2, Edit, X, Calendar, CheckCircle, AlertCircle, XCircle, Package } from "lucide-react";
 import { incrementVisitCount } from "../../services/campaign.visit.service";
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, FacebookIcon, TwitterIcon, LinkedinIcon } from "react-share";
 import QRCode from "react-qr-code";
@@ -35,6 +39,7 @@ const CampaignDetail = () => {
   const [stats, setStats] = useState<any>(null);
   const [visits, setVisits] = useState(0);
   const [shares, setShares] = useState(0);
+  const [itemDonations, setItemDonations] = useState<ItemDonation[]>([]);
 
   const query = useQuery();
   const pidxVerifiedRef = useRef(false);
@@ -62,10 +67,13 @@ const CampaignDetail = () => {
 
       fetchedStats = await getCampaignStats(id);
 
+      const itemDonationsData = await getCampaignItemDonations(id).catch(() => []);
+
       setCampaign(data);
       setStats(fetchedStats);
       setVisits(data.visits || data.viewCount || 0);
       setShares(data.shareCount);
+      setItemDonations(itemDonationsData);
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to load campaign details.");
       toast.error("Error", { description: err.response?.data?.message || "Failed to load campaign." });
@@ -113,6 +121,12 @@ const CampaignDetail = () => {
   useEffect(() => {
     fetchCampaign();
   }, [fetchCampaign]);
+
+  useEffect(() => {
+    if (campaign) {
+      document.title = `${campaign.title} | Nepal360`;
+    }
+  }, [campaign]);
 
   const handleShare = () => {
     if (id) {
@@ -566,6 +580,59 @@ const CampaignDetail = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* Item Pledges */}
+            <Card className="border-gray-200 shadow-sm">
+              <CardHeader className="border-b border-gray-100">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <Package className="w-5 h-5 text-amber-600" />
+                    Item Pledges
+                  </CardTitle>
+                  {campaign.status === "LIVE" && (
+                    <ItemPledgeForm campaignId={id!} onSuccess={fetchCampaign} />
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent className="pt-6">
+                {itemDonations.length === 0 ? (
+                  <div className="text-center py-6">
+                    <Package className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                    <p className="text-gray-500 text-sm">No item pledges yet</p>
+                  </div>
+                ) : (
+                  <ul className="space-y-3">
+                    {itemDonations.map((donation) => (
+                      <li key={donation.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-900">{donation.itemName}</p>
+                            <p className="text-sm text-gray-600">Qty: {donation.quantity}</p>
+                            {donation.donor?.name && (
+                              <p className="text-xs text-gray-500 mt-1">by {donation.donor.name}</p>
+                            )}
+                          </div>
+                          <Badge
+                            className={
+                              donation.status === 'CONFIRMED'
+                                ? 'bg-emerald-100 text-emerald-700 border-emerald-200'
+                                : donation.status === 'DELIVERED'
+                                ? 'bg-blue-100 text-blue-700 border-blue-200'
+                                : donation.status === 'REJECTED'
+                                ? 'bg-red-100 text-red-700 border-red-200'
+                                : 'bg-yellow-100 text-yellow-700 border-yellow-200'
+                            }
+                            variant="outline"
+                          >
+                            {donation.status}
+                          </Badge>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Donor List */}
             <DonorList campaignId={id!} />
