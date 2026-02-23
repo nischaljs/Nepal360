@@ -43,9 +43,12 @@ const Header = () => {
                   </Link>
                 )}
                 <div className="flex items-center gap-3 ml-4 pl-4 border-l border-gray-200">
-                  <span className="text-sm text-gray-600">
+                  <Link
+                    to="/profile"
+                    className="text-sm text-gray-600 hover:text-emerald-600 transition-colors"
+                  >
                     {user.name || user.email}
-                  </span>
+                  </Link>
                   <Button 
                     onClick={logout} 
                     variant="outline"
