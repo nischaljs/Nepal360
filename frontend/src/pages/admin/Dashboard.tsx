@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 const AdminDashboard = () => {
+  useEffect(() => {
+    document.title = "Admin Dashboard | Nepal360";
+  }, []);
+
   return (
     <div>
       <h1 className="text-3xl font-bold">Admin Dashboard</h1>

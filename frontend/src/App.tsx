@@ -4,6 +4,7 @@ import { useAuthStore } from "./store/auth.store";
 import { useEffect } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const { fetchUser, isLoading } = useAuthStore();
@@ -24,14 +25,16 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow">
-        <Outlet />
-      </main>
-      <Footer />
-      <Toaster />
-    </div>
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+        <Footer />
+        <Toaster />
+      </div>
+    </ErrorBoundary>
   );
 }
 

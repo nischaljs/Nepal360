@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../services/auth.service";
 import { Button } from "../../components/ui/button";
@@ -15,6 +15,10 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Sign Up | Nepal360";
+  }, []);
 
   // Password strength indicator
   const getPasswordStrength = (pwd: string) => {

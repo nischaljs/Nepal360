@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 import { getAuditLogs, type GetAuditLogsFilter } from "@/services/admin.auditLog.service";
 import type { AuditLog } from "@/types/auditLog.types";
 import { toast } from "sonner";
@@ -57,7 +58,7 @@ const AuditLogView = () => {
       </form>
 
       {loading ? (
-        <p>Loading...</p>
+        <div className="py-8"><GlobalLoader message="Loading audit logs..." /></div>
       ) : (
         <Table>
           <TableHeader>

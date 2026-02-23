@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 import {
   getItemDonations,
   confirmItemDonation,
@@ -88,7 +89,7 @@ const ItemDonationManagement = () => {
         </TabsList>
         <TabsContent value={status}>
           {loading ? (
-            <p>Loading...</p>
+            <div className="py-8"><GlobalLoader message="Loading donations..." /></div>
           ) : (
             <Table>
               <TableHeader>

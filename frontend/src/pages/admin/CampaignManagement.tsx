@@ -17,6 +17,7 @@ import type { CampaignStatus } from "@/types/campaign.types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 
 
 const CampaignManagement = () => {
@@ -97,7 +98,7 @@ const CampaignManagement = () => {
         </TabsList>
         <TabsContent value={status}>
           {loading ? (
-            <p>Loading...</p>
+            <div className="py-8"><GlobalLoader message="Loading campaigns..." /></div>
           ) : status === "QUEUE" ? (
             renderTable(queue)
           ) : (

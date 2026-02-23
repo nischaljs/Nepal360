@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 import { getKycProfiles, approveKyc, rejectKyc } from "@/services/admin.kyc.service";
 import type { KYCProfile, KYCStatus } from "@/types/kyc.types";
 import { toast } from "sonner";
@@ -83,7 +84,7 @@ const KYCManagement = () => {
         </TabsList>
         <TabsContent value={status}>
           {loading ? (
-            <p>Loading...</p>
+            <div className="py-8"><GlobalLoader message="Loading profiles..." /></div>
           ) : (
             <Table>
               <TableHeader>

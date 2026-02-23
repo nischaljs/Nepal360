@@ -1,25 +1,38 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import App from "./App";
-
-import Home from "./pages/Home";
-import Signup from "./pages/auth/Signup";
-import Login from "./pages/auth/Login";
-import VerifyEmail from "./pages/auth/VerifyEmail";
-import CreateCampaign from "./pages/campaign/CreateCampaign";
-import MyCampaigns from "./pages/campaign/MyCampaigns";
-import CampaignDetail from "./pages/campaign/CampaignDetail";
-import CampaignsPage from "./pages/campaign/List";
-import AdminCampaignDetail from "./pages/admin/AdminCampaignDetail";
+import GlobalLoader from "./components/ui/GlobalLoader";
 import AdminRoute from "./components/AdminRoute";
-import KYCForm from "./pages/kyc/KYCForm";
-import AdminLayout from "./pages/admin/layout/AdminLayout";
-import AdminDashboard from "./pages/admin/Dashboard";
-import KYCManagement from "./pages/admin/KYCManagement";
-import CampaignManagement from "./pages/admin/CampaignManagement";
-import ItemDonationManagement from "./pages/admin/ItemDonationManagement";
-import BadgeManagement from "./pages/admin/BadgeManagement";
-import AuditLogView from "./pages/admin/AuditLogView";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+const Home = lazy(() => import("./pages/Home"));
+const Signup = lazy(() => import("./pages/auth/Signup"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const VerifyEmail = lazy(() => import("./pages/auth/VerifyEmail"));
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+const CreateCampaign = lazy(() => import("./pages/campaign/CreateCampaign"));
+const MyCampaigns = lazy(() => import("./pages/campaign/MyCampaigns"));
+const CampaignDetail = lazy(() => import("./pages/campaign/CampaignDetail"));
+const CampaignsPage = lazy(() => import("./pages/campaign/List"));
+const AdminCampaignDetail = lazy(() => import("./pages/admin/AdminCampaignDetail"));
+const KYCForm = lazy(() => import("./pages/kyc/KYCForm"));
+const AdminLayout = lazy(() => import("./pages/admin/layout/AdminLayout"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const KYCManagement = lazy(() => import("./pages/admin/KYCManagement"));
+const CampaignManagement = lazy(() => import("./pages/admin/CampaignManagement"));
+const ItemDonationManagement = lazy(() => import("./pages/admin/ItemDonationManagement"));
+const BadgeManagement = lazy(() => import("./pages/admin/BadgeManagement"));
+const AuditLogView = lazy(() => import("./pages/admin/AuditLogView"));
+const Leaderboard = lazy(() => import("./pages/leaderboard/Leaderboard"));
+const About = lazy(() => import("./pages/About"));
+const Profile = lazy(() => import("./pages/Profile"));
+const MyItemDonations = lazy(() => import("./pages/MyItemDonations"));
+
+const Lazy = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<div className="flex items-center justify-center py-20"><GlobalLoader message="Loading..." /></div>}>
+    {children}
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -28,37 +41,41 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Lazy><Home /></Lazy>,
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <Lazy><Signup /></Lazy>,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <Lazy><Login /></Lazy>,
       },
       {
         path: "/verify-email",
-        element: <VerifyEmail />,
+        element: <Lazy><VerifyEmail /></Lazy>,
+      },
+      {
+        path: "/forgot-password",
+        element: <Lazy><ForgotPassword /></Lazy>,
       },
       {
         path: "/kyc/submit",
         element: (
           <ProtectedRoute>
-            <KYCForm />
+            <Lazy><KYCForm /></Lazy>
           </ProtectedRoute>
         ),
       },
       {
         path: "/campaigns",
-        element: <CampaignsPage />,
+        element: <Lazy><CampaignsPage /></Lazy>,
       },
       {
         path: "/campaigns/create",
         element: (
           <ProtectedRoute>
-            <CreateCampaign />
+            <Lazy><CreateCampaign /></Lazy>
           </ProtectedRoute>
         ),
       },
@@ -66,13 +83,37 @@ export const router = createBrowserRouter([
         path: "/campaigns/me",
         element: (
           <ProtectedRoute>
-            <MyCampaigns />
+            <Lazy><MyCampaigns /></Lazy>
           </ProtectedRoute>
         ),
       },
       {
         path: "/campaigns/:id",
-        element: <CampaignDetail />,
+        element: <Lazy><CampaignDetail /></Lazy>,
+      },
+      {
+        path: "/leaderboard",
+        element: <Lazy><Leaderboard /></Lazy>,
+      },
+      {
+        path: "/about",
+        element: <Lazy><About /></Lazy>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Lazy><Profile /></Lazy>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/my-item-donations",
+        element: (
+          <ProtectedRoute>
+            <Lazy><MyItemDonations /></Lazy>
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -80,37 +121,37 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: (
       <AdminRoute>
-        <AdminLayout />
+        <Lazy><AdminLayout /></Lazy>
       </AdminRoute>
     ),
     children: [
       {
         path: "dashboard",
-        element: <AdminDashboard />,
+        element: <Lazy><AdminDashboard /></Lazy>,
       },
       {
         path: "kyc",
-        element: <KYCManagement />,
+        element: <Lazy><KYCManagement /></Lazy>,
       },
       {
         path: "campaigns",
-        element: <CampaignManagement />,
+        element: <Lazy><CampaignManagement /></Lazy>,
       },
       {
         path: "campaigns/:id",
-        element: <AdminCampaignDetail />,
+        element: <Lazy><AdminCampaignDetail /></Lazy>,
       },
       {
         path: "item-donations",
-        element: <ItemDonationManagement />,
+        element: <Lazy><ItemDonationManagement /></Lazy>,
       },
       {
         path: "badges",
-        element: <BadgeManagement />,
+        element: <Lazy><BadgeManagement /></Lazy>,
       },
       {
         path: "audit-logs",
-        element: <AuditLogView />,
+        element: <Lazy><AuditLogView /></Lazy>,
       },
     ],
   },
