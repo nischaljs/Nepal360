@@ -7,7 +7,9 @@
     "login": "Login",
     "signup": "Sign Up",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "bookmarks": "Bookmarks",
+    "notifications": "Notifications"
   },
   "common": {
     "loading": "Loading...",
@@ -20,7 +22,9 @@
     "submit": "Submit",
     "search": "Search",
     "noResults": "No results found",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "export": "Export",
+    "download": "Download"
   },
   "home": {
     "tagline": "NEPAL'S MOST TRUSTED PLATFORM",
@@ -64,7 +68,16 @@
     "updates": "Updates",
     "wishes": "Best Wishes",
     "createCampaign": "Create Campaign",
-    "myCampaigns": "My Campaigns"
+    "myCampaigns": "My Campaigns",
+    "bookmark": "Bookmark",
+    "unbookmark": "Remove Bookmark",
+    "bookmarked": "Campaign bookmarked!",
+    "unbookmarked": "Bookmark removed",
+    "comments": "Discussion",
+    "noComments": "No comments yet. Be the first!",
+    "postComment": "Post",
+    "deleteComment": "Delete",
+    "commentPlaceholder": "Share your thoughts..."
   },
   "auth": {
     "loginTitle": "Welcome Back",
@@ -102,6 +115,29 @@
     "amount": "Amount (NPR)",
     "anonymous": "Donate anonymously",
     "thankYou": "Thank you for your donation!",
-    "receipt": "Download Receipt"
+    "receipt": "Download Receipt",
+    "exportCSV": "Export CSV"
+  },
+  "notification": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications yet",
+    "donationReceived": "Donation Received",
+    "campaignVerified": "Campaign Verified",
+    "campaignRejected": "Campaign Rejected",
+    "milestoneCompleted": "Milestone Completed",
+    "badgeEarned": "Badge Earned",
+    "commentReceived": "New Comment",
+    "campaignUpdate": "Campaign Update"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  },
+  "bookmarks": {
+    "title": "My Bookmarks",
+    "empty": "No bookmarks yet",
+    "emptyDesc": "Save campaigns you're interested in to find them later.",
+    "browseCampaigns": "Browse Campaigns"
   }
 }

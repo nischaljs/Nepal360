@@ -11,6 +11,15 @@ import campaignUpdateRoutes from './campaignUpdate.routes';
 import bestWishRoutes from './bestWish.routes';
 import recurringDonationRoutes from './recurringDonation.routes';
 import adminMilestoneRoutes from './admin.milestone.routes';
+import bookmarkRoutes from './bookmark.routes';
+import notificationRoutes from './notification.routes';
+import commentRoutes from './comment.routes';
+import exportRoutes from './export.routes';
+import sseRoutes from './sse.routes';
+import mapRoutes from './map.routes';
+import certificateRoutes from './certificate.routes';
+import activityRoutes from './activity.routes';
+import predictionRoutes from './prediction.routes';
 
 const router = express.Router();
 
@@ -26,5 +35,14 @@ router.use('/leaderboards', leaderboardRoutes);
 router.use('/ai', aiRoutes);
 router.use('/recurring-donations', recurringDonationRoutes);
 router.use('/admin', adminMilestoneRoutes);
+router.use('/bookmarks', bookmarkRoutes);
+router.use('/notifications', notificationRoutes);
+router.use('/comments', commentRoutes);
+router.use('/export', exportRoutes);
+router.use('/sse', sseRoutes);
+router.use('/map', mapRoutes);
+router.use('/certificates', certificateRoutes);
+router.use('/activity', activityRoutes);
+router.use('/predictions', predictionRoutes);
 
 export default router;

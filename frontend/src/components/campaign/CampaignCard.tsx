@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import type { Campaign } from "../../types/campaign.types";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import BookmarkButton from "./BookmarkButton";
 
 interface CampaignCardProps {
   campaign: Campaign;
@@ -35,15 +36,16 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
   };
 
   return (
-    <Card className="group flex flex-col overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl bg-white max-w-sm">
+    <Card className="group flex flex-col overflow-hidden border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl bg-white dark:bg-gray-800 max-w-sm">
       {/* Image Section - Reduced Height */}
       <div className="relative h-40 overflow-hidden">
-        <img 
-          src={campaign.coverImage} 
-          alt={campaign.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+        <img
+          src={campaign.coverImage}
+          alt={campaign.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 flex gap-1.5">
+          <BookmarkButton campaignId={campaign.id} size="icon" variant="ghost" />
           {getStatusBadge(campaign.status)}
         </div>
       </div>
@@ -56,10 +58,10 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
               <Users size={10} /> {campaign.beneficiary?.name || 'Anonymous'}
             </span>
           </div>
-          <CardTitle className="text-lg font-bold line-clamp-1 text-gray-900 group-hover:text-emerald-600 transition-colors">
+          <CardTitle className="text-lg font-bold line-clamp-1 text-gray-900 dark:text-white group-hover:text-emerald-600 transition-colors">
             {campaign.title}
           </CardTitle>
-          <CardDescription className="line-clamp-2 text-gray-500 text-xs leading-snug">
+          <CardDescription className="line-clamp-2 text-gray-500 dark:text-gray-400 text-xs leading-snug">
             {campaign.description}
           </CardDescription>
         </CardHeader>
@@ -68,10 +70,10 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
           <div className="space-y-2">
             <div className="flex justify-between items-end">
               <div className="flex flex-col">
-                <span className="text-lg font-black text-gray-900 leading-none">
+                <span className="text-lg font-black text-gray-900 dark:text-white leading-none">
                    रू {totalRaised.toLocaleString()}
                 </span>
-                <span className="text-[10px] font-medium text-gray-400 mt-0.5">
+                <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 mt-0.5">
                   of रू {targetAmount.toLocaleString()}
                 </span>
               </div>

@@ -22,6 +22,9 @@ import DonationForm from "../../components/campaign/DonationForm";
 import RecurringDonationForm from "../../components/campaign/RecurringDonationForm";
 import { verifyKhaltiPayment } from "../../services/donation.service";
 import DonorList from "@/components/campaign/DonorList";
+import CommentSection from "../../components/campaign/CommentSection";
+import BookmarkButton from "../../components/campaign/BookmarkButton";
+import FundraisingPrediction from "../../components/campaign/FundraisingPrediction";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -238,10 +241,10 @@ const CampaignDetail = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-8">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen py-8">
       <div className="container mx-auto px-6">
         {/* Campaign Header */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
           <div className="relative h-96">
             <img 
               src={campaign.coverImage} 
@@ -254,7 +257,10 @@ const CampaignDetail = () => {
           </div>
           
           <div className="p-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{campaign.title}</h1>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">{campaign.title}</h1>
+              <BookmarkButton campaignId={id!} size="default" />
+            </div>
             
             {/* Progress Bar */}
             <div className="mb-6">
@@ -411,6 +417,11 @@ const CampaignDetail = () => {
               </Card>
             )}
 
+            {/* Fundraising Prediction */}
+            {campaign.status === "LIVE" && (
+              <FundraisingPrediction campaignId={id!} />
+            )}
+
             {/* Share Campaign */}
             <Card className="border-gray-200 shadow-sm">
               <CardHeader className="border-b border-gray-100">
@@ -507,6 +518,9 @@ const CampaignDetail = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* Comments / Discussion */}
+            <CommentSection campaignId={id!} />
 
             {/* Edit Campaign Section */}
             {isBeneficiary && canEditCampaign && (

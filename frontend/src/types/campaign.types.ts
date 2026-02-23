@@ -63,6 +63,7 @@ export interface Campaign {
   suspendedAt?: string | null;
   deletedAt?: string | null;
   isActive?: boolean;
+  district?: string | null;
   milestones: Milestone[];
   totalMoneyRaised?: number;
 }
@@ -72,6 +73,7 @@ export interface CreateCampaignData {
   description: string;
   targetAmount: number;
   category?: CampaignCategory;
+  district?: string;
   coverImage: File;
   proofs?: File[];
 }

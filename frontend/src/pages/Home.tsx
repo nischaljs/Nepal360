@@ -44,7 +44,7 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6 py-20 animate-pulse">
           <div className="h-12 bg-gray-100 rounded-xl w-2/3 mx-auto mb-6" />
           <div className="h-6 bg-gray-100 rounded-lg w-1/2 mx-auto mb-12" />
@@ -71,19 +71,19 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <section className="relative overflow-hidden pt-16 pb-12 lg:pt-24 lg:pb-20">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,#ecfdf5_0%,#ffffff_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,#ecfdf5_0%,#ffffff_100%)] dark:bg-[radial-gradient(45%_45%_at_50%_50%,#064e3b_0%,#0f172a_100%)]" />
         <div className="container mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mb-6">
             <Sparkles size={14} />
             {t('home.tagline')}
           </div>
-          <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 tracking-tight">
+          <h1 className="text-5xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
             {t('home.title1')} <br />
             <span className="text-emerald-600">{t('home.title2')}</span>
           </h1>
-          <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
             {t('home.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -101,27 +101,27 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-8 border-y border-gray-100 bg-gray-50/50">
+      <section className="py-8 border-y border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200">
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Shield size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">{t('home.verified')}</p>
+                <p className="font-bold text-gray-900 dark:text-white">{t('home.verified')}</p>
                 <p className="text-xs text-gray-500">{t('home.verifiedDesc')}</p>
               </div>
             </div>
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><TrendingUp size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">{t('home.transparent')}</p>
+                <p className="font-bold text-gray-900 dark:text-white">{t('home.transparent')}</p>
                 <p className="text-xs text-gray-500">{t('home.transparentDesc')}</p>
               </div>
             </div>
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Users size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">{t('home.community')}</p>
+                <p className="font-bold text-gray-900 dark:text-white">{t('home.community')}</p>
                 <p className="text-xs text-gray-500">{t('home.communityDesc')}</p>
               </div>
             </div>
@@ -133,7 +133,7 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{t('home.featuredCampaigns')}</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">{t('home.featuredCampaigns')}</h2>
               <p className="text-gray-500 mt-1">{t('home.featuredDesc')}</p>
             </div>
             <Link to="/campaigns" className="hidden md:block">
@@ -168,11 +168,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800/50">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{t('home.topDonors')}</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">{t('home.topDonors')}</h2>
               <p className="text-gray-500 mt-1">{t('home.topDonorsDesc')}</p>
             </div>
             <Link to="/leaderboard" className="hidden md:block">

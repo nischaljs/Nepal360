@@ -7,7 +7,9 @@
     "login": "लगइन",
     "signup": "साइन अप",
     "logout": "लगआउट",
-    "profile": "प्रोफाइल"
+    "profile": "प्रोफाइल",
+    "bookmarks": "बुकमार्कहरू",
+    "notifications": "सूचनाहरू"
   },
   "common": {
     "loading": "लोड हुँदैछ...",
@@ -20,7 +22,9 @@
     "submit": "पेश गर्नुहोस्",
     "search": "खोज्नुहोस्",
     "noResults": "कुनै नतिजा फेला परेन",
-    "viewAll": "सबै हेर्नुहोस्"
+    "viewAll": "सबै हेर्नुहोस्",
+    "export": "निर्यात",
+    "download": "डाउनलोड"
   },
   "home": {
     "tagline": "नेपालको सबैभन्दा विश्वसनीय प्लेटफर्म",
@@ -64,7 +68,16 @@
     "updates": "अपडेटहरू",
     "wishes": "शुभकामना",
     "createCampaign": "अभियान सिर्जना गर्नुहोस्",
-    "myCampaigns": "मेरा अभियानहरू"
+    "myCampaigns": "मेरा अभियानहरू",
+    "bookmark": "बुकमार्क",
+    "unbookmark": "बुकमार्क हटाउनुहोस्",
+    "bookmarked": "अभियान बुकमार्क गरियो!",
+    "unbookmarked": "बुकमार्क हटाइयो",
+    "comments": "छलफल",
+    "noComments": "अहिलेसम्म कुनै टिप्पणी छैन। पहिलो बन्नुहोस्!",
+    "postComment": "पोस्ट गर्नुहोस्",
+    "deleteComment": "मेटाउनुहोस्",
+    "commentPlaceholder": "आफ्नो विचार साझा गर्नुहोस्..."
   },
   "auth": {
     "loginTitle": "फेरि स्वागत छ",
@@ -102,6 +115,29 @@
     "amount": "रकम (रुपैयाँ)",
     "anonymous": "गोप्य रूपमा दान गर्नुहोस्",
     "thankYou": "तपाईंको दानको लागि धन्यवाद!",
-    "receipt": "रसिद डाउनलोड गर्नुहोस्"
+    "receipt": "रसिद डाउनलोड गर्नुहोस्",
+    "exportCSV": "CSV निर्यात गर्नुहोस्"
+  },
+  "notification": {
+    "title": "सूचनाहरू",
+    "markAllRead": "सबै पढेको चिन्ह लगाउनुहोस्",
+    "noNotifications": "अहिलेसम्म कुनै सूचना छैन",
+    "donationReceived": "दान प्राप्त भयो",
+    "campaignVerified": "अभियान प्रमाणित भयो",
+    "campaignRejected": "अभियान अस्वीकार गरियो",
+    "milestoneCompleted": "माइलस्टोन पूरा भयो",
+    "badgeEarned": "ब्याज प्राप्त भयो",
+    "commentReceived": "नयाँ टिप्पणी",
+    "campaignUpdate": "अभियान अपडेट"
+  },
+  "theme": {
+    "light": "उज्यालो मोड",
+    "dark": "अँध्यारो मोड"
+  },
+  "bookmarks": {
+    "title": "मेरा बुकमार्कहरू",
+    "empty": "अहिलेसम्म कुनै बुकमार्क छैन",
+    "emptyDesc": "पछि फेला पार्न चाहनुभएको अभियानहरू सेभ गर्नुहोस्।",
+    "browseCampaigns": "अभियानहरू हेर्नुहोस्"
   }
 }

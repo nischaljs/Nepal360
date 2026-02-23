@@ -8,6 +8,9 @@ import {
 import { getMyImpact, type DonorImpactData } from "../services/impact.service";
 import { getMyBadges, type UserBadge } from "../services/user.service";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Download } from "lucide-react";
+import { exportDonationsCSV } from "../services/export.service";
 
 const COLORS = ["#059669", "#0891b2", "#7c3aed", "#e11d48", "#f59e0b", "#6366f1", "#14b8a6"];
 
@@ -98,7 +101,22 @@ const DonorImpact = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <h1 className="text-2xl font-bold mb-6">My Donor Impact</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold dark:text-white">My Donor Impact</h1>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            exportDonationsCSV()
+              .then(() => toast.success('Donations exported!'))
+              .catch(() => toast.error('Failed to export'));
+          }}
+          className="gap-2 border-gray-300 dark:border-gray-600 dark:text-gray-300"
+        >
+          <Download className="w-4 h-4" />
+          Export CSV
+        </Button>
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <StatCard

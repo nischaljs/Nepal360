@@ -103,3 +103,16 @@ export const LeaderboardPeriod = {
 } as const
 
 export type LeaderboardPeriod = (typeof LeaderboardPeriod)[keyof typeof LeaderboardPeriod]
+
+
+export const NotificationType = {
+  DONATION_RECEIVED: 'DONATION_RECEIVED',
+  CAMPAIGN_VERIFIED: 'CAMPAIGN_VERIFIED',
+  CAMPAIGN_REJECTED: 'CAMPAIGN_REJECTED',
+  MILESTONE_COMPLETED: 'MILESTONE_COMPLETED',
+  BADGE_EARNED: 'BADGE_EARNED',
+  COMMENT_RECEIVED: 'COMMENT_RECEIVED',
+  CAMPAIGN_UPDATE: 'CAMPAIGN_UPDATE'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

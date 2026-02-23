@@ -21,6 +21,7 @@ export const createCampaign = async (data: CreateCampaignData): Promise<Campaign
   formData.append('description', data.description);
   formData.append('targetAmount', data.targetAmount.toString());
   if (data.category) formData.append('category', data.category);
+  if (data.district) formData.append('district', data.district);
   formData.append('coverImage', data.coverImage);
 
   if (data.proofs) {

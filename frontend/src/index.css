@@ -2,6 +2,8 @@
 @import "tailwindcss/preflight" layer(base);
 @import "tailwindcss/utilities" layer(utilities);
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Root Variables */
 :root {
   /* Brand Colors - Green Trust Palette */
@@ -53,6 +55,19 @@
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Mode Variables */
+.dark {
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-dark: #334155;
+  --color-border: #334155;
+  --color-border-dark: #475569;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  color-scheme: dark;
+}
+
 @layer base {
   /* Global Resets & Base Styles */
   * {
@@ -74,6 +89,7 @@
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* Typography */

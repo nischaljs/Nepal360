@@ -66,6 +66,9 @@ export const ModelName = {
   Leaderboard: 'Leaderboard',
   LeaderboardEntry: 'LeaderboardEntry',
   RecurringDonation: 'RecurringDonation',
+  Bookmark: 'Bookmark',
+  Notification: 'Notification',
+  Comment: 'Comment',
   AuditLog: 'AuditLog'
 } as const
 
@@ -132,6 +135,7 @@ export const CampaignScalarFieldEnum = {
   title: 'title',
   description: 'description',
   category: 'category',
+  district: 'district',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   targetAmount: 'targetAmount',
@@ -309,6 +313,41 @@ export const RecurringDonationScalarFieldEnum = {
 export type RecurringDonationScalarFieldEnum = (typeof RecurringDonationScalarFieldEnum)[keyof typeof RecurringDonationScalarFieldEnum]
 
 
+export const BookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  createdAt: 'createdAt'
+} as const
+
+export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  link: 'link',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const CommentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   actorType: 'actorType',
@@ -379,6 +418,7 @@ export const CampaignOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
   category: 'category',
+  district: 'district',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   rejectionReason: 'rejectionReason',
@@ -504,6 +544,36 @@ export const RecurringDonationOrderByRelevanceFieldEnum = {
 } as const
 
 export type RecurringDonationOrderByRelevanceFieldEnum = (typeof RecurringDonationOrderByRelevanceFieldEnum)[keyof typeof RecurringDonationOrderByRelevanceFieldEnum]
+
+
+export const BookmarkOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId'
+} as const
+
+export type BookmarkOrderByRelevanceFieldEnum = (typeof BookmarkOrderByRelevanceFieldEnum)[keyof typeof BookmarkOrderByRelevanceFieldEnum]
+
+
+export const NotificationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  link: 'link'
+} as const
+
+export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
+
+
+export const CommentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  content: 'content'
+} as const
+
+export type CommentOrderByRelevanceFieldEnum = (typeof CommentOrderByRelevanceFieldEnum)[keyof typeof CommentOrderByRelevanceFieldEnum]
 
 
 export const AuditLogOrderByRelevanceFieldEnum = {

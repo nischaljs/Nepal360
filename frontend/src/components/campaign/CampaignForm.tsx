@@ -1,5 +1,6 @@
-import { AlertCircle, FileText, Image as ImageIcon, Upload, X } from "lucide-react";
+import { AlertCircle, FileText, Image as ImageIcon, MapPin, Upload, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { getDistrictList } from "../../services/map.service";
 import { toast } from "sonner";
 import type { Campaign, CampaignCategory, CampaignStatus, CreateCampaignData, UpdateCampaignData } from "../../types/campaign.types";
 import { CAMPAIGN_CATEGORIES } from "../../types/campaign.types";
@@ -24,9 +25,15 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [proofs, setProofs] = useState<File[]>([]);
   const [status, setStatus] = useState<CampaignStatus>(initialData?.status || "DRAFT");
+  const [district, setDistrict] = useState(initialData?.district || "");
+  const [districts, setDistricts] = useState<string[]>([]);
   const [coverImagePreview, setCoverImagePreview] = useState<string | null>(
     initialData?.coverImage || null
   );
+
+  useEffect(() => {
+    getDistrictList().then(setDistricts).catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (initialData) {
@@ -107,7 +114,8 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
         targetAmount: parsedTargetAmount,
         category,
         coverImage,
-        proofs
+        proofs,
+        district: district || undefined,
       };
       await onSubmit(createData);
     }
@@ -200,6 +208,31 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
         </Select>
         <p className="text-xs text-gray-600">
           Choose the category that best describes your campaign
+        </p>
+      </div>
+
+      {/* District / Location */}
+      <div className="space-y-2">
+        <Label htmlFor="district" className="text-sm font-semibold text-gray-900">
+          <MapPin className="w-4 h-4 inline mr-1" />
+          Location (District)
+        </Label>
+        <Select
+          value={district}
+          onValueChange={(value: string) => setDistrict(value)}
+          disabled={isLoading}
+        >
+          <SelectTrigger id="district" className="h-11 border-gray-300">
+            <SelectValue placeholder="Select your district" />
+          </SelectTrigger>
+          <SelectContent>
+            {districts.map(d => (
+              <SelectItem key={d} value={d}>{d}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-gray-600">
+          Select the district where this campaign is based (shown on the Campaign Map)
         </p>
       </div>
 

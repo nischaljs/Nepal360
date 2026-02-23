@@ -93,6 +93,21 @@ export type LeaderboardEntry = Prisma.LeaderboardEntryModel
  */
 export type RecurringDonation = Prisma.RecurringDonationModel
 /**
+ * Model Bookmark
+ * 
+ */
+export type Bookmark = Prisma.BookmarkModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
  * Model AuditLog
  * 
  */

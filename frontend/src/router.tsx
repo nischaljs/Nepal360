@@ -30,6 +30,9 @@ const MyItemDonations = lazy(() => import("./pages/MyItemDonations"));
 const MyRecurringDonations = lazy(() => import("./pages/MyRecurringDonations"));
 const DonorImpact = lazy(() => import("./pages/DonorImpact"));
 const CampaignAnalytics = lazy(() => import("./pages/campaign/CampaignAnalytics"));
+const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const CampaignMap = lazy(() => import("./pages/CampaignMap"));
+const ActivityFeed = lazy(() => import("./pages/ActivityFeed"));
 
 const Lazy = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div className="flex items-center justify-center py-20"><GlobalLoader message="Loading..." /></div>}>
@@ -133,6 +136,22 @@ export const router = createBrowserRouter([
             <Lazy><MyItemDonations /></Lazy>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/bookmarks",
+        element: (
+          <ProtectedRoute>
+            <Lazy><Bookmarks /></Lazy>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/map",
+        element: <Lazy><CampaignMap /></Lazy>,
+      },
+      {
+        path: "/activity",
+        element: <Lazy><ActivityFeed /></Lazy>,
       },
       {
         path: "/my-recurring-donations",

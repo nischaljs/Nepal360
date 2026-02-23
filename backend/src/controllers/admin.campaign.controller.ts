@@ -592,7 +592,7 @@ export async function getCampaignStats(req: AuthenticatedRequest, res: Response)
             averageDonation: campaign.donationCount > 0 ? (totalRaised / campaign.donationCount).toFixed(2) : '0',
             itemDonationCount: campaign.itemDonations.length,
             shareCount: campaign.shareCount,
-            viewCount: campaign.viewCount,
+            viewCount: campaign.visits,
             completionPercentage,
             milestonesCompleted,
             totalMilestones: campaign.milestones.length,
