@@ -4,6 +4,7 @@ import adminKycRoutes from './admin.kyc.routes';
 import adminItemDonationRoutes from './admin.itemDonation.routes';
 import adminBadgeRoutes from './admin.badge.routes';
 import adminAuditLogRoutes from './admin.auditLog.routes';
+import adminAnalyticsRoutes from './admin.analytics.routes';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/kyc', adminKycRoutes);
 router.use('/item-donations', adminItemDonationRoutes);
 router.use('/badges', adminBadgeRoutes);
 router.use('/audit-logs', adminAuditLogRoutes);
+router.use('/analytics', adminAnalyticsRoutes);
 
 export default router;
