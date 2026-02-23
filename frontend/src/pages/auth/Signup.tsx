@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../services/auth.service";
 import { Button } from "../../components/ui/button";
@@ -7,8 +8,10 @@ import { Label } from "../../components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import { toast } from "sonner";
 import { User, Mail, Lock, ArrowRight, Eye, EyeOff, CheckCircle } from "lucide-react";
+import GoogleLoginButton from "../../components/auth/GoogleLoginButton";
 
 const Signup = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,12 +23,11 @@ const Signup = () => {
     document.title = "Sign Up | Nepal360";
   }, []);
 
-  // Password strength indicator
   const getPasswordStrength = (pwd: string) => {
     if (pwd.length === 0) return { strength: 0, label: "", color: "" };
     if (pwd.length < 6) return { strength: 1, label: "Weak", color: "bg-red-500" };
     if (pwd.length < 10) return { strength: 2, label: "Fair", color: "bg-yellow-500" };
-    if (pwd.length < 12 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) 
+    if (pwd.length < 12 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd))
       return { strength: 3, label: "Good", color: "bg-emerald-500" };
     if (pwd.length >= 12 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd) && /[!@#$%^&*]/.test(pwd))
       return { strength: 4, label: "Strong", color: "bg-green-600" };
@@ -36,7 +38,7 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (password.length < 8) {
       toast.error("Password too short", {
         description: "Password must be at least 8 characters long",
@@ -64,28 +66,36 @@ const Signup = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        {/* Logo/Brand Section */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <h1 className="text-4xl font-bold text-emerald-600 mb-2">Nepal360</h1>
           </Link>
-          <p className="text-gray-600">Create your account and start making a difference</p>
+          <p className="text-gray-600">{t('auth.signupDesc')}</p>
         </div>
 
-        {/* Signup Card */}
         <Card className="border-gray-200 shadow-lg">
           <CardHeader className="space-y-1 pb-6">
-            <CardTitle className="text-2xl font-bold text-center">Get Started</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center">{t('auth.signupTitle')}</CardTitle>
             <CardDescription className="text-center">
-              Join our community of changemakers
+              {t('auth.signupSubtitle')}
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <GoogleLoginButton />
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-gray-500">or continue with email</span>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name Field */}
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium text-gray-700">
-                  Full Name
+                  {t('auth.name')}
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -102,10 +112,9 @@ const Signup = () => {
                 </div>
               </div>
 
-              {/* Email Field */}
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                  Email Address
+                  {t('auth.email')}
                 </Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -122,17 +131,16 @@ const Signup = () => {
                 </div>
               </div>
 
-              {/* Password Field */}
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-                  Password
+                  {t('auth.password')}
                 </Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Create a strong password"
+                    placeholder={t('auth.createStrongPassword')}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -152,7 +160,6 @@ const Signup = () => {
                   </button>
                 </div>
 
-                {/* Password Strength Indicator */}
                 {password && (
                   <div className="space-y-2">
                     <div className="flex gap-1">
@@ -168,83 +175,78 @@ const Signup = () => {
                       ))}
                     </div>
                     <p className="text-xs text-gray-600">
-                      Password strength: <span className="font-medium">{passwordStrength.label}</span>
+                      {t('auth.passwordStrength')}: <span className="font-medium">{passwordStrength.label}</span>
                     </p>
                   </div>
                 )}
 
                 <p className="text-xs text-gray-500 mt-1">
-                  Must be at least 8 characters long
+                  {t('auth.passwordMinLength')}
                 </p>
               </div>
 
-              {/* Submit Button */}
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="w-full h-11 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-base"
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Creating account...
+                    {t('auth.creatingAccount')}
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    Create Account
+                    {t('auth.createAccount')}
                     <ArrowRight className="w-5 h-5" />
                   </span>
                 )}
               </Button>
             </form>
 
-            {/* Terms */}
             <p className="text-xs text-center text-gray-500 mt-6">
-              By signing up, you agree to our{" "}
+              {t('auth.termsAgree')}{" "}
               <Link to="/terms" className="text-emerald-600 hover:text-emerald-700 font-medium">
-                Terms of Service
+                {t('auth.termsOfService')}
               </Link>{" "}
-              and{" "}
+              {t('auth.and')}{" "}
               <Link to="/privacy" className="text-emerald-600 hover:text-emerald-700 font-medium">
-                Privacy Policy
+                {t('auth.privacyPolicy')}
               </Link>
             </p>
 
-            {/* Divider */}
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">Already have an account?</span>
+                <span className="px-4 bg-white text-gray-500">{t('auth.hasAccount')}</span>
               </div>
             </div>
 
-            {/* Login Link */}
             <div className="text-center">
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className="text-sm font-semibold text-emerald-600 hover:text-emerald-700"
               >
-                Sign in instead
+                {t('auth.signInInstead')}
               </Link>
             </div>
           </CardContent>
         </Card>
 
-        {/* Benefits */}
         <div className="mt-8 space-y-3">
           <div className="flex items-center gap-3 text-sm text-gray-600">
             <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-            <span>Start or support verified campaigns</span>
+            <span>{t('auth.benefit1')}</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-600">
             <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-            <span>Track your impact with transparent reporting</span>
+            <span>{t('auth.benefit2')}</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-600">
             <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-            <span>Join a trusted community of changemakers</span>
+            <span>{t('auth.benefit3')}</span>
           </div>
         </div>
       </div>

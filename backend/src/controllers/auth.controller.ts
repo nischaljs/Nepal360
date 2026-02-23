@@ -7,11 +7,13 @@ import {
     verifyEmailSchema,
     forgotPasswordSchema,
     resetPasswordSchema,
+    googleLoginSchema,
     SignupInput,
     LoginInput,
     VerifyEmailInput,
     ForgotPasswordInput,
     ResetPasswordInput,
+    GoogleLoginInput,
 } from '../schemas/auth.schema';
 import { prisma } from '../lib/prisma';
 import { EmailStatus, KYCStatus } from '../../generated/prisma/enums';
@@ -215,6 +217,64 @@ export async function resetPassword(data: ResetPasswordInput): Promise<Controlle
     return {
         status: 200,
         body: { success: true, message: 'Password reset successfully. You can now log in.' },
+    };
+}
+
+/* ----------------------------- GOOGLE LOGIN -------------------------------- */
+
+export async function googleLogin(data: GoogleLoginInput): Promise<ControllerResult> {
+    const validation = googleLoginSchema.safeParse(data);
+    if (!validation.success) {
+        return { status: 400, body: { success: false, message: validation.error.message } };
+    }
+
+    const { idToken } = validation.data;
+
+    const res = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
+    if (!res.ok) {
+        return { status: 401, body: { success: false, message: 'Invalid Google token' } };
+    }
+
+    const payload = await res.json();
+    const { email, name, picture } = payload;
+
+    if (!email) {
+        return { status: 401, body: { success: false, message: 'Google account has no email' } };
+    }
+
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+        const randomPassword = await hashPassword(crypto.randomUUID());
+        user = await prisma.user.create({
+            data: {
+                name: name || email.split('@')[0],
+                email,
+                passwordHash: randomPassword,
+                emailStatus: EmailStatus.VERIFIED,
+            },
+        });
+    }
+
+    const token = generateToken({
+        userId: user.id,
+        email: user.email,
+        emailVerified: user.emailStatus === EmailStatus.VERIFIED,
+    });
+
+    return {
+        status: 200,
+        body: {
+            success: true,
+            message: 'Login successful',
+            token,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                emailVerified: user.emailStatus === EmailStatus.VERIFIED,
+            },
+        },
     };
 }
 

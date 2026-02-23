@@ -11,6 +11,7 @@ const envSchema = z.object({
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   BACKEND_URL: z.string().default('http://localhost:3000'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  GOOGLE_CLIENT_ID: z.string().default(''),
 });
 
 const parsed = envSchema.safeParse(process.env);

@@ -26,6 +26,11 @@ export const resetPasswordSchema = z.object({
   newPassword: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
+export const googleLoginSchema = z.object({
+  idToken: z.string().min(1, 'ID token is required'),
+});
+
+export type GoogleLoginInput = z.infer<typeof googleLoginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
