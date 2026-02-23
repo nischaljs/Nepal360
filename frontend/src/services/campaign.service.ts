@@ -2,6 +2,7 @@
 import api from './api';
 import type{
   Campaign,
+  CampaignFilters,
   Milestone,
   CreateCampaignData,
   UpdateCampaignData,
@@ -19,6 +20,7 @@ export const createCampaign = async (data: CreateCampaignData): Promise<Campaign
   formData.append('title', data.title);
   formData.append('description', data.description);
   formData.append('targetAmount', data.targetAmount.toString());
+  if (data.category) formData.append('category', data.category);
   formData.append('coverImage', data.coverImage);
 
   if (data.proofs) {
@@ -81,8 +83,16 @@ export const deleteMilestone = async (
   return response.data;
 };
 
-export const getAllCampaigns = async (): Promise<Campaign[]> => {
-  const response = await api.get<CampaignsResponse>(BASE_URL);
+export const getAllCampaigns = async (filters?: CampaignFilters): Promise<Campaign[]> => {
+  const params = new URLSearchParams();
+  if (filters?.category) params.append('category', filters.category);
+  if (filters?.search) params.append('search', filters.search);
+  if (filters?.minAmount) params.append('minAmount', filters.minAmount.toString());
+  if (filters?.maxAmount) params.append('maxAmount', filters.maxAmount.toString());
+  if (filters?.sort) params.append('sort', filters.sort);
+
+  const query = params.toString();
+  const response = await api.get<CampaignsResponse>(`${BASE_URL}${query ? `?${query}` : ''}`);
   return response.data.campaigns;
 };
 

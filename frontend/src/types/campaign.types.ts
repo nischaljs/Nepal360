@@ -1,6 +1,23 @@
 
 export type CampaignStatus = "DRAFT" | "PENDING_VERIFICATION" | "LIVE" | "SUSPENDED" | "COMPLETED";
 
+export type CampaignCategory =
+  | "education" | "health" | "disaster" | "community" | "animals"
+  | "arts" | "business" | "emergency" | "environment" | "other" | "general";
+
+export const CAMPAIGN_CATEGORIES: { value: CampaignCategory; label: string }[] = [
+  { value: "education", label: "Education" },
+  { value: "health", label: "Health" },
+  { value: "disaster", label: "Disaster Relief" },
+  { value: "community", label: "Community" },
+  { value: "animals", label: "Animals" },
+  { value: "arts", label: "Arts & Culture" },
+  { value: "business", label: "Business" },
+  { value: "emergency", label: "Emergency" },
+  { value: "environment", label: "Environment" },
+  { value: "other", label: "Other" },
+];
+
 export interface Milestone {
   id: string;
   campaignId: string;
@@ -20,6 +37,7 @@ export interface Campaign {
   };
   title: string;
   description: string;
+  category: CampaignCategory;
   coverImage: string;
   proofLinks: string[]; 
   targetAmount: string; 
@@ -46,7 +64,8 @@ export interface Campaign {
 export interface CreateCampaignData {
   title: string;
   description: string;
-  targetAmount: number; 
+  targetAmount: number;
+  category?: CampaignCategory;
   coverImage: File;
   proofs?: File[];
 }
@@ -54,13 +73,22 @@ export interface CreateCampaignData {
 export interface UpdateCampaignData {
   title?: string;
   description?: string;
-  targetAmount?: number; // For submission
+  targetAmount?: number;
+  category?: CampaignCategory;
   status?: CampaignStatus;
 }
 
 export interface AddMilestoneData {
   title: string;
   amount: number; // For submission
+}
+
+export interface CampaignFilters {
+  category?: string;
+  search?: string;
+  minAmount?: number;
+  maxAmount?: number;
+  sort?: string;
 }
 
 // API Responses

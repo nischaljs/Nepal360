@@ -56,6 +56,8 @@ export const ModelName = {
   KYCProfile: 'KYCProfile',
   Campaign: 'Campaign',
   Milestone: 'Milestone',
+  CampaignUpdate: 'CampaignUpdate',
+  BestWish: 'BestWish',
   MoneyDonation: 'MoneyDonation',
   ItemDonation: 'ItemDonation',
   Badge: 'Badge',
@@ -72,12 +74,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = runtime.makeStrictEnum({
+export const TransactionIsolationLevel = {
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const)
+} as const
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -128,6 +130,7 @@ export const CampaignScalarFieldEnum = {
   beneficiaryId: 'beneficiaryId',
   title: 'title',
   description: 'description',
+  category: 'category',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   targetAmount: 'targetAmount',
@@ -161,6 +164,35 @@ export const MilestoneScalarFieldEnum = {
 } as const
 
 export type MilestoneScalarFieldEnum = (typeof MilestoneScalarFieldEnum)[keyof typeof MilestoneScalarFieldEnum]
+
+
+export const CampaignUpdateScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  title: 'title',
+  content: 'content',
+  images: 'images',
+  isMilestone: 'isMilestone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignUpdateScalarFieldEnum = (typeof CampaignUpdateScalarFieldEnum)[keyof typeof CampaignUpdateScalarFieldEnum]
+
+
+export const BestWishScalarFieldEnum = {
+  id: 'id',
+  donationId: 'donationId',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  message: 'message',
+  cardStyle: 'cardStyle',
+  isAnonymous: 'isAnonymous',
+  createdAt: 'createdAt'
+} as const
+
+export type BestWishScalarFieldEnum = (typeof BestWishScalarFieldEnum)[keyof typeof BestWishScalarFieldEnum]
 
 
 export const MoneyDonationScalarFieldEnum = {
@@ -321,6 +353,7 @@ export const CampaignOrderByRelevanceFieldEnum = {
   beneficiaryId: 'beneficiaryId',
   title: 'title',
   description: 'description',
+  category: 'category',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   rejectionReason: 'rejectionReason',
@@ -340,6 +373,30 @@ export const MilestoneOrderByRelevanceFieldEnum = {
 } as const
 
 export type MilestoneOrderByRelevanceFieldEnum = (typeof MilestoneOrderByRelevanceFieldEnum)[keyof typeof MilestoneOrderByRelevanceFieldEnum]
+
+
+export const CampaignUpdateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  title: 'title',
+  content: 'content',
+  images: 'images'
+} as const
+
+export type CampaignUpdateOrderByRelevanceFieldEnum = (typeof CampaignUpdateOrderByRelevanceFieldEnum)[keyof typeof CampaignUpdateOrderByRelevanceFieldEnum]
+
+
+export const BestWishOrderByRelevanceFieldEnum = {
+  id: 'id',
+  donationId: 'donationId',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  message: 'message',
+  cardStyle: 'cardStyle'
+} as const
+
+export type BestWishOrderByRelevanceFieldEnum = (typeof BestWishOrderByRelevanceFieldEnum)[keyof typeof BestWishOrderByRelevanceFieldEnum]
 
 
 export const MoneyDonationOrderByRelevanceFieldEnum = {

@@ -8,6 +8,13 @@ import { z } from 'zod';
  * - coverImage: Single image file (required, max 5MB)
  * - proofs: Multiple proof files (optional, max 10 files, 20MB each)
  */
+export const CAMPAIGN_CATEGORIES = [
+    'education', 'health', 'disaster', 'community', 'animals',
+    'arts', 'business', 'emergency', 'environment', 'other', 'general',
+] as const;
+
+export type CampaignCategory = typeof CAMPAIGN_CATEGORIES[number];
+
 export const createCampaignSchema = z.object({
     title: z.string()
         .min(5, 'Title must be at least 5 characters')
@@ -20,6 +27,7 @@ export const createCampaignSchema = z.object({
         .transform((val) => Number(val))
         .refine((val) => val > 0, 'Target amount must be greater than 0')
         .refine((val) => val <= 999999999.99, 'Target amount is too large'),
+    category: z.enum(CAMPAIGN_CATEGORIES).optional().default('general'),
 }).strict();
 
 /**
@@ -41,6 +49,7 @@ export const updateCampaignSchema = z.object({
         .transform((val) => Number(val))
         .refine((val) => val > 0, 'Target amount must be greater than 0')
         .optional(),
+    category: z.enum(CAMPAIGN_CATEGORIES).optional(),
     status: z.enum(['DRAFT', 'PENDING_VERIFICATION', 'LIVE', 'SUSPENDED', 'COMPLETED'])
         .optional(),
 }).refine(

@@ -63,6 +63,16 @@ export type Campaign = Prisma.CampaignModel
  */
 export type Milestone = Prisma.MilestoneModel
 /**
+ * Model CampaignUpdate
+ * 
+ */
+export type CampaignUpdate = Prisma.CampaignUpdateModel
+/**
+ * Model BestWish
+ * 
+ */
+export type BestWish = Prisma.BestWishModel
+/**
  * Model MoneyDonation
  * 
  */

@@ -27,7 +27,7 @@ export async function createCampaign(req: AuthenticatedRequest, res: Response) {
             });
         }
 
-        const { title, description, targetAmount } = validation.data;
+        const { title, description, targetAmount, category } = validation.data;
         const files = req.files as { [key: string]: Express.Multer.File[] };
 
         // Check if cover image is provided
@@ -45,6 +45,7 @@ export async function createCampaign(req: AuthenticatedRequest, res: Response) {
                 beneficiaryId: req.user!.userId,
                 title,
                 description,
+                category: category || 'general',
                 coverImage: coverImageRelativePath,
                 proofLinks: proofLinks.length > 0 ? JSON.stringify(proofLinks) : null,
                 targetAmount,
@@ -110,12 +111,38 @@ export async function getMyCampaigns(req: AuthenticatedRequest, res: Response) {
 
 export async function getAllCampaigns(req: Request, res: Response) {
     try {
-        const campaigns = await prisma.campaign.findMany({
-            where: {
-                status: {
-                    in: [CampaignStatus.LIVE, CampaignStatus.COMPLETED],
-                },
+        const { category, search, minAmount, maxAmount, sort } = req.query;
+
+        const where: any = {
+            status: {
+                in: [CampaignStatus.LIVE, CampaignStatus.COMPLETED],
             },
+        };
+
+        if (category && typeof category === 'string') {
+            where.category = category;
+        }
+
+        if (search && typeof search === 'string') {
+            where.OR = [
+                { title: { contains: search } },
+                { description: { contains: search } },
+            ];
+        }
+
+        if (minAmount || maxAmount) {
+            where.targetAmount = {};
+            if (minAmount) where.targetAmount.gte = Number(minAmount);
+            if (maxAmount) where.targetAmount.lte = Number(maxAmount);
+        }
+
+        let orderBy: any = { createdAt: 'desc' };
+        if (sort === 'oldest') orderBy = { createdAt: 'asc' };
+        else if (sort === 'target_high') orderBy = { targetAmount: 'desc' };
+        else if (sort === 'target_low') orderBy = { targetAmount: 'asc' };
+
+        const campaigns = await prisma.campaign.findMany({
+            where,
             include: {
                 beneficiary: {
                     select: {
@@ -128,18 +155,20 @@ export async function getAllCampaigns(req: Request, res: Response) {
                     select: { amount: true },
                 },
             },
-            orderBy: {
-                createdAt: 'desc',
-            },
+            orderBy,
         });
 
         const baseUrl = getBaseUrl(req);
-        const formattedCampaigns = campaigns.map(c => ({
+        let formattedCampaigns = campaigns.map(c => ({
             ...c,
             totalMoneyRaised: c.moneyDonations.reduce((sum, d) => sum + d.amount.toNumber(), 0),
             coverImage: `${baseUrl}/uploads/${c.coverImage}`,
             proofLinks: convertProofLinksToUrls(parseProofLinks(c.proofLinks), baseUrl),
         }));
+
+        if (sort === 'most_funded') {
+            formattedCampaigns.sort((a, b) => b.totalMoneyRaised - a.totalMoneyRaised);
+        }
 
         return res.status(200).json({ success: true, campaigns: formattedCampaigns });
     } catch (error) {

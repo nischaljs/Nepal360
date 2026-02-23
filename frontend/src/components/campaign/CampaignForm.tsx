@@ -1,7 +1,8 @@
 import { AlertCircle, FileText, Image as ImageIcon, Upload, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import type { Campaign, CampaignStatus, CreateCampaignData, UpdateCampaignData } from "../../types/campaign.types";
+import type { Campaign, CampaignCategory, CampaignStatus, CreateCampaignData, UpdateCampaignData } from "../../types/campaign.types";
+import { CAMPAIGN_CATEGORIES } from "../../types/campaign.types";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -19,6 +20,7 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [targetAmount, setTargetAmount] = useState(initialData?.targetAmount ? parseFloat(initialData.targetAmount).toString() : "");
+  const [category, setCategory] = useState<CampaignCategory>(initialData?.category || "general");
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [proofs, setProofs] = useState<File[]>([]);
   const [status, setStatus] = useState<CampaignStatus>(initialData?.status || "DRAFT");
@@ -31,6 +33,7 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
       setTitle(initialData.title);
       setDescription(initialData.description);
       setTargetAmount(parseFloat(initialData.targetAmount).toString());
+      setCategory(initialData.category || "general");
       setStatus(initialData.status);
       setCoverImagePreview(initialData.coverImage);
     }
@@ -83,11 +86,12 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
     }
 
     if (isEditMode) {
-      const updateData: UpdateCampaignData = { 
-        title, 
-        description, 
-        targetAmount: parsedTargetAmount, 
-        status 
+      const updateData: UpdateCampaignData = {
+        title,
+        description,
+        targetAmount: parsedTargetAmount,
+        category,
+        status
       };
       await onSubmit(updateData);
     } else {
@@ -97,12 +101,13 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
         });
         return;
       }
-      const createData: CreateCampaignData = { 
-        title, 
-        description, 
-        targetAmount: parsedTargetAmount, 
-        coverImage, 
-        proofs 
+      const createData: CreateCampaignData = {
+        title,
+        description,
+        targetAmount: parsedTargetAmount,
+        category,
+        coverImage,
+        proofs
       };
       await onSubmit(createData);
     }
@@ -171,6 +176,30 @@ const CampaignForm = ({ initialData, onSubmit, isLoading, isEditMode = false }: 
         </div>
         <p className="text-xs text-gray-600">
           Set a realistic goal that covers your needs
+        </p>
+      </div>
+
+      {/* Category */}
+      <div className="space-y-2">
+        <Label htmlFor="category" className="text-sm font-semibold text-gray-900">
+          Category <span className="text-red-500">*</span>
+        </Label>
+        <Select
+          value={category}
+          onValueChange={(value: CampaignCategory) => setCategory(value)}
+          disabled={isLoading}
+        >
+          <SelectTrigger id="category" className="h-11 border-gray-300">
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+          <SelectContent>
+            {CAMPAIGN_CATEGORIES.map(cat => (
+              <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-gray-600">
+          Choose the category that best describes your campaign
         </p>
       </div>
 

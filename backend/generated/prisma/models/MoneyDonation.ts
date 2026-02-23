@@ -250,6 +250,7 @@ export type MoneyDonationWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"MoneyDonation"> | Date | string
   donor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
+  bestWish?: Prisma.XOR<Prisma.BestWishNullableScalarRelationFilter, Prisma.BestWishWhereInput> | null
 }
 
 export type MoneyDonationOrderByWithRelationInput = {
@@ -264,6 +265,7 @@ export type MoneyDonationOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   donor?: Prisma.UserOrderByWithRelationInput
   campaign?: Prisma.CampaignOrderByWithRelationInput
+  bestWish?: Prisma.BestWishOrderByWithRelationInput
   _relevance?: Prisma.MoneyDonationOrderByRelevanceInput
 }
 
@@ -282,6 +284,7 @@ export type MoneyDonationWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"MoneyDonation"> | Date | string
   donor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
+  bestWish?: Prisma.XOR<Prisma.BestWishNullableScalarRelationFilter, Prisma.BestWishWhereInput> | null
 }, "id" | "paymentRef" | "pidx">
 
 export type MoneyDonationOrderByWithAggregationInput = {
@@ -326,6 +329,7 @@ export type MoneyDonationCreateInput = {
   createdAt?: Date | string
   donor: Prisma.UserCreateNestedOneWithoutMoneyDonationsInput
   campaign: Prisma.CampaignCreateNestedOneWithoutMoneyDonationsInput
+  bestWish?: Prisma.BestWishCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationUncheckedCreateInput = {
@@ -338,6 +342,7 @@ export type MoneyDonationUncheckedCreateInput = {
   paymentRef?: string | null
   pidx?: string | null
   createdAt?: Date | string
+  bestWish?: Prisma.BestWishUncheckedCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationUpdateInput = {
@@ -350,6 +355,7 @@ export type MoneyDonationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donor?: Prisma.UserUpdateOneRequiredWithoutMoneyDonationsNestedInput
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMoneyDonationsNestedInput
+  bestWish?: Prisma.BestWishUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationUncheckedUpdateInput = {
@@ -362,6 +368,7 @@ export type MoneyDonationUncheckedUpdateInput = {
   paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bestWish?: Prisma.BestWishUncheckedUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationCreateManyInput = {
@@ -406,6 +413,11 @@ export type MoneyDonationListRelationFilter = {
 
 export type MoneyDonationOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type MoneyDonationScalarRelationFilter = {
+  is?: Prisma.MoneyDonationWhereInput
+  isNot?: Prisma.MoneyDonationWhereInput
 }
 
 export type MoneyDonationOrderByRelevanceInput = {
@@ -542,6 +554,20 @@ export type MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.MoneyDonationScalarWhereInput | Prisma.MoneyDonationScalarWhereInput[]
 }
 
+export type MoneyDonationCreateNestedOneWithoutBestWishInput = {
+  create?: Prisma.XOR<Prisma.MoneyDonationCreateWithoutBestWishInput, Prisma.MoneyDonationUncheckedCreateWithoutBestWishInput>
+  connectOrCreate?: Prisma.MoneyDonationCreateOrConnectWithoutBestWishInput
+  connect?: Prisma.MoneyDonationWhereUniqueInput
+}
+
+export type MoneyDonationUpdateOneRequiredWithoutBestWishNestedInput = {
+  create?: Prisma.XOR<Prisma.MoneyDonationCreateWithoutBestWishInput, Prisma.MoneyDonationUncheckedCreateWithoutBestWishInput>
+  connectOrCreate?: Prisma.MoneyDonationCreateOrConnectWithoutBestWishInput
+  upsert?: Prisma.MoneyDonationUpsertWithoutBestWishInput
+  connect?: Prisma.MoneyDonationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MoneyDonationUpdateToOneWithWhereWithoutBestWishInput, Prisma.MoneyDonationUpdateWithoutBestWishInput>, Prisma.MoneyDonationUncheckedUpdateWithoutBestWishInput>
+}
+
 export type EnumDonationVisibilityFieldUpdateOperationsInput = {
   set?: $Enums.DonationVisibility
 }
@@ -559,6 +585,7 @@ export type MoneyDonationCreateWithoutDonorInput = {
   pidx?: string | null
   createdAt?: Date | string
   campaign: Prisma.CampaignCreateNestedOneWithoutMoneyDonationsInput
+  bestWish?: Prisma.BestWishCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationUncheckedCreateWithoutDonorInput = {
@@ -570,6 +597,7 @@ export type MoneyDonationUncheckedCreateWithoutDonorInput = {
   paymentRef?: string | null
   pidx?: string | null
   createdAt?: Date | string
+  bestWish?: Prisma.BestWishUncheckedCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationCreateOrConnectWithoutDonorInput = {
@@ -622,6 +650,7 @@ export type MoneyDonationCreateWithoutCampaignInput = {
   pidx?: string | null
   createdAt?: Date | string
   donor: Prisma.UserCreateNestedOneWithoutMoneyDonationsInput
+  bestWish?: Prisma.BestWishCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationUncheckedCreateWithoutCampaignInput = {
@@ -633,6 +662,7 @@ export type MoneyDonationUncheckedCreateWithoutCampaignInput = {
   paymentRef?: string | null
   pidx?: string | null
   createdAt?: Date | string
+  bestWish?: Prisma.BestWishUncheckedCreateNestedOneWithoutDonationInput
 }
 
 export type MoneyDonationCreateOrConnectWithoutCampaignInput = {
@@ -661,6 +691,70 @@ export type MoneyDonationUpdateManyWithWhereWithoutCampaignInput = {
   data: Prisma.XOR<Prisma.MoneyDonationUpdateManyMutationInput, Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignInput>
 }
 
+export type MoneyDonationCreateWithoutBestWishInput = {
+  id?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  visibility: $Enums.DonationVisibility
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
+  createdAt?: Date | string
+  donor: Prisma.UserCreateNestedOneWithoutMoneyDonationsInput
+  campaign: Prisma.CampaignCreateNestedOneWithoutMoneyDonationsInput
+}
+
+export type MoneyDonationUncheckedCreateWithoutBestWishInput = {
+  id?: string
+  donorId: string
+  campaignId: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  visibility: $Enums.DonationVisibility
+  status?: $Enums.MoneyDonationStatus
+  paymentRef?: string | null
+  pidx?: string | null
+  createdAt?: Date | string
+}
+
+export type MoneyDonationCreateOrConnectWithoutBestWishInput = {
+  where: Prisma.MoneyDonationWhereUniqueInput
+  create: Prisma.XOR<Prisma.MoneyDonationCreateWithoutBestWishInput, Prisma.MoneyDonationUncheckedCreateWithoutBestWishInput>
+}
+
+export type MoneyDonationUpsertWithoutBestWishInput = {
+  update: Prisma.XOR<Prisma.MoneyDonationUpdateWithoutBestWishInput, Prisma.MoneyDonationUncheckedUpdateWithoutBestWishInput>
+  create: Prisma.XOR<Prisma.MoneyDonationCreateWithoutBestWishInput, Prisma.MoneyDonationUncheckedCreateWithoutBestWishInput>
+  where?: Prisma.MoneyDonationWhereInput
+}
+
+export type MoneyDonationUpdateToOneWithWhereWithoutBestWishInput = {
+  where?: Prisma.MoneyDonationWhereInput
+  data: Prisma.XOR<Prisma.MoneyDonationUpdateWithoutBestWishInput, Prisma.MoneyDonationUncheckedUpdateWithoutBestWishInput>
+}
+
+export type MoneyDonationUpdateWithoutBestWishInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  donor?: Prisma.UserUpdateOneRequiredWithoutMoneyDonationsNestedInput
+  campaign?: Prisma.CampaignUpdateOneRequiredWithoutMoneyDonationsNestedInput
+}
+
+export type MoneyDonationUncheckedUpdateWithoutBestWishInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  donorId?: Prisma.StringFieldUpdateOperationsInput | string
+  campaignId?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  visibility?: Prisma.EnumDonationVisibilityFieldUpdateOperationsInput | $Enums.DonationVisibility
+  status?: Prisma.EnumMoneyDonationStatusFieldUpdateOperationsInput | $Enums.MoneyDonationStatus
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type MoneyDonationCreateManyDonorInput = {
   id?: string
   campaignId: string
@@ -681,6 +775,7 @@ export type MoneyDonationUpdateWithoutDonorInput = {
   pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMoneyDonationsNestedInput
+  bestWish?: Prisma.BestWishUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationUncheckedUpdateWithoutDonorInput = {
@@ -692,6 +787,7 @@ export type MoneyDonationUncheckedUpdateWithoutDonorInput = {
   paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bestWish?: Prisma.BestWishUncheckedUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationUncheckedUpdateManyWithoutDonorInput = {
@@ -725,6 +821,7 @@ export type MoneyDonationUpdateWithoutCampaignInput = {
   pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donor?: Prisma.UserUpdateOneRequiredWithoutMoneyDonationsNestedInput
+  bestWish?: Prisma.BestWishUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationUncheckedUpdateWithoutCampaignInput = {
@@ -736,6 +833,7 @@ export type MoneyDonationUncheckedUpdateWithoutCampaignInput = {
   paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pidx?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bestWish?: Prisma.BestWishUncheckedUpdateOneWithoutDonationNestedInput
 }
 
 export type MoneyDonationUncheckedUpdateManyWithoutCampaignInput = {
@@ -763,6 +861,7 @@ export type MoneyDonationSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   donor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
+  bestWish?: boolean | Prisma.MoneyDonation$bestWishArgs<ExtArgs>
 }, ExtArgs["result"]["moneyDonation"]>
 
 
@@ -783,6 +882,7 @@ export type MoneyDonationOmit<ExtArgs extends runtime.Types.Extensions.InternalA
 export type MoneyDonationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   donor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
+  bestWish?: boolean | Prisma.MoneyDonation$bestWishArgs<ExtArgs>
 }
 
 export type $MoneyDonationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -790,6 +890,7 @@ export type $MoneyDonationPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     donor: Prisma.$UserPayload<ExtArgs>
     campaign: Prisma.$CampaignPayload<ExtArgs>
+    bestWish: Prisma.$BestWishPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1143,6 +1244,7 @@ export interface Prisma__MoneyDonationClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   donor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   campaign<T extends Prisma.CampaignDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CampaignDefaultArgs<ExtArgs>>): Prisma.Prisma__CampaignClient<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  bestWish<T extends Prisma.MoneyDonation$bestWishArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MoneyDonation$bestWishArgs<ExtArgs>>): Prisma.Prisma__BestWishClient<runtime.Types.Result.GetResult<Prisma.$BestWishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1521,6 +1623,25 @@ export type MoneyDonationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many MoneyDonations to delete.
    */
   limit?: number
+}
+
+/**
+ * MoneyDonation.bestWish
+ */
+export type MoneyDonation$bestWishArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BestWish
+   */
+  select?: Prisma.BestWishSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BestWish
+   */
+  omit?: Prisma.BestWishOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BestWishInclude<ExtArgs> | null
+  where?: Prisma.BestWishWhereInput
 }
 
 /**

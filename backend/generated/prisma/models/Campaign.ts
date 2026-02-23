@@ -45,6 +45,7 @@ export type CampaignMinAggregateOutputType = {
   beneficiaryId: string | null
   title: string | null
   description: string | null
+  category: string | null
   coverImage: string | null
   proofLinks: string | null
   targetAmount: runtime.Decimal | null
@@ -70,6 +71,7 @@ export type CampaignMaxAggregateOutputType = {
   beneficiaryId: string | null
   title: string | null
   description: string | null
+  category: string | null
   coverImage: string | null
   proofLinks: string | null
   targetAmount: runtime.Decimal | null
@@ -95,6 +97,7 @@ export type CampaignCountAggregateOutputType = {
   beneficiaryId: number
   title: number
   description: number
+  category: number
   coverImage: number
   proofLinks: number
   targetAmount: number
@@ -136,6 +139,7 @@ export type CampaignMinAggregateInputType = {
   beneficiaryId?: true
   title?: true
   description?: true
+  category?: true
   coverImage?: true
   proofLinks?: true
   targetAmount?: true
@@ -161,6 +165,7 @@ export type CampaignMaxAggregateInputType = {
   beneficiaryId?: true
   title?: true
   description?: true
+  category?: true
   coverImage?: true
   proofLinks?: true
   targetAmount?: true
@@ -186,6 +191,7 @@ export type CampaignCountAggregateInputType = {
   beneficiaryId?: true
   title?: true
   description?: true
+  category?: true
   coverImage?: true
   proofLinks?: true
   targetAmount?: true
@@ -298,6 +304,7 @@ export type CampaignGroupByOutputType = {
   beneficiaryId: string
   title: string
   description: string
+  category: string
   coverImage: string
   proofLinks: string | null
   targetAmount: runtime.Decimal
@@ -346,6 +353,7 @@ export type CampaignWhereInput = {
   beneficiaryId?: Prisma.StringFilter<"Campaign"> | string
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringFilter<"Campaign"> | string
+  category?: Prisma.StringFilter<"Campaign"> | string
   coverImage?: Prisma.StringFilter<"Campaign"> | string
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -368,6 +376,8 @@ export type CampaignWhereInput = {
   milestones?: Prisma.MilestoneListRelationFilter
   moneyDonations?: Prisma.MoneyDonationListRelationFilter
   itemDonations?: Prisma.ItemDonationListRelationFilter
+  updates?: Prisma.CampaignUpdateListRelationFilter
+  bestWishes?: Prisma.BestWishListRelationFilter
 }
 
 export type CampaignOrderByWithRelationInput = {
@@ -375,6 +385,7 @@ export type CampaignOrderByWithRelationInput = {
   beneficiaryId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   proofLinks?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
@@ -397,6 +408,8 @@ export type CampaignOrderByWithRelationInput = {
   milestones?: Prisma.MilestoneOrderByRelationAggregateInput
   moneyDonations?: Prisma.MoneyDonationOrderByRelationAggregateInput
   itemDonations?: Prisma.ItemDonationOrderByRelationAggregateInput
+  updates?: Prisma.CampaignUpdateOrderByRelationAggregateInput
+  bestWishes?: Prisma.BestWishOrderByRelationAggregateInput
   _relevance?: Prisma.CampaignOrderByRelevanceInput
 }
 
@@ -408,6 +421,7 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   beneficiaryId?: Prisma.StringFilter<"Campaign"> | string
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringFilter<"Campaign"> | string
+  category?: Prisma.StringFilter<"Campaign"> | string
   coverImage?: Prisma.StringFilter<"Campaign"> | string
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -430,6 +444,8 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   milestones?: Prisma.MilestoneListRelationFilter
   moneyDonations?: Prisma.MoneyDonationListRelationFilter
   itemDonations?: Prisma.ItemDonationListRelationFilter
+  updates?: Prisma.CampaignUpdateListRelationFilter
+  bestWishes?: Prisma.BestWishListRelationFilter
 }, "id">
 
 export type CampaignOrderByWithAggregationInput = {
@@ -437,6 +453,7 @@ export type CampaignOrderByWithAggregationInput = {
   beneficiaryId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   proofLinks?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
@@ -470,6 +487,7 @@ export type CampaignScalarWhereWithAggregatesInput = {
   beneficiaryId?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   title?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   description?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
+  category?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   coverImage?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   proofLinks?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalWithAggregatesFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -494,6 +512,7 @@ export type CampaignCreateInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -516,6 +535,8 @@ export type CampaignCreateInput = {
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateInput = {
@@ -523,6 +544,7 @@ export type CampaignUncheckedCreateInput = {
   beneficiaryId: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -544,12 +566,15 @@ export type CampaignUncheckedCreateInput = {
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -572,6 +597,8 @@ export type CampaignUpdateInput = {
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateInput = {
@@ -579,6 +606,7 @@ export type CampaignUncheckedUpdateInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -600,6 +628,8 @@ export type CampaignUncheckedUpdateInput = {
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyInput = {
@@ -607,6 +637,7 @@ export type CampaignCreateManyInput = {
   beneficiaryId: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -631,6 +662,7 @@ export type CampaignUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -656,6 +688,7 @@ export type CampaignUncheckedUpdateManyInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -697,6 +730,7 @@ export type CampaignCountOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
@@ -729,6 +763,7 @@ export type CampaignMaxOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
@@ -754,6 +789,7 @@ export type CampaignMinOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   proofLinks?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
@@ -866,6 +902,34 @@ export type CampaignUpdateOneRequiredWithoutMilestonesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutMilestonesInput, Prisma.CampaignUpdateWithoutMilestonesInput>, Prisma.CampaignUncheckedUpdateWithoutMilestonesInput>
 }
 
+export type CampaignCreateNestedOneWithoutUpdatesInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutUpdatesInput, Prisma.CampaignUncheckedCreateWithoutUpdatesInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutUpdatesInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutUpdatesInput, Prisma.CampaignUncheckedCreateWithoutUpdatesInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutUpdatesInput
+  upsert?: Prisma.CampaignUpsertWithoutUpdatesInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutUpdatesInput, Prisma.CampaignUpdateWithoutUpdatesInput>, Prisma.CampaignUncheckedUpdateWithoutUpdatesInput>
+}
+
+export type CampaignCreateNestedOneWithoutBestWishesInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutBestWishesInput, Prisma.CampaignUncheckedCreateWithoutBestWishesInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutBestWishesInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutBestWishesNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutBestWishesInput, Prisma.CampaignUncheckedCreateWithoutBestWishesInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutBestWishesInput
+  upsert?: Prisma.CampaignUpsertWithoutBestWishesInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutBestWishesInput, Prisma.CampaignUpdateWithoutBestWishesInput>, Prisma.CampaignUncheckedUpdateWithoutBestWishesInput>
+}
+
 export type CampaignCreateNestedOneWithoutMoneyDonationsInput = {
   create?: Prisma.XOR<Prisma.CampaignCreateWithoutMoneyDonationsInput, Prisma.CampaignUncheckedCreateWithoutMoneyDonationsInput>
   connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutMoneyDonationsInput
@@ -898,6 +962,7 @@ export type CampaignCreateWithoutBeneficiaryInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -919,12 +984,15 @@ export type CampaignCreateWithoutBeneficiaryInput = {
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutBeneficiaryInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -946,6 +1014,8 @@ export type CampaignUncheckedCreateWithoutBeneficiaryInput = {
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutBeneficiaryInput = {
@@ -982,6 +1052,7 @@ export type CampaignScalarWhereInput = {
   beneficiaryId?: Prisma.StringFilter<"Campaign"> | string
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringFilter<"Campaign"> | string
+  category?: Prisma.StringFilter<"Campaign"> | string
   coverImage?: Prisma.StringFilter<"Campaign"> | string
   proofLinks?: Prisma.StringNullableFilter<"Campaign"> | string | null
   targetAmount?: Prisma.DecimalFilter<"Campaign"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1006,6 +1077,7 @@ export type CampaignCreateWithoutMilestonesInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1027,6 +1099,8 @@ export type CampaignCreateWithoutMilestonesInput = {
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutMilestonesInput = {
@@ -1034,6 +1108,7 @@ export type CampaignUncheckedCreateWithoutMilestonesInput = {
   beneficiaryId: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1054,6 +1129,8 @@ export type CampaignUncheckedCreateWithoutMilestonesInput = {
   deletedAt?: Date | string | null
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutMilestonesInput = {
@@ -1076,6 +1153,7 @@ export type CampaignUpdateWithoutMilestonesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1097,6 +1175,8 @@ export type CampaignUpdateWithoutMilestonesInput = {
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutMilestonesInput = {
@@ -1104,6 +1184,7 @@ export type CampaignUncheckedUpdateWithoutMilestonesInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1124,12 +1205,287 @@ export type CampaignUncheckedUpdateWithoutMilestonesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutUpdatesInput = {
+  id?: string
+  title: string
+  description: string
+  category?: string
+  coverImage: string
+  proofLinks?: string | null
+  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  visits?: number
+  isActive?: boolean
+  createdAt?: Date | string
+  verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
+  milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
+  moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
+  itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutUpdatesInput = {
+  id?: string
+  beneficiaryId: string
+  title: string
+  description: string
+  category?: string
+  coverImage: string
+  proofLinks?: string | null
+  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  visits?: number
+  isActive?: boolean
+  createdAt?: Date | string
+  verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
+  itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutUpdatesInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutUpdatesInput, Prisma.CampaignUncheckedCreateWithoutUpdatesInput>
+}
+
+export type CampaignUpsertWithoutUpdatesInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutUpdatesInput, Prisma.CampaignUncheckedUpdateWithoutUpdatesInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutUpdatesInput, Prisma.CampaignUncheckedCreateWithoutUpdatesInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutUpdatesInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutUpdatesInput, Prisma.CampaignUncheckedUpdateWithoutUpdatesInput>
+}
+
+export type CampaignUpdateWithoutUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImage?: Prisma.StringFieldUpdateOperationsInput | string
+  proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
+  milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
+  moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
+  itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImage?: Prisma.StringFieldUpdateOperationsInput | string
+  proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutBestWishesInput = {
+  id?: string
+  title: string
+  description: string
+  category?: string
+  coverImage: string
+  proofLinks?: string | null
+  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  visits?: number
+  isActive?: boolean
+  createdAt?: Date | string
+  verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
+  milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
+  moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
+  itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutBestWishesInput = {
+  id?: string
+  beneficiaryId: string
+  title: string
+  description: string
+  category?: string
+  coverImage: string
+  proofLinks?: string | null
+  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CampaignStatus
+  rejectionReason?: string | null
+  suspensionReason?: string | null
+  verifiedBy?: string | null
+  rejectedBy?: string | null
+  suspendedBy?: string | null
+  donationCount?: number
+  shareCount?: number
+  visits?: number
+  isActive?: boolean
+  createdAt?: Date | string
+  verifiedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  suspendedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
+  itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutBestWishesInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutBestWishesInput, Prisma.CampaignUncheckedCreateWithoutBestWishesInput>
+}
+
+export type CampaignUpsertWithoutBestWishesInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutBestWishesInput, Prisma.CampaignUncheckedUpdateWithoutBestWishesInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutBestWishesInput, Prisma.CampaignUncheckedCreateWithoutBestWishesInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutBestWishesInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutBestWishesInput, Prisma.CampaignUncheckedUpdateWithoutBestWishesInput>
+}
+
+export type CampaignUpdateWithoutBestWishesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImage?: Prisma.StringFieldUpdateOperationsInput | string
+  proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
+  milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
+  moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
+  itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutBestWishesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImage?: Prisma.StringFieldUpdateOperationsInput | string
+  proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspensionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suspendedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  donationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  shareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  visits?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  suspendedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutMoneyDonationsInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1151,6 +1507,8 @@ export type CampaignCreateWithoutMoneyDonationsInput = {
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutMoneyDonationsInput = {
@@ -1158,6 +1516,7 @@ export type CampaignUncheckedCreateWithoutMoneyDonationsInput = {
   beneficiaryId: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1178,6 +1537,8 @@ export type CampaignUncheckedCreateWithoutMoneyDonationsInput = {
   deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutMoneyDonationsInput = {
@@ -1200,6 +1561,7 @@ export type CampaignUpdateWithoutMoneyDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1221,6 +1583,8 @@ export type CampaignUpdateWithoutMoneyDonationsInput = {
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutMoneyDonationsInput = {
@@ -1228,6 +1592,7 @@ export type CampaignUncheckedUpdateWithoutMoneyDonationsInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1248,12 +1613,15 @@ export type CampaignUncheckedUpdateWithoutMoneyDonationsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutItemDonationsInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1275,6 +1643,8 @@ export type CampaignCreateWithoutItemDonationsInput = {
   beneficiary: Prisma.UserCreateNestedOneWithoutCampaignsInput
   milestones?: Prisma.MilestoneCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutItemDonationsInput = {
@@ -1282,6 +1652,7 @@ export type CampaignUncheckedCreateWithoutItemDonationsInput = {
   beneficiaryId: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1302,6 +1673,8 @@ export type CampaignUncheckedCreateWithoutItemDonationsInput = {
   deletedAt?: Date | string | null
   milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutCampaignInput
   moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutCampaignInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutItemDonationsInput = {
@@ -1324,6 +1697,7 @@ export type CampaignUpdateWithoutItemDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1345,6 +1719,8 @@ export type CampaignUpdateWithoutItemDonationsInput = {
   beneficiary?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutItemDonationsInput = {
@@ -1352,6 +1728,7 @@ export type CampaignUncheckedUpdateWithoutItemDonationsInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1372,12 +1749,15 @@ export type CampaignUncheckedUpdateWithoutItemDonationsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyBeneficiaryInput = {
   id?: string
   title: string
   description: string
+  category?: string
   coverImage: string
   proofLinks?: string | null
   targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1402,6 +1782,7 @@ export type CampaignUpdateWithoutBeneficiaryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1423,12 +1804,15 @@ export type CampaignUpdateWithoutBeneficiaryInput = {
   milestones?: Prisma.MilestoneUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutBeneficiaryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1450,12 +1834,15 @@ export type CampaignUncheckedUpdateWithoutBeneficiaryInput = {
   milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutCampaignNestedInput
   moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutCampaignNestedInput
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutCampaignNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateManyWithoutBeneficiaryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   proofLinks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1485,12 +1872,16 @@ export type CampaignCountOutputType = {
   milestones: number
   moneyDonations: number
   itemDonations: number
+  updates: number
+  bestWishes: number
 }
 
 export type CampaignCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   milestones?: boolean | CampaignCountOutputTypeCountMilestonesArgs
   moneyDonations?: boolean | CampaignCountOutputTypeCountMoneyDonationsArgs
   itemDonations?: boolean | CampaignCountOutputTypeCountItemDonationsArgs
+  updates?: boolean | CampaignCountOutputTypeCountUpdatesArgs
+  bestWishes?: boolean | CampaignCountOutputTypeCountBestWishesArgs
 }
 
 /**
@@ -1524,12 +1915,27 @@ export type CampaignCountOutputTypeCountItemDonationsArgs<ExtArgs extends runtim
   where?: Prisma.ItemDonationWhereInput
 }
 
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignUpdateWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountBestWishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BestWishWhereInput
+}
+
 
 export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   beneficiaryId?: boolean
   title?: boolean
   description?: boolean
+  category?: boolean
   coverImage?: boolean
   proofLinks?: boolean
   targetAmount?: boolean
@@ -1552,6 +1958,8 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   milestones?: boolean | Prisma.Campaign$milestonesArgs<ExtArgs>
   moneyDonations?: boolean | Prisma.Campaign$moneyDonationsArgs<ExtArgs>
   itemDonations?: boolean | Prisma.Campaign$itemDonationsArgs<ExtArgs>
+  updates?: boolean | Prisma.Campaign$updatesArgs<ExtArgs>
+  bestWishes?: boolean | Prisma.Campaign$bestWishesArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaign"]>
 
@@ -1562,6 +1970,7 @@ export type CampaignSelectScalar = {
   beneficiaryId?: boolean
   title?: boolean
   description?: boolean
+  category?: boolean
   coverImage?: boolean
   proofLinks?: boolean
   targetAmount?: boolean
@@ -1582,12 +1991,14 @@ export type CampaignSelectScalar = {
   deletedAt?: boolean
 }
 
-export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "rejectionReason" | "suspensionReason" | "verifiedBy" | "rejectedBy" | "suspendedBy" | "donationCount" | "shareCount" | "visits" | "isActive" | "createdAt" | "verifiedAt" | "rejectedAt" | "suspendedAt" | "deletedAt", ExtArgs["result"]["campaign"]>
+export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "beneficiaryId" | "title" | "description" | "category" | "coverImage" | "proofLinks" | "targetAmount" | "status" | "rejectionReason" | "suspensionReason" | "verifiedBy" | "rejectedBy" | "suspendedBy" | "donationCount" | "shareCount" | "visits" | "isActive" | "createdAt" | "verifiedAt" | "rejectedAt" | "suspendedAt" | "deletedAt", ExtArgs["result"]["campaign"]>
 export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   milestones?: boolean | Prisma.Campaign$milestonesArgs<ExtArgs>
   moneyDonations?: boolean | Prisma.Campaign$moneyDonationsArgs<ExtArgs>
   itemDonations?: boolean | Prisma.Campaign$itemDonationsArgs<ExtArgs>
+  updates?: boolean | Prisma.Campaign$updatesArgs<ExtArgs>
+  bestWishes?: boolean | Prisma.Campaign$bestWishesArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1598,12 +2009,15 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     milestones: Prisma.$MilestonePayload<ExtArgs>[]
     moneyDonations: Prisma.$MoneyDonationPayload<ExtArgs>[]
     itemDonations: Prisma.$ItemDonationPayload<ExtArgs>[]
+    updates: Prisma.$CampaignUpdatePayload<ExtArgs>[]
+    bestWishes: Prisma.$BestWishPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     beneficiaryId: string
     title: string
     description: string
+    category: string
     coverImage: string
     proofLinks: string | null
     targetAmount: runtime.Decimal
@@ -1966,6 +2380,8 @@ export interface Prisma__CampaignClient<T, Null = never, ExtArgs extends runtime
   milestones<T extends Prisma.Campaign$milestonesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$milestonesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   moneyDonations<T extends Prisma.Campaign$moneyDonationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$moneyDonationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MoneyDonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   itemDonations<T extends Prisma.Campaign$itemDonationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$itemDonationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemDonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updates<T extends Prisma.Campaign$updatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bestWishes<T extends Prisma.Campaign$bestWishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$bestWishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BestWishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1999,6 +2415,7 @@ export interface CampaignFieldRefs {
   readonly beneficiaryId: Prisma.FieldRef<"Campaign", 'String'>
   readonly title: Prisma.FieldRef<"Campaign", 'String'>
   readonly description: Prisma.FieldRef<"Campaign", 'String'>
+  readonly category: Prisma.FieldRef<"Campaign", 'String'>
   readonly coverImage: Prisma.FieldRef<"Campaign", 'String'>
   readonly proofLinks: Prisma.FieldRef<"Campaign", 'String'>
   readonly targetAmount: Prisma.FieldRef<"Campaign", 'Decimal'>
@@ -2429,6 +2846,54 @@ export type Campaign$itemDonationsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ItemDonationScalarFieldEnum | Prisma.ItemDonationScalarFieldEnum[]
+}
+
+/**
+ * Campaign.updates
+ */
+export type Campaign$updatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignUpdate
+   */
+  select?: Prisma.CampaignUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignUpdate
+   */
+  omit?: Prisma.CampaignUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignUpdateInclude<ExtArgs> | null
+  where?: Prisma.CampaignUpdateWhereInput
+  orderBy?: Prisma.CampaignUpdateOrderByWithRelationInput | Prisma.CampaignUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignUpdateScalarFieldEnum | Prisma.CampaignUpdateScalarFieldEnum[]
+}
+
+/**
+ * Campaign.bestWishes
+ */
+export type Campaign$bestWishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BestWish
+   */
+  select?: Prisma.BestWishSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BestWish
+   */
+  omit?: Prisma.BestWishOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BestWishInclude<ExtArgs> | null
+  where?: Prisma.BestWishWhereInput
+  orderBy?: Prisma.BestWishOrderByWithRelationInput | Prisma.BestWishOrderByWithRelationInput[]
+  cursor?: Prisma.BestWishWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BestWishScalarFieldEnum | Prisma.BestWishScalarFieldEnum[]
 }
 
 /**

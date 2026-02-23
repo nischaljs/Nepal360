@@ -180,6 +180,8 @@ model User {
   badges             UserBadge[]
   auditLogs          AuditLog[]         @relation("Actor")
   leaderboardEntries LeaderboardEntry[]
+  updates            CampaignUpdate[]
+  bestWishes         BestWish[]
 
   @@index([email])
 }
@@ -227,6 +229,7 @@ model Campaign {
 
   title        String
   description  String
+  category     String         @default("general")
   coverImage   String  // relative path to cover image
   proofLinks   String? // JSON array of relative paths to proof files
   targetAmount Decimal        @db.Decimal(12, 2)
@@ -256,11 +259,14 @@ model Campaign {
   milestones     Milestone[]
   moneyDonations MoneyDonation[]
   itemDonations  ItemDonation[]
+  updates        CampaignUpdate[]
+  bestWishes     BestWish[]
 
   @@index([status])
   @@index([beneficiaryId])
   @@index([isActive])
   @@index([verifiedAt])
+  @@index([category])
 }
 
 model Milestone {
@@ -273,6 +279,51 @@ model Milestone {
   completed Boolean @default(false)
 
   createdAt DateTime @default(now())
+}
+
+/**
+ * ===================== CAMPAIGN UPDATES =====================
+ */
+
+model CampaignUpdate {
+  id          String   @id @default(uuid())
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  title       String
+  content     String
+  images      String   // JSON array of image URLs
+  isMilestone Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([campaignId])
+}
+
+/**
+ * ===================== BEST WISHES =====================
+ */
+
+model BestWish {
+  id          String   @id @default(uuid())
+  donationId  String   @unique
+  donation    MoneyDonation @relation(fields: [donationId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+
+  message     String
+  cardStyle   String   @default("simple")
+  isAnonymous Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([campaignId])
+  @@index([userId])
 }
 
 /**
@@ -293,6 +344,8 @@ model MoneyDonation {
   pidx       String?            @unique
 
   createdAt DateTime @default(now())
+
+  bestWish  BestWish?
 
   @@index([campaignId])
   @@index([donorId])

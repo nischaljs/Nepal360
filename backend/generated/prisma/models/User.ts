@@ -207,6 +207,8 @@ export type UserWhereInput = {
   badges?: Prisma.UserBadgeListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   leaderboardEntries?: Prisma.LeaderboardEntryListRelationFilter
+  updates?: Prisma.CampaignUpdateListRelationFilter
+  bestWishes?: Prisma.BestWishListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -226,6 +228,8 @@ export type UserOrderByWithRelationInput = {
   badges?: Prisma.UserBadgeOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   leaderboardEntries?: Prisma.LeaderboardEntryOrderByRelationAggregateInput
+  updates?: Prisma.CampaignUpdateOrderByRelationAggregateInput
+  bestWishes?: Prisma.BestWishOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -249,6 +253,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   badges?: Prisma.UserBadgeListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   leaderboardEntries?: Prisma.LeaderboardEntryListRelationFilter
+  updates?: Prisma.CampaignUpdateListRelationFilter
+  bestWishes?: Prisma.BestWishListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -294,6 +300,8 @@ export type UserCreateInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -313,6 +321,8 @@ export type UserUncheckedCreateInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -332,6 +342,8 @@ export type UserUpdateInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -351,6 +363,8 @@ export type UserUncheckedUpdateInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -483,6 +497,34 @@ export type UserUpdateOneRequiredWithoutCampaignsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCampaignsInput, Prisma.UserUpdateWithoutCampaignsInput>, Prisma.UserUncheckedUpdateWithoutCampaignsInput>
 }
 
+export type UserCreateNestedOneWithoutUpdatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatesInput, Prisma.UserUncheckedCreateWithoutUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatesInput, Prisma.UserUncheckedCreateWithoutUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatesInput, Prisma.UserUpdateWithoutUpdatesInput>, Prisma.UserUncheckedUpdateWithoutUpdatesInput>
+}
+
+export type UserCreateNestedOneWithoutBestWishesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBestWishesInput, Prisma.UserUncheckedCreateWithoutBestWishesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBestWishesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBestWishesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBestWishesInput, Prisma.UserUncheckedCreateWithoutBestWishesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBestWishesInput
+  upsert?: Prisma.UserUpsertWithoutBestWishesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBestWishesInput, Prisma.UserUpdateWithoutBestWishesInput>, Prisma.UserUncheckedUpdateWithoutBestWishesInput>
+}
+
 export type UserCreateNestedOneWithoutMoneyDonationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutMoneyDonationsInput, Prisma.UserUncheckedCreateWithoutMoneyDonationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutMoneyDonationsInput
@@ -585,6 +627,8 @@ export type UserCreateWithoutAdminRoleInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminRoleInput = {
@@ -603,6 +647,8 @@ export type UserUncheckedCreateWithoutAdminRoleInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminRoleInput = {
@@ -637,6 +683,8 @@ export type UserUpdateWithoutAdminRoleInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminRoleInput = {
@@ -655,6 +703,8 @@ export type UserUncheckedUpdateWithoutAdminRoleInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutKycProfileInput = {
@@ -673,6 +723,8 @@ export type UserCreateWithoutKycProfileInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutKycProfileInput = {
@@ -691,6 +743,8 @@ export type UserUncheckedCreateWithoutKycProfileInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutKycProfileInput = {
@@ -725,6 +779,8 @@ export type UserUpdateWithoutKycProfileInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutKycProfileInput = {
@@ -743,6 +799,8 @@ export type UserUncheckedUpdateWithoutKycProfileInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCampaignsInput = {
@@ -761,6 +819,8 @@ export type UserCreateWithoutCampaignsInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCampaignsInput = {
@@ -779,6 +839,8 @@ export type UserUncheckedCreateWithoutCampaignsInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCampaignsInput = {
@@ -813,6 +875,8 @@ export type UserUpdateWithoutCampaignsInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCampaignsInput = {
@@ -831,6 +895,200 @@ export type UserUncheckedUpdateWithoutCampaignsInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUpdatesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUpdatesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleUncheckedCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileUncheckedCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsUncheckedCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUpdatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatesInput, Prisma.UserUncheckedCreateWithoutUpdatesInput>
+}
+
+export type UserUpsertWithoutUpdatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatesInput, Prisma.UserUncheckedUpdateWithoutUpdatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatesInput, Prisma.UserUncheckedCreateWithoutUpdatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatesInput, Prisma.UserUncheckedUpdateWithoutUpdatesInput>
+}
+
+export type UserUpdateWithoutUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUncheckedUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUncheckedUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUncheckedUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBestWishesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBestWishesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleUncheckedCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileUncheckedCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsUncheckedCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBestWishesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBestWishesInput, Prisma.UserUncheckedCreateWithoutBestWishesInput>
+}
+
+export type UserUpsertWithoutBestWishesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBestWishesInput, Prisma.UserUncheckedUpdateWithoutBestWishesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBestWishesInput, Prisma.UserUncheckedCreateWithoutBestWishesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBestWishesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBestWishesInput, Prisma.UserUncheckedUpdateWithoutBestWishesInput>
+}
+
+export type UserUpdateWithoutBestWishesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBestWishesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUncheckedUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUncheckedUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUncheckedUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMoneyDonationsInput = {
@@ -849,6 +1107,8 @@ export type UserCreateWithoutMoneyDonationsInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMoneyDonationsInput = {
@@ -867,6 +1127,8 @@ export type UserUncheckedCreateWithoutMoneyDonationsInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMoneyDonationsInput = {
@@ -901,6 +1163,8 @@ export type UserUpdateWithoutMoneyDonationsInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMoneyDonationsInput = {
@@ -919,6 +1183,8 @@ export type UserUncheckedUpdateWithoutMoneyDonationsInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutItemDonationsInput = {
@@ -937,6 +1203,8 @@ export type UserCreateWithoutItemDonationsInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutItemDonationsInput = {
@@ -955,6 +1223,8 @@ export type UserUncheckedCreateWithoutItemDonationsInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutItemDonationsInput = {
@@ -989,6 +1259,8 @@ export type UserUpdateWithoutItemDonationsInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutItemDonationsInput = {
@@ -1007,6 +1279,8 @@ export type UserUncheckedUpdateWithoutItemDonationsInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBadgesInput = {
@@ -1025,6 +1299,8 @@ export type UserCreateWithoutBadgesInput = {
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBadgesInput = {
@@ -1043,6 +1319,8 @@ export type UserUncheckedCreateWithoutBadgesInput = {
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBadgesInput = {
@@ -1077,6 +1355,8 @@ export type UserUpdateWithoutBadgesInput = {
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBadgesInput = {
@@ -1095,6 +1375,8 @@ export type UserUncheckedUpdateWithoutBadgesInput = {
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDonorStatsInput = {
@@ -1113,6 +1395,8 @@ export type UserCreateWithoutDonorStatsInput = {
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDonorStatsInput = {
@@ -1131,6 +1415,8 @@ export type UserUncheckedCreateWithoutDonorStatsInput = {
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDonorStatsInput = {
@@ -1165,6 +1451,8 @@ export type UserUpdateWithoutDonorStatsInput = {
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDonorStatsInput = {
@@ -1183,6 +1471,8 @@ export type UserUncheckedUpdateWithoutDonorStatsInput = {
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeaderboardEntriesInput = {
@@ -1201,6 +1491,8 @@ export type UserCreateWithoutLeaderboardEntriesInput = {
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeaderboardEntriesInput = {
@@ -1219,6 +1511,8 @@ export type UserUncheckedCreateWithoutLeaderboardEntriesInput = {
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeaderboardEntriesInput = {
@@ -1253,6 +1547,8 @@ export type UserUpdateWithoutLeaderboardEntriesInput = {
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeaderboardEntriesInput = {
@@ -1271,6 +1567,8 @@ export type UserUncheckedUpdateWithoutLeaderboardEntriesInput = {
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -1289,6 +1587,8 @@ export type UserCreateWithoutAuditLogsInput = {
   itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
   badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -1307,6 +1607,8 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1341,6 +1643,8 @@ export type UserUpdateWithoutAuditLogsInput = {
   itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
   badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1359,6 +1663,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1373,6 +1679,8 @@ export type UserCountOutputType = {
   badges: number
   auditLogs: number
   leaderboardEntries: number
+  updates: number
+  bestWishes: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1382,6 +1690,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   badges?: boolean | UserCountOutputTypeCountBadgesArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
   leaderboardEntries?: boolean | UserCountOutputTypeCountLeaderboardEntriesArgs
+  updates?: boolean | UserCountOutputTypeCountUpdatesArgs
+  bestWishes?: boolean | UserCountOutputTypeCountBestWishesArgs
 }
 
 /**
@@ -1436,6 +1746,20 @@ export type UserCountOutputTypeCountLeaderboardEntriesArgs<ExtArgs extends runti
   where?: Prisma.LeaderboardEntryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignUpdateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBestWishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BestWishWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1454,6 +1778,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   badges?: boolean | Prisma.User$badgesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   leaderboardEntries?: boolean | Prisma.User$leaderboardEntriesArgs<ExtArgs>
+  updates?: boolean | Prisma.User$updatesArgs<ExtArgs>
+  bestWishes?: boolean | Prisma.User$bestWishesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1480,6 +1806,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   badges?: boolean | Prisma.User$badgesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   leaderboardEntries?: boolean | Prisma.User$leaderboardEntriesArgs<ExtArgs>
+  updates?: boolean | Prisma.User$updatesArgs<ExtArgs>
+  bestWishes?: boolean | Prisma.User$bestWishesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1495,6 +1823,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     badges: Prisma.$UserBadgePayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     leaderboardEntries: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
+    updates: Prisma.$CampaignUpdatePayload<ExtArgs>[]
+    bestWishes: Prisma.$BestWishPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1853,6 +2183,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   badges<T extends Prisma.User$badgesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$badgesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leaderboardEntries<T extends Prisma.User$leaderboardEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leaderboardEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updates<T extends Prisma.User$updatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bestWishes<T extends Prisma.User$bestWishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bestWishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BestWishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2430,6 +2762,54 @@ export type User$leaderboardEntriesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.LeaderboardEntryScalarFieldEnum | Prisma.LeaderboardEntryScalarFieldEnum[]
+}
+
+/**
+ * User.updates
+ */
+export type User$updatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignUpdate
+   */
+  select?: Prisma.CampaignUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignUpdate
+   */
+  omit?: Prisma.CampaignUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignUpdateInclude<ExtArgs> | null
+  where?: Prisma.CampaignUpdateWhereInput
+  orderBy?: Prisma.CampaignUpdateOrderByWithRelationInput | Prisma.CampaignUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignUpdateScalarFieldEnum | Prisma.CampaignUpdateScalarFieldEnum[]
+}
+
+/**
+ * User.bestWishes
+ */
+export type User$bestWishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BestWish
+   */
+  select?: Prisma.BestWishSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BestWish
+   */
+  omit?: Prisma.BestWishOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BestWishInclude<ExtArgs> | null
+  where?: Prisma.BestWishWhereInput
+  orderBy?: Prisma.BestWishOrderByWithRelationInput | Prisma.BestWishOrderByWithRelationInput[]
+  cursor?: Prisma.BestWishWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BestWishScalarFieldEnum | Prisma.BestWishScalarFieldEnum[]
 }
 
 /**

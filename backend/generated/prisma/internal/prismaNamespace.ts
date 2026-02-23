@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.3.0
- * Query Engine version: 9d6ad21cbbceab97458517b147a6a09ff43aa735
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.3.0",
-  engine: "9d6ad21cbbceab97458517b147a6a09ff43aa735"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 /**
@@ -389,6 +389,8 @@ export const ModelName = {
   KYCProfile: 'KYCProfile',
   Campaign: 'Campaign',
   Milestone: 'Milestone',
+  CampaignUpdate: 'CampaignUpdate',
+  BestWish: 'BestWish',
   MoneyDonation: 'MoneyDonation',
   ItemDonation: 'ItemDonation',
   Badge: 'Badge',
@@ -412,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "adminRole" | "kYCProfile" | "campaign" | "milestone" | "moneyDonation" | "itemDonation" | "badge" | "userBadge" | "donorStats" | "leaderboard" | "leaderboardEntry" | "auditLog"
+    modelProps: "user" | "adminRole" | "kYCProfile" | "campaign" | "milestone" | "campaignUpdate" | "bestWish" | "moneyDonation" | "itemDonation" | "badge" | "userBadge" | "donorStats" | "leaderboard" | "leaderboardEntry" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -743,6 +745,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MilestoneCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MilestoneCountAggregateOutputType> | number
+        }
+      }
+    }
+    CampaignUpdate: {
+      payload: Prisma.$CampaignUpdatePayload<ExtArgs>
+      fields: Prisma.CampaignUpdateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CampaignUpdateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CampaignUpdateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        findFirst: {
+          args: Prisma.CampaignUpdateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CampaignUpdateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        findMany: {
+          args: Prisma.CampaignUpdateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>[]
+        }
+        create: {
+          args: Prisma.CampaignUpdateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        createMany: {
+          args: Prisma.CampaignUpdateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CampaignUpdateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        update: {
+          args: Prisma.CampaignUpdateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        deleteMany: {
+          args: Prisma.CampaignUpdateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CampaignUpdateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CampaignUpdateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignUpdatePayload>
+        }
+        aggregate: {
+          args: Prisma.CampaignUpdateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCampaignUpdate>
+        }
+        groupBy: {
+          args: Prisma.CampaignUpdateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignUpdateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CampaignUpdateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignUpdateCountAggregateOutputType> | number
+        }
+      }
+    }
+    BestWish: {
+      payload: Prisma.$BestWishPayload<ExtArgs>
+      fields: Prisma.BestWishFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BestWishFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BestWishFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        findFirst: {
+          args: Prisma.BestWishFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BestWishFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        findMany: {
+          args: Prisma.BestWishFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>[]
+        }
+        create: {
+          args: Prisma.BestWishCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        createMany: {
+          args: Prisma.BestWishCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.BestWishDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        update: {
+          args: Prisma.BestWishUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        deleteMany: {
+          args: Prisma.BestWishDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BestWishUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.BestWishUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BestWishPayload>
+        }
+        aggregate: {
+          args: Prisma.BestWishAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBestWish>
+        }
+        groupBy: {
+          args: Prisma.BestWishGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BestWishGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BestWishCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BestWishCountAggregateOutputType> | number
         }
       }
     }
@@ -1359,6 +1493,7 @@ export const CampaignScalarFieldEnum = {
   beneficiaryId: 'beneficiaryId',
   title: 'title',
   description: 'description',
+  category: 'category',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   targetAmount: 'targetAmount',
@@ -1392,6 +1527,35 @@ export const MilestoneScalarFieldEnum = {
 } as const
 
 export type MilestoneScalarFieldEnum = (typeof MilestoneScalarFieldEnum)[keyof typeof MilestoneScalarFieldEnum]
+
+
+export const CampaignUpdateScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  title: 'title',
+  content: 'content',
+  images: 'images',
+  isMilestone: 'isMilestone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignUpdateScalarFieldEnum = (typeof CampaignUpdateScalarFieldEnum)[keyof typeof CampaignUpdateScalarFieldEnum]
+
+
+export const BestWishScalarFieldEnum = {
+  id: 'id',
+  donationId: 'donationId',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  message: 'message',
+  cardStyle: 'cardStyle',
+  isAnonymous: 'isAnonymous',
+  createdAt: 'createdAt'
+} as const
+
+export type BestWishScalarFieldEnum = (typeof BestWishScalarFieldEnum)[keyof typeof BestWishScalarFieldEnum]
 
 
 export const MoneyDonationScalarFieldEnum = {
@@ -1552,6 +1716,7 @@ export const CampaignOrderByRelevanceFieldEnum = {
   beneficiaryId: 'beneficiaryId',
   title: 'title',
   description: 'description',
+  category: 'category',
   coverImage: 'coverImage',
   proofLinks: 'proofLinks',
   rejectionReason: 'rejectionReason',
@@ -1571,6 +1736,30 @@ export const MilestoneOrderByRelevanceFieldEnum = {
 } as const
 
 export type MilestoneOrderByRelevanceFieldEnum = (typeof MilestoneOrderByRelevanceFieldEnum)[keyof typeof MilestoneOrderByRelevanceFieldEnum]
+
+
+export const CampaignUpdateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  title: 'title',
+  content: 'content',
+  images: 'images'
+} as const
+
+export type CampaignUpdateOrderByRelevanceFieldEnum = (typeof CampaignUpdateOrderByRelevanceFieldEnum)[keyof typeof CampaignUpdateOrderByRelevanceFieldEnum]
+
+
+export const BestWishOrderByRelevanceFieldEnum = {
+  id: 'id',
+  donationId: 'donationId',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  message: 'message',
+  cardStyle: 'cardStyle'
+} as const
+
+export type BestWishOrderByRelevanceFieldEnum = (typeof BestWishOrderByRelevanceFieldEnum)[keyof typeof BestWishOrderByRelevanceFieldEnum]
 
 
 export const MoneyDonationOrderByRelevanceFieldEnum = {
@@ -1869,6 +2058,8 @@ export type GlobalOmitConfig = {
   kYCProfile?: Prisma.KYCProfileOmit
   campaign?: Prisma.CampaignOmit
   milestone?: Prisma.MilestoneOmit
+  campaignUpdate?: Prisma.CampaignUpdateOmit
+  bestWish?: Prisma.BestWishOmit
   moneyDonation?: Prisma.MoneyDonationOmit
   itemDonation?: Prisma.ItemDonationOmit
   badge?: Prisma.BadgeOmit
