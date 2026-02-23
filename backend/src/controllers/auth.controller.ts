@@ -5,9 +5,13 @@ import {
     signupSchema,
     loginSchema,
     verifyEmailSchema,
+    forgotPasswordSchema,
+    resetPasswordSchema,
     SignupInput,
     LoginInput,
     VerifyEmailInput,
+    ForgotPasswordInput,
+    ResetPasswordInput,
 } from '../schemas/auth.schema';
 import { prisma } from '../lib/prisma';
 import { EmailStatus, KYCStatus } from '../../generated/prisma/enums';
@@ -153,6 +157,64 @@ export async function login(data: LoginInput): Promise<ControllerResult> {
                 emailVerified: true,
             },
         },
+    };
+}
+
+/* ----------------------------- FORGOT PASSWORD ----------------------------- */
+
+export async function forgotPassword(data: ForgotPasswordInput): Promise<ControllerResult> {
+    const validation = forgotPasswordSchema.safeParse(data);
+    if (!validation.success) {
+        return { status: 400, body: { success: false, message: validation.error.message } };
+    }
+
+    const { email } = validation.data;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+        return {
+            status: 200,
+            body: { success: true, message: 'If an account exists with this email, an OTP has been sent.' },
+        };
+    }
+
+    const otp = saveOTP(email);
+    console.log(`[PASSWORD RESET OTP] ${email}: ${otp}`);
+
+    return {
+        status: 200,
+        body: { success: true, message: 'If an account exists with this email, an OTP has been sent.' },
+    };
+}
+
+/* ----------------------------- RESET PASSWORD ------------------------------ */
+
+export async function resetPassword(data: ResetPasswordInput): Promise<ControllerResult> {
+    const validation = resetPasswordSchema.safeParse(data);
+    if (!validation.success) {
+        return { status: 400, body: { success: false, message: validation.error.message } };
+    }
+
+    const { email, otp, newPassword } = validation.data;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+        return { status: 400, body: { success: false, message: 'Invalid email or OTP' } };
+    }
+
+    if (!verifyOTP(email, otp)) {
+        return { status: 401, body: { success: false, message: 'Invalid or expired OTP' } };
+    }
+
+    const passwordHash = await hashPassword(newPassword);
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { passwordHash },
+    });
+
+    return {
+        status: 200,
+        body: { success: true, message: 'Password reset successfully. You can now log in.' },
     };
 }
 

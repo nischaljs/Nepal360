@@ -1,13 +1,15 @@
 import express, { Request, Response } from 'express';
-import { signup, verifyEmail, login, getCurrentUser } from '../controllers/auth.controller';
+import { signup, verifyEmail, login, forgotPassword, resetPassword, getCurrentUser } from '../controllers/auth.controller';
 import { requireAuth } from '../middlewares/auth.middleware';
 import { catchAsync } from '../middlewares/errohandler.middleware';
+import { authLimiter } from '../middlewares/rateLimit.middleware';
 import { AuthenticatedRequest } from '../types/auth.types';
 
 const router = express.Router();
 
 router.post(
     '/signup',
+    authLimiter,
     catchAsync(async (req: Request, res: Response) => {
         const result = await signup(req.body);
         res.status(result.status).json(result.body);
@@ -24,8 +26,26 @@ router.post(
 
 router.post(
     '/login',
+    authLimiter,
     catchAsync(async (req: Request, res: Response) => {
         const result = await login(req.body);
+        res.status(result.status).json(result.body);
+    })
+);
+
+router.post(
+    '/forgot-password',
+    authLimiter,
+    catchAsync(async (req: Request, res: Response) => {
+        const result = await forgotPassword(req.body);
+        res.status(result.status).json(result.body);
+    })
+);
+
+router.post(
+    '/reset-password',
+    catchAsync(async (req: Request, res: Response) => {
+        const result = await resetPassword(req.body);
         res.status(result.status).json(result.body);
     })
 );

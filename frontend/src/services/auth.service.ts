@@ -6,6 +6,10 @@ import type {
   VerifyEmailResponse,
   LoginData,
   LoginResponse,
+  ForgotPasswordData,
+  ForgotPasswordResponse,
+  ResetPasswordData,
+  ResetPasswordResponse,
   CurrentUser,
 } from '../types/auth.types';
 
@@ -22,6 +26,16 @@ export const verifyEmail = async (data: VerifyEmailData): Promise<VerifyEmailRes
 export const login = async (data: LoginData): Promise<LoginResponse> => {
   const response = await api.post<LoginResponse>('/auth/login', data);
 
+  return response.data;
+};
+
+export const forgotPassword = async (data: ForgotPasswordData): Promise<ForgotPasswordResponse> => {
+  const response = await api.post<ForgotPasswordResponse>('/auth/forgot-password', data);
+  return response.data;
+};
+
+export const resetPassword = async (data: ResetPasswordData): Promise<ResetPasswordResponse> => {
+  const response = await api.post<ResetPasswordResponse>('/auth/reset-password', data);
   return response.data;
 };
 

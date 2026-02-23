@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/store/auth.store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../../components/ui/button";
@@ -17,6 +17,10 @@ const Login = () => {
   const navigate = useNavigate();
   
   const { fetchUser } = useAuthStore();
+
+  useEffect(() => {
+    document.title = "Login | Nepal360";
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
