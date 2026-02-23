@@ -1,5 +1,6 @@
 import { ArrowRight, Heart, Medal, Shield, Sparkles, TrendingUp, Trophy, Users } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import CampaignCard from "../components/campaign/CampaignCard";
@@ -10,6 +11,7 @@ import { getCurrentMonthLeaderboard, type LeaderboardEntry } from "../services/l
 import type { Campaign } from "../types/campaign.types";
 
 const Home = () => {
+  const { t } = useTranslation();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -61,8 +63,8 @@ const Home = () => {
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="text-center">
           <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Something went wrong</h2>
-          <Button onClick={() => window.location.reload()} variant="outline">Try Again</Button>
+          <h2 className="text-xl font-bold mb-2">{t('common.error')}</h2>
+          <Button onClick={() => window.location.reload()} variant="outline">{t('common.tryAgain')}</Button>
         </div>
       </div>
     );
@@ -75,25 +77,24 @@ const Home = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mb-6">
             <Sparkles size={14} />
-            NEPAL'S MOST TRUSTED PLATFORM
+            {t('home.tagline')}
           </div>
           <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 tracking-tight">
-            Empower Change <br />
-            <span className="text-emerald-600">Across Nepal</span>
+            {t('home.title1')} <br />
+            <span className="text-emerald-600">{t('home.title2')}</span>
           </h1>
           <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Nepal360 connects compassionate hearts with verified causes. 
-            Start a movement or support a community today.
+            {t('home.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/campaigns">
               <Button size="lg" className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg shadow-emerald-200 transition-all active:scale-95">
-                Explore Campaigns <ArrowRight className="ml-2 w-5 h-5" />
+                {t('home.exploreCampaigns')} <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             <Link to="/campaigns/create">
               <Button size="lg" variant="outline" className="h-14 px-8 border-gray-200 text-gray-700 rounded-2xl font-bold text-base hover:bg-gray-50 active:scale-95">
-                Start Fundraising
+                {t('home.startFundraising')}
               </Button>
             </Link>
           </div>
@@ -106,22 +107,22 @@ const Home = () => {
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Shield size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">100% Verified</p>
-                <p className="text-xs text-gray-500">Secure & Trustworthy</p>
+                <p className="font-bold text-gray-900">{t('home.verified')}</p>
+                <p className="text-xs text-gray-500">{t('home.verifiedDesc')}</p>
               </div>
             </div>
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><TrendingUp size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">Full Transparency</p>
-                <p className="text-xs text-gray-500">Track every Rupee</p>
+                <p className="font-bold text-gray-900">{t('home.transparent')}</p>
+                <p className="text-xs text-gray-500">{t('home.transparentDesc')}</p>
               </div>
             </div>
             <div className="flex items-center justify-center gap-4 py-4 md:py-0">
               <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Users size={24} /></div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">Community First</p>
-                <p className="text-xs text-gray-500">Local Impact Focus</p>
+                <p className="font-bold text-gray-900">{t('home.community')}</p>
+                <p className="text-xs text-gray-500">{t('home.communityDesc')}</p>
               </div>
             </div>
           </div>
@@ -132,12 +133,12 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Featured Campaigns</h2>
-              <p className="text-gray-500 mt-1">Handpicked causes that need your urgent support</p>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{t('home.featuredCampaigns')}</h2>
+              <p className="text-gray-500 mt-1">{t('home.featuredDesc')}</p>
             </div>
             <Link to="/campaigns" className="hidden md:block">
               <Button variant="ghost" className="text-emerald-600 font-bold hover:bg-emerald-50">
-                View All <ArrowRight size={16} className="ml-1" />
+                {t('common.viewAll')} <ArrowRight size={16} className="ml-1" />
               </Button>
             </Link>
           </div>
@@ -145,10 +146,10 @@ const Home = () => {
           {campaigns.length === 0 ? (
             <div className="py-20 text-center bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
               <Heart className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-bold">No active campaigns</h3>
-              <p className="text-gray-500 mb-6">Be the spark that starts a change.</p>
+              <h3 className="text-lg font-bold">{t('home.noCampaigns')}</h3>
+              <p className="text-gray-500 mb-6">{t('home.noCampaignsDesc')}</p>
               <Link to="/campaigns/create">
-                <Button className="bg-emerald-600">Create First Campaign</Button>
+                <Button className="bg-emerald-600">{t('home.createFirstCampaign')}</Button>
               </Link>
             </div>
           ) : (
@@ -161,7 +162,7 @@ const Home = () => {
 
           <div className="mt-12 text-center md:hidden">
             <Link to="/campaigns">
-              <Button variant="outline" className="w-full h-12 rounded-xl">View All Campaigns</Button>
+              <Button variant="outline" className="w-full h-12 rounded-xl">{t('home.viewAllCampaigns')}</Button>
             </Link>
           </div>
         </div>
@@ -171,12 +172,12 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Top Donors This Month</h2>
-              <p className="text-gray-500 mt-1">Recognizing our most generous contributors</p>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{t('home.topDonors')}</h2>
+              <p className="text-gray-500 mt-1">{t('home.topDonorsDesc')}</p>
             </div>
             <Link to="/leaderboard" className="hidden md:block">
               <Button variant="ghost" className="text-emerald-600 font-bold hover:bg-emerald-50">
-                View Full Rankings <ArrowRight size={16} className="ml-1" />
+                {t('home.viewFullRankings')} <ArrowRight size={16} className="ml-1" />
               </Button>
             </Link>
           </div>
@@ -191,15 +192,15 @@ const Home = () => {
             <Card className="bg-white">
               <CardContent className="py-12 text-center">
                 <Trophy className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-gray-600">No rankings yet</h3>
-                <p className="text-gray-500">Be the first to contribute this month!</p>
+                <h3 className="text-lg font-bold text-gray-600">{t('home.noRankings')}</h3>
+                <p className="text-gray-500">{t('home.noRankingsDesc')}</p>
               </CardContent>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               {leaderboard.map((entry, index) => (
-                <Card 
-                  key={entry.id} 
+                <Card
+                  key={entry.id}
                   className={`bg-white hover:shadow-lg transition-shadow cursor-pointer ${
                     index === 0 ? 'border-2 border-yellow-400' : ''
                   }`}
@@ -225,7 +226,7 @@ const Home = () => {
                       NPR {Number(entry.totalAmount).toLocaleString()}
                     </p>
                     <p className="text-xs text-gray-500">
-                      {entry.totalItems} items donated
+                      {entry.totalItems} {t('home.itemsDonated')}
                     </p>
                   </CardContent>
                 </Card>
@@ -235,7 +236,7 @@ const Home = () => {
 
           <div className="mt-12 text-center md:hidden">
             <Link to="/leaderboard">
-              <Button variant="outline" className="w-full h-12 rounded-xl">View Full Rankings</Button>
+              <Button variant="outline" className="w-full h-12 rounded-xl">{t('home.viewFullRankings')}</Button>
             </Link>
           </div>
         </div>
@@ -248,21 +249,20 @@ const Home = () => {
 
           <div className="relative z-10">
             <h2 className="text-3xl lg:text-5xl font-black text-white mb-6">
-              Ready to create an impact?
+              {t('home.readyToImpact')}
             </h2>
             <p className="text-emerald-50 text-lg mb-10 max-w-xl mx-auto opacity-90">
-              Join thousands of donors and organizers. 
-              Registration is free and takes less than 2 minutes.
+              {t('home.readyToImpactDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/signup">
                 <Button size="lg" className="h-14 px-10 bg-white text-emerald-600 hover:bg-emerald-50 rounded-2xl font-bold transition-all active:scale-95">
-                  Start Now
+                  {t('home.startNow')}
                 </Button>
               </Link>
               <Link to="/about">
                 <Button size="lg" variant="outline" className="h-14 px-10 border-emerald-400 text-white hover:bg-emerald-700 rounded-2xl font-bold">
-                  Learn More
+                  {t('home.learnMore')}
                 </Button>
               </Link>
             </div>
