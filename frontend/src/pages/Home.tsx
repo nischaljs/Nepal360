@@ -1,30 +1,43 @@
+import { ArrowRight, Heart, Medal, Shield, Sparkles, TrendingUp, Trophy, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import type { Campaign } from "../types/campaign.types";
-import { getAllCampaigns } from "../services/campaign.service";
-import CampaignCard from "../components/campaign/CampaignCard";
 import { toast } from "sonner";
-import { Heart, Shield, TrendingUp, Users, ArrowRight, Search, Sparkles } from "lucide-react";
+import CampaignCard from "../components/campaign/CampaignCard";
 import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { getAllCampaigns } from "../services/campaign.service";
+import { getCurrentMonthLeaderboard, type LeaderboardEntry } from "../services/leaderboard.service";
+import type { Campaign } from "../types/campaign.types";
 
 const Home = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCampaigns = async () => {
+    document.title = "Nepal360 - Crowdfunding for Nepal";
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const data = await getAllCampaigns();
-        setCampaigns(data);
+        const [campaignsData, leaderboardData] = await Promise.all([
+          getAllCampaigns(),
+          getCurrentMonthLeaderboard().catch(() => ({ entries: [] }))
+        ]);
+        setCampaigns(campaignsData);
+        setLeaderboard(leaderboardData.entries.slice(0, 5));
       } catch (err: any) {
-        setError(err.response?.data?.message || "Failed to fetch campaigns.");
-        toast.error("Error", { description: "Could not load campaigns." });
+        setError(err.response?.data?.message || "Failed to fetch data.");
+        toast.error("Error", { description: "Could not load content." });
       } finally {
         setIsLoading(false);
+        setLeaderboardLoading(false);
       }
     };
-    fetchCampaigns();
+    fetchData();
   }, []);
 
   if (isLoading) {
@@ -57,9 +70,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <section className="relative overflow-hidden pt-16 pb-12 lg:pt-24 lg:pb-20">
-        {/* Background Decorative Element */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,#ecfdf5_0%,#ffffff_100%)]" />
         <div className="container mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mb-6">
@@ -89,7 +100,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Trust Stats - Compact */}
       <section className="py-8 border-y border-gray-100 bg-gray-50/50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200">
@@ -118,7 +128,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Campaigns */}
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-10">
@@ -158,13 +167,85 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section - Minimalist */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-between items-end mb-10">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Top Donors This Month</h2>
+              <p className="text-gray-500 mt-1">Recognizing our most generous contributors</p>
+            </div>
+            <Link to="/leaderboard" className="hidden md:block">
+              <Button variant="ghost" className="text-emerald-600 font-bold hover:bg-emerald-50">
+                View Full Rankings <ArrowRight size={16} className="ml-1" />
+              </Button>
+            </Link>
+          </div>
+
+          {leaderboardLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="h-32 bg-gray-200 rounded-xl animate-pulse" />
+              ))}
+            </div>
+          ) : leaderboard.length === 0 ? (
+            <Card className="bg-white">
+              <CardContent className="py-12 text-center">
+                <Trophy className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-gray-600">No rankings yet</h3>
+                <p className="text-gray-500">Be the first to contribute this month!</p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {leaderboard.map((entry, index) => (
+                <Card 
+                  key={entry.id} 
+                  className={`bg-white hover:shadow-lg transition-shadow cursor-pointer ${
+                    index === 0 ? 'border-2 border-yellow-400' : ''
+                  }`}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className="flex justify-center mb-2">
+                      {index === 0 ? (
+                        <Trophy className="w-8 h-8 text-yellow-500" />
+                      ) : index === 1 ? (
+                        <Medal className="w-8 h-8 text-gray-400" />
+                      ) : index === 2 ? (
+                        <Medal className="w-8 h-8 text-amber-600" />
+                      ) : (
+                        <span className="w-8 h-8 flex items-center justify-center text-lg font-bold text-emerald-600">
+                          #{index + 1}
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-bold text-gray-900 truncate">
+                      {entry.isAnonymous ? 'Anonymous' : entry.user.name}
+                    </p>
+                    <p className="text-sm text-emerald-600 font-semibold">
+                      NPR {Number(entry.totalAmount).toLocaleString()}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {entry.totalItems} items donated
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-12 text-center md:hidden">
+            <Link to="/leaderboard">
+              <Button variant="outline" className="w-full h-12 rounded-xl">View Full Rankings</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="container mx-auto px-6 mb-20">
         <div className="bg-emerald-600 rounded-[2.5rem] p-10 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-emerald-200">
-          {/* Decorative Circles */}
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-500 rounded-full opacity-50" />
           <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 bg-emerald-700 rounded-full opacity-50" />
-          
+
           <div className="relative z-10">
             <h2 className="text-3xl lg:text-5xl font-black text-white mb-6">
               Ready to create an impact?

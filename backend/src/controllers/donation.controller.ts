@@ -1,21 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import { prisma } from '../lib/prisma';
+import { env } from '../config/env';
 import {
   initiateKhaltiPaymentSchema,
   verifyKhaltiPaymentSchema,
 } from '../schemas/donation.schema';
 import { AuthenticatedRequest } from '../types/auth.types';
 
-const KHALTI_API_URL = process.env.KHALTI_API_URL || 'https://dev.khalti.com/api/v2'; // Updated to sandbox URL by default
-const KHALTI_SECRET_KEY = process.env.KHALTI_SECRET_KEY;
+const KHALTI_API_URL = env.KHALTI_API_URL;
+const KHALTI_SECRET_KEY = env.KHALTI_SECRET_KEY;
 
-// ============== Helper function to verify payment ==============
 const verifyPayment = async (pidx: string) => {
-  if (!KHALTI_SECRET_KEY) {
-    throw new Error('Khalti secret key is not configured.');
-  }
-
   const response = await fetch(`${KHALTI_API_URL}/epayment/lookup/`, {
     method: 'POST',
     headers: {
@@ -45,22 +41,41 @@ const verifyPayment = async (pidx: string) => {
     throw new Error('Donation not found or already processed.');
   }
 
-  const updatedDonation = await prisma.moneyDonation.update({
-    where: { id: donation.id },
-    data: {
-      status: 'COMPLETED',
-      paymentRef: data.transaction_id,
-    },
-  });
+  const updatedDonation = await prisma.$transaction(async (tx) => {
+    const updated = await tx.moneyDonation.update({
+      where: { id: donation.id },
+      data: {
+        status: 'COMPLETED',
+        paymentRef: data.transaction_id,
+      },
+    });
 
-  // TODO: Update DonorStats and Campaign donationCount
-  // This can be done via a separate service or a background job
+    await tx.campaign.update({
+      where: { id: donation.campaignId },
+      data: { donationCount: { increment: 1 } },
+    });
+
+    await tx.donorStats.upsert({
+      where: { userId: donation.donorId },
+      create: {
+        userId: donation.donorId,
+        totalMoneyDonated: donation.amount,
+        donationCount: 1,
+        lastDonationAt: new Date(),
+      },
+      update: {
+        totalMoneyDonated: { increment: donation.amount },
+        donationCount: { increment: 1 },
+        lastDonationAt: new Date(),
+      },
+    });
+
+    return updated;
+  });
 
   return updatedDonation;
 };
 
-
-// ============== Controller Functions ==============
 
 export const initiateKhaltiPayment = async (
   req: AuthenticatedRequest,
@@ -68,10 +83,6 @@ export const initiateKhaltiPayment = async (
   next: NextFunction
 ) => {
   try {
-    if (!KHALTI_SECRET_KEY) {
-      throw new Error('Khalti secret key is not configured.');
-    }
-
     const { userId: donorId, name: userName, email } = req.user!;
     const customerName = userName || 'Guest Donor';
     const { campaignId, amount, returnUrl, visibility } =
@@ -81,7 +92,7 @@ export const initiateKhaltiPayment = async (
       where: { id: campaignId },
     });
     if (!campaign) {
-      return res.status(404).json({ message: 'Campaign not found.' });
+      return res.status(404).json({ success: false, message: 'Campaign not found.' });
     }
 
     const donation = await prisma.moneyDonation.create({
@@ -96,35 +107,21 @@ export const initiateKhaltiPayment = async (
 
     const purchase_order_id = donation.id;
     const amountInPaisa = amount * 100;
-    console.log('Preparing to send to Khalti:', {
+
+    const khaltiRequestBody = JSON.stringify({
       return_url: returnUrl,
-      website_url: process.env.WEBSITE_URL || 'http://localhost:3000',
+      website_url: env.WEBSITE_URL,
       amount: amountInPaisa,
       purchase_order_id: purchase_order_id,
       purchase_order_name: `Donation for ${campaign.title}`,
       customer_info: {
         name: customerName,
         email: email,
-        phone: "9800000001" 
+        phone: "9800000001"
       },
     });
 
-    const khaltiRequestBody = JSON.stringify({
-        return_url: returnUrl,
-        website_url: process.env.WEBSITE_URL || 'http://localhost:3000',
-        amount: amountInPaisa,
-        purchase_order_id: purchase_order_id,
-        purchase_order_name: `Donation for ${campaign.title}`,
-        customer_info: {
-          name: customerName,
-          email: email,
-          phone: "9800000001" // Added phone for sandbox testing
-        },
-      });
-
-    console.log('Sending to Khalti:', khaltiRequestBody);
-
-    const khaltiResponse = await fetch(`${KHALTI_API_URL}/epayment/initiate/`, { // Changed /payment/initiate/ to /epayment/initiate/
+    const khaltiResponse = await fetch(`${KHALTI_API_URL}/epayment/initiate/`, {
       method: 'POST',
       headers: {
         Authorization: `Key ${KHALTI_SECRET_KEY}`,
@@ -134,24 +131,23 @@ export const initiateKhaltiPayment = async (
     });
 
     if (!khaltiResponse.ok) {
-      const errorText = await khaltiResponse.text(); // Get raw text to see HTML
-      console.error('Khalti initiation failed. Status:', khaltiResponse.status, 'Response:', errorText);
-      return res.status(500).json({ message: 'Failed to initiate Khalti payment. Check server logs for details.' });
+      const errorText = await khaltiResponse.text();
+      console.error('Khalti initiation failed:', khaltiResponse.status, errorText);
+      return res.status(500).json({ success: false, message: 'Failed to initiate Khalti payment. Check server logs for details.' });
     }
 
     const khaltiData = await khaltiResponse.json();
-    console.log('Received from Khalti:', khaltiData);
 
     await prisma.moneyDonation.update({
       where: { id: donation.id },
       data: { pidx: khaltiData.pidx },
     });
 
-    res.status(200).json({ paymentUrl: khaltiData.payment_url });
+    res.status(200).json({ success: true, data: { paymentUrl: khaltiData.payment_url } });
 
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(400).json({ message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
+      return res.status(400).json({ success: false, message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
     }
     next(error);
   }
@@ -171,7 +167,7 @@ export const verifyKhaltiPayment = async (
     });
 
     if (!donation) {
-        return res.status(404).json({ message: 'Donation not found or you are not authorized to verify it.' });
+        return res.status(404).json({ success: false, message: 'Donation not found or you are not authorized to verify it.' });
     }
 
     if (donation.status === 'COMPLETED') {
@@ -180,10 +176,10 @@ export const verifyKhaltiPayment = async (
 
     const updatedDonation = await verifyPayment(pidx);
 
-    res.status(200).json({ success: true, donation: updatedDonation });
+    res.status(200).json({ success: true, data: updatedDonation });
   } catch (error) {
      if (error instanceof ZodError) {
-      return res.status(400).json({ message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
+      return res.status(400).json({ success: false, message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
     }
     next(error);
   }
@@ -196,16 +192,15 @@ export const handleKhaltiCallback = async (
 ) => {
     const { pidx } = req.body;
     if (!pidx) {
-        return res.status(400).json({ message: 'pidx is required.' });
+        return res.status(400).json({ success: false, message: 'pidx is required.' });
     }
 
     try {
         await verifyPayment(pidx);
         res.status(200).json({ success: true });
     } catch (error) {
-        // Log the error, but don't send detailed error back to Khalti
         console.error('Khalti callback verification failed:', error);
-        res.status(200).json({ success: false }); // Still send 200 to acknowledge receipt
+        res.status(200).json({ success: false });
     }
 };
 
@@ -234,7 +229,7 @@ export const getMyMoneyDonations = async (
             }
         });
 
-        res.status(200).json(donations);
+        res.status(200).json({ success: true, data: donations });
     } catch (error) {
         next(error);
     }
@@ -245,7 +240,6 @@ export const getCampaignDonors = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('Received request for campaign donors:', req.params.id, req.query);
   try {
     const { id: campaignId } = req.params;
     const page = parseInt(req.query.page as string) || 1;
@@ -257,18 +251,12 @@ export const getCampaignDonors = async (
         campaignId,
         status: 'COMPLETED',
       },
-      orderBy: {
-        amount: 'desc', // Sort by highest amount
-      },
+      orderBy: { amount: 'desc' },
       take: limit,
       skip: skip,
       include: {
         donor: {
-          select: {
-            id: true,
-            name: true,
-            // Only include name if visibility is public, otherwise anonymize
-          },
+          select: { id: true, name: true },
         },
       },
     });
@@ -288,10 +276,13 @@ export const getCampaignDonors = async (
     }));
 
     res.status(200).json({
-      donors: formattedDonations,
-      currentPage: page,
-      totalPages: Math.ceil(totalDonations / limit),
-      totalDonors: totalDonations,
+      success: true,
+      data: {
+        donors: formattedDonations,
+        currentPage: page,
+        totalPages: Math.ceil(totalDonations / limit),
+        totalDonors: totalDonations,
+      },
     });
   } catch (error) {
     console.error('Error fetching campaign donors:', error);
