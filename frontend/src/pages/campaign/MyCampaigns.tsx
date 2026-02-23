@@ -69,7 +69,18 @@ const MyCampaigns = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {campaigns.map((campaign) => (
-            <CampaignCard key={campaign.id} campaign={campaign} />
+            <div key={campaign.id} className="flex flex-col">
+              <CampaignCard campaign={campaign} />
+              <Link to={`/campaigns/${campaign.id}/analytics`} className="mt-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                >
+                  View Analytics
+                </Button>
+              </Link>
+            </div>
           ))}
         </div>
       )}

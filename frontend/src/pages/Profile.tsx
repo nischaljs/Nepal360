@@ -175,6 +175,14 @@ const Profile = () => {
                   <p className="text-xs text-gray-500">Items Pledged</p>
                 </div>
               </div>
+              <Link to="/impact">
+                <Button
+                  variant="outline"
+                  className="w-full mt-2 border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                >
+                  View My Impact
+                </Button>
+              </Link>
               <Link to="/campaigns/me">
                 <Button
                   variant="outline"
