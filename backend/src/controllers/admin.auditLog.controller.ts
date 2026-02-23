@@ -29,7 +29,7 @@ export const listAuditLogs = async (
       },
       take: 100, // Add pagination limit
     });
-    res.status(200).json(logs);
+    res.status(200).json({ success: true, data: logs });
   } catch (error) {
     next(error);
   }
@@ -61,7 +61,7 @@ export const getAuditLogsForTarget = async (
         createdAt: 'desc',
       },
     });
-    res.status(200).json(logs);
+    res.status(200).json({ success: true, data: logs });
   } catch (error) {
     next(error);
   }

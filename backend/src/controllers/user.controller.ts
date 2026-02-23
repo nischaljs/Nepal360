@@ -24,7 +24,7 @@ export const getMyStats = async (
   try {
     const { userId: userId } = req.user!;
     const stats = await findOrCreateDonorStats(userId);
-    res.status(200).json(stats);
+    res.status(200).json({ success: true, data: stats });
   } catch (error) {
     next(error);
   }
@@ -46,7 +46,7 @@ export const getMyBadges = async (
         awardedAt: 'desc',
       },
     });
-    res.status(200).json(userBadges);
+    res.status(200).json({ success: true, data: userBadges });
   } catch (error) {
     next(error);
   }
@@ -60,9 +60,7 @@ export const getUserStats = async (
   try {
     const { userId } = req.params;
     const stats = await findOrCreateDonorStats(userId);
-    // For public view, you might want to select a subset of fields
-    // but for now, we return the whole object as the model itself is public-safe.
-    res.status(200).json(stats);
+    res.status(200).json({ success: true, data: stats });
   } catch (error) {
     next(error);
   }
@@ -100,7 +98,7 @@ export const getMyDonationHistory = async (
 
         allDonations.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
-        res.status(200).json(allDonations);
+        res.status(200).json({ success: true, data: allDonations });
 
     } catch (error) {
         next(error);

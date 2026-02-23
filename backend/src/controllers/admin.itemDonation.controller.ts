@@ -16,7 +16,7 @@ export const listItemDonations = async (
     status &&
     !['PLEDGED', 'DELIVERED', 'CONFIRMED', 'REJECTED'].includes(status as string)
   ) {
-    return res.status(400).json({ message: 'Invalid status filter.' });
+    return res.status(400).json({ success: false, message: 'Invalid status filter.' });
   }
 
   try {
@@ -37,7 +37,7 @@ export const listItemDonations = async (
       },
     });
 
-    res.status(200).json(donations);
+    res.status(200).json({ success: true, data: donations });
   } catch (error) {
     next(error);
   }
@@ -70,10 +70,8 @@ export const confirmItemDonation = async (
         note: 'Item donation confirmed',
       },
     });
-    
-    // TODO: Update DonorStats and Campaign donationCount
 
-    res.status(200).json(donation);
+    res.status(200).json({ success: true, data: donation });
   } catch (error) {
     next(error);
   }
@@ -107,10 +105,10 @@ export const rejectItemDonation = async (
       },
     });
 
-    res.status(200).json(donation);
+    res.status(200).json({ success: true, data: donation });
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(400).json({ message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
+      return res.status(400).json({ success: false, message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
     }
     next(error);
   }

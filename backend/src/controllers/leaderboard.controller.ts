@@ -14,7 +14,7 @@ export const listLeaderboards = async (
         createdAt: 'desc',
       },
     });
-    res.status(200).json(leaderboards);
+    res.status(200).json({ success: true, data: leaderboards });
   } catch (error) {
     next(error);
   }
@@ -29,7 +29,7 @@ export const getLeaderboard = async (
     const { period, key } = req.params;
 
     if (!['MONTHLY', 'CAMPAIGN', 'YEARLY'].includes(period.toUpperCase())) {
-        return res.status(400).json({ message: 'Invalid leaderboard period.' });
+        return res.status(400).json({ success: false, message: 'Invalid leaderboard period.' });
     }
 
     const leaderboard = await prisma.leaderboard.findUnique({
@@ -57,10 +57,10 @@ export const getLeaderboard = async (
     });
 
     if (!leaderboard) {
-      return res.status(404).json({ message: 'Leaderboard not found.' });
+      return res.status(404).json({ success: false, message: 'Leaderboard not found.' });
     }
 
-    res.status(200).json(leaderboard);
+    res.status(200).json({ success: true, data: leaderboard });
   } catch (error) {
     next(error);
   }

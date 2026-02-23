@@ -7,19 +7,21 @@ import {
 } from '../controllers/donation.controller';
 import { requireAuth } from '../middlewares/auth.middleware';
 import { catchAsync } from '../middlewares/errohandler.middleware';
+import { paymentLimiter } from '../middlewares/rateLimit.middleware';
 import itemDonationRoutes from './itemDonation.routes';
 
 const router = Router();
 
-// Routes for money donations, specifically with Khalti
 router.post(
   '/money/khalti/initiate',
   requireAuth,
+  paymentLimiter,
   catchAsync(initiateKhaltiPayment)
 );
 router.post(
   '/money/khalti/verify',
   requireAuth,
+  paymentLimiter,
   catchAsync(verifyKhaltiPayment)
 );
 router.get('/money/me', requireAuth, catchAsync(getMyMoneyDonations));

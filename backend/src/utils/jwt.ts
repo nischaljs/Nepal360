@@ -1,7 +1,8 @@
 import * as jwt from 'jsonwebtoken';
 import { TokenPayload } from '../types/auth.types';
+import { env } from '../config/env';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = env.JWT_SECRET;
 const JWT_EXPIRY = '7d';
 
 export function generateToken(payload: TokenPayload): string {

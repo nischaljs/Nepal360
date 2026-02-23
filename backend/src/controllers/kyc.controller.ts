@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import { prisma } from '../lib/prisma';
+import { env } from '../config/env';
 import { submitKycSchema } from '../schemas/kyc.schema';
 import { AuthenticatedRequest, AuthenticatedRequestWithFiles } from '../types/auth.types';
 import { getRelativePath, generateAssetUrl } from '../utils/file';
-import path from 'path'; // Import path module
+import path from 'path';
 
-const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3000'; // Define base URL
+const BASE_URL = env.BACKEND_URL;
 
 export const submitKyc = async (
   req: AuthenticatedRequestWithFiles,
@@ -19,10 +20,10 @@ export const submitKyc = async (
 
     // Validate file uploads
     if (!files || !files.documentImage || files.documentImage.length === 0) {
-      return res.status(400).json({ message: 'Document image is required.' });
+      return res.status(400).json({ success: false, message: 'Document image is required.' });
     }
     if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
-      return res.status(400).json({ message: 'Profile photo is required.' });
+      return res.status(400).json({ success: false, message: 'Profile photo is required.' });
     }
 
     const documentImageRelativePath = getRelativePath(files.documentImage[0].path);
@@ -43,7 +44,7 @@ export const submitKyc = async (
     if (existingKyc) {
       return res
         .status(409)
-        .json({ message: 'KYC profile already exists.' });
+        .json({ success: false, message: 'KYC profile already exists.' });
     }
 
     const newKyc = await prisma.kYCProfile.create({
@@ -54,7 +55,6 @@ export const submitKyc = async (
       },
     });
 
-    // Convert relative paths to full URLs for the response
     const responseKyc = {
       ...newKyc,
       documentImage: generateAssetUrl(newKyc.documentImage, BASE_URL),
@@ -63,10 +63,11 @@ export const submitKyc = async (
 
     res
       .status(201)
-      .json({ message: 'KYC profile submitted successfully.', kyc: responseKyc });
+      .json({ success: true, message: 'KYC profile submitted successfully.', data: responseKyc });
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
+        success: false,
         message: 'Validation error',
         errors: error.issues.map((e) => ({
           path: e.path,
@@ -99,17 +100,16 @@ export const getMyKycStatus = async (
     });
 
     if (!kyc) {
-      return res.status(200).json({ status: 'NOT_SUBMITTED' });
+      return res.status(200).json({ success: true, data: { status: 'NOT_SUBMITTED' } });
     }
 
-    // Convert relative paths to full URLs for the response
     const responseKyc = {
       ...kyc,
       documentImage: kyc.documentImage ? generateAssetUrl(kyc.documentImage, BASE_URL) : undefined,
       profilePhoto: kyc.profilePhoto ? generateAssetUrl(kyc.profilePhoto, BASE_URL) : undefined,
     };
 
-    res.status(200).json(responseKyc);
+    res.status(200).json({ success: true, data: responseKyc });
   } catch (error) {
     next(error);
   }
@@ -126,10 +126,10 @@ export const resubmitKyc = async (
 
     // Validate file uploads
     if (!files || !files.documentImage || files.documentImage.length === 0) {
-      return res.status(400).json({ message: 'Document image is required.' });
+      return res.status(400).json({ success: false, message: 'Document image is required.' });
     }
     if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
-      return res.status(400).json({ message: 'Profile photo is required.' });
+      return res.status(400).json({ success: false, message: 'Profile photo is required.' });
     }
 
     const documentImageRelativePath = getRelativePath(files.documentImage[0].path);
@@ -148,11 +148,12 @@ export const resubmitKyc = async (
     });
 
     if (!existingKyc) {
-      return res.status(404).json({ message: 'KYC profile not found.' });
+      return res.status(404).json({ success: false, message: 'KYC profile not found.' });
     }
 
     if (existingKyc.status !== 'REJECTED') {
       return res.status(403).json({
+        success: false,
         message: 'You can only resubmit a rejected KYC profile.',
       });
     }
@@ -166,7 +167,6 @@ export const resubmitKyc = async (
       },
     });
 
-    // Convert relative paths to full URLs for the response
     const responseKyc = {
       ...updatedKyc,
       documentImage: generateAssetUrl(updatedKyc.documentImage, BASE_URL),
@@ -174,12 +174,14 @@ export const resubmitKyc = async (
     };
 
     res.status(200).json({
+      success: true,
       message: 'KYC profile resubmitted successfully.',
-      kyc: responseKyc,
+      data: responseKyc,
     });
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
+        success: false,
         message: 'Validation error',
         errors: error.issues.map((e) => ({
           path: e.path,

@@ -13,7 +13,7 @@ export const listKycProfiles = async (
   const { status } = req.query;
 
   if (status && !['PENDING', 'APPROVED', 'REJECTED'].includes(status as string)) {
-    return res.status(400).json({ message: 'Invalid status filter.' });
+    return res.status(400).json({ success: false, message: 'Invalid status filter.' });
   }
 
   try {
@@ -32,7 +32,7 @@ export const listKycProfiles = async (
       },
     });
 
-    res.status(200).json(kycProfiles);
+    res.status(200).json({ success: true, data: kycProfiles });
   } catch (error) {
     next(error);
   }
@@ -54,7 +54,7 @@ export const getKycDetail = async (
     });
 
     if (!kycProfile) {
-      return res.status(404).json({ message: 'KYC profile not found.' });
+      return res.status(404).json({ success: false, message: 'KYC profile not found.' });
     }
 
     const auditLogs = await prisma.auditLog.findMany({
@@ -67,7 +67,7 @@ export const getKycDetail = async (
       },
     });
 
-    res.status(200).json({ ...kycProfile, auditLogs });
+    res.status(200).json({ success: true, data: { ...kycProfile, auditLogs } });
   } catch (error) {
     next(error);
   }
@@ -101,7 +101,7 @@ export const approveKyc = async (
       },
     });
 
-    res.status(200).json({ message: 'KYC profile approved.', kycProfile });
+    res.status(200).json({ success: true, message: 'KYC profile approved.', data: kycProfile });
   } catch (error) {
     next(error);
   }
@@ -138,10 +138,11 @@ export const rejectKyc = async (
       },
     });
 
-    res.status(200).json({ message: 'KYC profile rejected.', kycProfile });
+    res.status(200).json({ success: true, message: 'KYC profile rejected.', data: kycProfile });
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
+        success: false,
         message: 'Validation error',
         errors: error.issues.map((e) => ({
           path: e.path,

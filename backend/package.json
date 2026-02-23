@@ -6,7 +6,9 @@
     "scripts": {
         "dev": "tsx watch src/server.ts",
         "build": "tsc",
-        "start": "node dist/server.js"
+        "start": "node dist/server.js",
+        "db:generate": "prisma generate",
+        "db:migrate": "prisma migrate dev"
     },
     "keywords": [],
     "author": "",
@@ -14,6 +16,7 @@
     "packageManager": "pnpm@10.13.1",
     "devDependencies": {
         "@types/jsonwebtoken": "^9.0.10",
+        "@types/pdfkit": "^0.17.4",
         "dotenv": "^17.2.3",
         "prisma": "^7.2.0",
         "tsx": "^4.21.0",
@@ -25,12 +28,16 @@
         "@types/cors": "^2.8.19",
         "@types/express": "^5.0.6",
         "@types/multer": "^2.0.0",
+        "@types/node": "^25.2.0",
         "bcryptjs": "^3.0.3",
         "cors": "^2.8.5",
+        "date-fns": "^4.1.0",
         "express": "^5.2.1",
+        "express-rate-limit": "^7.5.0",
         "jsonwebtoken": "^9.0.2",
         "multer": "^2.0.2",
         "mysql2": "^3.16.0",
+        "pdfkit": "^0.17.1",
         "zod": "^4.2.1"
     }
 }
