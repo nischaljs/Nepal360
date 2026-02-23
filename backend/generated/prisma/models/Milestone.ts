@@ -28,10 +28,12 @@ export type AggregateMilestone = {
 
 export type MilestoneAvgAggregateOutputType = {
   amount: runtime.Decimal | null
+  releasedAmount: runtime.Decimal | null
 }
 
 export type MilestoneSumAggregateOutputType = {
   amount: runtime.Decimal | null
+  releasedAmount: runtime.Decimal | null
 }
 
 export type MilestoneMinAggregateOutputType = {
@@ -40,6 +42,12 @@ export type MilestoneMinAggregateOutputType = {
   title: string | null
   amount: runtime.Decimal | null
   completed: boolean | null
+  fundsReleased: boolean | null
+  releasedAmount: runtime.Decimal | null
+  releasedAt: Date | null
+  verifiedBy: string | null
+  claimStatus: string | null
+  claimProof: string | null
   createdAt: Date | null
 }
 
@@ -49,6 +57,12 @@ export type MilestoneMaxAggregateOutputType = {
   title: string | null
   amount: runtime.Decimal | null
   completed: boolean | null
+  fundsReleased: boolean | null
+  releasedAmount: runtime.Decimal | null
+  releasedAt: Date | null
+  verifiedBy: string | null
+  claimStatus: string | null
+  claimProof: string | null
   createdAt: Date | null
 }
 
@@ -58,6 +72,12 @@ export type MilestoneCountAggregateOutputType = {
   title: number
   amount: number
   completed: number
+  fundsReleased: number
+  releasedAmount: number
+  releasedAt: number
+  verifiedBy: number
+  claimStatus: number
+  claimProof: number
   createdAt: number
   _all: number
 }
@@ -65,10 +85,12 @@ export type MilestoneCountAggregateOutputType = {
 
 export type MilestoneAvgAggregateInputType = {
   amount?: true
+  releasedAmount?: true
 }
 
 export type MilestoneSumAggregateInputType = {
   amount?: true
+  releasedAmount?: true
 }
 
 export type MilestoneMinAggregateInputType = {
@@ -77,6 +99,12 @@ export type MilestoneMinAggregateInputType = {
   title?: true
   amount?: true
   completed?: true
+  fundsReleased?: true
+  releasedAmount?: true
+  releasedAt?: true
+  verifiedBy?: true
+  claimStatus?: true
+  claimProof?: true
   createdAt?: true
 }
 
@@ -86,6 +114,12 @@ export type MilestoneMaxAggregateInputType = {
   title?: true
   amount?: true
   completed?: true
+  fundsReleased?: true
+  releasedAmount?: true
+  releasedAt?: true
+  verifiedBy?: true
+  claimStatus?: true
+  claimProof?: true
   createdAt?: true
 }
 
@@ -95,6 +129,12 @@ export type MilestoneCountAggregateInputType = {
   title?: true
   amount?: true
   completed?: true
+  fundsReleased?: true
+  releasedAmount?: true
+  releasedAt?: true
+  verifiedBy?: true
+  claimStatus?: true
+  claimProof?: true
   createdAt?: true
   _all?: true
 }
@@ -191,6 +231,12 @@ export type MilestoneGroupByOutputType = {
   title: string
   amount: runtime.Decimal
   completed: boolean
+  fundsReleased: boolean
+  releasedAmount: runtime.Decimal | null
+  releasedAt: Date | null
+  verifiedBy: string | null
+  claimStatus: string
+  claimProof: string | null
   createdAt: Date
   _count: MilestoneCountAggregateOutputType | null
   _avg: MilestoneAvgAggregateOutputType | null
@@ -223,6 +269,12 @@ export type MilestoneWhereInput = {
   title?: Prisma.StringFilter<"Milestone"> | string
   amount?: Prisma.DecimalFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFilter<"Milestone"> | boolean
+  fundsReleased?: Prisma.BoolFilter<"Milestone"> | boolean
+  releasedAmount?: Prisma.DecimalNullableFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.DateTimeNullableFilter<"Milestone"> | Date | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Milestone"> | string | null
+  claimStatus?: Prisma.StringFilter<"Milestone"> | string
+  claimProof?: Prisma.StringNullableFilter<"Milestone"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Milestone"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }
@@ -233,6 +285,12 @@ export type MilestoneOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   completed?: Prisma.SortOrder
+  fundsReleased?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  releasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  claimStatus?: Prisma.SortOrder
+  claimProof?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   campaign?: Prisma.CampaignOrderByWithRelationInput
   _relevance?: Prisma.MilestoneOrderByRelevanceInput
@@ -247,6 +305,12 @@ export type MilestoneWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Milestone"> | string
   amount?: Prisma.DecimalFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFilter<"Milestone"> | boolean
+  fundsReleased?: Prisma.BoolFilter<"Milestone"> | boolean
+  releasedAmount?: Prisma.DecimalNullableFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.DateTimeNullableFilter<"Milestone"> | Date | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Milestone"> | string | null
+  claimStatus?: Prisma.StringFilter<"Milestone"> | string
+  claimProof?: Prisma.StringNullableFilter<"Milestone"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Milestone"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }, "id">
@@ -257,6 +321,12 @@ export type MilestoneOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   completed?: Prisma.SortOrder
+  fundsReleased?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  releasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  claimStatus?: Prisma.SortOrder
+  claimProof?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MilestoneCountOrderByAggregateInput
   _avg?: Prisma.MilestoneAvgOrderByAggregateInput
@@ -274,6 +344,12 @@ export type MilestoneScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Milestone"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolWithAggregatesFilter<"Milestone"> | boolean
+  fundsReleased?: Prisma.BoolWithAggregatesFilter<"Milestone"> | boolean
+  releasedAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Milestone"> | Date | string | null
+  verifiedBy?: Prisma.StringNullableWithAggregatesFilter<"Milestone"> | string | null
+  claimStatus?: Prisma.StringWithAggregatesFilter<"Milestone"> | string
+  claimProof?: Prisma.StringNullableWithAggregatesFilter<"Milestone"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Milestone"> | Date | string
 }
 
@@ -282,6 +358,12 @@ export type MilestoneCreateInput = {
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
   campaign: Prisma.CampaignCreateNestedOneWithoutMilestonesInput
 }
@@ -292,6 +374,12 @@ export type MilestoneUncheckedCreateInput = {
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
 }
 
@@ -300,6 +388,12 @@ export type MilestoneUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMilestonesNestedInput
 }
@@ -310,6 +404,12 @@ export type MilestoneUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -319,6 +419,12 @@ export type MilestoneCreateManyInput = {
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
 }
 
@@ -327,6 +433,12 @@ export type MilestoneUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -336,6 +448,12 @@ export type MilestoneUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -361,11 +479,18 @@ export type MilestoneCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   completed?: Prisma.SortOrder
+  fundsReleased?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrder
+  releasedAt?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  claimStatus?: Prisma.SortOrder
+  claimProof?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type MilestoneAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrder
 }
 
 export type MilestoneMaxOrderByAggregateInput = {
@@ -374,6 +499,12 @@ export type MilestoneMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   completed?: Prisma.SortOrder
+  fundsReleased?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrder
+  releasedAt?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  claimStatus?: Prisma.SortOrder
+  claimProof?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -383,11 +514,18 @@ export type MilestoneMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   completed?: Prisma.SortOrder
+  fundsReleased?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrder
+  releasedAt?: Prisma.SortOrder
+  verifiedBy?: Prisma.SortOrder
+  claimStatus?: Prisma.SortOrder
+  claimProof?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type MilestoneSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  releasedAmount?: Prisma.SortOrder
 }
 
 export type MilestoneCreateNestedManyWithoutCampaignInput = {
@@ -432,11 +570,25 @@ export type MilestoneUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.MilestoneScalarWhereInput | Prisma.MilestoneScalarWhereInput[]
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type MilestoneCreateWithoutCampaignInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
 }
 
@@ -445,6 +597,12 @@ export type MilestoneUncheckedCreateWithoutCampaignInput = {
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
 }
 
@@ -483,6 +641,12 @@ export type MilestoneScalarWhereInput = {
   title?: Prisma.StringFilter<"Milestone"> | string
   amount?: Prisma.DecimalFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFilter<"Milestone"> | boolean
+  fundsReleased?: Prisma.BoolFilter<"Milestone"> | boolean
+  releasedAmount?: Prisma.DecimalNullableFilter<"Milestone"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.DateTimeNullableFilter<"Milestone"> | Date | string | null
+  verifiedBy?: Prisma.StringNullableFilter<"Milestone"> | string | null
+  claimStatus?: Prisma.StringFilter<"Milestone"> | string
+  claimProof?: Prisma.StringNullableFilter<"Milestone"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Milestone"> | Date | string
 }
 
@@ -491,6 +655,12 @@ export type MilestoneCreateManyCampaignInput = {
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Date | string | null
+  verifiedBy?: string | null
+  claimStatus?: string
+  claimProof?: string | null
   createdAt?: Date | string
 }
 
@@ -499,6 +669,12 @@ export type MilestoneUpdateWithoutCampaignInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -507,6 +683,12 @@ export type MilestoneUncheckedUpdateWithoutCampaignInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -515,6 +697,12 @@ export type MilestoneUncheckedUpdateManyWithoutCampaignInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fundsReleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  releasedAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  claimProof?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -526,6 +714,12 @@ export type MilestoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   title?: boolean
   amount?: boolean
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: boolean
+  releasedAt?: boolean
+  verifiedBy?: boolean
+  claimStatus?: boolean
+  claimProof?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["milestone"]>
@@ -538,10 +732,16 @@ export type MilestoneSelectScalar = {
   title?: boolean
   amount?: boolean
   completed?: boolean
+  fundsReleased?: boolean
+  releasedAmount?: boolean
+  releasedAt?: boolean
+  verifiedBy?: boolean
+  claimStatus?: boolean
+  claimProof?: boolean
   createdAt?: boolean
 }
 
-export type MilestoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "title" | "amount" | "completed" | "createdAt", ExtArgs["result"]["milestone"]>
+export type MilestoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "title" | "amount" | "completed" | "fundsReleased" | "releasedAmount" | "releasedAt" | "verifiedBy" | "claimStatus" | "claimProof" | "createdAt", ExtArgs["result"]["milestone"]>
 export type MilestoneInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }
@@ -557,6 +757,12 @@ export type $MilestonePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     title: string
     amount: runtime.Decimal
     completed: boolean
+    fundsReleased: boolean
+    releasedAmount: runtime.Decimal | null
+    releasedAt: Date | null
+    verifiedBy: string | null
+    claimStatus: string
+    claimProof: string | null
     createdAt: Date
   }, ExtArgs["result"]["milestone"]>
   composites: {}
@@ -933,6 +1139,12 @@ export interface MilestoneFieldRefs {
   readonly title: Prisma.FieldRef<"Milestone", 'String'>
   readonly amount: Prisma.FieldRef<"Milestone", 'Decimal'>
   readonly completed: Prisma.FieldRef<"Milestone", 'Boolean'>
+  readonly fundsReleased: Prisma.FieldRef<"Milestone", 'Boolean'>
+  readonly releasedAmount: Prisma.FieldRef<"Milestone", 'Decimal'>
+  readonly releasedAt: Prisma.FieldRef<"Milestone", 'DateTime'>
+  readonly verifiedBy: Prisma.FieldRef<"Milestone", 'String'>
+  readonly claimStatus: Prisma.FieldRef<"Milestone", 'String'>
+  readonly claimProof: Prisma.FieldRef<"Milestone", 'String'>
   readonly createdAt: Prisma.FieldRef<"Milestone", 'DateTime'>
 }
     

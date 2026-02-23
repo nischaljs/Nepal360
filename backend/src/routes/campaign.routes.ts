@@ -13,12 +13,15 @@ import {
 import { incrementVisitCount } from '../controllers/campaign/visit.controller';
 import { incrementShareCount } from '../controllers/campaign/share.controller';
 import { getCampaignDonors } from '../controllers/donation.controller';
+import { getCampaignAnalytics } from '../controllers/campaign/analytics.controller';
+import { claimMilestone } from '../controllers/admin.milestone.controller';
 
 import {
     requireAuth,
     requireVerifiedEmail,
     requireApprovedKYC,
 } from '../middlewares/auth.middleware';
+import { catchAsync } from '../middlewares/errohandler.middleware';
 import { createCampaignUpload } from '../config/multer';
 import { AuthenticatedRequest } from '../types/auth.types';
 
@@ -30,7 +33,8 @@ router.get('/public/:id', getCampaignPublic);
 router.post('/public/:id/visit', incrementVisitCount);
 router.post('/public/:id/share', incrementShareCount);
 router.get('/:id/stats', getCampaignStats);
-router.get('/:id/donors', getCampaignDonors); // New route for campaign donors
+router.get('/:id/donors', getCampaignDonors);
+router.get('/:id/analytics', requireAuth, catchAsync(getCampaignAnalytics));
 
 // Apply authentication middlewares to all routes
 router.use(requireAuth, requireVerifiedEmail, requireApprovedKYC);
@@ -56,5 +60,6 @@ router.put('/:id', updateCampaign);
 // Milestone endpoints
 router.post('/:id/milestones', addMilestone);
 router.delete('/:id/milestones/:milestoneId', deleteMilestone);
+router.post('/milestones/:id/claim', catchAsync(claimMilestone));
 
 export default router;

@@ -30,6 +30,13 @@ import { Button } from "../../components/ui/button";
 import { Separator } from "../../components/ui/separator";
 import { format } from "date-fns";
 import { Input } from "../../components/ui/input";
+import { Badge } from "../../components/ui/badge";
+import {
+  getAdminMilestones,
+  releaseMilestoneFunds,
+  rejectMilestoneClaim,
+} from "../../services/admin.milestone.service";
+import type { Milestone } from "../../types/campaign.types";
 
 
 const AdminCampaignDetail = () => {
@@ -49,6 +56,19 @@ const AdminCampaignDetail = () => {
   const [suspensionNote, setSuspensionNote] = useState("");
   const [deleteReason, setDeleteReason] = useState("");
   const [deleteNote, setDeleteNote] = useState("");
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
+  const [rejectReasons, setRejectReasons] = useState<Record<string, string>>({});
+  const [milestoneActionLoading, setMilestoneActionLoading] = useState<string | null>(null);
+
+  const fetchMilestones = async () => {
+    if (!id) return;
+    try {
+      const data = await getAdminMilestones(id);
+      setMilestones(data);
+    } catch {
+      // Milestones will fall back to campaign data
+    }
+  };
 
   const fetchCampaignData = async () => {
     if (!id) return;
@@ -74,6 +94,7 @@ const AdminCampaignDetail = () => {
 
   useEffect(() => {
     fetchCampaignData();
+    fetchMilestones();
   }, [id]);
 
   const handleAction = async (
@@ -226,23 +247,109 @@ const AdminCampaignDetail = () => {
 
               <Separator className="my-6" />
 
-              <h3 className="text-xl font-semibold mb-3">Milestones</h3>
-              {campaign.milestones.length === 0 ? (
+              <h3 className="text-xl font-semibold mb-3">Milestones & Fund Release</h3>
+              {(milestones.length > 0 ? milestones : campaign.milestones).length === 0 ? (
                 <p>No milestones set for this campaign.</p>
               ) : (
-                <ul className="space-y-2">
-                  {campaign.milestones.map((milestone) => (
-                    <li
-                      key={milestone.id}
-                      className="flex justify-between items-center bg-gray-100 p-3 rounded-md"
-                    >
-                      <span>
-                        {milestone.title} - Rs.
-                        {parseFloat(milestone.amount).toFixed(2)}{" "}
-                        {milestone.completed && "(Completed)"}
-                      </span>
-                    </li>
-                  ))}
+                <ul className="space-y-3">
+                  {(milestones.length > 0 ? milestones : campaign.milestones).map((milestone) => {
+                    const claimStatus = milestone.claimStatus || "UNCLAIMED";
+                    const isClaimed = claimStatus === "CLAIMED";
+                    const claimColor = milestone.fundsReleased
+                      ? "bg-emerald-100 text-emerald-700 border-emerald-200"
+                      : isClaimed
+                      ? "bg-blue-100 text-blue-700 border-blue-200"
+                      : claimStatus === "REJECTED"
+                      ? "bg-red-100 text-red-700 border-red-200"
+                      : "bg-gray-100 text-gray-600 border-gray-200";
+                    const claimLabel = milestone.fundsReleased
+                      ? "Funds Released"
+                      : claimStatus === "CLAIMED"
+                      ? "Claimed - Pending Review"
+                      : claimStatus === "REJECTED"
+                      ? "Rejected"
+                      : "Unclaimed";
+
+                    return (
+                      <li key={milestone.id} className="bg-gray-50 border border-gray-200 p-4 rounded-lg">
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <span className="font-semibold">{milestone.title}</span>
+                            <span className="text-gray-500 ml-2">
+                              Rs.{parseFloat(milestone.amount).toFixed(2)}
+                            </span>
+                          </div>
+                          <Badge variant="outline" className={claimColor}>
+                            {claimLabel}
+                          </Badge>
+                        </div>
+                        {milestone.claimProof && (
+                          <p className="text-sm text-gray-600 mb-2">
+                            Proof: {milestone.claimProof}
+                          </p>
+                        )}
+                        {milestone.fundsReleased && milestone.releasedAmount && (
+                          <p className="text-sm text-emerald-600 mb-2">
+                            Released: Rs.{parseFloat(milestone.releasedAmount).toFixed(2)}
+                            {milestone.releasedAt && ` on ${format(new Date(milestone.releasedAt), "PP")}`}
+                          </p>
+                        )}
+                        {isClaimed && !milestone.fundsReleased && (
+                          <div className="flex items-center gap-2 mt-3">
+                            <Button
+                              size="sm"
+                              disabled={milestoneActionLoading === milestone.id}
+                              onClick={async () => {
+                                setMilestoneActionLoading(milestone.id);
+                                try {
+                                  await releaseMilestoneFunds(milestone.id);
+                                  toast.success("Funds released successfully.");
+                                  fetchMilestones();
+                                  fetchCampaignData();
+                                } catch (err: any) {
+                                  toast.error(err.response?.data?.message || "Failed to release funds.");
+                                } finally {
+                                  setMilestoneActionLoading(null);
+                                }
+                              }}
+                              className="bg-emerald-600 hover:bg-emerald-700"
+                            >
+                              Release Funds
+                            </Button>
+                            <Input
+                              placeholder="Rejection reason"
+                              value={rejectReasons[milestone.id] || ""}
+                              onChange={(e) =>
+                                setRejectReasons((prev) => ({ ...prev, [milestone.id]: e.target.value }))
+                              }
+                              className="h-9 flex-1"
+                            />
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              disabled={milestoneActionLoading === milestone.id}
+                              onClick={async () => {
+                                setMilestoneActionLoading(milestone.id);
+                                try {
+                                  await rejectMilestoneClaim(milestone.id, rejectReasons[milestone.id]);
+                                  toast.success("Milestone claim rejected.");
+                                  setRejectReasons((prev) => ({ ...prev, [milestone.id]: "" }));
+                                  fetchMilestones();
+                                  fetchCampaignData();
+                                } catch (err: any) {
+                                  toast.error(err.response?.data?.message || "Failed to reject claim.");
+                                } finally {
+                                  setMilestoneActionLoading(null);
+                                }
+                              }}
+                            >
+                              Reject
+                            </Button>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </CardContent>

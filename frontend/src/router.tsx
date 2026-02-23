@@ -27,6 +27,9 @@ const Leaderboard = lazy(() => import("./pages/leaderboard/Leaderboard"));
 const About = lazy(() => import("./pages/About"));
 const Profile = lazy(() => import("./pages/Profile"));
 const MyItemDonations = lazy(() => import("./pages/MyItemDonations"));
+const MyRecurringDonations = lazy(() => import("./pages/MyRecurringDonations"));
+const DonorImpact = lazy(() => import("./pages/DonorImpact"));
+const CampaignAnalytics = lazy(() => import("./pages/campaign/CampaignAnalytics"));
 
 const Lazy = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div className="flex items-center justify-center py-20"><GlobalLoader message="Loading..." /></div>}>
@@ -92,6 +95,22 @@ export const router = createBrowserRouter([
         element: <Lazy><CampaignDetail /></Lazy>,
       },
       {
+        path: "/campaigns/:id/analytics",
+        element: (
+          <ProtectedRoute>
+            <Lazy><CampaignAnalytics /></Lazy>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/impact",
+        element: (
+          <ProtectedRoute>
+            <Lazy><DonorImpact /></Lazy>
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/leaderboard",
         element: <Lazy><Leaderboard /></Lazy>,
       },
@@ -112,6 +131,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Lazy><MyItemDonations /></Lazy>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/my-recurring-donations",
+        element: (
+          <ProtectedRoute>
+            <Lazy><MyRecurringDonations /></Lazy>
           </ProtectedRoute>
         ),
       },

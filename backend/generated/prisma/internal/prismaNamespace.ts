@@ -398,6 +398,7 @@ export const ModelName = {
   DonorStats: 'DonorStats',
   Leaderboard: 'Leaderboard',
   LeaderboardEntry: 'LeaderboardEntry',
+  RecurringDonation: 'RecurringDonation',
   AuditLog: 'AuditLog'
 } as const
 
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "adminRole" | "kYCProfile" | "campaign" | "milestone" | "campaignUpdate" | "bestWish" | "moneyDonation" | "itemDonation" | "badge" | "userBadge" | "donorStats" | "leaderboard" | "leaderboardEntry" | "auditLog"
+    modelProps: "user" | "adminRole" | "kYCProfile" | "campaign" | "milestone" | "campaignUpdate" | "bestWish" | "moneyDonation" | "itemDonation" | "badge" | "userBadge" | "donorStats" | "leaderboard" | "leaderboardEntry" | "recurringDonation" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1342,6 +1343,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RecurringDonation: {
+      payload: Prisma.$RecurringDonationPayload<ExtArgs>
+      fields: Prisma.RecurringDonationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecurringDonationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecurringDonationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        findFirst: {
+          args: Prisma.RecurringDonationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecurringDonationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        findMany: {
+          args: Prisma.RecurringDonationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>[]
+        }
+        create: {
+          args: Prisma.RecurringDonationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        createMany: {
+          args: Prisma.RecurringDonationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.RecurringDonationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        update: {
+          args: Prisma.RecurringDonationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecurringDonationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecurringDonationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.RecurringDonationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecurringDonationPayload>
+        }
+        aggregate: {
+          args: Prisma.RecurringDonationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecurringDonation>
+        }
+        groupBy: {
+          args: Prisma.RecurringDonationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecurringDonationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecurringDonationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecurringDonationCountAggregateOutputType> | number
+        }
+      }
+    }
     AuditLog: {
       payload: Prisma.$AuditLogPayload<ExtArgs>
       fields: Prisma.AuditLogFieldRefs
@@ -1523,6 +1590,12 @@ export const MilestoneScalarFieldEnum = {
   title: 'title',
   amount: 'amount',
   completed: 'completed',
+  fundsReleased: 'fundsReleased',
+  releasedAmount: 'releasedAmount',
+  releasedAt: 'releasedAt',
+  verifiedBy: 'verifiedBy',
+  claimStatus: 'claimStatus',
+  claimProof: 'claimProof',
   createdAt: 'createdAt'
 } as const
 
@@ -1647,6 +1720,24 @@ export const LeaderboardEntryScalarFieldEnum = {
 export type LeaderboardEntryScalarFieldEnum = (typeof LeaderboardEntryScalarFieldEnum)[keyof typeof LeaderboardEntryScalarFieldEnum]
 
 
+export const RecurringDonationScalarFieldEnum = {
+  id: 'id',
+  donorId: 'donorId',
+  campaignId: 'campaignId',
+  amount: 'amount',
+  frequency: 'frequency',
+  status: 'status',
+  nextDueDate: 'nextDueDate',
+  lastPaidDate: 'lastPaidDate',
+  totalPaid: 'totalPaid',
+  paymentCount: 'paymentCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecurringDonationScalarFieldEnum = (typeof RecurringDonationScalarFieldEnum)[keyof typeof RecurringDonationScalarFieldEnum]
+
+
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   actorType: 'actorType',
@@ -1732,7 +1823,10 @@ export type CampaignOrderByRelevanceFieldEnum = (typeof CampaignOrderByRelevance
 export const MilestoneOrderByRelevanceFieldEnum = {
   id: 'id',
   campaignId: 'campaignId',
-  title: 'title'
+  title: 'title',
+  verifiedBy: 'verifiedBy',
+  claimStatus: 'claimStatus',
+  claimProof: 'claimProof'
 } as const
 
 export type MilestoneOrderByRelevanceFieldEnum = (typeof MilestoneOrderByRelevanceFieldEnum)[keyof typeof MilestoneOrderByRelevanceFieldEnum]
@@ -1828,6 +1922,17 @@ export const LeaderboardEntryOrderByRelevanceFieldEnum = {
 } as const
 
 export type LeaderboardEntryOrderByRelevanceFieldEnum = (typeof LeaderboardEntryOrderByRelevanceFieldEnum)[keyof typeof LeaderboardEntryOrderByRelevanceFieldEnum]
+
+
+export const RecurringDonationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  donorId: 'donorId',
+  campaignId: 'campaignId',
+  frequency: 'frequency',
+  status: 'status'
+} as const
+
+export type RecurringDonationOrderByRelevanceFieldEnum = (typeof RecurringDonationOrderByRelevanceFieldEnum)[keyof typeof RecurringDonationOrderByRelevanceFieldEnum]
 
 
 export const AuditLogOrderByRelevanceFieldEnum = {
@@ -2067,6 +2172,7 @@ export type GlobalOmitConfig = {
   donorStats?: Prisma.DonorStatsOmit
   leaderboard?: Prisma.LeaderboardOmit
   leaderboardEntry?: Prisma.LeaderboardEntryOmit
+  recurringDonation?: Prisma.RecurringDonationOmit
   auditLog?: Prisma.AuditLogOmit
 }
 

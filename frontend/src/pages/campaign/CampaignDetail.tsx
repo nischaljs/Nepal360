@@ -10,16 +10,16 @@ import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Separator } from "../../components/ui/separator";
-import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats, incrementShareCount } from "../../services/campaign.service";
+import { addMilestone, deleteMilestone, getBeneficiaryCampaignById, updateCampaign, getCampaignById, getCampaignStats, incrementShareCount, claimMilestone } from "../../services/campaign.service";
 import { getCampaignItemDonations } from "../../services/itemDonation.service";
 import { useAuthStore } from "../../store/auth.store";
 import type { AddMilestoneData, Campaign, UpdateCampaignData } from "../../types/campaign.types";
 import type { ItemDonation } from "../../types/itemDonation.types";
-import { CircleDollarSign, Users, Gift, Handshake, Eye, Share2, Edit, X, Calendar, CheckCircle, AlertCircle, XCircle, Package } from "lucide-react";
+import { CircleDollarSign, Users, Gift, Handshake, Eye, Share2, Edit, X, Calendar, CheckCircle, AlertCircle, XCircle, Package, Link, Copy, Check, MessageCircle } from "lucide-react";
 import { incrementVisitCount } from "../../services/campaign.visit.service";
-import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, FacebookIcon, TwitterIcon, LinkedinIcon } from "react-share";
 import QRCode from "react-qr-code";
 import DonationForm from "../../components/campaign/DonationForm";
+import RecurringDonationForm from "../../components/campaign/RecurringDonationForm";
 import { verifyKhaltiPayment } from "../../services/donation.service";
 import DonorList from "@/components/campaign/DonorList";
 
@@ -40,6 +40,7 @@ const CampaignDetail = () => {
   const [visits, setVisits] = useState(0);
   const [shares, setShares] = useState(0);
   const [itemDonations, setItemDonations] = useState<ItemDonation[]>([]);
+  const [copied, setCopied] = useState(false);
 
   const query = useQuery();
   const pidxVerifiedRef = useRef(false);
@@ -418,15 +419,57 @@ const CampaignDetail = () => {
               <CardContent className="pt-6">
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   <div className="flex gap-3">
-                    <FacebookShareButton url={campaignUrl} onShareWindowClose={handleShare}>
-                      <FacebookIcon size={40} round />
-                    </FacebookShareButton>
-                    <TwitterShareButton url={campaignUrl} onShareWindowClose={handleShare}>
-                      <TwitterIcon size={40} round />
-                    </TwitterShareButton>
-                    <LinkedinShareButton url={campaignUrl} onShareWindowClose={handleShare}>
-                      <LinkedinIcon size={40} round />
-                    </LinkedinShareButton>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full border-blue-300 text-blue-600 hover:bg-blue-50"
+                      onClick={() => {
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(campaignUrl)}`, '_blank', 'width=600,height=400');
+                        handleShare();
+                      }}
+                      title="Share on Facebook"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full border-gray-400 text-gray-800 hover:bg-gray-100"
+                      onClick={() => {
+                        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(campaignUrl)}&text=${encodeURIComponent(campaign.title)}`, '_blank', 'width=600,height=400');
+                        handleShare();
+                      }}
+                      title="Share on X"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full border-green-400 text-green-600 hover:bg-green-50"
+                      onClick={() => {
+                        window.open(`https://wa.me/?text=${encodeURIComponent(campaign.title + ' ' + campaignUrl)}`, '_blank');
+                        handleShare();
+                      }}
+                      title="Share on WhatsApp"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full border-gray-300 text-gray-600 hover:bg-gray-100"
+                      onClick={() => {
+                        navigator.clipboard.writeText(campaignUrl);
+                        setCopied(true);
+                        toast.success("Link copied to clipboard!");
+                        setTimeout(() => setCopied(false), 2000);
+                        handleShare();
+                      }}
+                      title="Copy link"
+                    >
+                      {copied ? <Check className="w-5 h-5 text-emerald-600" /> : <Copy className="w-5 h-5" />}
+                    </Button>
                   </div>
                   <div className="p-4 bg-white border-2 border-gray-200 rounded-lg">
                     <QRCode
@@ -511,6 +554,11 @@ const CampaignDetail = () => {
             {/* Donation Form */}
             <DonationForm campaignId={id!} />
 
+            {/* Recurring Donation */}
+            {campaign.status === "LIVE" && (
+              <RecurringDonationForm campaignId={id!} />
+            )}
+
             {/* Milestones */}
             <Card className="border-gray-200 shadow-sm">
               <CardHeader className="border-b border-gray-100">
@@ -524,46 +572,92 @@ const CampaignDetail = () => {
                   </div>
                 ) : (
                   <ul className="space-y-3">
-                    {campaign.milestones.map((milestone) => (
-                      <li 
-                        key={milestone.id} 
-                        className={`p-4 rounded-lg border transition-all ${
-                          milestone.completed 
-                            ? 'bg-emerald-50 border-emerald-200' 
-                            : 'bg-gray-50 border-gray-200'
-                        }`}
-                      >
-                        <div className="flex justify-between items-start gap-3">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              {milestone.completed && (
-                                <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                              )}
-                              <p className={`font-semibold ${
-                                milestone.completed ? 'text-emerald-700' : 'text-gray-900'
+                    {campaign.milestones.map((milestone) => {
+                      const claimStatus = milestone.claimStatus || 'UNCLAIMED';
+                      const statusLabel = milestone.fundsReleased
+                        ? 'Released'
+                        : claimStatus === 'CLAIMED'
+                        ? 'Claimed'
+                        : claimStatus === 'REJECTED'
+                        ? 'Rejected'
+                        : 'Pending';
+                      const statusColor = milestone.fundsReleased
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : claimStatus === 'CLAIMED'
+                        ? 'bg-blue-100 text-blue-700'
+                        : claimStatus === 'REJECTED'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-gray-100 text-gray-600';
+
+                      return (
+                        <li
+                          key={milestone.id}
+                          className={`p-4 rounded-lg border transition-all ${
+                            milestone.completed
+                              ? 'bg-emerald-50 border-emerald-200'
+                              : 'bg-gray-50 border-gray-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start gap-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                {milestone.completed && (
+                                  <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                                )}
+                                <p className={`font-semibold ${
+                                  milestone.completed ? 'text-emerald-700' : 'text-gray-900'
+                                }`}>
+                                  {milestone.title}
+                                </p>
+                                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColor}`}>
+                                  {statusLabel}
+                                </span>
+                              </div>
+                              <p className={`text-sm ${
+                                milestone.completed ? 'text-emerald-600' : 'text-gray-600'
                               }`}>
-                                {milestone.title}
+                                रू {parseFloat(milestone.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}
                               </p>
+                              {milestone.fundsReleased && milestone.releasedAmount && (
+                                <p className="text-xs text-emerald-600 mt-1">
+                                  Released: रू {parseFloat(milestone.releasedAmount).toLocaleString(undefined, {minimumFractionDigits: 2})}
+                                </p>
+                              )}
                             </div>
-                            <p className={`text-sm ${
-                              milestone.completed ? 'text-emerald-600' : 'text-gray-600'
-                            }`}>
-                              रू {parseFloat(milestone.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}
-                            </p>
+                            <div className="flex gap-2">
+                              {isBeneficiary && (claimStatus === 'UNCLAIMED' || claimStatus === 'REJECTED') && !milestone.fundsReleased && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={async () => {
+                                    try {
+                                      await claimMilestone(milestone.id);
+                                      toast.success("Milestone Claimed", { description: "Your claim has been submitted for review." });
+                                      fetchCampaign();
+                                    } catch (err: any) {
+                                      toast.error("Claim Failed", { description: err.response?.data?.message || "Failed to claim milestone." });
+                                    }
+                                  }}
+                                  className="border-blue-300 text-blue-600 hover:bg-blue-50"
+                                >
+                                  Claim
+                                </Button>
+                              )}
+                              {isBeneficiary && canEditCampaign && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDeleteMilestone(milestone.id)}
+                                  className="border-red-300 text-red-600 hover:bg-red-50"
+                                >
+                                  Delete
+                                </Button>
+                              )}
+                            </div>
                           </div>
-                          {isBeneficiary && canEditCampaign && (
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              onClick={() => handleDeleteMilestone(milestone.id)}
-                              className="border-red-300 text-red-600 hover:bg-red-50"
-                            >
-                              Delete
-                            </Button>
-                          )}
-                        </div>
-                      </li>
-                    ))}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
               </CardContent>

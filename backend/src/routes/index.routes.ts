@@ -9,6 +9,8 @@ import leaderboardRoutes from './leaderboard.routes';
 import aiRoutes from './ai.routes';
 import campaignUpdateRoutes from './campaignUpdate.routes';
 import bestWishRoutes from './bestWish.routes';
+import recurringDonationRoutes from './recurringDonation.routes';
+import adminMilestoneRoutes from './admin.milestone.routes';
 
 const router = express.Router();
 
@@ -22,5 +24,7 @@ router.use('/donations', donationRoutes);
 router.use('/users', userRoutes);
 router.use('/leaderboards', leaderboardRoutes);
 router.use('/ai', aiRoutes);
+router.use('/recurring-donations', recurringDonationRoutes);
+router.use('/admin', adminMilestoneRoutes);
 
 export default router;

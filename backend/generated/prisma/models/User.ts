@@ -209,6 +209,7 @@ export type UserWhereInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryListRelationFilter
   updates?: Prisma.CampaignUpdateListRelationFilter
   bestWishes?: Prisma.BestWishListRelationFilter
+  recurringDonations?: Prisma.RecurringDonationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -230,6 +231,7 @@ export type UserOrderByWithRelationInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryOrderByRelationAggregateInput
   updates?: Prisma.CampaignUpdateOrderByRelationAggregateInput
   bestWishes?: Prisma.BestWishOrderByRelationAggregateInput
+  recurringDonations?: Prisma.RecurringDonationOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -255,6 +257,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   leaderboardEntries?: Prisma.LeaderboardEntryListRelationFilter
   updates?: Prisma.CampaignUpdateListRelationFilter
   bestWishes?: Prisma.BestWishListRelationFilter
+  recurringDonations?: Prisma.RecurringDonationListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -302,6 +305,7 @@ export type UserCreateInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -323,6 +327,7 @@ export type UserUncheckedCreateInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserUpdateInput = {
@@ -344,6 +349,7 @@ export type UserUpdateInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -365,6 +371,7 @@ export type UserUncheckedUpdateInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -595,6 +602,20 @@ export type UserUpdateOneRequiredWithoutLeaderboardEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLeaderboardEntriesInput, Prisma.UserUpdateWithoutLeaderboardEntriesInput>, Prisma.UserUncheckedUpdateWithoutLeaderboardEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutRecurringDonationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecurringDonationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRecurringDonationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecurringDonationsInput
+  upsert?: Prisma.UserUpsertWithoutRecurringDonationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRecurringDonationsInput, Prisma.UserUpdateWithoutRecurringDonationsInput>, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
+}
+
 export type UserCreateNestedOneWithoutAuditLogsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
@@ -629,6 +650,7 @@ export type UserCreateWithoutAdminRoleInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutAdminRoleInput = {
@@ -649,6 +671,7 @@ export type UserUncheckedCreateWithoutAdminRoleInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutAdminRoleInput = {
@@ -685,6 +708,7 @@ export type UserUpdateWithoutAdminRoleInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminRoleInput = {
@@ -705,6 +729,7 @@ export type UserUncheckedUpdateWithoutAdminRoleInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutKycProfileInput = {
@@ -725,6 +750,7 @@ export type UserCreateWithoutKycProfileInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutKycProfileInput = {
@@ -745,6 +771,7 @@ export type UserUncheckedCreateWithoutKycProfileInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutKycProfileInput = {
@@ -781,6 +808,7 @@ export type UserUpdateWithoutKycProfileInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutKycProfileInput = {
@@ -801,6 +829,7 @@ export type UserUncheckedUpdateWithoutKycProfileInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutCampaignsInput = {
@@ -821,6 +850,7 @@ export type UserCreateWithoutCampaignsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutCampaignsInput = {
@@ -841,6 +871,7 @@ export type UserUncheckedCreateWithoutCampaignsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutCampaignsInput = {
@@ -877,6 +908,7 @@ export type UserUpdateWithoutCampaignsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCampaignsInput = {
@@ -897,6 +929,7 @@ export type UserUncheckedUpdateWithoutCampaignsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutUpdatesInput = {
@@ -917,6 +950,7 @@ export type UserCreateWithoutUpdatesInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutUpdatesInput = {
@@ -937,6 +971,7 @@ export type UserUncheckedCreateWithoutUpdatesInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutUpdatesInput = {
@@ -973,6 +1008,7 @@ export type UserUpdateWithoutUpdatesInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatesInput = {
@@ -993,6 +1029,7 @@ export type UserUncheckedUpdateWithoutUpdatesInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutBestWishesInput = {
@@ -1013,6 +1050,7 @@ export type UserCreateWithoutBestWishesInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutBestWishesInput = {
@@ -1033,6 +1071,7 @@ export type UserUncheckedCreateWithoutBestWishesInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutBestWishesInput = {
@@ -1069,6 +1108,7 @@ export type UserUpdateWithoutBestWishesInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBestWishesInput = {
@@ -1089,6 +1129,7 @@ export type UserUncheckedUpdateWithoutBestWishesInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutMoneyDonationsInput = {
@@ -1109,6 +1150,7 @@ export type UserCreateWithoutMoneyDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutMoneyDonationsInput = {
@@ -1129,6 +1171,7 @@ export type UserUncheckedCreateWithoutMoneyDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutMoneyDonationsInput = {
@@ -1165,6 +1208,7 @@ export type UserUpdateWithoutMoneyDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMoneyDonationsInput = {
@@ -1185,6 +1229,7 @@ export type UserUncheckedUpdateWithoutMoneyDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutItemDonationsInput = {
@@ -1205,6 +1250,7 @@ export type UserCreateWithoutItemDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutItemDonationsInput = {
@@ -1225,6 +1271,7 @@ export type UserUncheckedCreateWithoutItemDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutItemDonationsInput = {
@@ -1261,6 +1308,7 @@ export type UserUpdateWithoutItemDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutItemDonationsInput = {
@@ -1281,6 +1329,7 @@ export type UserUncheckedUpdateWithoutItemDonationsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutBadgesInput = {
@@ -1301,6 +1350,7 @@ export type UserCreateWithoutBadgesInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutBadgesInput = {
@@ -1321,6 +1371,7 @@ export type UserUncheckedCreateWithoutBadgesInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutBadgesInput = {
@@ -1357,6 +1408,7 @@ export type UserUpdateWithoutBadgesInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBadgesInput = {
@@ -1377,6 +1429,7 @@ export type UserUncheckedUpdateWithoutBadgesInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutDonorStatsInput = {
@@ -1397,6 +1450,7 @@ export type UserCreateWithoutDonorStatsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutDonorStatsInput = {
@@ -1417,6 +1471,7 @@ export type UserUncheckedCreateWithoutDonorStatsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutDonorStatsInput = {
@@ -1453,6 +1508,7 @@ export type UserUpdateWithoutDonorStatsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDonorStatsInput = {
@@ -1473,6 +1529,7 @@ export type UserUncheckedUpdateWithoutDonorStatsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 export type UserCreateWithoutLeaderboardEntriesInput = {
@@ -1493,6 +1550,7 @@ export type UserCreateWithoutLeaderboardEntriesInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutLeaderboardEntriesInput = {
@@ -1513,6 +1571,7 @@ export type UserUncheckedCreateWithoutLeaderboardEntriesInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutLeaderboardEntriesInput = {
@@ -1549,6 +1608,7 @@ export type UserUpdateWithoutLeaderboardEntriesInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeaderboardEntriesInput = {
@@ -1567,6 +1627,107 @@ export type UserUncheckedUpdateWithoutLeaderboardEntriesInput = {
   itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
+}
+
+export type UserCreateWithoutRecurringDonationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRecurringDonationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash: string
+  emailStatus?: $Enums.EmailStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  adminRole?: Prisma.AdminRoleUncheckedCreateNestedOneWithoutUserInput
+  kycProfile?: Prisma.KYCProfileUncheckedCreateNestedOneWithoutUserInput
+  donorStats?: Prisma.DonorStatsUncheckedCreateNestedOneWithoutUserInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBeneficiaryInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedCreateNestedManyWithoutDonorInput
+  itemDonations?: Prisma.ItemDonationUncheckedCreateNestedManyWithoutDonorInput
+  badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
+  bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRecurringDonationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
+}
+
+export type UserUpsertWithoutRecurringDonationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRecurringDonationsInput, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRecurringDonationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRecurringDonationsInput, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
+}
+
+export type UserUpdateWithoutRecurringDonationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
+  updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
+  bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRecurringDonationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  emailStatus?: Prisma.EnumEmailStatusFieldUpdateOperationsInput | $Enums.EmailStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adminRole?: Prisma.AdminRoleUncheckedUpdateOneWithoutUserNestedInput
+  kycProfile?: Prisma.KYCProfileUncheckedUpdateOneWithoutUserNestedInput
+  donorStats?: Prisma.DonorStatsUncheckedUpdateOneWithoutUserNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  moneyDonations?: Prisma.MoneyDonationUncheckedUpdateManyWithoutDonorNestedInput
+  itemDonations?: Prisma.ItemDonationUncheckedUpdateManyWithoutDonorNestedInput
+  badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1589,6 +1750,7 @@ export type UserCreateWithoutAuditLogsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutDonorInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -1609,6 +1771,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutUserInput
   bestWishes?: Prisma.BestWishUncheckedCreateNestedManyWithoutUserInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutDonorInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1645,6 +1808,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutDonorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1665,6 +1829,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   leaderboardEntries?: Prisma.LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutUserNestedInput
   bestWishes?: Prisma.BestWishUncheckedUpdateManyWithoutUserNestedInput
+  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput
 }
 
 
@@ -1681,6 +1846,7 @@ export type UserCountOutputType = {
   leaderboardEntries: number
   updates: number
   bestWishes: number
+  recurringDonations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1692,6 +1858,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   leaderboardEntries?: boolean | UserCountOutputTypeCountLeaderboardEntriesArgs
   updates?: boolean | UserCountOutputTypeCountUpdatesArgs
   bestWishes?: boolean | UserCountOutputTypeCountBestWishesArgs
+  recurringDonations?: boolean | UserCountOutputTypeCountRecurringDonationsArgs
 }
 
 /**
@@ -1760,6 +1927,13 @@ export type UserCountOutputTypeCountBestWishesArgs<ExtArgs extends runtime.Types
   where?: Prisma.BestWishWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRecurringDonationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecurringDonationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1780,6 +1954,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   leaderboardEntries?: boolean | Prisma.User$leaderboardEntriesArgs<ExtArgs>
   updates?: boolean | Prisma.User$updatesArgs<ExtArgs>
   bestWishes?: boolean | Prisma.User$bestWishesArgs<ExtArgs>
+  recurringDonations?: boolean | Prisma.User$recurringDonationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1808,6 +1983,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   leaderboardEntries?: boolean | Prisma.User$leaderboardEntriesArgs<ExtArgs>
   updates?: boolean | Prisma.User$updatesArgs<ExtArgs>
   bestWishes?: boolean | Prisma.User$bestWishesArgs<ExtArgs>
+  recurringDonations?: boolean | Prisma.User$recurringDonationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1825,6 +2001,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     leaderboardEntries: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
     updates: Prisma.$CampaignUpdatePayload<ExtArgs>[]
     bestWishes: Prisma.$BestWishPayload<ExtArgs>[]
+    recurringDonations: Prisma.$RecurringDonationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2185,6 +2362,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   leaderboardEntries<T extends Prisma.User$leaderboardEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leaderboardEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updates<T extends Prisma.User$updatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bestWishes<T extends Prisma.User$bestWishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bestWishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BestWishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recurringDonations<T extends Prisma.User$recurringDonationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$recurringDonationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecurringDonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2810,6 +2988,30 @@ export type User$bestWishesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.BestWishScalarFieldEnum | Prisma.BestWishScalarFieldEnum[]
+}
+
+/**
+ * User.recurringDonations
+ */
+export type User$recurringDonationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecurringDonation
+   */
+  select?: Prisma.RecurringDonationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RecurringDonation
+   */
+  omit?: Prisma.RecurringDonationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecurringDonationInclude<ExtArgs> | null
+  where?: Prisma.RecurringDonationWhereInput
+  orderBy?: Prisma.RecurringDonationOrderByWithRelationInput | Prisma.RecurringDonationOrderByWithRelationInput[]
+  cursor?: Prisma.RecurringDonationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecurringDonationScalarFieldEnum | Prisma.RecurringDonationScalarFieldEnum[]
 }
 
 /**

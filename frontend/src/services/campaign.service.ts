@@ -83,6 +83,14 @@ export const deleteMilestone = async (
   return response.data;
 };
 
+export const claimMilestone = async (
+  milestoneId: string,
+  claimProof?: string
+): Promise<Milestone> => {
+  const response = await api.post(`${BASE_URL}/milestones/${milestoneId}/claim`, { claimProof });
+  return response.data.data;
+};
+
 export const getAllCampaigns = async (filters?: CampaignFilters): Promise<Campaign[]> => {
   const params = new URLSearchParams();
   if (filters?.category) params.append('category', filters.category);

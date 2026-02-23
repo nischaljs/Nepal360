@@ -24,7 +24,13 @@ export interface Milestone {
   title: string;
   amount: string;
   completed: boolean;
-  createdAt: string; 
+  fundsReleased?: boolean;
+  releasedAmount?: string | null;
+  releasedAt?: string | null;
+  verifiedBy?: string | null;
+  claimStatus?: 'UNCLAIMED' | 'CLAIMED' | 'APPROVED' | 'REJECTED';
+  claimProof?: string | null;
+  createdAt: string;
 }
 
 export interface Campaign {

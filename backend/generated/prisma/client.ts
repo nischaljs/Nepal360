@@ -108,6 +108,11 @@ export type Leaderboard = Prisma.LeaderboardModel
  */
 export type LeaderboardEntry = Prisma.LeaderboardEntryModel
 /**
+ * Model RecurringDonation
+ * 
+ */
+export type RecurringDonation = Prisma.RecurringDonationModel
+/**
  * Model AuditLog
  * 
  */

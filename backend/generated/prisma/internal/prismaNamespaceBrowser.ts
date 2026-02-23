@@ -65,6 +65,7 @@ export const ModelName = {
   DonorStats: 'DonorStats',
   Leaderboard: 'Leaderboard',
   LeaderboardEntry: 'LeaderboardEntry',
+  RecurringDonation: 'RecurringDonation',
   AuditLog: 'AuditLog'
 } as const
 
@@ -160,6 +161,12 @@ export const MilestoneScalarFieldEnum = {
   title: 'title',
   amount: 'amount',
   completed: 'completed',
+  fundsReleased: 'fundsReleased',
+  releasedAmount: 'releasedAmount',
+  releasedAt: 'releasedAt',
+  verifiedBy: 'verifiedBy',
+  claimStatus: 'claimStatus',
+  claimProof: 'claimProof',
   createdAt: 'createdAt'
 } as const
 
@@ -284,6 +291,24 @@ export const LeaderboardEntryScalarFieldEnum = {
 export type LeaderboardEntryScalarFieldEnum = (typeof LeaderboardEntryScalarFieldEnum)[keyof typeof LeaderboardEntryScalarFieldEnum]
 
 
+export const RecurringDonationScalarFieldEnum = {
+  id: 'id',
+  donorId: 'donorId',
+  campaignId: 'campaignId',
+  amount: 'amount',
+  frequency: 'frequency',
+  status: 'status',
+  nextDueDate: 'nextDueDate',
+  lastPaidDate: 'lastPaidDate',
+  totalPaid: 'totalPaid',
+  paymentCount: 'paymentCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecurringDonationScalarFieldEnum = (typeof RecurringDonationScalarFieldEnum)[keyof typeof RecurringDonationScalarFieldEnum]
+
+
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   actorType: 'actorType',
@@ -369,7 +394,10 @@ export type CampaignOrderByRelevanceFieldEnum = (typeof CampaignOrderByRelevance
 export const MilestoneOrderByRelevanceFieldEnum = {
   id: 'id',
   campaignId: 'campaignId',
-  title: 'title'
+  title: 'title',
+  verifiedBy: 'verifiedBy',
+  claimStatus: 'claimStatus',
+  claimProof: 'claimProof'
 } as const
 
 export type MilestoneOrderByRelevanceFieldEnum = (typeof MilestoneOrderByRelevanceFieldEnum)[keyof typeof MilestoneOrderByRelevanceFieldEnum]
@@ -465,6 +493,17 @@ export const LeaderboardEntryOrderByRelevanceFieldEnum = {
 } as const
 
 export type LeaderboardEntryOrderByRelevanceFieldEnum = (typeof LeaderboardEntryOrderByRelevanceFieldEnum)[keyof typeof LeaderboardEntryOrderByRelevanceFieldEnum]
+
+
+export const RecurringDonationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  donorId: 'donorId',
+  campaignId: 'campaignId',
+  frequency: 'frequency',
+  status: 'status'
+} as const
+
+export type RecurringDonationOrderByRelevanceFieldEnum = (typeof RecurringDonationOrderByRelevanceFieldEnum)[keyof typeof RecurringDonationOrderByRelevanceFieldEnum]
 
 
 export const AuditLogOrderByRelevanceFieldEnum = {
