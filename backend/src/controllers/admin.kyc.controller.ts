@@ -4,6 +4,10 @@ import { KYCStatus } from '../../generated/prisma/enums';
 import { prisma } from '../lib/prisma';
 import { rejectKycSchema } from '../schemas/admin.kyc.schema';
 import { AuthenticatedRequest } from '../types/auth.types';
+import { generateAssetUrl } from '../utils/file';
+import { env } from '../config/env';
+
+const BASE_URL = env.BACKEND_URL;
 
 export const listKycProfiles = async (
   req: Request,
@@ -32,7 +36,13 @@ export const listKycProfiles = async (
       },
     });
 
-    res.status(200).json({ success: true, data: kycProfiles });
+    const formatted = kycProfiles.map((p) => ({
+      ...p,
+      documentImage: p.documentImage ? generateAssetUrl(p.documentImage, BASE_URL) : undefined,
+      profilePhoto: p.profilePhoto ? generateAssetUrl(p.profilePhoto, BASE_URL) : undefined,
+    }));
+
+    res.status(200).json({ success: true, data: formatted });
   } catch (error) {
     next(error);
   }
@@ -67,7 +77,15 @@ export const getKycDetail = async (
       },
     });
 
-    res.status(200).json({ success: true, data: { ...kycProfile, auditLogs } });
+    res.status(200).json({
+      success: true,
+      data: {
+        ...kycProfile,
+        documentImage: kycProfile.documentImage ? generateAssetUrl(kycProfile.documentImage, BASE_URL) : undefined,
+        profilePhoto: kycProfile.profilePhoto ? generateAssetUrl(kycProfile.profilePhoto, BASE_URL) : undefined,
+        auditLogs,
+      },
+    });
   } catch (error) {
     next(error);
   }

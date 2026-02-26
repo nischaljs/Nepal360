@@ -27,7 +27,7 @@ export async function createCampaign(req: AuthenticatedRequest, res: Response) {
             });
         }
 
-        const { title, description, targetAmount, category } = validation.data;
+        const { title, description, targetAmount, category, district } = validation.data;
         const files = req.files as { [key: string]: Express.Multer.File[] };
 
         // Check if cover image is provided
@@ -46,6 +46,7 @@ export async function createCampaign(req: AuthenticatedRequest, res: Response) {
                 title,
                 description,
                 category: category || 'general',
+                district: district || null,
                 coverImage: coverImageRelativePath,
                 proofLinks: proofLinks.length > 0 ? JSON.stringify(proofLinks) : null,
                 targetAmount,

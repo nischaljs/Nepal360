@@ -1,5 +1,5 @@
 
-import type{ ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../store/auth.store";
 import { toast } from "sonner";
@@ -9,7 +9,13 @@ interface AdminRouteProps {
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  const { user, isLoading } = useAuthStore();
+  const { user, isLoading, fetchUser } = useAuthStore();
+
+  useEffect(() => {
+    if (isLoading) {
+      fetchUser();
+    }
+  }, []);
 
   if (isLoading) {
     return <div className="container mx-auto p-4 text-center">Loading authentication...</div>;

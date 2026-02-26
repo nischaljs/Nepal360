@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Page-1" id="dfd1">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" value="Nepal360\nCrowdfunding\nPlatform" style="ellipse;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="520" y="350" width="220" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="3" value="Donor" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="4" value="Beneficiary\n(Campaign Creator)" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="5" value="Admin" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="700" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="6" value="Khalti\nPayment Gateway" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="700" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" value="Guest\n(Visitor)" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="0" y="400" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="8" value="Registration Data,\nLogin Credentials,\nDonation Details,\nItem Pledges,\nComments, Bookmarks" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="2" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="9" value="Donation Receipt,\nBadges, Notifications,\nLeaderboard Ranking,\nCertificates" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="3" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="10" value="KYC Documents,\nCampaign Details,\nMilestone Updates,\nCampaign Updates" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="4" target="2" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="11" value="Campaign Status,\nDonation Notifications,\nVerification Status,\nFund Release Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="4" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="12" value="KYC Approval/Rejection,\nCampaign Verification,\nItem Donation Confirmation,\nBadge Grants" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="5" target="2" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="13" value="Analytics Dashboard,\nAudit Logs,\nKYC Profiles,\nPending Campaigns" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="5" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="14" value="Payment Initiation\n(Amount, Return URL)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="6" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="15" value="Payment Verification\n(pidx, Status)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="6" target="2" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="16" value="Browse Campaigns,\nView Map,\nSearch" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="7" target="2" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="17" value="Campaign Listings,\nPublic Campaign Details,\nMap Data" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="7" parent="1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -19,6 +19,7 @@ const KYCForm = lazy(() => import("./pages/kyc/KYCForm"));
 const AdminLayout = lazy(() => import("./pages/admin/layout/AdminLayout"));
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const KYCManagement = lazy(() => import("./pages/admin/KYCManagement"));
+const KYCDetail = lazy(() => import("./pages/admin/KYCDetail"));
 const CampaignManagement = lazy(() => import("./pages/admin/CampaignManagement"));
 const ItemDonationManagement = lazy(() => import("./pages/admin/ItemDonationManagement"));
 const BadgeManagement = lazy(() => import("./pages/admin/BadgeManagement"));
@@ -178,6 +179,10 @@ export const router = createBrowserRouter([
       {
         path: "kyc",
         element: <Lazy><KYCManagement /></Lazy>,
+      },
+      {
+        path: "kyc/:userId",
+        element: <Lazy><KYCDetail /></Lazy>,
       },
       {
         path: "campaigns",

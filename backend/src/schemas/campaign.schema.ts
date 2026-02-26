@@ -28,6 +28,7 @@ export const createCampaignSchema = z.object({
         .refine((val) => val > 0, 'Target amount must be greater than 0')
         .refine((val) => val <= 999999999.99, 'Target amount is too large'),
     category: z.enum(CAMPAIGN_CATEGORIES).optional().default('general'),
+    district: z.string().optional(),
 }).strict();
 
 /**

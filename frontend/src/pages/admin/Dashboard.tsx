@@ -28,7 +28,10 @@ import {
   TrendingUp,
   ShieldCheck,
   Package,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   getAdminAnalytics,
   type AnalyticsData,
@@ -141,6 +144,8 @@ const AdminDashboard = () => {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activityPage, setActivityPage] = useState(1);
+  const ACTIVITY_PER_PAGE = 5;
 
   useEffect(() => {
     getAdminAnalytics()
@@ -400,41 +405,74 @@ const AdminDashboard = () => {
               {recentActivity.length === 0 ? (
                 <p className="text-center text-muted-foreground py-8">No recent activity</p>
               ) : (
-                recentActivity.map((log) => (
-                  <div
-                    key={log.id}
-                    className="flex items-start gap-3 rounded-lg border p-3"
-                  >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100">
-                      <ShieldCheck className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="text-xs">
-                          {log.actionType.replace(/_/g, " ")}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(log.createdAt).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
+                <>
+                  {recentActivity
+                    .slice((activityPage - 1) * ACTIVITY_PER_PAGE, activityPage * ACTIVITY_PER_PAGE)
+                    .map((log) => (
+                      <div
+                        key={log.id}
+                        className="flex items-start gap-3 rounded-lg border p-3"
+                      >
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100">
+                          <ShieldCheck className="h-4 w-4 text-gray-500" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs">
+                              {log.actionType.replace(/_/g, " ")}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground">
+                              {new Date(log.createdAt).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+                          {log.note && (
+                            <p className="mt-1 text-sm text-muted-foreground truncate">
+                              {log.note}
+                            </p>
+                          )}
+                          {log.actor && (
+                            <p className="text-xs text-muted-foreground">
+                              by {log.actor.name}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      {log.note && (
-                        <p className="mt-1 text-sm text-muted-foreground truncate">
-                          {log.note}
-                        </p>
-                      )}
-                      {log.actor && (
-                        <p className="text-xs text-muted-foreground">
-                          by {log.actor.name}
-                        </p>
-                      )}
+                    ))}
+                  {recentActivity.length > ACTIVITY_PER_PAGE && (
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-xs text-muted-foreground">
+                        {(activityPage - 1) * ACTIVITY_PER_PAGE + 1}–
+                        {Math.min(activityPage * ACTIVITY_PER_PAGE, recentActivity.length)} of{" "}
+                        {recentActivity.length}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="h-8 w-8"
+                          disabled={activityPage === 1}
+                          onClick={() => setActivityPage((p) => p - 1)}
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="h-8 w-8"
+                          disabled={activityPage * ACTIVITY_PER_PAGE >= recentActivity.length}
+                          onClick={() => setActivityPage((p) => p + 1)}
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                ))
+                  )}
+                </>
               )}
             </div>
           </CardContent>

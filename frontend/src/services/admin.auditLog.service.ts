@@ -8,11 +8,11 @@ export interface GetAuditLogsFilter {
 }
 
 export const getAuditLogs = async (filter?: GetAuditLogsFilter): Promise<AuditLog[]> => {
-  const response = await api.get("/admin/audit-logs", { params: filter });
-  return response.data;
+  const { data } = await api.get("/admin/audit-logs", { params: filter });
+  return data.data;
 };
 
 export const getAuditLogsForTarget = async (targetType: string, targetId: string): Promise<AuditLog[]> => {
-  const response = await api.get(`/admin/audit-logs/${targetType}/${targetId}`);
-  return response.data;
+  const { data } = await api.get(`/admin/audit-logs/${targetType}/${targetId}`);
+  return data.data;
 };
