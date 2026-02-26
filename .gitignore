@@ -1,0 +1,15 @@
+# Agent documentation (internal dev notes)
+agent-docs/
+
+# Plans and drafts
+plans/
+
+# Report images (large binary assets)
+report_images/
+
+# Old documents
+old.docx
+
+# OS files
+.DS_Store
+Thumbs.db

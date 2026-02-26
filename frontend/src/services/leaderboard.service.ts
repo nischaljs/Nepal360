@@ -29,13 +29,13 @@ export interface LeaderboardResponse {
 }
 
 export const listLeaderboards = async (): Promise<Leaderboard[]> => {
-  const response = await api.get<Leaderboard[]>('/leaderboards');
-  return response.data;
+  const { data } = await api.get('/leaderboards');
+  return data.data;
 };
 
 export const getLeaderboard = async (period: string, key: string): Promise<LeaderboardResponse> => {
-  const response = await api.get<LeaderboardResponse>(`/leaderboards/${period}/${key}`);
-  return response.data;
+  const { data } = await api.get(`/leaderboards/${period}/${key}`);
+  return data.data;
 };
 
 export const getCurrentMonthLeaderboard = async (): Promise<LeaderboardResponse> => {

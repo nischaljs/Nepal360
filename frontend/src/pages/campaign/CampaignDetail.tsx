@@ -697,7 +697,7 @@ const CampaignDetail = () => {
                     <Package className="w-5 h-5 text-amber-600" />
                     Item Pledges
                   </CardTitle>
-                  {campaign.status === "LIVE" && (
+                  {campaign.status === "LIVE" && isAuthenticated && !isBeneficiary && (
                     <ItemPledgeForm campaignId={id!} onSuccess={fetchCampaign} />
                   )}
                 </div>

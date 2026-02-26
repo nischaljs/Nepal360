@@ -24,10 +24,17 @@ const Leaderboard = () => {
         const currentKey = `${year}-${month}`;
         
         const monthly = data.find(l => l.period === 'MONTHLY' && l.periodKey === currentKey);
-        if (monthly) {
-          setCurrentLeaderboard(monthly);
-        } else if (data.length > 0) {
-          setCurrentLeaderboard(data[0]);
+        const target = monthly || data[0];
+        if (target) {
+          const full = await getLeaderboard(target.period, target.periodKey);
+          setCurrentLeaderboard({
+            id: full.id,
+            period: full.period as any,
+            periodKey: full.periodKey,
+            createdAt: full.createdAt,
+            entries: full.entries,
+          });
+          setSelectedPeriod(target.period);
         }
       } catch (error) {
         console.error("Failed to fetch leaderboards:", error);

@@ -14,21 +14,21 @@ const CAMPAIGN_BASE_URL = '/campaigns';
 export const initiateKhaltiPayment = async (
   data: InitiateKhaltiPaymentData
 ): Promise<InitiateKhaltiPaymentResponse> => {
-  const response = await api.post<InitiateKhaltiPaymentResponse>(
+  const { data: resp } = await api.post(
     `${BASE_URL}/money/khalti/initiate`,
     data
   );
-  return response.data;
+  return resp.data;
 };
 
 export const verifyKhaltiPayment = async (
   data: VerifyKhaltiPaymentData
 ): Promise<VerifyKhaltiPaymentResponse> => {
-  const response = await api.post<VerifyKhaltiPaymentResponse>(
+  const { data: resp } = await api.post(
     `${BASE_URL}/money/khalti/verify`,
     data
   );
-  return response.data;
+  return resp.data;
 };
 
 export const getCampaignDonors = async (
@@ -36,11 +36,11 @@ export const getCampaignDonors = async (
   page: number = 1,
   limit: number = 10
 ): Promise<CampaignDonorsResponse> => {
-  const response = await api.get<CampaignDonorsResponse>(
+  const response = await api.get(
     `${CAMPAIGN_BASE_URL}/${campaignId}/donors`,
     {
       params: { page, limit },
     }
   );
-  return response.data;
+  return response.data.data;
 };

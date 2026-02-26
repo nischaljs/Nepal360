@@ -38,21 +38,21 @@ export interface DonationHistoryItem {
 }
 
 export const getMyStats = async (): Promise<UserStats> => {
-  const response = await api.get<UserStats>('/users/me/stats');
-  return response.data;
+  const { data } = await api.get('/users/me/stats');
+  return data.data;
 };
 
 export const getUserStats = async (userId: string): Promise<UserStats> => {
-  const response = await api.get<UserStats>(`/users/${userId}/stats`);
-  return response.data;
+  const { data } = await api.get(`/users/${userId}/stats`);
+  return data.data;
 };
 
 export const getMyBadges = async (): Promise<UserBadge[]> => {
-  const response = await api.get<UserBadge[]>('/users/me/badges');
-  return response.data;
+  const { data } = await api.get('/users/me/badges');
+  return data.data;
 };
 
 export const getMyDonationHistory = async (): Promise<DonationHistoryItem[]> => {
-  const response = await api.get<DonationHistoryItem[]>('/users/me/donations');
-  return response.data;
+  const { data } = await api.get('/users/me/donations');
+  return data.data;
 };

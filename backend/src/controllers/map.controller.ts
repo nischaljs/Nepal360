@@ -1,5 +1,6 @@
 import { Response, NextFunction } from 'express';
 import { prisma } from '../lib/prisma';
+import { getBaseUrl } from '../utils/campaign.helpers';
 
 // Nepal district coordinates (major districts)
 const DISTRICT_COORDS: Record<string, { lat: number; lng: number }> = {
@@ -92,8 +93,9 @@ export const getDistrictList = async (_req: any, res: Response) => {
   res.json({ success: true, data: Object.keys(DISTRICT_COORDS).sort() });
 };
 
-export const getCampaignMapData = async (_req: any, res: Response, next: NextFunction) => {
+export const getCampaignMapData = async (req: any, res: Response, next: NextFunction) => {
   try {
+    const baseUrl = getBaseUrl(req);
     const campaigns = await prisma.campaign.findMany({
       where: {
         status: 'LIVE',
@@ -125,7 +127,7 @@ export const getCampaignMapData = async (_req: any, res: Response, next: NextFun
         district: c.district,
         category: c.category,
         targetAmount: c.targetAmount.toString(),
-        coverImage: c.coverImage,
+        coverImage: `${baseUrl}/uploads/${c.coverImage}`,
         donationCount: c.donationCount,
         beneficiary: c.beneficiary.name,
         lat: DISTRICT_COORDS[c.district!].lat,

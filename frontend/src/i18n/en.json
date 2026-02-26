@@ -139,5 +139,22 @@
     "empty": "No bookmarks yet",
     "emptyDesc": "Save campaigns you're interested in to find them later.",
     "browseCampaigns": "Browse Campaigns"
+  },
+  "footer": {
+    "tagline": "Empowering communities through transparent and trustworthy crowdfunding. Together, we build a better tomorrow.",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "campaigns": "Campaigns",
+    "aboutUs": "About Us",
+    "leaderboard": "Leaderboard",
+    "platform": "Platform",
+    "startCampaign": "Start a Campaign",
+    "kycVerification": "KYC Verification",
+    "howItWorks": "How It Works",
+    "donorImpact": "Donor Impact",
+    "copyright": "Nepal360. All rights reserved.",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "instagram": "Instagram"
   }
 }

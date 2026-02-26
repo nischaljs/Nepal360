@@ -113,7 +113,8 @@ const FundraisingPrediction = ({ campaignId }: Props) => {
             />
             <YAxis
               tick={{ fontSize: 11 }}
-              tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
+              tickFormatter={(v) => v >= 1000000 ? `${(v / 1000000).toFixed(1)}M` : `${(v / 1000).toFixed(0)}k`}
+              domain={[0, target]}
             />
             <Tooltip
               formatter={(value: number, name: string) => [

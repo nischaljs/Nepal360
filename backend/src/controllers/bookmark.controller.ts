@@ -1,6 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { AuthenticatedRequest } from '../types/auth.types';
 import { prisma } from '../lib/prisma';
+import { getBaseUrl } from '../utils/campaign.helpers';
 
 export const toggleBookmark = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
@@ -41,19 +42,34 @@ export const getMyBookmarks = async (req: AuthenticatedRequest, res: Response, n
   try {
     const userId = req.user!.userId;
 
+    const baseUrl = getBaseUrl(req);
     const bookmarks = await prisma.bookmark.findMany({
       where: { userId },
       include: {
         campaign: {
           include: {
             beneficiary: { select: { id: true, name: true } },
+            moneyDonations: {
+              where: { status: 'COMPLETED' },
+              select: { amount: true },
+            },
           },
         },
       },
       orderBy: { createdAt: 'desc' },
     });
 
-    res.json({ success: true, data: bookmarks });
+    const formatted = bookmarks.map((b) => ({
+      ...b,
+      campaign: {
+        ...b.campaign,
+        coverImage: `${baseUrl}/uploads/${b.campaign.coverImage}`,
+        totalMoneyRaised: b.campaign.moneyDonations.reduce((sum, d) => sum + d.amount.toNumber(), 0),
+        moneyDonations: undefined,
+      },
+    }));
+
+    res.json({ success: true, data: formatted });
   } catch (error) {
     next(error);
   }

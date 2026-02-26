@@ -30,9 +30,9 @@ const DonorList = ({ campaignId }: DonorListProps) => {
       setLoading(true);
       try {
         const response = await getCampaignDonors(campaignId, currentPage, limit);
-        setDonors(response.donors);
-        setTotalPages(response.totalPages);
-        setTotalDonors(response.totalDonors);
+        setDonors(response.donors ?? []);
+        setTotalPages(response.totalPages ?? 1);
+        setTotalDonors(response.totalDonors ?? 0);
       } catch (error) {
         console.error("Error fetching campaign donors:", error);
       } finally {
