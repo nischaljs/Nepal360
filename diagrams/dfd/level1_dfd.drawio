@@ -1,356 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" type="device">
   <diagram name="Level 1 DFD - Nepal360" id="dfd-level1">
-    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1800" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1700" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-
-        <!-- ===== EXTERNAL ENTITIES ===== -->
-        <mxCell id="2" value="Donor" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="50" y="100" width="140" height="50" as="geometry"/>
+        <mxCell id="2" value="Donor" style="rounded=0;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="3" value="Beneficiary&#xa;(Campaign Creator)" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="50" y="550" width="160" height="50" as="geometry"/>
+        <mxCell id="3" value="Beneficiary" style="rounded=0;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="550" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="4" value="Admin" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="50" y="1050" width="140" height="50" as="geometry"/>
+        <mxCell id="4" value="Admin" style="rounded=0;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1050" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="5" value="Khalti Payment&#xa;Gateway" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1800" y="350" width="160" height="50" as="geometry"/>
+        <mxCell id="5" value="Khalti\nPayment Gateway" style="rounded=0;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2050" y="350" width="150" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="6" value="Guest&#xa;(Visitor)" style="shape=rectangle;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=13;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="50" y="1500" width="140" height="50" as="geometry"/>
+        <mxCell id="6" value="Guest\n(Visitor)" style="rounded=0;whiteSpace=wrap;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1500" width="130" height="45" as="geometry"/>
         </mxCell>
-
-        <!-- ===== PROCESSES ===== -->
-        <mxCell id="7" value="1.0&#xa;User&#xa;Management" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="50" width="160" height="70" as="geometry"/>
+        <mxCell id="7" value="1.0\nUser\nManagement" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="400" y="60" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="8" value="2.0&#xa;KYC&#xa;Verification" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="250" width="160" height="70" as="geometry"/>
+        <mxCell id="8" value="2.0\nKYC\nVerification" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="400" y="300" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="9" value="3.0&#xa;Campaign&#xa;Management" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="200" width="160" height="70" as="geometry"/>
+        <mxCell id="9" value="3.0\nCampaign\nManagement" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="800" y="200" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="10" value="4.0&#xa;Money&#xa;Donation" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="200" width="160" height="70" as="geometry"/>
+        <mxCell id="10" value="4.0\nMoney\nDonation" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="200" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="11" value="5.0&#xa;Item&#xa;Donation" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="400" width="160" height="70" as="geometry"/>
+        <mxCell id="11" value="5.0\nItem\nDonation" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="450" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="12" value="6.0&#xa;Payment&#xa;Processing" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="200" width="160" height="70" as="geometry"/>
+        <mxCell id="12" value="6.0\nPayment\nProcessing" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="200" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="13" value="7.0&#xa;Admin&#xa;Dashboard" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="800" width="160" height="70" as="geometry"/>
+        <mxCell id="13" value="7.0\nAdmin\nDashboard" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="400" y="800" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="14" value="8.0&#xa;Gamification&#xa;&amp; Badges" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="500" width="160" height="70" as="geometry"/>
+        <mxCell id="14" value="8.0\nGamification\n& Badges" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="800" y="550" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="15" value="9.0&#xa;Leaderboard&#xa;Management" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="700" width="160" height="70" as="geometry"/>
+        <mxCell id="15" value="9.0\nCampaign\nMap & Browse" style="rounded=1;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=10;align=center;verticalAlign=middle;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1450" width="150" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="16" value="10.0&#xa;Notification&#xa;System" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="600" width="160" height="70" as="geometry"/>
+        <mxCell id="16" value="D1  User Data" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="650" y="140" width="180" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="17" value="11.0&#xa;Campaign&#xa;Map &amp; Browse" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="1450" width="160" height="70" as="geometry"/>
+        <mxCell id="17" value="D2  KYC Data" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="500" width="180" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="18" value="12.0&#xa;Bookmark, Comment&#xa;&amp; Wishes" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="900" width="170" height="70" as="geometry"/>
+        <mxCell id="18" value="D3  Campaign Data" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="800" y="370" width="180" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="19" value="13.0&#xa;Recurring&#xa;Donation" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="50" width="160" height="70" as="geometry"/>
+        <mxCell id="19" value="D4  Donation Data" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="400" width="180" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="20" value="14.0&#xa;Campaign&#xa;Updates" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="50" width="160" height="70" as="geometry"/>
+        <mxCell id="20" value="D5  Badge Data" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="680" width="180" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="77" value="15.0&#xa;AI Predictions&#xa;&amp; Recommendations" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="1300" width="180" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="78" value="16.0&#xa;Certificate&#xa;&amp; Export" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="500" width="160" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="79" value="17.0&#xa;Real-Time&#xa;Activity Feed" style="shape=mxgraph.dfd.process;whiteSpace=wrap;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="800" width="160" height="70" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== DATA STORES ===== -->
-        <mxCell id="21" value="D1 | User Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="150" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="22" value="D2 | KYC Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="450" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="23" value="D3 | Campaign Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="700" y="370" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="24" value="D4 | Money Donation Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="380" width="220" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="25" value="D5 | Item Donation Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="620" width="220" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="26" value="D6 | Badge Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="600" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="27" value="D7 | Leaderboard Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="950" width="220" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="28" value="D8 | Notification Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="750" width="220" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="29" value="D9 | Audit Log Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="350" y="1150" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="30" value="D10 | Bookmark Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1050" y="950" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="31" value="D11 | Comment &amp; Wish Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1050" y="1050" width="220" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="32" value="D12 | Recurring Donation Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="130" width="240" height="40" as="geometry"/>
-        </mxCell>
-        <mxCell id="80" value="D13 | Activity Feed Data" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1500" y="880" width="220" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== DATA FLOWS ===== -->
-
-        <!-- User Management flows -->
-        <mxCell id="33" value="Registration,&#xa;Login, OAuth" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="7" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="34" value="User Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="7" target="21" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="35" value="Auth Data" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="21" target="7" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="100" value="Registration,&#xa;Login" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="7" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- KYC flows -->
-        <mxCell id="36" value="KYC Documents,&#xa;ID Photos" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="8" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="37" value="KYC Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="8" target="22" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="38" value="Verification Status" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="8" target="3" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Campaign Management flows -->
-        <mxCell id="39" value="Campaign Details,&#xa;Cover Image, Proofs" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="9" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="40" value="Campaign Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="9" target="23" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="41" value="Campaign Status" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="9" target="3" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Campaign Updates flows -->
-        <mxCell id="42" value="Update Content" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="20" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="43" value="Update Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="20" target="23" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Money Donation flows -->
-        <mxCell id="44" value="Donation Amount,&#xa;Visibility" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="10" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="45" value="Donation Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="24" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="46" value="Payment Request" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="12" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="47" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="10" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Payment Processing flows -->
-        <mxCell id="48" value="Initiate Payment&#xa;(Amount, Return URL)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="12" target="5" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="49" value="Payment Status&#xa;(pidx, Status)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="5" target="12" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="50" value="Payment Confirmation" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="12" target="24" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Item Donation flows -->
-        <mxCell id="51" value="Item Pledge&#xa;Details" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="11" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="52" value="Item Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="11" target="25" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="53" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="11" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Recurring Donation flows -->
-        <mxCell id="54" value="Recurring Setup&#xa;(Amount, Interval)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="19" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="55" value="Recurring Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="19" target="32" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="56" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="19" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Admin Dashboard flows -->
-        <mxCell id="57" value="Review Actions&#xa;(Approve/Reject)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="4" target="13" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="58" value="Analytics,&#xa;Pending Items" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="13" target="4" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="59" value="Audit Log" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="13" target="29" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="60" value="KYC Profiles" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="22" target="13" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="61" value="Campaign Data" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="13" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="62" value="Item Donations" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="25" target="13" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="101" value="Badge Grant" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="13" target="26" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Gamification & Badges flows -->
-        <mxCell id="63" value="Donation History" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="14" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="64" value="Badge Award" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="14" target="26" parent="1">
+        <mxCell id="21" value="Registration,\nLogin" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="7" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="65" value="Badge Notification" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="14" target="16" parent="1">
+        <mxCell id="22" value="Registration,\nLogin" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="7" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Leaderboard flows -->
-        <mxCell id="66" value="Donation Totals" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="15" parent="1">
+        <mxCell id="23" value="User Record" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="7" target="16" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="67" value="Ranking Data" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="15" target="27" parent="1">
+        <mxCell id="24" value="Auth Data" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="16" target="7" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="102" value="Leaderboard&#xa;Rankings" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="15" target="2" parent="1">
+        <mxCell id="25" value="KYC Documents" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="8" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Notification System flows -->
-        <mxCell id="68" value="Notification Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="16" target="28" parent="1">
+        <mxCell id="26" value="KYC Record" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="8" target="17" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="69" value="Notifications" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="16" target="2" parent="1">
+        <mxCell id="27" value="Verification\nStatus" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="8" target="3" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="70" value="Notifications" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="16" target="3" parent="1">
+        <mxCell id="28" value="Campaign Details,\nCover Image" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="3" target="9" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Bookmark, Comment & Wishes flows -->
-        <mxCell id="71" value="Bookmark,&#xa;Comment, Wish" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="18" parent="1">
+        <mxCell id="29" value="Campaign Record" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="9" target="18" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="72" value="Bookmark Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="30" parent="1">
+        <mxCell id="30" value="Campaign Status" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="9" target="3" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="73" value="Comment &amp;&#xa;Wish Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="31" parent="1">
+        <mxCell id="31" value="Donation Amount" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="10" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="103" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="18" parent="1">
+        <mxCell id="32" value="Donation Record" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="19" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Campaign Map & Browse flows -->
-        <mxCell id="74" value="Search, Browse,&#xa;Map View" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="6" target="17" parent="1">
+        <mxCell id="33" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="10" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="75" value="Campaign Listings" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="17" parent="1">
+        <mxCell id="34" value="Payment Request" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="12" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="76" value="Campaign Data,&#xa;Map Markers" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="17" target="6" parent="1">
+        <mxCell id="35" value="Donation Receipt" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="2" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- AI Predictions & Recommendations flows -->
-        <mxCell id="81" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="23" target="77" parent="1">
+        <mxCell id="36" value="Initiate Payment" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="12" target="5" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="82" value="Donation History" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="77" parent="1">
+        <mxCell id="37" value="Payment Status" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="5" target="12" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="83" value="Predictions,&#xa;Recommendations" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="77" target="2" parent="1">
+        <mxCell id="38" value="Payment\nConfirmation" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="12" target="19" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="84" value="Predictions,&#xa;Similar Campaigns" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="77" target="6" parent="1">
+        <mxCell id="39" value="Item Pledge" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="11" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Certificate & Export flows -->
-        <mxCell id="85" value="Certificate Request,&#xa;Export Request" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="2" target="78" parent="1">
+        <mxCell id="40" value="Item Record" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="11" target="19" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="86" value="Donation Details" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="78" parent="1">
+        <mxCell id="41" value="Campaign Info" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="11" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="87" value="Certificate PDF,&#xa;Export CSV" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="78" target="2" parent="1">
+        <mxCell id="42" value="Review Actions" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="4" target="13" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Real-Time Activity Feed flows -->
-        <mxCell id="88" value="Real-Time&#xa;Notifications (SSE)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="79" target="2" parent="1">
+        <mxCell id="43" value="Analytics,\nPending Items" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="13" target="4" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="89" value="Real-Time&#xa;Events (SSE)" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="79" target="3" parent="1">
+        <mxCell id="44" value="KYC Profiles" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="17" target="13" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="90" value="Notification Queue" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="28" target="79" parent="1">
+        <mxCell id="45" value="Campaign Data" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="13" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="91" value="Activity Record" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="79" target="80" parent="1">
+        <mxCell id="46" value="Badge Grant" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="13" target="20" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="92" value="Activity Feed" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="80" target="6" parent="1">
+        <mxCell id="47" value="Donation History" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="19" target="14" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="93" value="Donation Events" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="79" parent="1">
+        <mxCell id="48" value="Badge Award" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="14" target="20" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Donation receipt back to donor -->
-        <mxCell id="94" value="Donation Receipt" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="2" parent="1">
+        <mxCell id="49" value="Search, Browse" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="6" target="15" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Notification from donation to beneficiary -->
-        <mxCell id="95" value="Donation Alert" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="10" target="16" parent="1">
+        <mxCell id="50" value="Campaign\nListings" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="18" target="15" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
-        <!-- Money donation data to admin -->
-        <mxCell id="96" value="Donation Reports" style="endArrow=classic;strokeColor=#333333;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="24" target="13" parent="1">
+        <mxCell id="51" value="Campaign Data,\nMap Markers" style="endArrow=classic;strokeColor=#333333;strokeWidth=1;fontSize=8;fontColor=#333333;labelBackgroundColor=#FFFFFF;curved=1;" edge="1" source="15" target="6" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>
