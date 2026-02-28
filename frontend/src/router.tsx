@@ -24,6 +24,7 @@ const CampaignManagement = lazy(() => import("./pages/admin/CampaignManagement")
 const ItemDonationManagement = lazy(() => import("./pages/admin/ItemDonationManagement"));
 const BadgeManagement = lazy(() => import("./pages/admin/BadgeManagement"));
 const AuditLogView = lazy(() => import("./pages/admin/AuditLogView"));
+const AdminReports = lazy(() => import("./pages/admin/Reports"));
 const Leaderboard = lazy(() => import("./pages/leaderboard/Leaderboard"));
 const About = lazy(() => import("./pages/About"));
 const Profile = lazy(() => import("./pages/Profile"));
@@ -203,6 +204,10 @@ export const router = createBrowserRouter([
       {
         path: "audit-logs",
         element: <Lazy><AuditLogView /></Lazy>,
+      },
+      {
+        path: "reports",
+        element: <Lazy><AdminReports /></Lazy>,
       },
     ],
   },

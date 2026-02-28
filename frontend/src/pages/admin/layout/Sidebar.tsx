@@ -1,10 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Home, ShieldCheck, CheckSquare, Gift, Badge, History, LogOut } from 'lucide-react';
+import { Home, ShieldCheck, CheckSquare, Gift, Badge, History, FileBarChart, LogOut } from 'lucide-react';
 import { useAuthStore } from "@/store/auth.store";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { to: "/admin/dashboard", icon: Home, text: "Dashboard" },
+  { to: "/admin/reports", icon: FileBarChart, text: "Reports" },
   { to: "/admin/kyc", icon: ShieldCheck, text: "KYC Management" },
   { to: "/admin/campaigns", icon: CheckSquare, text: "Campaigns" },
   { to: "/admin/item-donations", icon: Gift, text: "Item Donations" },

@@ -5,6 +5,7 @@ import adminItemDonationRoutes from './admin.itemDonation.routes';
 import adminBadgeRoutes from './admin.badge.routes';
 import adminAuditLogRoutes from './admin.auditLog.routes';
 import adminAnalyticsRoutes from './admin.analytics.routes';
+import adminReportsRoutes from './admin.reports.routes';
 import { listUsers } from '../controllers/admin.user.controller';
 import { requireAuth, requireAdmin } from '../middlewares/auth.middleware';
 import { catchAsync } from '../middlewares/errohandler.middleware';
@@ -21,6 +22,7 @@ router.use('/item-donations', adminItemDonationRoutes);
 router.use('/badges', adminBadgeRoutes);
 router.use('/audit-logs', adminAuditLogRoutes);
 router.use('/analytics', adminAnalyticsRoutes);
+router.use('/reports', adminReportsRoutes);
 router.get('/users', requireAuth, requireAdmin, catchAsync(listUsers));
 
 export default router;
