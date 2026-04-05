@@ -749,7 +749,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="sep" parent="1" style="strokeColor=#AAAAAA;fillColor=none;dashed=1;dashPattern=8 4;" value="" vertex="1">
-          <mxGeometry height="2" width="1250" x="20" y="720" as="geometry" />
+          <mxGeometry height="2" width="1070" x="20" y="720" as="geometry" />
         </mxCell>
         <mxCell id="t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;" value="Process 4: Donation Processing (Decomposition)" vertex="1">
           <mxGeometry height="30" width="500" x="30" y="750" as="geometry" />
@@ -758,7 +758,7 @@
           <mxGeometry height="80" width="150" x="30" y="920" as="geometry" />
         </mxCell>
         <mxCell id="e2b" parent="1" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" value="Beneficiary" vertex="1">
-          <mxGeometry height="80" width="150" x="1100" y="1100" as="geometry" />
+          <mxGeometry height="80" width="150" x="1100" y="1110" as="geometry" />
         </mxCell>
         <mxCell id="p5ext" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeWidth=2;dashed=1;strokeColor=#666666;container=1;" value="" vertex="1">
           <mxGeometry height="80" width="180" x="1100" y="830" as="geometry" />
@@ -782,7 +782,7 @@
           <mxGeometry height="55" width="170" x="5" y="25" as="geometry" />
         </mxCell>
         <mxCell id="p6ext" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeWidth=2;dashed=1;strokeColor=#666666;container=1;" value="" vertex="1">
-          <mxGeometry height="80" width="220" x="550" y="1220" as="geometry" />
+          <mxGeometry height="80" width="220" x="694" y="981" as="geometry" />
         </mxCell>
         <mxCell id="c225" edge="1" parent="p6ext" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;" value="">
           <mxGeometry relative="1" as="geometry">
@@ -866,7 +866,7 @@
           <mxGeometry height="55" width="190" x="5" y="25" as="geometry" />
         </mxCell>
         <mxCell id="p44" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;container=1;" value="" vertex="1">
-          <mxGeometry height="80" width="200" x="700" y="1060" as="geometry" />
+          <mxGeometry height="80" width="200" x="783" y="1094" as="geometry" />
         </mxCell>
         <mxCell id="c241" edge="1" parent="p44" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;" value="">
           <mxGeometry relative="1" as="geometry">
@@ -887,7 +887,7 @@
           <mxGeometry height="55" width="190" x="5" y="25" as="geometry" />
         </mxCell>
         <mxCell id="d4" parent="1" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" value="D4  Money Donations" vertex="1">
-          <mxGeometry height="30" width="170" x="530" y="940" as="geometry" />
+          <mxGeometry height="30" width="170" x="500" y="980" as="geometry" />
         </mxCell>
         <mxCell id="d5" parent="1" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" value="D5  Item Donations" vertex="1">
           <mxGeometry height="30" width="170" x="530" y="1160" as="geometry" />
@@ -895,10 +895,14 @@
         <mxCell id="d3b" parent="1" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" value="D3  Campaigns" vertex="1">
           <mxGeometry height="30" width="170" x="950" y="1010" as="geometry" />
         </mxCell>
-        <mxCell id="f21" edge="1" parent="1" source="e1b" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p41" value="donation amount, campaign id">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f21" edge="1" parent="1" source="e1b" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.849;exitY=-0.031;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" target="p41" value="donation amount, campaign id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="870" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="f22" edge="1" parent="1" source="p41" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="d4" value="pending donation">
+        <mxCell id="f22" edge="1" parent="1" source="c232" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="d4" value="pending donation">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="f23" edge="1" parent="1" source="p41" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="p42" value="payment details">
@@ -910,11 +914,19 @@
         <mxCell id="f25" edge="1" parent="1" source="p5ext" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="p42" value="payment confirmation">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="f26" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="d4" value="completed status">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f26" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="d4" value="completed status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="910" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="f27" edge="1" parent="1" source="e1b" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p43" value="item name, quantity">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f27" edge="1" parent="1" source="e1b" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.851;exitY=1.074;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" target="p43" value="item name, quantity">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="1100" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="f28" edge="1" parent="1" source="p43" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="d5" value="pledge record">
           <mxGeometry relative="1" as="geometry" />
@@ -922,44 +934,37 @@
         <mxCell id="f29" edge="1" parent="1" source="e2b" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="p44" value="delivery photo">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="f30" edge="1" parent="1" source="p44" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="d5" value="confirmed status">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f30" edge="1" parent="1" source="c243" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.91;entryY=-0.134;entryDx=0;entryDy=0;entryPerimeter=0;" target="d5" value="confirmed status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="1115" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="f31" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" target="p6ext" value="money donation event">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f31b" edge="1" parent="1" source="p44" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" target="p6ext" value="item confirmed event">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f32" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="d3b" value="donation count update">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f33" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="e1b" value="receipt">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p8ext" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFCC;strokeColor=#666666;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeWidth=2;dashed=1;container=1;" value="" vertex="1">
-          <mxGeometry height="80" width="180" x="300" y="1220" as="geometry" />
-        </mxCell>
-        <mxCell id="c300" edge="1" parent="p8ext" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint y="25" as="sourcePoint" />
-            <mxPoint x="180" y="25" as="targetPoint" />
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="c301" edge="1" parent="p8ext" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;" value="">
+        <mxCell id="f31b" edge="1" parent="1" source="p44" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="c228" value="item confirmed event">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="40" as="sourcePoint" />
-            <mxPoint x="40" y="25" as="targetPoint" />
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="c302" parent="p8ext" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontSize=11;fontStyle=1;" value="8" vertex="1">
-          <mxGeometry height="25" width="40" as="geometry" />
+        <mxCell id="f32" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="d3b" value="donation count update">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="993" y="910" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="c303" parent="p8ext" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;html=1;" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Notification System&lt;/span&gt;" vertex="1">
-          <mxGeometry height="55" width="170" x="5" y="25" as="geometry" />
-        </mxCell>
-        <mxCell id="f34" edge="1" parent="1" source="p42" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="p8ext" value="donation notification">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f33" edge="1" parent="1" source="c232" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="e1b" value="receipt">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="960" />
+            </Array>
+            <mxPoint x="510" y="883.9999999999998" as="sourcePoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
