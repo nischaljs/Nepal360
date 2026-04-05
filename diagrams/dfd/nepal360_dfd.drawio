@@ -5,19 +5,19 @@
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="p0" value="<b style='font-size:10px;'>0</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Nepal360&#xa;Crowdfunding&#xa;Platform</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p0" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;0&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Nepal360&amp;#10;Crowdfunding&amp;#10;Platform&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="480" y="300" width="240" height="130" as="geometry"/>
         </mxCell>
         <mxCell id="e1" value="Donor" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="60" y="140" width="150" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="e2" value="Beneficiary&#xa;(Campaign Creator)" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="e2" value="Beneficiary&amp;#10;(Campaign Creator)" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="990" y="140" width="170" height="55" as="geometry"/>
         </mxCell>
         <mxCell id="e3" value="Admin" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="60" y="560" width="150" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="e4" value="Khalti&#xa;Payment Gateway" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="e4" value="Khalti&amp;#10;Payment Gateway" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="990" y="560" width="170" height="55" as="geometry"/>
         </mxCell>
         <mxCell id="f1" value="registration data, donation details" style="endArrow=classic;startArrow=none;strokeColor=#333333;strokeWidth=1.5;fontSize=9;fontColor=#333333;fontStyle=0;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" source="e1" target="p0" parent="1">
@@ -73,31 +73,31 @@
         <mxCell id="e3" value="Admin" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="30" y="1000" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="e4" value="Khalti&#xa;Payment Gateway" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="e4" value="Khalti&amp;#10;Payment Gateway" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="1850" y="380" width="150" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="p1" value="<b style='font-size:10px;'>1</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>User&#xa;Management</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p1" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;1&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;User&amp;#10;Management&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="350" y="100" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p2" value="<b style='font-size:10px;'>2</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>KYC&#xa;Verification</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p2" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;2&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;KYC&amp;#10;Verification&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="350" y="340" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p3" value="<b style='font-size:10px;'>3</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Campaign&#xa;Management</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p3" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Campaign&amp;#10;Management&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="750" y="200" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p4" value="<b style='font-size:10px;'>4</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Donation&#xa;Processing</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p4" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;4&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Donation&amp;#10;Processing&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="1150" y="200" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p5" value="<b style='font-size:10px;'>5</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Payment&#xa;Processing</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p5" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;5&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Payment&amp;#10;Processing&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="1550" y="200" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p6" value="<b style='font-size:10px;'>6</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Gamification &amp;&#xa;Leaderboard</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p6" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;6&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Gamification &amp;amp;&amp;#10;Leaderboard&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="1150" y="600" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p7" value="<b style='font-size:10px;'>7</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Admin &amp;&#xa;Moderation</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p7" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;7&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Admin &amp;amp;&amp;#10;Moderation&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="350" y="800" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p8" value="<b style='font-size:10px;'>8</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Notification&#xa;System</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p8" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;8&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Notification&amp;#10;System&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="750" y="600" width="160" height="75" as="geometry"/>
         </mxCell>
         <mxCell id="d1" value="D1  Users" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" vertex="1" parent="1">
@@ -279,7 +279,7 @@
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="t1" value="<b style='font-size:14px;'>Process 3: Campaign Management (Decomposition)</b>" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="t1" value="&lt;b style=&#x27;font-size:14px;&#x27;&gt;Process 3: Campaign Management (Decomposition)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="30" y="15" width="450" height="30" as="geometry"/>
         </mxCell>
         <mxCell id="e2" value="Beneficiary" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
@@ -291,19 +291,19 @@
         <mxCell id="e3" value="Admin" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="1100" y="400" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="p31" value="<b style='font-size:10px;'>3.1</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Create&#xa;Campaign</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p31" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3.1&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Create&amp;#10;Campaign&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="300" y="120" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p32" value="<b style='font-size:10px;'>3.2</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Verify&#xa;Campaign</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p32" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3.2&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Verify&amp;#10;Campaign&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="120" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p33" value="<b style='font-size:10px;'>3.3</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Manage&#xa;Milestones</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p33" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3.3&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Manage&amp;#10;Milestones&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="340" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p34" value="<b style='font-size:10px;'>3.4</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Post Campaign&#xa;Updates</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p34" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3.4&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Post Campaign&amp;#10;Updates&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="300" y="340" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p35" value="<b style='font-size:10px;'>3.5</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Browse &amp;&#xa;Bookmark</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p35" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;3.5&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Browse &amp;amp;&amp;#10;Bookmark&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="300" y="520" width="160" height="75" as="geometry"/>
         </mxCell>
         <mxCell id="d3" value="D3  Campaigns" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" vertex="1" parent="1">
@@ -381,7 +381,7 @@
         <mxCell id="sep" value="" style="strokeColor=#AAAAAA;fillColor=none;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
           <mxGeometry x="20" y="720" width="1230" height="2" as="geometry"/>
         </mxCell>
-        <mxCell id="t2" value="<b style='font-size:14px;'>Process 4: Donation Processing (Decomposition)</b>" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="t2" value="&lt;b style=&#x27;font-size:14px;&#x27;&gt;Process 4: Donation Processing (Decomposition)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="30" y="750" width="450" height="30" as="geometry"/>
         </mxCell>
         <mxCell id="e1b" value="Donor" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
@@ -390,22 +390,22 @@
         <mxCell id="e2b" value="Beneficiary" style="rounded=0;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#333333;fontStyle=1;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="1100" y="1100" width="130" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="p5ext" value="<b style='font-size:10px;'>5</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Payment&#xa;Processing</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
+        <mxCell id="p5ext" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;5&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Payment&amp;#10;Processing&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeColor=#666666;strokeWidth=2;dashed=1;" vertex="1" parent="1">
           <mxGeometry x="1100" y="830" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p6ext" value="<b style='font-size:10px;'>6</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Gamification &amp;&#xa;Leaderboard</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
+        <mxCell id="p6ext" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;6&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Gamification &amp;amp;&amp;#10;Leaderboard&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;strokeColor=#666666;strokeWidth=2;dashed=1;" vertex="1" parent="1">
           <mxGeometry x="550" y="1220" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p41" value="<b style='font-size:10px;'>4.1</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Initiate Money&#xa;Donation</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p41" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;4.1&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Initiate Money&amp;#10;Donation&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="300" y="830" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p42" value="<b style='font-size:10px;'>4.2</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Verify&#xa;Payment</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p42" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;4.2&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Verify&amp;#10;Payment&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="830" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p43" value="<b style='font-size:10px;'>4.3</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Process Item&#xa;Pledge</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p43" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;4.3&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Process Item&amp;#10;Pledge&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="300" y="1050" width="160" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="p44" value="<b style='font-size:10px;'>4.4</b><hr size='1' style='margin:2px 0;color:#333;'/><span style='font-size:10px;'>Confirm Item&#xa;Delivery</span>" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+        <mxCell id="p44" value="&lt;b style=&#x27;font-size:10px;&#x27;&gt;4.4&lt;/b&gt;&lt;hr size=&#x27;1&#x27; style=&#x27;margin:2px 0;color:#333;&#x27;/&gt;&lt;span style=&#x27;font-size:10px;&#x27;&gt;Confirm Item&amp;#10;Delivery&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;overflow=hidden;fillColor=#FFFFCC;strokeColor=#333333;fontSize=10;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="1050" width="160" height="75" as="geometry"/>
         </mxCell>
         <mxCell id="d4" value="D4  Money Donations" style="shape=partialRectangle;whiteSpace=wrap;top=1;bottom=1;left=1;right=0;fillColor=#FFFFFF;strokeColor=#333333;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;" vertex="1" parent="1">
