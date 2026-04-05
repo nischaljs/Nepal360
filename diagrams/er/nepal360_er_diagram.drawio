@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.6">
   <diagram name="Nepal360 ER Diagram" id="er1">
-    <mxGraphModel dx="3643" dy="1697" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2500" pageHeight="2700" math="0" shadow="0">
+    <mxGraphModel dx="1987" dy="925" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2500" pageHeight="2700" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -260,7 +260,7 @@
         <mxCell id="86" parent="1" style="ellipse;whiteSpace=wrap;fillColor=#E8E8E8;strokeColor=#666666;fontSize=8;fontStyle=4;align=center;verticalAlign=middle;" value="userId" vertex="1">
           <mxGeometry height="26" width="82" x="1703" y="1136" as="geometry" />
         </mxCell>
-        <mxCell id="87" edge="1" parent="1" style="endArrow=none;strokeColor=#888888;" target="86">
+        <mxCell id="87" edge="1" parent="1" source="85" style="endArrow=none;strokeColor=#888888;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="86">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1753" y="1277" as="sourcePoint" />
           </mxGeometry>
@@ -394,7 +394,7 @@
         <mxCell id="129" edge="1" parent="1" source="33" style="endArrow=none;strokeColor=#555555;fontSize=10;fontColor=#CC0000;fontStyle=1;exitX=0.941;exitY=1.007;exitDx=0;exitDy=0;exitPerimeter=0;" target="128" value="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="130" edge="1" parent="1" source="128" style="endArrow=none;strokeColor=#555555;fontSize=10;fontColor=#CC0000;fontStyle=1;" target="85" value="0..1">
+        <mxCell id="130" edge="1" parent="1" source="128" style="endArrow=none;strokeColor=#555555;fontSize=10;fontColor=#CC0000;fontStyle=1;" target="85" value="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="131" parent="1" style="rhombus;whiteSpace=wrap;fillColor=#CCE5FF;strokeColor=#333333;fontSize=9;align=center;verticalAlign=middle;" value="makes" vertex="1">
