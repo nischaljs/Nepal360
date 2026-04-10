@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const bestWish_controller_js_1 = require("../controllers/bestWish.controller.js");
+const auth_middleware_js_1 = require("../middlewares/auth.middleware.js");
+const router = (0, express_1.Router)({ mergeParams: true });
+router.get('/', bestWish_controller_js_1.getCampaignWishes);
+router.post('/donations/:id/wish', auth_middleware_js_1.requireAuth, bestWish_controller_js_1.createBestWish);
+router.get('/donations/:id/wish', bestWish_controller_js_1.getDonationWish);
+router.put('/donations/:id/wish', auth_middleware_js_1.requireAuth, bestWish_controller_js_1.updateBestWish);
+router.delete('/donations/:id/wish', auth_middleware_js_1.requireAuth, bestWish_controller_js_1.deleteBestWish);
+exports.default = router;

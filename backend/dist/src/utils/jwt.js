@@ -37,7 +37,8 @@ exports.generateToken = generateToken;
 exports.verifyToken = verifyToken;
 exports.extractToken = extractToken;
 const jwt = __importStar(require("jsonwebtoken"));
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const env_1 = require("../config/env");
+const JWT_SECRET = env_1.env.JWT_SECRET;
 const JWT_EXPIRY = '7d';
 function generateToken(payload) {
     return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRY });

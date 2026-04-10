@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyEmailSchema = exports.loginSchema = exports.signupSchema = void 0;
+exports.googleLoginSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.verifyEmailSchema = exports.loginSchema = exports.signupSchema = void 0;
 const zod_1 = require("zod");
 exports.signupSchema = zod_1.z.object({
     name: zod_1.z.string().min(2, 'Name must be at least 2 characters'),
@@ -14,4 +14,15 @@ exports.loginSchema = zod_1.z.object({
 exports.verifyEmailSchema = zod_1.z.object({
     email: zod_1.z.string().email('Invalid email address'),
     otp: zod_1.z.string().length(6, 'OTP must be 6 digits'),
+});
+exports.forgotPasswordSchema = zod_1.z.object({
+    email: zod_1.z.string().email('Invalid email address'),
+});
+exports.resetPasswordSchema = zod_1.z.object({
+    email: zod_1.z.string().email('Invalid email address'),
+    otp: zod_1.z.string().length(6, 'OTP must be 6 digits'),
+    newPassword: zod_1.z.string().min(8, 'Password must be at least 8 characters'),
+});
+exports.googleLoginSchema = zod_1.z.object({
+    idToken: zod_1.z.string().min(1, 'ID token is required'),
 });

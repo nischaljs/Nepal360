@@ -18,7 +18,7 @@ const listLeaderboards = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                 createdAt: 'desc',
             },
         });
-        res.status(200).json(leaderboards);
+        res.status(200).json({ success: true, data: leaderboards });
     }
     catch (error) {
         next(error);
@@ -29,7 +29,7 @@ const getLeaderboard = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     try {
         const { period, key } = req.params;
         if (!['MONTHLY', 'CAMPAIGN', 'YEARLY'].includes(period.toUpperCase())) {
-            return res.status(400).json({ message: 'Invalid leaderboard period.' });
+            return res.status(400).json({ success: false, message: 'Invalid leaderboard period.' });
         }
         const leaderboard = yield prisma_1.prisma.leaderboard.findUnique({
             where: {
@@ -55,9 +55,9 @@ const getLeaderboard = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             },
         });
         if (!leaderboard) {
-            return res.status(404).json({ message: 'Leaderboard not found.' });
+            return res.status(404).json({ success: false, message: 'Leaderboard not found.' });
         }
-        res.status(200).json(leaderboard);
+        res.status(200).json({ success: true, data: leaderboard });
     }
     catch (error) {
         next(error);

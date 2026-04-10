@@ -13,10 +13,13 @@ exports.rejectKyc = exports.approveKyc = exports.getKycDetail = exports.listKycP
 const zod_1 = require("zod");
 const prisma_1 = require("../lib/prisma");
 const admin_kyc_schema_1 = require("../schemas/admin.kyc.schema");
+const file_1 = require("../utils/file");
+const env_1 = require("../config/env");
+const BASE_URL = env_1.env.BACKEND_URL;
 const listKycProfiles = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { status } = req.query;
     if (status && !['PENDING', 'APPROVED', 'REJECTED'].includes(status)) {
-        return res.status(400).json({ message: 'Invalid status filter.' });
+        return res.status(400).json({ success: false, message: 'Invalid status filter.' });
     }
     try {
         const kycProfiles = yield prisma_1.prisma.kYCProfile.findMany({
@@ -33,7 +36,8 @@ const listKycProfiles = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 },
             },
         });
-        res.status(200).json(kycProfiles);
+        const formatted = kycProfiles.map((p) => (Object.assign(Object.assign({}, p), { documentImage: p.documentImage ? (0, file_1.generateAssetUrl)(p.documentImage, BASE_URL) : undefined, profilePhoto: p.profilePhoto ? (0, file_1.generateAssetUrl)(p.profilePhoto, BASE_URL) : undefined })));
+        res.status(200).json({ success: true, data: formatted });
     }
     catch (error) {
         next(error);
@@ -50,7 +54,7 @@ const getKycDetail = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             },
         });
         if (!kycProfile) {
-            return res.status(404).json({ message: 'KYC profile not found.' });
+            return res.status(404).json({ success: false, message: 'KYC profile not found.' });
         }
         const auditLogs = yield prisma_1.prisma.auditLog.findMany({
             where: {
@@ -61,7 +65,10 @@ const getKycDetail = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 createdAt: 'desc',
             },
         });
-        res.status(200).json(Object.assign(Object.assign({}, kycProfile), { auditLogs }));
+        res.status(200).json({
+            success: true,
+            data: Object.assign(Object.assign({}, kycProfile), { documentImage: kycProfile.documentImage ? (0, file_1.generateAssetUrl)(kycProfile.documentImage, BASE_URL) : undefined, profilePhoto: kycProfile.profilePhoto ? (0, file_1.generateAssetUrl)(kycProfile.profilePhoto, BASE_URL) : undefined, auditLogs }),
+        });
     }
     catch (error) {
         next(error);
@@ -89,7 +96,7 @@ const approveKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                 note: 'KYC Approved',
             },
         });
-        res.status(200).json({ message: 'KYC profile approved.', kycProfile });
+        res.status(200).json({ success: true, message: 'KYC profile approved.', data: kycProfile });
     }
     catch (error) {
         next(error);
@@ -119,11 +126,12 @@ const rejectKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function
                 note: `KYC Rejected: ${reason}`,
             },
         });
-        res.status(200).json({ message: 'KYC profile rejected.', kycProfile });
+        res.status(200).json({ success: true, message: 'KYC profile rejected.', data: kycProfile });
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {
             return res.status(400).json({
+                success: false,
                 message: 'Validation error',
                 errors: error.issues.map((e) => ({
                     path: e.path,

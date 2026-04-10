@@ -2,7 +2,7 @@
 
 echo "Starting backend..."
 cd backend
-pnpm start &
+pnpm dev &
 BACKEND_PID=$!
 cd ..
 

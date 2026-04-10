@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const campaignUpdate_controller_js_1 = require("../controllers/campaignUpdate.controller.js");
+const auth_middleware_js_1 = require("../middlewares/auth.middleware.js");
+const router = (0, express_1.Router)({ mergeParams: true });
+router.get('/', campaignUpdate_controller_js_1.getCampaignUpdates);
+router.get('/:updateId', campaignUpdate_controller_js_1.getCampaignUpdate);
+router.post('/', auth_middleware_js_1.requireAuth, campaignUpdate_controller_js_1.createCampaignUpdate);
+router.put('/:updateId', auth_middleware_js_1.requireAuth, campaignUpdate_controller_js_1.updateCampaignUpdate);
+router.delete('/:updateId', auth_middleware_js_1.requireAuth, campaignUpdate_controller_js_1.deleteCampaignUpdate);
+exports.default = router;

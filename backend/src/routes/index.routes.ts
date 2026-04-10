@@ -1,4 +1,5 @@
 import express from 'express';
+import devRoutes from './dev.routes';
 import authRoutes from './auth.routes';
 import campaignRoutes from './campaign.routes';
 import adminRoutes from './admin.routes';
@@ -44,5 +45,8 @@ router.use('/map', mapRoutes);
 router.use('/certificates', certificateRoutes);
 router.use('/activity', activityRoutes);
 router.use('/predictions', predictionRoutes);
+if (process.env.NODE_ENV !== 'production') {
+    router.use('/dev', devRoutes);
+}
 
 export default router;

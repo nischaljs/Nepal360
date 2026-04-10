@@ -5,7 +5,9 @@ const itemDonation_controller_1 = require("../controllers/itemDonation.controlle
 const auth_middleware_1 = require("../middlewares/auth.middleware");
 const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
 const router = (0, express_1.Router)();
-router.use(auth_middleware_1.requireAuth);
-router.post('/', (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.pledgeItemDonation));
-router.get('/me', (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.getMyItemDonations));
+router.get('/campaign/:campaignId', (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.getCampaignItemDonations));
+router.get('/me', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.getMyItemDonations));
+router.get('/:id', (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.getItemDonationById));
+router.post('/', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.pledgeItemDonation));
+router.put('/:id', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(itemDonation_controller_1.updateItemDonation));
 exports.default = router;

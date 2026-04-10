@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.signup = signup;
 exports.verifyEmail = verifyEmail;
 exports.login = login;
+exports.forgotPassword = forgotPassword;
+exports.resetPassword = resetPassword;
+exports.googleLogin = googleLogin;
 exports.getCurrentUser = getCurrentUser;
 const password_1 = require("../utils/password");
 const otp_1 = require("../utils/otp");
@@ -131,6 +134,105 @@ function login(data) {
                     name: user.name,
                     email: user.email,
                     emailVerified: true,
+                },
+            },
+        };
+    });
+}
+/* ----------------------------- FORGOT PASSWORD ----------------------------- */
+function forgotPassword(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const validation = auth_schema_1.forgotPasswordSchema.safeParse(data);
+        if (!validation.success) {
+            return { status: 400, body: { success: false, message: validation.error.message } };
+        }
+        const { email } = validation.data;
+        const user = yield prisma_1.prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            return {
+                status: 200,
+                body: { success: true, message: 'If an account exists with this email, an OTP has been sent.' },
+            };
+        }
+        const otp = (0, otp_1.saveOTP)(email);
+        console.log(`[PASSWORD RESET OTP] ${email}: ${otp}`);
+        return {
+            status: 200,
+            body: { success: true, message: 'If an account exists with this email, an OTP has been sent.' },
+        };
+    });
+}
+/* ----------------------------- RESET PASSWORD ------------------------------ */
+function resetPassword(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const validation = auth_schema_1.resetPasswordSchema.safeParse(data);
+        if (!validation.success) {
+            return { status: 400, body: { success: false, message: validation.error.message } };
+        }
+        const { email, otp, newPassword } = validation.data;
+        const user = yield prisma_1.prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            return { status: 400, body: { success: false, message: 'Invalid email or OTP' } };
+        }
+        if (!(0, otp_1.verifyOTP)(email, otp)) {
+            return { status: 401, body: { success: false, message: 'Invalid or expired OTP' } };
+        }
+        const passwordHash = yield (0, password_1.hashPassword)(newPassword);
+        yield prisma_1.prisma.user.update({
+            where: { id: user.id },
+            data: { passwordHash },
+        });
+        return {
+            status: 200,
+            body: { success: true, message: 'Password reset successfully. You can now log in.' },
+        };
+    });
+}
+/* ----------------------------- GOOGLE LOGIN -------------------------------- */
+function googleLogin(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const validation = auth_schema_1.googleLoginSchema.safeParse(data);
+        if (!validation.success) {
+            return { status: 400, body: { success: false, message: validation.error.message } };
+        }
+        const { idToken } = validation.data;
+        const res = yield fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
+        if (!res.ok) {
+            return { status: 401, body: { success: false, message: 'Invalid Google token' } };
+        }
+        const payload = yield res.json();
+        const { email, name, picture } = payload;
+        if (!email) {
+            return { status: 401, body: { success: false, message: 'Google account has no email' } };
+        }
+        let user = yield prisma_1.prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            const randomPassword = yield (0, password_1.hashPassword)(crypto.randomUUID());
+            user = yield prisma_1.prisma.user.create({
+                data: {
+                    name: name || email.split('@')[0],
+                    email,
+                    passwordHash: randomPassword,
+                    emailStatus: enums_1.EmailStatus.VERIFIED,
+                },
+            });
+        }
+        const token = (0, jwt_1.generateToken)({
+            userId: user.id,
+            email: user.email,
+            emailVerified: user.emailStatus === enums_1.EmailStatus.VERIFIED,
+        });
+        return {
+            status: 200,
+            body: {
+                success: true,
+                message: 'Login successful',
+                token,
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    emailVerified: user.emailStatus === enums_1.EmailStatus.VERIFIED,
                 },
             },
         };

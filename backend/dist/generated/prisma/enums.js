@@ -9,7 +9,7 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LeaderboardPeriod = exports.BadgeType = exports.AuditActorType = exports.AdminActionType = exports.ItemDonationStatus = exports.MoneyDonationStatus = exports.DonationVisibility = exports.CampaignStatus = exports.KYCStatus = exports.EmailStatus = void 0;
+exports.NotificationType = exports.LeaderboardPeriod = exports.BadgeType = exports.AuditActorType = exports.AdminActionType = exports.ItemDonationStatus = exports.MoneyDonationStatus = exports.DonationVisibility = exports.CampaignStatus = exports.KYCStatus = exports.EmailStatus = void 0;
 exports.EmailStatus = {
     PENDING: 'PENDING',
     VERIFIED: 'VERIFIED'
@@ -65,4 +65,13 @@ exports.LeaderboardPeriod = {
     MONTHLY: 'MONTHLY',
     CAMPAIGN: 'CAMPAIGN',
     YEARLY: 'YEARLY'
+};
+exports.NotificationType = {
+    DONATION_RECEIVED: 'DONATION_RECEIVED',
+    CAMPAIGN_VERIFIED: 'CAMPAIGN_VERIFIED',
+    CAMPAIGN_REJECTED: 'CAMPAIGN_REJECTED',
+    MILESTONE_COMPLETED: 'MILESTONE_COMPLETED',
+    BADGE_EARNED: 'BADGE_EARNED',
+    COMMENT_RECEIVED: 'COMMENT_RECEIVED',
+    CAMPAIGN_UPDATE: 'CAMPAIGN_UPDATE'
 };

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.milestoneQuerySchema = exports.campaignQuerySchema = exports.createMilestoneSchema = exports.updateCampaignSchema = exports.createCampaignSchema = void 0;
+exports.milestoneQuerySchema = exports.campaignQuerySchema = exports.createMilestoneSchema = exports.updateCampaignSchema = exports.createCampaignSchema = exports.CAMPAIGN_CATEGORIES = void 0;
 const zod_1 = require("zod");
 /**
  * Campaign Creation Schema
@@ -10,6 +10,10 @@ const zod_1 = require("zod");
  * - coverImage: Single image file (required, max 5MB)
  * - proofs: Multiple proof files (optional, max 10 files, 20MB each)
  */
+exports.CAMPAIGN_CATEGORIES = [
+    'education', 'health', 'disaster', 'community', 'animals',
+    'arts', 'business', 'emergency', 'environment', 'other', 'general',
+];
 exports.createCampaignSchema = zod_1.z.object({
     title: zod_1.z.string()
         .min(5, 'Title must be at least 5 characters')
@@ -22,6 +26,8 @@ exports.createCampaignSchema = zod_1.z.object({
         .transform((val) => Number(val))
         .refine((val) => val > 0, 'Target amount must be greater than 0')
         .refine((val) => val <= 999999999.99, 'Target amount is too large'),
+    category: zod_1.z.enum(exports.CAMPAIGN_CATEGORIES).optional().default('general'),
+    district: zod_1.z.string().optional(),
 }).strict();
 /**
  * Campaign Update Schema
@@ -42,6 +48,7 @@ exports.updateCampaignSchema = zod_1.z.object({
         .transform((val) => Number(val))
         .refine((val) => val > 0, 'Target amount must be greater than 0')
         .optional(),
+    category: zod_1.z.enum(exports.CAMPAIGN_CATEGORIES).optional(),
     status: zod_1.z.enum(['DRAFT', 'PENDING_VERIFICATION', 'LIVE', 'SUSPENDED', 'COMPLETED'])
         .optional(),
 }).refine((data) => Object.keys(data).length > 0, 'At least one field must be provided for update').strict();

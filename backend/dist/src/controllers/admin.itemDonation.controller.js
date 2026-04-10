@@ -17,7 +17,7 @@ const listItemDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     const { status } = req.query;
     if (status &&
         !['PLEDGED', 'DELIVERED', 'CONFIRMED', 'REJECTED'].includes(status)) {
-        return res.status(400).json({ message: 'Invalid status filter.' });
+        return res.status(400).json({ success: false, message: 'Invalid status filter.' });
     }
     try {
         const donations = yield prisma_1.prisma.itemDonation.findMany({
@@ -36,7 +36,7 @@ const listItemDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, 
                 createdAt: 'desc',
             },
         });
-        res.status(200).json(donations);
+        res.status(200).json({ success: true, data: donations });
     }
     catch (error) {
         next(error);
@@ -64,8 +64,7 @@ const confirmItemDonation = (req, res, next) => __awaiter(void 0, void 0, void 0
                 note: 'Item donation confirmed',
             },
         });
-        // TODO: Update DonorStats and Campaign donationCount
-        res.status(200).json(donation);
+        res.status(200).json({ success: true, data: donation });
     }
     catch (error) {
         next(error);
@@ -93,11 +92,11 @@ const rejectItemDonation = (req, res, next) => __awaiter(void 0, void 0, void 0,
                 note: `Item donation rejected: ${reason}`,
             },
         });
-        res.status(200).json(donation);
+        res.status(200).json({ success: true, data: donation });
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {
-            return res.status(400).json({ message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
+            return res.status(400).json({ success: false, message: 'Validation error', errors: error.issues.map(e => ({ path: e.path, message: e.message })) });
         }
         next(error);
     }

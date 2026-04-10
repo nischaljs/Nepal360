@@ -16,8 +16,9 @@ const express_1 = __importDefault(require("express"));
 const auth_controller_1 = require("../controllers/auth.controller");
 const auth_middleware_1 = require("../middlewares/auth.middleware");
 const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
+const rateLimit_middleware_1 = require("../middlewares/rateLimit.middleware");
 const router = express_1.default.Router();
-router.post('/signup', (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/signup', rateLimit_middleware_1.authLimiter, (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield (0, auth_controller_1.signup)(req.body);
     res.status(result.status).json(result.body);
 })));
@@ -25,8 +26,20 @@ router.post('/verify-email', (0, errohandler_middleware_1.catchAsync)((req, res)
     const result = yield (0, auth_controller_1.verifyEmail)(req.body);
     res.status(result.status).json(result.body);
 })));
-router.post('/login', (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/login', rateLimit_middleware_1.authLimiter, (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield (0, auth_controller_1.login)(req.body);
+    res.status(result.status).json(result.body);
+})));
+router.post('/google', rateLimit_middleware_1.authLimiter, (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, auth_controller_1.googleLogin)(req.body);
+    res.status(result.status).json(result.body);
+})));
+router.post('/forgot-password', rateLimit_middleware_1.authLimiter, (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, auth_controller_1.forgotPassword)(req.body);
+    res.status(result.status).json(result.body);
+})));
+router.post('/reset-password', (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, auth_controller_1.resetPassword)(req.body);
     res.status(result.status).json(result.body);
 })));
 router.get('/me', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

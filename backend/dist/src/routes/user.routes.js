@@ -8,5 +8,6 @@ const router = (0, express_1.Router)();
 router.get('/me/stats', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(user_controller_1.getMyStats));
 router.get('/me/badges', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(user_controller_1.getMyBadges));
 router.get('/me/donations', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(user_controller_1.getMyDonationHistory));
+router.get('/me/impact', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(user_controller_1.getMyImpact));
 router.get('/:userId/stats', (0, errohandler_middleware_1.catchAsync)(user_controller_1.getUserStats));
 exports.default = router;

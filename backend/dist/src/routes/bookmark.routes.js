@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const bookmark_controller_1 = require("../controllers/bookmark.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const router = (0, express_1.Router)();
+router.post('/toggle', auth_middleware_1.requireAuth, bookmark_controller_1.toggleBookmark);
+router.get('/me', auth_middleware_1.requireAuth, bookmark_controller_1.getMyBookmarks);
+router.get('/check/:campaignId', auth_middleware_1.requireAuth, bookmark_controller_1.checkBookmark);
+exports.default = router;

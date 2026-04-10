@@ -48,7 +48,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.AuditLogOrderByRelevanceFieldEnum = exports.LeaderboardEntryOrderByRelevanceFieldEnum = exports.LeaderboardOrderByRelevanceFieldEnum = exports.DonorStatsOrderByRelevanceFieldEnum = exports.UserBadgeOrderByRelevanceFieldEnum = exports.BadgeOrderByRelevanceFieldEnum = exports.ItemDonationOrderByRelevanceFieldEnum = exports.MoneyDonationOrderByRelevanceFieldEnum = exports.MilestoneOrderByRelevanceFieldEnum = exports.CampaignOrderByRelevanceFieldEnum = exports.KYCProfileOrderByRelevanceFieldEnum = exports.NullsOrder = exports.AdminRoleOrderByRelevanceFieldEnum = exports.UserOrderByRelevanceFieldEnum = exports.SortOrder = exports.AuditLogScalarFieldEnum = exports.LeaderboardEntryScalarFieldEnum = exports.LeaderboardScalarFieldEnum = exports.DonorStatsScalarFieldEnum = exports.UserBadgeScalarFieldEnum = exports.BadgeScalarFieldEnum = exports.ItemDonationScalarFieldEnum = exports.MoneyDonationScalarFieldEnum = exports.MilestoneScalarFieldEnum = exports.CampaignScalarFieldEnum = exports.KYCProfileScalarFieldEnum = exports.AdminRoleScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.BadgeOrderByRelevanceFieldEnum = exports.ItemDonationOrderByRelevanceFieldEnum = exports.MoneyDonationOrderByRelevanceFieldEnum = exports.BestWishOrderByRelevanceFieldEnum = exports.CampaignUpdateOrderByRelevanceFieldEnum = exports.MilestoneOrderByRelevanceFieldEnum = exports.CampaignOrderByRelevanceFieldEnum = exports.KYCProfileOrderByRelevanceFieldEnum = exports.NullsOrder = exports.AdminRoleOrderByRelevanceFieldEnum = exports.UserOrderByRelevanceFieldEnum = exports.SortOrder = exports.AuditLogScalarFieldEnum = exports.CommentScalarFieldEnum = exports.NotificationScalarFieldEnum = exports.BookmarkScalarFieldEnum = exports.RecurringDonationScalarFieldEnum = exports.LeaderboardEntryScalarFieldEnum = exports.LeaderboardScalarFieldEnum = exports.DonorStatsScalarFieldEnum = exports.UserBadgeScalarFieldEnum = exports.BadgeScalarFieldEnum = exports.ItemDonationScalarFieldEnum = exports.MoneyDonationScalarFieldEnum = exports.BestWishScalarFieldEnum = exports.CampaignUpdateScalarFieldEnum = exports.MilestoneScalarFieldEnum = exports.CampaignScalarFieldEnum = exports.KYCProfileScalarFieldEnum = exports.AdminRoleScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.AuditLogOrderByRelevanceFieldEnum = exports.CommentOrderByRelevanceFieldEnum = exports.NotificationOrderByRelevanceFieldEnum = exports.BookmarkOrderByRelevanceFieldEnum = exports.RecurringDonationOrderByRelevanceFieldEnum = exports.LeaderboardEntryOrderByRelevanceFieldEnum = exports.LeaderboardOrderByRelevanceFieldEnum = exports.DonorStatsOrderByRelevanceFieldEnum = exports.UserBadgeOrderByRelevanceFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -108,6 +109,8 @@ exports.ModelName = {
     KYCProfile: 'KYCProfile',
     Campaign: 'Campaign',
     Milestone: 'Milestone',
+    CampaignUpdate: 'CampaignUpdate',
+    BestWish: 'BestWish',
     MoneyDonation: 'MoneyDonation',
     ItemDonation: 'ItemDonation',
     Badge: 'Badge',
@@ -115,6 +118,10 @@ exports.ModelName = {
     DonorStats: 'DonorStats',
     Leaderboard: 'Leaderboard',
     LeaderboardEntry: 'LeaderboardEntry',
+    RecurringDonation: 'RecurringDonation',
+    Bookmark: 'Bookmark',
+    Notification: 'Notification',
+    Comment: 'Comment',
     AuditLog: 'AuditLog'
 };
 /**
@@ -160,6 +167,8 @@ exports.CampaignScalarFieldEnum = {
     beneficiaryId: 'beneficiaryId',
     title: 'title',
     description: 'description',
+    category: 'category',
+    district: 'district',
     coverImage: 'coverImage',
     proofLinks: 'proofLinks',
     targetAmount: 'targetAmount',
@@ -171,7 +180,7 @@ exports.CampaignScalarFieldEnum = {
     suspendedBy: 'suspendedBy',
     donationCount: 'donationCount',
     shareCount: 'shareCount',
-    viewCount: 'viewCount',
+    visits: 'visits',
     isActive: 'isActive',
     createdAt: 'createdAt',
     verifiedAt: 'verifiedAt',
@@ -185,6 +194,33 @@ exports.MilestoneScalarFieldEnum = {
     title: 'title',
     amount: 'amount',
     completed: 'completed',
+    fundsReleased: 'fundsReleased',
+    releasedAmount: 'releasedAmount',
+    releasedAt: 'releasedAt',
+    verifiedBy: 'verifiedBy',
+    claimStatus: 'claimStatus',
+    claimProof: 'claimProof',
+    createdAt: 'createdAt'
+};
+exports.CampaignUpdateScalarFieldEnum = {
+    id: 'id',
+    campaignId: 'campaignId',
+    userId: 'userId',
+    title: 'title',
+    content: 'content',
+    images: 'images',
+    isMilestone: 'isMilestone',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.BestWishScalarFieldEnum = {
+    id: 'id',
+    donationId: 'donationId',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    message: 'message',
+    cardStyle: 'cardStyle',
+    isAnonymous: 'isAnonymous',
     createdAt: 'createdAt'
 };
 exports.MoneyDonationScalarFieldEnum = {
@@ -248,6 +284,43 @@ exports.LeaderboardEntryScalarFieldEnum = {
     totalItems: 'totalItems',
     isAnonymous: 'isAnonymous'
 };
+exports.RecurringDonationScalarFieldEnum = {
+    id: 'id',
+    donorId: 'donorId',
+    campaignId: 'campaignId',
+    amount: 'amount',
+    frequency: 'frequency',
+    status: 'status',
+    nextDueDate: 'nextDueDate',
+    lastPaidDate: 'lastPaidDate',
+    totalPaid: 'totalPaid',
+    paymentCount: 'paymentCount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.BookmarkScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    createdAt: 'createdAt'
+};
+exports.NotificationScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    type: 'type',
+    title: 'title',
+    message: 'message',
+    link: 'link',
+    isRead: 'isRead',
+    createdAt: 'createdAt'
+};
+exports.CommentScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    content: 'content',
+    createdAt: 'createdAt'
+};
 exports.AuditLogScalarFieldEnum = {
     id: 'id',
     actorType: 'actorType',
@@ -293,6 +366,8 @@ exports.CampaignOrderByRelevanceFieldEnum = {
     beneficiaryId: 'beneficiaryId',
     title: 'title',
     description: 'description',
+    category: 'category',
+    district: 'district',
     coverImage: 'coverImage',
     proofLinks: 'proofLinks',
     rejectionReason: 'rejectionReason',
@@ -304,7 +379,26 @@ exports.CampaignOrderByRelevanceFieldEnum = {
 exports.MilestoneOrderByRelevanceFieldEnum = {
     id: 'id',
     campaignId: 'campaignId',
-    title: 'title'
+    title: 'title',
+    verifiedBy: 'verifiedBy',
+    claimStatus: 'claimStatus',
+    claimProof: 'claimProof'
+};
+exports.CampaignUpdateOrderByRelevanceFieldEnum = {
+    id: 'id',
+    campaignId: 'campaignId',
+    userId: 'userId',
+    title: 'title',
+    content: 'content',
+    images: 'images'
+};
+exports.BestWishOrderByRelevanceFieldEnum = {
+    id: 'id',
+    donationId: 'donationId',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    message: 'message',
+    cardStyle: 'cardStyle'
 };
 exports.MoneyDonationOrderByRelevanceFieldEnum = {
     id: 'id',
@@ -345,6 +439,31 @@ exports.LeaderboardEntryOrderByRelevanceFieldEnum = {
     id: 'id',
     leaderboardId: 'leaderboardId',
     userId: 'userId'
+};
+exports.RecurringDonationOrderByRelevanceFieldEnum = {
+    id: 'id',
+    donorId: 'donorId',
+    campaignId: 'campaignId',
+    frequency: 'frequency',
+    status: 'status'
+};
+exports.BookmarkOrderByRelevanceFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId'
+};
+exports.NotificationOrderByRelevanceFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    message: 'message',
+    link: 'link'
+};
+exports.CommentOrderByRelevanceFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    content: 'content'
 };
 exports.AuditLogOrderByRelevanceFieldEnum = {
     id: 'id',

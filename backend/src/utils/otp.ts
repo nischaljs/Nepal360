@@ -18,6 +18,11 @@ export function saveOTP(email: string): string {
 }
 
 
+export function getOTPForTesting(email: string): string | null {
+    if (process.env.NODE_ENV === 'production') return null;
+    return otpStore.get(email)?.otp ?? null;
+}
+
 export function verifyOTP(email: string, otp: string): boolean {
     const stored = otpStore.get(email);
     if (!stored) return false;

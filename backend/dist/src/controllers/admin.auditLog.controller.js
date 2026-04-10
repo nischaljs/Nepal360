@@ -34,7 +34,7 @@ const listAuditLogs = (req, res, next) => __awaiter(void 0, void 0, void 0, func
             },
             take: 100, // Add pagination limit
         });
-        res.status(200).json(logs);
+        res.status(200).json({ success: true, data: logs });
     }
     catch (error) {
         next(error);
@@ -62,7 +62,7 @@ const getAuditLogsForTarget = (req, res, next) => __awaiter(void 0, void 0, void
                 createdAt: 'desc',
             },
         });
-        res.status(200).json(logs);
+        res.status(200).json({ success: true, data: logs });
     }
     catch (error) {
         next(error);

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const recurringDonation_controller_1 = require("../controllers/recurringDonation.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const errohandler_middleware_1 = require("../middlewares/errohandler.middleware");
+const router = (0, express_1.Router)();
+router.post('/', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.createRecurring));
+router.get('/me', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.getMyRecurring));
+router.patch('/:id/pause', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.pauseRecurring));
+router.patch('/:id/resume', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.resumeRecurring));
+router.patch('/:id/cancel', auth_middleware_1.requireAuth, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.cancelRecurring));
+router.get('/due', auth_middleware_1.requireAuth, auth_middleware_1.requireAdmin, (0, errohandler_middleware_1.catchAsync)(recurringDonation_controller_1.getDueRecurring));
+exports.default = router;

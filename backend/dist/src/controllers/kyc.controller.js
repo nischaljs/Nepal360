@@ -12,19 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.resubmitKyc = exports.getMyKycStatus = exports.submitKyc = void 0;
 const zod_1 = require("zod");
 const prisma_1 = require("../lib/prisma");
+const env_1 = require("../config/env");
 const kyc_schema_1 = require("../schemas/kyc.schema");
 const file_1 = require("../utils/file");
-const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3000'; // Define base URL
+const BASE_URL = env_1.env.BACKEND_URL;
 const submitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.user;
         const files = req.files;
         // Validate file uploads
         if (!files || !files.documentImage || files.documentImage.length === 0) {
-            return res.status(400).json({ message: 'Document image is required.' });
+            return res.status(400).json({ success: false, message: 'Document image is required.' });
         }
         if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
-            return res.status(400).json({ message: 'Profile photo is required.' });
+            return res.status(400).json({ success: false, message: 'Profile photo is required.' });
         }
         const documentImageRelativePath = (0, file_1.getRelativePath)(files.documentImage[0].path);
         const profilePhotoRelativePath = (0, file_1.getRelativePath)(files.profilePhoto[0].path);
@@ -36,20 +37,20 @@ const submitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         if (existingKyc) {
             return res
                 .status(409)
-                .json({ message: 'KYC profile already exists.' });
+                .json({ success: false, message: 'KYC profile already exists.' });
         }
         const newKyc = yield prisma_1.prisma.kYCProfile.create({
             data: Object.assign(Object.assign({}, parsedKycData), { userId, status: 'PENDING' }),
         });
-        // Convert relative paths to full URLs for the response
         const responseKyc = Object.assign(Object.assign({}, newKyc), { documentImage: (0, file_1.generateAssetUrl)(newKyc.documentImage, BASE_URL), profilePhoto: (0, file_1.generateAssetUrl)(newKyc.profilePhoto, BASE_URL) });
         res
             .status(201)
-            .json({ message: 'KYC profile submitted successfully.', kyc: responseKyc });
+            .json({ success: true, message: 'KYC profile submitted successfully.', data: responseKyc });
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {
             return res.status(400).json({
+                success: false,
                 message: 'Validation error',
                 errors: error.issues.map((e) => ({
                     path: e.path,
@@ -76,11 +77,10 @@ const getMyKycStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             },
         });
         if (!kyc) {
-            return res.status(200).json({ status: 'NOT_SUBMITTED' });
+            return res.status(200).json({ success: true, data: { status: 'NOT_SUBMITTED' } });
         }
-        // Convert relative paths to full URLs for the response
         const responseKyc = Object.assign(Object.assign({}, kyc), { documentImage: kyc.documentImage ? (0, file_1.generateAssetUrl)(kyc.documentImage, BASE_URL) : undefined, profilePhoto: kyc.profilePhoto ? (0, file_1.generateAssetUrl)(kyc.profilePhoto, BASE_URL) : undefined });
-        res.status(200).json(responseKyc);
+        res.status(200).json({ success: true, data: responseKyc });
     }
     catch (error) {
         next(error);
@@ -93,10 +93,10 @@ const resubmitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         const files = req.files;
         // Validate file uploads
         if (!files || !files.documentImage || files.documentImage.length === 0) {
-            return res.status(400).json({ message: 'Document image is required.' });
+            return res.status(400).json({ success: false, message: 'Document image is required.' });
         }
         if (!files || !files.profilePhoto || files.profilePhoto.length === 0) {
-            return res.status(400).json({ message: 'Profile photo is required.' });
+            return res.status(400).json({ success: false, message: 'Profile photo is required.' });
         }
         const documentImageRelativePath = (0, file_1.getRelativePath)(files.documentImage[0].path);
         const profilePhotoRelativePath = (0, file_1.getRelativePath)(files.profilePhoto[0].path);
@@ -106,10 +106,11 @@ const resubmitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             where: { userId },
         });
         if (!existingKyc) {
-            return res.status(404).json({ message: 'KYC profile not found.' });
+            return res.status(404).json({ success: false, message: 'KYC profile not found.' });
         }
         if (existingKyc.status !== 'REJECTED') {
             return res.status(403).json({
+                success: false,
                 message: 'You can only resubmit a rejected KYC profile.',
             });
         }
@@ -117,16 +118,17 @@ const resubmitKyc = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             where: { userId },
             data: Object.assign(Object.assign({}, parsedKycData), { status: 'PENDING', rejectionReason: null }),
         });
-        // Convert relative paths to full URLs for the response
         const responseKyc = Object.assign(Object.assign({}, updatedKyc), { documentImage: (0, file_1.generateAssetUrl)(updatedKyc.documentImage, BASE_URL), profilePhoto: (0, file_1.generateAssetUrl)(updatedKyc.profilePhoto, BASE_URL) });
         res.status(200).json({
+            success: true,
             message: 'KYC profile resubmitted successfully.',
-            kyc: responseKyc,
+            data: responseKyc,
         });
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {
             return res.status(400).json({
+                success: false,
                 message: 'Validation error',
                 errors: error.issues.map((e) => ({
                     path: e.path,

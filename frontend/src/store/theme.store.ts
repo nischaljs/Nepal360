@@ -8,8 +8,7 @@ interface ThemeState {
 
 export const useThemeStore = create<ThemeState>((set) => {
   const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const isDark = saved ? saved === 'dark' : prefersDark;
+  const isDark = saved === 'dark'; // default to light if no saved preference
 
   // Apply immediately
   if (isDark) {
